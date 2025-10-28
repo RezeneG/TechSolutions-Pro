@@ -1,5 +1,5 @@
 # Create enhanced frontend with admin authentication
-$enhancedFrontend = @'
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1411,9 +1411,4 @@ $enhancedFrontend = @'
     </script>
 </body>
 </html>
-'@
 
-# Save the enhanced frontend
-$enhancedFrontend | Out-File -FilePath "frontend/index.html" -Encoding UTF8
-
-Write-Host "✅ Enhanced frontend with admin authentication created!" -ForegroundColor Green
