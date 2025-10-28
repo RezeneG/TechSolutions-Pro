@@ -1,255 +1,381 @@
-# Update backend/server.js with enhanced features
-cd D:\online-tuition\TechSolutions-Pro\backend
+# Update the backend/server.js in the setup script
+$enhancedBackend = @'
+// TechSolutions Pro - Backend Server with Admin Authentication
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
 
-@'
-// TechSolutions Pro - Enhanced Backend with All Features
-const express = require("express");
-const cors = require("cors");
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Enhanced Data with more details
-const services = [
-    {id:1, name:"Website Development", price:"£999-£4,999", category:"development", description:"Custom website development with modern technologies.", features:["Responsive Design", "SEO Optimized", "CMS Integration"], popularity: 95},
-    {id:2, name:"E-commerce Solutions", price:"£2,499-£7,999", category:"development", description:"Complete e-commerce platform development.", features:["Payment Gateway", "Inventory Management", "Order Tracking"], popularity: 88},
-    {id:3, name:"Mobile App Development", price:"£3,999-£12,999", category:"development", description:"Native and cross-platform mobile applications.", features:["iOS & Android", "Cross-platform", "App Store Deployment"], popularity: 92},
-    {id:4, name:"Custom Software", price:"£5,999-£25,000+", category:"development", description:"Tailored software solutions for your business.", features:["Custom Requirements", "Scalable Architecture", "API Integration"], popularity: 85},
-    {id:5, name:"IT Support", price:"£45/hour", category:"support", description:"Professional IT support and maintenance.", features:["24/7 Support", "Remote Assistance", "Hardware Maintenance"], popularity: 90},
-    {id:6, name:"Cloud Management", price:"£75/hour", category:"support", description:"Cloud infrastructure setup and management.", features:["AWS/Azure", "Cloud Migration", "Cost Optimization"], popularity: 87},
-    {id:7, name:"Security Audit", price:"£1,499-£4,999", category:"support", description:"Comprehensive security assessment.", features:["Vulnerability Assessment", "Penetration Testing", "Security Report"], popularity: 83},
-    {id:8, name:"Software Testing", price:"£1,999-£6,999", category:"testing", description:"Comprehensive software testing services.", features:["Automated Testing", "Manual Testing", "Performance Testing"], popularity: 89},
-    {id:9, name:"Mobile Testing", price:"£1,499-£4,999", category:"testing", description:"Specialized mobile app testing.", features:["Device Compatibility", "Performance Testing", "User Experience"], popularity: 86},
-    {id:10, name:"Game Dev Consultation", price:"£65/hour", category:"consultation", description:"Expert game development consultation.", features:["Game Design", "Technical Architecture", "Platform Guidance"], popularity: 82},
-    {id:11, name:"Digital Transformation", price:"£120/hour", category:"consultation", description:"Strategic digital consulting.", features:["Strategy Development", "Technology Assessment", "ROI Analysis"], popularity: 88},
-    {id:12, name:"AI & ML Consulting", price:"£95/hour", category:"consultation", description:"AI and machine learning guidance.", features:["AI Strategy", "Model Development", "Implementation Support"], popularity: 94}
+// Admin Users Database
+const adminUsers = [
+    { id: 1, username: "admin", password: "admin123", role: "superadmin", email: "admin@techsolutions.com" },
+    { id: 2, username: "manager", password: "manager123", role: "manager", email: "manager@techsolutions.com" },
+    { id: 3, username: "demo", password: "demo123", role: "viewer", email: "demo@techsolutions.com" }
 ];
 
-const courses = [
-    {id:1, name:"Web Development Bootcamp", duration:"12 weeks", price:"£499", enrolled:1247, rating:4.8, description:"Master full-stack web development.", category:"web-dev", instructor:"Sarah Johnson", level:"Beginner to Advanced", badge: "BESTSELLER"},
-    {id:2, name:"Advanced JavaScript & React", duration:"8 weeks", price:"£349", enrolled:892, rating:4.7, description:"Deep dive into modern JavaScript.", category:"web-dev", instructor:"Mike Chen", level:"Intermediate", badge: "POPULAR"},
-    {id:3, name:"Cybersecurity Essentials", duration:"10 weeks", price:"£399", enrolled:756, rating:4.6, description:"Learn cybersecurity principles.", category:"security", instructor:"Dr. Emily Watson", level:"Beginner to Intermediate", badge: "HOT"},
-    {id:4, name:"Ethical Hacking", duration:"14 weeks", price:"£599", enrolled:423, rating:4.9, description:"Penetration testing techniques.", category:"security", instructor:"Alex Rodriguez", level:"Advanced", badge: "ADVANCED"},
-    {id:5, name:"Mobile App with Flutter", duration:"10 weeks", price:"£449", enrolled:634, rating:4.5, description:"Build mobile apps with Flutter.", category:"mobile", instructor:"David Kim", level:"Intermediate", badge: "TRENDING"},
-    {id:6, name:"iOS Development", duration:"12 weeks", price:"£479", enrolled:521, rating:4.7, description:"Master iOS app development.", category:"mobile", instructor:"Lisa Thompson", level:"Intermediate", badge: "NEW"},
-    {id:7, name:"Data Science & ML", duration:"16 weeks", price:"£549", enrolled:887, rating:4.8, description:"Comprehensive data science course.", category:"data-science", instructor:"Dr. Robert Brown", level:"Intermediate to Advanced", badge: "POPULAR"},
-    {id:8, name:"Python Automation", duration:"6 weeks", price:"£299", enrolled:1123, rating:4.6, description:"Python for automation and scripting.", category:"programming", instructor:"Maria Garcia", level:"Beginner", badge: "BESTSELLER"},
-    {id:9, name:"AWS Cloud", duration:"10 weeks", price:"£529", enrolled:698, rating:4.7, description:"AWS cloud services and certifications.", category:"cloud", instructor:"James Wilson", level:"Intermediate", badge: "CERTIFICATION"}
+// Sample data (fallback when MongoDB is not available)
+const sampleServices = [
+    {
+        id: 1,
+        name: "Website Development",
+        description: "Custom website development with modern technologies. We create responsive, SEO-friendly websites that drive results.",
+        price: "£999",
+        category: "development",
+        features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
+        status: "active",
+        created: "2024-01-15"
+    },
+    {
+        id: 2,
+        name: "IT Support & Maintenance",
+        description: "Professional IT support and maintenance services to keep your systems running smoothly.",
+        price: "£45/hour",
+        category: "support", 
+        features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
+        status: "active",
+        created: "2024-01-10"
+    },
+    {
+        id: 3,
+        name: "Software Testing",
+        description: "Comprehensive software testing services to ensure your applications are bug-free and performant.",
+        price: "Get Quote",
+        category: "testing",
+        features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"],
+        status: "active",
+        created: "2024-02-01"
+    },
+    {
+        id: 4, 
+        name: "Game Development Consultation",
+        description: "Expert consultation for game development projects, from concept to deployment.",
+        price: "£65/hour",
+        category: "consultation",
+        features: ["Game Design", "Technical Architecture", "Performance Optimization", "Platform Guidance"],
+        status: "active",
+        created: "2024-01-20"
+    }
 ];
 
-// User database (in production, use proper database)
-let users = [
-    {id: 1, email: "admin@techsolutions.com", password: "admin123", role: "admin", name: "System Administrator"},
-    {id: 2, email: "user@example.com", password: "user123", role: "user", name: "Demo User"}
+const sampleCourses = [
+    {
+        id: 1,
+        name: "Complete Web Development Bootcamp",
+        description: "Master full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
+        duration: "12 weeks",
+        enrolled: 1247,
+        rating: 4.8,
+        level: "Beginner to Advanced",
+        status: "published",
+        price: "£499"
+    },
+    {
+        id: 2,
+        name: "Cybersecurity Essentials", 
+        description: "Learn essential cybersecurity principles, threat detection, and protection strategies.",
+        duration: "8 weeks",
+        enrolled: 892,
+        rating: 4.7,
+        level: "Intermediate",
+        status: "published",
+        price: "£399"
+    },
+    {
+        id: 3,
+        name: "Mobile App Development",
+        description: "Build native and cross-platform mobile applications for iOS and Android.",
+        duration: "10 weeks", 
+        enrolled: 756,
+        rating: 4.6,
+        level: "Intermediate",
+        status: "published",
+        price: "£449"
+    }
 ];
 
-let bookings = [];
-let enrollments = [];
+// Helper function to generate simple tokens
+function generateToken(userId) {
+    return 'admin-token-' + userId + '-' + Date.now();
+}
 
-// Enhanced Routes
-app.get("/", (req, res) => {
+// Authentication middleware
+function authenticateAdmin(req, res, next) {
+    const token = req.headers.authorization;
+    
+    if (!token) {
+        return res.status(401).json({ 
+            success: false, 
+            message: "Admin authentication token required" 
+        });
+    }
+    
+    // Simple token validation (in production, use JWT)
+    const tokenParts = token.split('-');
+    if (tokenParts.length < 3 || tokenParts[0] !== 'admin' || tokenParts[1] !== 'token') {
+        return res.status(401).json({ 
+            success: false, 
+            message: "Invalid authentication token" 
+        });
+    }
+    
+    const userId = parseInt(tokenParts[2]);
+    const user = adminUsers.find(u => u.id === userId);
+    
+    if (!user) {
+        return res.status(401).json({ 
+            success: false, 
+            message: "User not found" 
+        });
+    }
+    
+    req.adminUser = user;
+    next();
+}
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
     res.json({ 
-        message: "TechSolutions Pro API - Enhanced Edition", 
-        features: ["Admin Dashboard", "Service Filtering", "User Authentication", "Booking System", "Search"],
-        services: services.length,
-        courses: courses.length,
-        version: "3.0"
+        status: 'OK', 
+        message: 'TechSolutions Pro Backend is running!',
+        timestamp: new Date().toISOString(),
+        version: '1.0.0',
+        features: {
+            adminAuth: true,
+            services: sampleServices.length,
+            courses: sampleCourses.length
+        }
     });
 });
 
-app.get("/api/health", (req, res) => {
-    res.json({ status: "OK", services: services.length, courses: courses.length });
-});
-
-// Services with filtering and search
-app.get("/api/services", (req, res) => {
-    let filteredServices = [...services];
+// Admin Authentication Endpoints
+app.post('/api/admin/login', (req, res) => {
+    const { username, password } = req.body;
     
-    // Category filter
-    if (req.query.category) {
-        filteredServices = filteredServices.filter(service => 
-            service.category === req.query.category
-        );
+    if (!username || !password) {
+        return res.status(400).json({ 
+            success: false, 
+            message: "Username and password required" 
+        });
     }
     
-    // Search filter
-    if (req.query.search) {
-        const searchTerm = req.query.search.toLowerCase();
-        filteredServices = filteredServices.filter(service =>
-            service.name.toLowerCase().includes(searchTerm) ||
-            service.description.toLowerCase().includes(searchTerm)
-        );
-    }
+    const user = adminUsers.find(u => u.username === username && u.password === password);
     
-    res.json(filteredServices);
-});
-
-app.get("/api/services/categories", (req, res) => {
-    const categories = [...new Set(services.map(service => service.category))];
-    res.json(categories);
-});
-
-// Courses with filtering and search
-app.get("/api/courses", (req, res) => {
-    let filteredCourses = [...courses];
-    
-    if (req.query.category) {
-        filteredCourses = filteredCourses.filter(course => 
-            course.category === req.query.category
-        );
-    }
-    
-    if (req.query.search) {
-        const searchTerm = req.query.search.toLowerCase();
-        filteredCourses = filteredCourses.filter(course =>
-            course.name.toLowerCase().includes(searchTerm) ||
-            course.description.toLowerCase().includes(searchTerm)
-        );
-    }
-    
-    res.json(filteredCourses);
-});
-
-app.get("/api/courses/categories", (req, res) => {
-    const categories = [...new Set(courses.map(course => course.category))];
-    res.json(categories);
-});
-
-// User Authentication
-app.post("/api/auth/register", (req, res) => {
-    const { email, password, name } = req.body;
-    
-    // Check if user exists
-    const existingUser = users.find(user => user.email === email);
-    if (existingUser) {
-        return res.status(400).json({ success: false, message: "User already exists" });
-    }
-    
-    // Create new user
-    const newUser = {
-        id: users.length + 1,
-        email,
-        password, // In production, hash this!
-        name,
-        role: "user"
-    };
-    
-    users.push(newUser);
-    res.json({ success: true, user: { id: newUser.id, email: newUser.email, name: newUser.name, role: newUser.role } });
-});
-
-app.post("/api/auth/login", (req, res) => {
-    const { email, password } = req.body;
-    
-    const user = users.find(u => u.email === email && u.password === password);
     if (user) {
+        const token = generateToken(user.id);
+        
         res.json({ 
             success: true, 
-            user: { id: user.id, email: user.email, name: user.name, role: user.role },
-            token: "demo-token-" + user.id
+            message: "Login successful",
+            user: { 
+                id: user.id,
+                username: user.username, 
+                role: user.role,
+                email: user.email
+            },
+            token: token,
+            permissions: getPermissions(user.role)
         });
     } else {
-        res.status(401).json({ success: false, message: "Invalid credentials" });
+        res.status(401).json({ 
+            success: false, 
+            message: "Invalid username or password" 
+        });
     }
 });
 
-// Booking System
-app.post("/api/bookings", (req, res) => {
-    const { serviceId, userId, date, notes } = req.body;
-    
-    const service = services.find(s => s.id === serviceId);
-    const user = users.find(u => u.id === userId);
-    
-    if (!service || !user) {
-        return res.status(400).json({ success: false, message: "Invalid service or user" });
-    }
-    
-    const booking = {
-        id: bookings.length + 1,
-        serviceId,
-        userId,
-        serviceName: service.name,
-        userName: user.name,
-        date,
-        notes,
-        status: "pending",
-        createdAt: new Date()
-    };
-    
-    bookings.push(booking);
-    res.json({ success: true, booking });
-});
-
-app.post("/api/enrollments", (req, res) => {
-    const { courseId, userId } = req.body;
-    
-    const course = courses.find(c => c.id === courseId);
-    const user = users.find(u => u.id === userId);
-    
-    if (!course || !user) {
-        return res.status(400).json({ success: false, message: "Invalid course or user" });
-    }
-    
-    const enrollment = {
-        id: enrollments.length + 1,
-        courseId,
-        userId,
-        courseName: course.name,
-        userName: user.name,
-        enrolledAt: new Date(),
-        progress: 0
-    };
-    
-    enrollments.push(enrollment);
-    res.json({ success: true, enrollment });
-});
-
-// Admin Dashboard
-app.get("/api/admin/dashboard", (req, res) => {
-    const totalRevenue = bookings.reduce((sum, booking) => {
-        const price = booking.serviceName.includes("£") ? parseInt(booking.serviceName.split("£")[1]) : 100;
-        return sum + price;
-    }, 0) + enrollments.reduce((sum, enrollment) => {
-        const course = courses.find(c => c.id === enrollment.courseId);
-        return sum + (course ? parseInt(course.price.replace("£", "")) : 0);
-    }, 0);
-
-    res.json({
-        totalUsers: users.length,
-        totalServices: services.length,
-        totalCourses: courses.length,
-        totalBookings: bookings.length,
-        totalEnrollments: enrollments.length,
-        revenue: "£" + totalRevenue,
-        recentActivities: [
-            { action: "user_registration", user: "New User", timestamp: new Date() },
-            { action: "service_booking", service: "Website Development", user: "John Doe", timestamp: new Date() },
-            { action: "course_enrollment", course: "Web Development Bootcamp", user: "Jane Smith", timestamp: new Date() }
-        ]
+app.post('/api/admin/logout', authenticateAdmin, (req, res) => {
+    res.json({ 
+        success: true, 
+        message: "Logout successful" 
     });
 });
 
-app.get("/api/admin/users", (req, res) => {
-    res.json(users);
+app.get('/api/admin/profile', authenticateAdmin, (req, res) => {
+    res.json({
+        success: true,
+        user: req.adminUser
+    });
 });
 
-app.get("/api/admin/bookings", (req, res) => {
-    res.json(bookings);
+// Helper function for permissions
+function getPermissions(role) {
+    const permissions = {
+        superadmin: ['read', 'write', 'delete', 'manage_users'],
+        manager: ['read', 'write'],
+        viewer: ['read']
+    };
+    return permissions[role] || ['read'];
+}
+
+// Public endpoints (no auth required)
+app.get('/api/services', (req, res) => {
+    res.json(sampleServices);
 });
 
-app.get("/api/admin/enrollments", (req, res) => {
-    res.json(enrollments);
+app.get('/api/services/categories/all', (req, res) => {
+    const categories = [...new Set(sampleServices.map(service => service.category))];
+    res.json(categories);
+});
+
+app.get('/api/courses', (req, res) => {
+    res.json(sampleCourses);
+});
+
+// Protected Admin endpoints
+app.get('/api/admin/dashboard', authenticateAdmin, (req, res) => {
+    const recentActivities = [
+        { id: 1, action: "user_registration", user: "John Doe", timestamp: new Date(Date.now() - 3600000).toISOString() },
+        { id: 2, action: "course_enrollment", course: "Web Development Bootcamp", user: "Jane Smith", timestamp: new Date(Date.now() - 7200000).toISOString() },
+        { id: 3, action: "service_purchase", service: "Website Development", amount: "£999", timestamp: new Date(Date.now() - 10800000).toISOString() },
+        { id: 4, action: "user_login", user: "admin", timestamp: new Date(Date.now() - 14400000).toISOString() }
+    ];
+    
+    res.json({
+        totalUsers: 5247,
+        totalServices: sampleServices.length,
+        totalCourses: sampleCourses.length,
+        revenue: "£12,847",
+        activeProjects: 47,
+        completionRate: "94%",
+        newRegistrations: 23,
+        monthlyGrowth: "12%",
+        recentActivities: recentActivities,
+        topPerforming: {
+            service: "Website Development",
+            course: "Complete Web Development Bootcamp",
+            revenueSource: "Service Sales"
+        }
+    });
+});
+
+app.get('/api/admin/services', authenticateAdmin, (req, res) => {
+    const serviceStats = sampleServices.reduce((acc, service) => {
+        acc.total++;
+        acc.byCategory[service.category] = (acc.byCategory[service.category] || 0) + 1;
+        acc.byStatus[service.status] = (acc.byStatus[service.status] || 0) + 1;
+        return acc;
+    }, { total: 0, byCategory: {}, byStatus: {} });
+
+    res.json({
+        services: sampleServices,
+        stats: serviceStats,
+        management: {
+            canAdd: req.adminUser.role !== 'viewer',
+            canEdit: req.adminUser.role !== 'viewer',
+            canDelete: req.adminUser.role === 'superadmin'
+        }
+    });
+});
+
+app.get('/api/admin/courses', authenticateAdmin, (req, res) => {
+    const courseStats = sampleCourses.reduce((acc, course) => {
+        acc.total++;
+        acc.totalEnrolled += course.enrolled;
+        acc.averageRating = (acc.averageRating || 0) + course.rating;
+        return acc;
+    }, { total: 0, totalEnrolled: 0, averageRating: 0 });
+    
+    courseStats.averageRating = (courseStats.averageRating / sampleCourses.length).toFixed(1);
+
+    res.json({
+        courses: sampleCourses,
+        stats: courseStats
+    });
+});
+
+// Admin management endpoints
+app.post('/api/admin/services', authenticateAdmin, (req, res) => {
+    if (req.adminUser.role === 'viewer') {
+        return res.status(403).json({ 
+            success: false, 
+            message: "Insufficient permissions to add services" 
+        });
+    }
+    
+    const newService = {
+        id: sampleServices.length + 1,
+        ...req.body,
+        created: new Date().toISOString().split('T')[0],
+        status: 'active'
+    };
+    
+    sampleServices.push(newService);
+    
+    res.json({
+        success: true,
+        message: "Service added successfully",
+        service: newService
+    });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Welcome to TechSolutions Pro API!',
+        version: '2.0.0',
+        features: ['services', 'courses', 'admin-auth', 'analytics'],
+        endpoints: {
+            public: {
+                services: '/api/services',
+                courses: '/api/courses', 
+                health: '/api/health'
+            },
+            admin: {
+                login: '/api/admin/login',
+                dashboard: '/api/admin/dashboard',
+                services: '/api/admin/services',
+                courses: '/api/admin/courses'
+            }
+        },
+        adminDemo: {
+            username: 'admin',
+            password: 'admin123'
+        }
+    });
 });
 
 // Start server
 app.listen(PORT, () => {
-    console.log("🚀 TechSolutions Pro Enhanced Backend running on http://localhost:" + PORT);
-    console.log("📊 Features: Admin Dashboard, User Auth, Booking System, Search & Filter");
-    console.log("🔑 Admin Login: admin@techsolutions.com / admin123");
-    console.log("👤 Demo User: user@example.com / user123");
+    console.log('🟢 Starting TechSolutions Pro Backend with Admin Authentication...');
+    console.log('==================================================');
+    console.log('🟢 TECH SOLUTIONS PRO BACKEND SERVER v2.0');
+    console.log('==================================================');
+    console.log('Port: ' + PORT);
+    console.log('Environment: ' + (process.env.NODE_ENV || 'development'));
+    console.log('Database: In-Memory with Admin Auth');
+    console.log('Time: ' + new Date().toLocaleString());
+    console.log('URL: http://localhost:' + PORT);
+    console.log('');
+    console.log('🔐 ADMIN AUTHENTICATION:');
+    console.log('   👤 Login: POST http://localhost:' + PORT + '/api/admin/login');
+    console.log('   📊 Dashboard: GET http://localhost:' + PORT + '/api/admin/dashboard');
+    console.log('');
+    console.log('🛠️  SERVICES MARKETPLACE:');
+    console.log('   📋 http://localhost:' + PORT + '/api/services');
+    console.log('   🗂️  http://localhost:' + PORT + '/api/services/categories/all');
+    console.log('');
+    console.log('📚 COURSES:');
+    console.log('   📖 http://localhost:' + PORT + '/api/courses');
+    console.log('');
+    console.log('🌐 PUBLIC:');
+    console.log('   🏠 http://localhost:' + PORT + '/');
+    console.log('   🩺 http://localhost:' + PORT + '/api/health');
+    console.log('');
+    console.log('🔑 DEMO CREDENTIALS:');
+    console.log('   👑 Admin: admin / admin123');
+    console.log('   👨‍💼 Manager: manager / manager123');
+    console.log('   👀 Viewer: demo / demo123');
+    console.log('==================================================');
 });
-'@ | Out-File -FilePath "server.js" -Encoding UTF8
+'@
 
-Write-Host "✅ Enhanced backend created with all features!" -ForegroundColor Green
+# Save the enhanced backend
+$enhancedBackend | Out-File -FilePath "backend/server.js" -Encoding UTF8
+
+Write-Host "✅ Enhanced backend with admin authentication created!" -ForegroundColor Green
