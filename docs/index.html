@@ -198,105 +198,6 @@
             opacity: 0.8;
         }
         
-        /* Filter & Search Section */
-        .filters-section {
-            background: white;
-            padding: 30px 0;
-            margin-bottom: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .filters-container {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 20px;
-            align-items: end;
-        }
-        
-        .search-box {
-            position: relative;
-        }
-        
-        .search-box input {
-            width: 100%;
-            padding: 12px 45px 12px 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .search-box i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-        }
-        
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .filter-group label {
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 0.9rem;
-        }
-        
-        .filter-group select {
-            padding: 12px 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            background: white;
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-        
-        .filter-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .filter-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .active-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--light-gray);
-        }
-        
-        .filter-tag {
-            background: var(--primary);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .filter-tag i {
-            cursor: pointer;
-            font-size: 0.7rem;
-        }
-        
         /* Services Section */
         .section {
             padding: 80px 0;
@@ -471,88 +372,6 @@
         
         .course-rating {
             color: var(--warning);
-        }
-        
-        /* Price List Section */
-        .price-list {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-top: 50px;
-        }
-        
-        .price-list-header {
-            background: var(--primary);
-            color: white;
-            padding: 20px 30px;
-        }
-        
-        .price-list-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        
-        .price-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .price-table th,
-        .price-table td {
-            padding: 15px 20px;
-            text-align: left;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .price-table th {
-            background: var(--light);
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .price-table tr:hover {
-            background: var(--light);
-        }
-        
-        .price-amount {
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .price-category {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        
-        /* Results Count */
-        .results-count {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--gray);
-            font-size: 1rem;
-        }
-        
-        .results-count strong {
-            color: var(--primary);
-        }
-        
-        /* No Results */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--gray);
-        }
-        
-        .no-results i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--light-gray);
         }
         
         /* Admin Dashboard */
@@ -742,15 +561,6 @@
                 gap: 10px;
             }
             
-            .filters-container {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .filter-actions {
-                grid-column: 1;
-            }
-            
             .dashboard-charts {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -772,11 +582,6 @@
             .courses-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
-            }
-            
-            .price-table {
-                display: block;
-                overflow-x: auto;
             }
         }
         
@@ -1018,7 +823,6 @@
                     <a href="#" class="active">Home</a>
                     <a href="#services">Services</a>
                     <a href="#courses">Courses</a>
-                    <a href="#pricing">Pricing</a>
                     <a href="#admin" id="adminNavLink">Admin <span class="admin-badge">Login Required</span></a>
                 </div>
                 <div class="auth-buttons">
@@ -1038,7 +842,6 @@
             <div class="hero-buttons">
                 <a href="#services" class="btn btn-primary">Explore Services</a>
                 <a href="#courses" class="btn btn-outline">View Courses</a>
-                <a href="#pricing" class="btn btn-outline">View Pricing</a>
                 <a href="#admin" class="btn btn-outline" onclick="checkAdminAccess(event)">Admin Dashboard</a>
             </div>
             <div class="hero-stats">
@@ -1065,53 +868,6 @@
                 <h2>Our Professional Services</h2>
                 <p>We offer a wide range of IT services to help your business grow and succeed in the digital age.</p>
             </div>
-
-            <!-- Services Filters -->
-            <div class="filters-section">
-                <div class="filters-container">
-                    <div class="search-box">
-                        <input type="text" id="serviceSearch" placeholder="Search services...">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="filter-group">
-                        <label for="serviceCategory">Category</label>
-                        <select id="serviceCategory">
-                            <option value="">All Categories</option>
-                            <option value="development">Development</option>
-                            <option value="support">Support</option>
-                            <option value="testing">Testing</option>
-                            <option value="consultation">Consultation</option>
-                            <option value="cloud">Cloud</option>
-                            <option value="security">Security</option>
-                            <option value="analytics">Analytics</option>
-                            <option value="database">Database</option>
-                            <option value="infrastructure">Infrastructure</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="serviceSort">Sort By</label>
-                        <select id="serviceSort">
-                            <option value="name">Name (A-Z)</option>
-                            <option value="name-desc">Name (Z-A)</option>
-                            <option value="price">Price (Low to High)</option>
-                            <option value="price-desc">Price (High to Low)</option>
-                        </select>
-                    </div>
-                    <div class="filter-actions">
-                        <button class="btn btn-outline btn-small" onclick="clearServiceFilters()">
-                            <i class="fas fa-times"></i> Clear
-                        </button>
-                    </div>
-                </div>
-                <div class="active-filters" id="serviceActiveFilters">
-                    <!-- Active filters will appear here -->
-                </div>
-            </div>
-
-            <div class="results-count" id="serviceResultsCount">
-                Showing <strong>12</strong> services
-            </div>
-
             <div class="services-grid" id="services-container">
                 <!-- Services populated by JavaScript -->
             </div>
@@ -1125,106 +881,276 @@
                 <h2>Training Courses</h2>
                 <p>Enhance your skills with our comprehensive IT training programs designed for all levels.</p>
             </div>
-
-            <!-- Courses Filters -->
-            <div class="filters-section">
-                <div class="filters-container">
-                    <div class="search-box">
-                        <input type="text" id="courseSearch" placeholder="Search courses...">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="filter-group">
-                        <label for="courseCategory">Category</label>
-                        <select id="courseCategory">
-                            <option value="">All Categories</option>
-                            <option value="bootcamp">Bootcamp</option>
-                            <option value="web">Web Development</option>
-                            <option value="mobile">Mobile Development</option>
-                            <option value="software">Software Development</option>
-                            <option value="support">Support & Analysis</option>
-                            <option value="testing">Testing</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="courseLevel">Level</label>
-                        <select id="courseLevel">
-                            <option value="">All Levels</option>
-                            <option value="Beginner">Beginner</option>
-                            <option value="Intermediate">Intermediate</option>
-                            <option value="Advanced">Advanced</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="courseSort">Sort By</label>
-                        <select id="courseSort">
-                            <option value="name">Name (A-Z)</option>
-                            <option value="name-desc">Name (Z-A)</option>
-                            <option value="rating">Rating (High to Low)</option>
-                            <option value="enrolled">Popularity</option>
-                            <option value="duration">Duration</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="active-filters" id="courseActiveFilters">
-                    <!-- Active filters will appear here -->
-                </div>
-            </div>
-
-            <div class="results-count" id="courseResultsCount">
-                Showing <strong>12</strong> courses
-            </div>
-
             <div class="courses-grid" id="courses-container">
                 <!-- Courses populated by JavaScript -->
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="section" id="pricing">
+    <!-- Admin Dashboard -->
+    <section class="section" id="admin" style="display: none;">
         <div class="container">
             <div class="section-header">
-                <h2>Comprehensive Pricing</h2>
-                <p>Transparent pricing for all our services and training programs. No hidden fees.</p>
+                <h2>Admin Dashboard</h2>
+                <p>Platform management and analytics</p>
+                <button class="btn btn-outline btn-small" onclick="adminLogout()" style="margin-top: 10px;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
-
-            <div class="price-list">
-                <div class="price-list-header">
-                    <h3><i class="fas fa-tags"></i> Service & Course Pricing</h3>
+            <div class="dashboard">
+                <div class="dashboard-header">
+                    <h3><i class="fas fa-chart-line"></i> Platform Analytics</h3>
+                    <span id="adminWelcome" class="user-welcome">Welcome, Administrator</span>
                 </div>
-                <table class="price-table">
-                    <thead>
-                        <tr>
-                            <th>Service/Course</th>
-                            <th>Category</th>
-                            <th>Type</th>
-                            <th>Price</th>
-                            <th>Duration</th>
-                        </tr>
-                    </thead>
-                    <tbody id="pricing-table-body">
-                        <!-- Pricing data will be populated here -->
-                    </tbody>
-                </table>
+                <div class="dashboard-stats" id="admin-stats">
+                    <!-- Admin stats will load here after login -->
+                </div>
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h4><i class="fas fa-chart-bar"></i> Revenue Overview</h4>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-bar" style="font-size: 2.5rem; opacity: 0.5;"></i>
+                            <span style="margin-left: 12px;">Revenue Analytics</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h4><i class="fas fa-bell"></i> Recent Activity</h4>
+                        <div id="recentActivities">
+                            <!-- Recent activities will load here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Management Section -->
+                <div class="admin-management" id="adminManagement" style="display: none;">
+                    <h3><i class="fas fa-cogs"></i> Management Panel</h3>
+                    <div class="management-tabs">
+                        <button class="tab-btn active" onclick="switchTab('services-tab')">Services</button>
+                        <button class="tab-btn" onclick="switchTab('courses-tab')">Courses</button>
+                        <button class="tab-btn" onclick="switchTab('users-tab')">Users</button>
+                        <button class="tab-btn" onclick="switchTab('orders-tab')">Orders</button>
+                    </div>
+                    
+                    <div id="services-tab" class="tab-content active">
+                        <button class="btn btn-success add-btn" onclick="openAddServiceModal()">
+                            <i class="fas fa-plus"></i> Add New Service
+                        </button>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="services-table-body">
+                                <!-- Services table data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="courses-tab" class="tab-content">
+                        <button class="btn btn-success add-btn" onclick="openAddCourseModal()">
+                            <i class="fas fa-plus"></i> Add New Course
+                        </button>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Duration</th>
+                                    <th>Enrolled</th>
+                                    <th>Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="courses-table-body">
+                                <!-- Courses table data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="users-tab" class="tab-content">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Joined</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- Users table data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="orders-tab" class="tab-content">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Service/Course</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table-body">
+                                <!-- Orders table data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Admin Dashboard -->
-    <section class="section" id="admin" style="display: none;">
-        <!-- Admin content remains the same -->
-    </section>
-
     <!-- Footer -->
     <footer>
-        <!-- Footer content remains the same -->
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TechSolutions Pro</h3>
+                    <p>Your trusted partner for IT services and professional training. We deliver excellence in every project.</p>
+                    <div style="margin-top: 15px;">
+                        <a href="#" style="margin-right: 10px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 10px;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="margin-right: 10px;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#admin" onclick="checkAdminAccess(event)">Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@techsolutions.com</li>
+                        <li><i class="fas fa-phone"></i> +44 123 456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, London, UK</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new courses, services, and career opportunities.</p>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <input type="email" placeholder="Your email address" style="margin-bottom: 10px;">
+                        <button class="btn btn-primary btn-small">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | <a href="#" style="color: var(--light-gray);">Privacy Policy</a> | <a href="#" style="color: var(--light-gray);">Terms of Service</a></p>
+            </div>
+        </div>
     </footer>
 
     <!-- Modals -->
-    <!-- All modal content remains the same -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
+            <h3>Login to Your Account</h3>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Login</button>
+            <p style="text-align: center; margin-top: 15px;">Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('registerModal');" style="color: var(--primary);">Sign up</a></p>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('registerModal')">&times;</span>
+            <h3>Create New Account</h3>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Create a password">
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" placeholder="Confirm your password">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Create Account</button>
+            <p style="text-align: center; margin-top: 15px;">Already have an account? <a href="#" onclick="closeModal('registerModal'); openModal('loginModal');" style="color: var(--primary);">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('adminLoginModal')">&times;</span>
+            <h3><i class="fas fa-lock"></i> Admin Login</h3>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="adminUsername" placeholder="Enter admin username" value="admin">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password" value="admin123">
+            </div>
+            <button class="btn btn-primary" onclick="adminLogin()" style="width: 100%;">
+                <i class="fas fa-sign-in-alt"></i> Login to Admin Dashboard
+            </button>
+            
+            <div class="demo-credentials">
+                <strong><i class="fas fa-key"></i> Demo Credentials:</strong><br>
+                <div style="margin-top: 8px;">
+                    <strong>Admin:</strong> admin / admin123<br>
+                    <strong>Manager:</strong> manager / manager123<br>
+                    <strong>Viewer:</strong> demo / demo123
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Enhanced sample data with categories and pricing
+        // Backend API URLs
+        const API_BASE = 'http://localhost:5000/api';
+        const SERVICES_URL = `${API_BASE}/services`;
+        const COURSES_URL = `${API_BASE}/courses`;
+        const ADMIN_URL = `${API_BASE}/admin/dashboard`;
+        const ADMIN_LOGIN_URL = `${API_BASE}/admin/login`;
+        const ADMIN_LOGOUT_URL = `${API_BASE}/admin/logout`;
+        const HEALTH_URL = `${API_BASE}/health`;
+
+        // Admin authentication state
+        let adminAuth = {
+            isLoggedIn: false,
+            user: null,
+            token: null,
+            permissions: []
+        };
+
+        // Enhanced sample data with more services and courses
         const sampleServices = [
             {
                 id: 1,
@@ -1232,7 +1158,6 @@
                 description: "Custom website development with modern technologies. We create responsive, SEO-friendly websites that drive results.",
                 price: "£999",
                 category: "development",
-                type: "service",
                 features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
                 status: "active"
             },
@@ -1242,7 +1167,6 @@
                 description: "Professional IT support and maintenance services to keep your systems running smoothly.",
                 price: "£45/hour",
                 category: "support",
-                type: "service",
                 features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
                 status: "active"
             },
@@ -1252,7 +1176,6 @@
                 description: "Comprehensive software testing services to ensure your applications are bug-free and performant.",
                 price: "Get Quote",
                 category: "testing",
-                type: "service",
                 features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"],
                 status: "active"
             },
@@ -1262,7 +1185,6 @@
                 description: "Expert consultation for game development projects, from concept to deployment.",
                 price: "£65/hour",
                 category: "consultation",
-                type: "service",
                 features: ["Game Design", "Technical Architecture", "Performance Optimization", "Platform Guidance"],
                 status: "active"
             },
@@ -1272,7 +1194,6 @@
                 description: "Seamlessly migrate your infrastructure to cloud platforms like AWS, Azure, or Google Cloud.",
                 price: "£1,500+",
                 category: "cloud",
-                type: "service",
                 features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"],
                 status: "active"
             },
@@ -1282,7 +1203,6 @@
                 description: "Comprehensive security assessment to identify vulnerabilities and protect your business.",
                 price: "£2,000",
                 category: "security",
-                type: "service",
                 features: ["Vulnerability Assessment", "Penetration Testing", "Security Report", "Remediation Plan"],
                 status: "active"
             },
@@ -1292,7 +1212,6 @@
                 description: "Create powerful mobile applications for iOS and Android platforms.",
                 price: "£1,200+",
                 category: "development",
-                type: "service",
                 features: ["Native & Cross-platform", "UI/UX Design", "App Store Deployment", "Maintenance"],
                 status: "active"
             },
@@ -1302,7 +1221,6 @@
                 description: "Transform your data into actionable insights with advanced analytics and business intelligence.",
                 price: "£85/hour",
                 category: "analytics",
-                type: "service",
                 features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"],
                 status: "active"
             },
@@ -1312,7 +1230,6 @@
                 description: "Build robust online stores with secure payment gateways and inventory management.",
                 price: "£1,800+",
                 category: "development",
-                type: "service",
                 features: ["Payment Integration", "Inventory Management", "Order Processing", "Security"],
                 status: "active"
             },
@@ -1322,7 +1239,6 @@
                 description: "Create scalable and secure APIs for your applications and third-party integrations.",
                 price: "£75/hour",
                 category: "development",
-                type: "service",
                 features: ["RESTful APIs", "Documentation", "Security", "Rate Limiting"],
                 status: "active"
             },
@@ -1332,7 +1248,6 @@
                 description: "Optimize your database performance and ensure data integrity and security.",
                 price: "£90/hour",
                 category: "database",
-                type: "service",
                 features: ["Performance Tuning", "Backup Solutions", "Security", "Monitoring"],
                 status: "active"
             },
@@ -1342,13 +1257,12 @@
                 description: "Design and implement complete IT infrastructure solutions for businesses.",
                 price: "Get Quote",
                 category: "infrastructure",
-                type: "service",
                 features: ["Network Setup", "Server Configuration", "Security", "Monitoring"],
                 status: "active"
             }
         ];
 
-        // Updated courses with categories
+        // Updated courses with the requested bootcamps
         const sampleCourses = [
             {
                 id: 1,
@@ -1358,10 +1272,7 @@
                 enrolled: 856,
                 rating: 4.6,
                 level: "Beginner",
-                badge: "ENTRY LEVEL",
-                category: "bootcamp",
-                type: "course",
-                price: "£1,499"
+                badge: "ENTRY LEVEL"
             },
             {
                 id: 2,
@@ -1371,10 +1282,7 @@
                 enrolled: 723,
                 rating: 4.7,
                 level: "Beginner",
-                badge: "POPULAR",
-                category: "bootcamp",
-                type: "course",
-                price: "£2,199"
+                badge: "POPULAR"
             },
             {
                 id: 3,
@@ -1384,10 +1292,7 @@
                 enrolled: 645,
                 rating: 4.8,
                 level: "Beginner",
-                badge: "HOT",
-                category: "web",
-                type: "course",
-                price: "£1,799"
+                badge: "HOT"
             },
             {
                 id: 4,
@@ -1397,10 +1302,7 @@
                 enrolled: 512,
                 rating: 4.5,
                 level: "Beginner",
-                badge: "NEW",
-                category: "software",
-                type: "course",
-                price: "£1,899"
+                badge: "NEW"
             },
             {
                 id: 5,
@@ -1410,10 +1312,7 @@
                 enrolled: 489,
                 rating: 4.7,
                 level: "Beginner",
-                badge: "TRENDING",
-                category: "mobile",
-                type: "course",
-                price: "£2,099"
+                badge: "TRENDING"
             },
             {
                 id: 6,
@@ -1423,10 +1322,7 @@
                 enrolled: 367,
                 rating: 4.4,
                 level: "Beginner",
-                badge: "SPECIALIZED",
-                category: "software",
-                type: "course",
-                price: "£2,299"
+                badge: "SPECIALIZED"
             },
             {
                 id: 7,
@@ -1436,10 +1332,7 @@
                 enrolled: 598,
                 rating: 4.8,
                 level: "Beginner to Intermediate",
-                badge: "BESTSELLER",
-                category: "bootcamp",
-                type: "course",
-                price: "£2,499"
+                badge: "BESTSELLER"
             },
             {
                 id: 8,
@@ -1449,10 +1342,7 @@
                 enrolled: 423,
                 rating: 4.3,
                 level: "Beginner",
-                badge: "SUPPORT",
-                category: "support",
-                type: "course",
-                price: "£1,299"
+                badge: "SUPPORT"
             },
             {
                 id: 9,
@@ -1462,10 +1352,7 @@
                 enrolled: 781,
                 rating: 4.6,
                 level: "Beginner",
-                badge: "FOUNDATION",
-                category: "software",
-                type: "course",
-                price: "£1,599"
+                badge: "FOUNDATION"
             },
             {
                 id: 10,
@@ -1475,10 +1362,7 @@
                 enrolled: 334,
                 rating: 4.2,
                 level: "Beginner",
-                badge: "ASSISTANT",
-                category: "software",
-                type: "course",
-                price: "£1,199"
+                badge: "ASSISTANT"
             },
             {
                 id: 11,
@@ -1488,10 +1372,7 @@
                 enrolled: 456,
                 rating: 4.7,
                 level: "Beginner to Intermediate",
-                badge: "TESTING",
-                category: "testing",
-                type: "course",
-                price: "£1,899"
+                badge: "TESTING"
             },
             {
                 id: 12,
@@ -1501,315 +1382,182 @@
                 enrolled: 1247,
                 rating: 4.9,
                 level: "Beginner to Advanced",
-                badge: "BESTSELLER",
-                category: "bootcamp",
-                type: "course",
-                price: "£2,999"
+                badge: "BESTSELLER"
             }
         ];
 
-        // Filter state
-        let serviceFilters = {
-            search: '',
-            category: '',
-            sort: 'name'
-        };
-
-        let courseFilters = {
-            search: '',
-            category: '',
-            level: '',
-            sort: 'name'
-        };
-
-        // Initialize filters
-        function initializeFilters() {
-            // Add event listeners for service filters
-            document.getElementById('serviceSearch').addEventListener('input', function(e) {
-                serviceFilters.search = e.target.value;
-                filterServices();
-            });
-
-            document.getElementById('serviceCategory').addEventListener('change', function(e) {
-                serviceFilters.category = e.target.value;
-                filterServices();
-            });
-
-            document.getElementById('serviceSort').addEventListener('change', function(e) {
-                serviceFilters.sort = e.target.value;
-                filterServices();
-            });
-
-            // Add event listeners for course filters
-            document.getElementById('courseSearch').addEventListener('input', function(e) {
-                courseFilters.search = e.target.value;
-                filterCourses();
-            });
-
-            document.getElementById('courseCategory').addEventListener('change', function(e) {
-                courseFilters.category = e.target.value;
-                filterCourses();
-            });
-
-            document.getElementById('courseLevel').addEventListener('change', function(e) {
-                courseFilters.level = e.target.value;
-                filterCourses();
-            });
-
-            document.getElementById('courseSort').addEventListener('change', function(e) {
-                courseFilters.sort = e.target.value;
-                filterCourses();
-            });
-        }
-
-        // Filter services
-        function filterServices() {
-            let filteredServices = [...sampleServices];
-
-            // Apply search filter
-            if (serviceFilters.search) {
-                const searchTerm = serviceFilters.search.toLowerCase();
-                filteredServices = filteredServices.filter(service => 
-                    service.name.toLowerCase().includes(searchTerm) ||
-                    service.description.toLowerCase().includes(searchTerm) ||
-                    service.category.toLowerCase().includes(searchTerm)
-                );
-            }
-
-            // Apply category filter
-            if (serviceFilters.category) {
-                filteredServices = filteredServices.filter(service => 
-                    service.category === serviceFilters.category
-                );
-            }
-
-            // Apply sorting
-            filteredServices.sort((a, b) => {
-                switch (serviceFilters.sort) {
-                    case 'name':
-                        return a.name.localeCompare(b.name);
-                    case 'name-desc':
-                        return b.name.localeCompare(a.name);
-                    case 'price':
-                        return extractPrice(a.price) - extractPrice(b.price);
-                    case 'price-desc':
-                        return extractPrice(b.price) - extractPrice(a.price);
-                    default:
-                        return 0;
-                }
-            });
-
-            // Update active filters display
-            updateServiceActiveFilters();
-
-            // Update results count
-            document.getElementById('serviceResultsCount').innerHTML = 
-                `Showing <strong>${filteredServices.length}</strong> services`;
-
-            // Render filtered services
-            renderServices(filteredServices);
-        }
-
-        // Filter courses
-        function filterCourses() {
-            let filteredCourses = [...sampleCourses];
-
-            // Apply search filter
-            if (courseFilters.search) {
-                const searchTerm = courseFilters.search.toLowerCase();
-                filteredCourses = filteredCourses.filter(course => 
-                    course.name.toLowerCase().includes(searchTerm) ||
-                    course.description.toLowerCase().includes(searchTerm) ||
-                    course.category.toLowerCase().includes(searchTerm) ||
-                    course.level.toLowerCase().includes(searchTerm)
-                );
-            }
-
-            // Apply category filter
-            if (courseFilters.category) {
-                filteredCourses = filteredCourses.filter(course => 
-                    course.category === courseFilters.category
-                );
-            }
-
-            // Apply level filter
-            if (courseFilters.level) {
-                filteredCourses = filteredCourses.filter(course => 
-                    course.level === courseFilters.level
-                );
-            }
-
-            // Apply sorting
-            filteredCourses.sort((a, b) => {
-                switch (courseFilters.sort) {
-                    case 'name':
-                        return a.name.localeCompare(b.name);
-                    case 'name-desc':
-                        return b.name.localeCompare(a.name);
-                    case 'rating':
-                        return b.rating - a.rating;
-                    case 'enrolled':
-                        return b.enrolled - a.enrolled;
-                    case 'duration':
-                        return extractWeeks(a.duration) - extractWeeks(b.duration);
-                    default:
-                        return 0;
-                }
-            });
-
-            // Update active filters display
-            updateCourseActiveFilters();
-
-            // Update results count
-            document.getElementById('courseResultsCount').innerHTML = 
-                `Showing <strong>${filteredCourses.length}</strong> courses`;
-
-            // Render filtered courses
-            renderCourses(filteredCourses);
-        }
-
-        // Helper function to extract price from string
-        function extractPrice(priceStr) {
-            const match = priceStr.match(/£([\d,]+)/);
-            return match ? parseInt(match[1].replace(/,/g, '')) : 0;
-        }
-
-        // Helper function to extract weeks from duration string
-        function extractWeeks(durationStr) {
-            const match = durationStr.match(/(\d+)\s*weeks?/);
-            return match ? parseInt(match[1]) : 0;
-        }
-
-        // Update active filters display for services
-        function updateServiceActiveFilters() {
-            const container = document.getElementById('serviceActiveFilters');
-            container.innerHTML = '';
-
-            if (serviceFilters.search) {
-                container.appendChild(createFilterTag('Search: ' + serviceFilters.search, 'search'));
-            }
-
-            if (serviceFilters.category) {
-                const categoryText = document.getElementById('serviceCategory').options[document.getElementById('serviceCategory').selectedIndex].text;
-                container.appendChild(createFilterTag('Category: ' + categoryText, 'category'));
-            }
-
-            if (serviceFilters.sort !== 'name') {
-                const sortText = document.getElementById('serviceSort').options[document.getElementById('serviceSort').selectedIndex].text;
-                container.appendChild(createFilterTag('Sorted by: ' + sortText, 'sort'));
+        // Check backend status
+        async function checkBackendStatus() {
+            try {
+                const response = await fetch(HEALTH_URL);
+                const data = await response.json();
+                document.getElementById('backend-status').className = 'status-badge status-online';
+                document.getElementById('backend-status').textContent = 'Backend Online';
+                return true;
+            } catch (error) {
+                document.getElementById('backend-status').className = 'status-badge status-offline';
+                document.getElementById('backend-status').textContent = 'Backend Offline';
+                return false;
             }
         }
 
-        // Update active filters display for courses
-        function updateCourseActiveFilters() {
-            const container = document.getElementById('courseActiveFilters');
-            container.innerHTML = '';
-
-            if (courseFilters.search) {
-                container.appendChild(createFilterTag('Search: ' + courseFilters.search, 'search'));
-            }
-
-            if (courseFilters.category) {
-                const categoryText = document.getElementById('courseCategory').options[document.getElementById('courseCategory').selectedIndex].text;
-                container.appendChild(createFilterTag('Category: ' + categoryText, 'category'));
-            }
-
-            if (courseFilters.level) {
-                container.appendChild(createFilterTag('Level: ' + courseFilters.level, 'level'));
-            }
-
-            if (courseFilters.sort !== 'name') {
-                const sortText = document.getElementById('courseSort').options[document.getElementById('courseSort').selectedIndex].text;
-                container.appendChild(createFilterTag('Sorted by: ' + sortText, 'sort'));
-            }
-        }
-
-        // Create filter tag element
-        function createFilterTag(text, type) {
-            const tag = document.createElement('div');
-            tag.className = 'filter-tag';
-            tag.innerHTML = `
-                ${text}
-                <i class="fas fa-times" onclick="removeFilter('${type}')"></i>
-            `;
-            return tag;
-        }
-
-        // Remove specific filter
-        function removeFilter(type) {
-            if (type === 'search') {
-                serviceFilters.search = '';
-                courseFilters.search = '';
-                document.getElementById('serviceSearch').value = '';
-                document.getElementById('courseSearch').value = '';
-            } else if (type === 'category') {
-                serviceFilters.category = '';
-                courseFilters.category = '';
-                document.getElementById('serviceCategory').value = '';
-                document.getElementById('courseCategory').value = '';
-            } else if (type === 'level') {
-                courseFilters.level = '';
-                document.getElementById('courseLevel').value = '';
-            } else if (type === 'sort') {
-                serviceFilters.sort = 'name';
-                courseFilters.sort = 'name';
-                document.getElementById('serviceSort').value = 'name';
-                document.getElementById('courseSort').value = 'name';
-            }
-
-            filterServices();
-            filterCourses();
-        }
-
-        // Clear all service filters
-        function clearServiceFilters() {
-            serviceFilters = {
-                search: '',
-                category: '',
-                sort: 'name'
-            };
-            document.getElementById('serviceSearch').value = '';
-            document.getElementById('serviceCategory').value = '';
-            document.getElementById('serviceSort').value = 'name';
-            filterServices();
-        }
-
-        // Load pricing table
-        function loadPricingTable() {
-            const container = document.getElementById('pricing-table-body');
-            container.innerHTML = '';
-
-            // Combine services and courses for pricing table
-            const allItems = [...sampleServices, ...sampleCourses];
-
-            allItems.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${item.name}</td>
-                    <td><span class="price-category">${item.category}</span></td>
-                    <td>${item.type === 'service' ? 'Service' : 'Course'}</td>
-                    <td class="price-amount">${item.price}</td>
-                    <td>${item.duration || 'Ongoing'}</td>
-                `;
-                container.appendChild(row);
-            });
-        }
-
-        // Enhanced render functions with filtering
-        function renderServices(services = sampleServices) {
-            const container = document.getElementById('services-container');
+        // Admin authentication functions
+        async function adminLogin() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
             
-            if (services.length === 0) {
-                container.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <h3>No services found</h3>
-                        <p>Try adjusting your search or filters</p>
-                    </div>
-                `;
-                return;
+            const isBackendOnline = await checkBackendStatus();
+            
+            if (isBackendOnline) {
+                try {
+                    const response = await fetch(ADMIN_LOGIN_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ username, password })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        adminAuth = {
+                            isLoggedIn: true,
+                            user: result.user,
+                            token: result.token,
+                            permissions: result.permissions
+                        };
+                        
+                        // Save to localStorage
+                        localStorage.setItem('adminAuth', JSON.stringify(adminAuth));
+                        
+                        closeModal('adminLoginModal');
+                        showAdminDashboard();
+                        loadAdminStats();
+                        loadManagementData();
+                        
+                        updateAdminNavigation();
+                        
+                    } else {
+                        alert('Admin login failed: ' + result.message);
+                    }
+                } catch (error) {
+                    console.error('Admin login error:', error);
+                    useDemoAdminAuth();
+                }
+            } else {
+                // Backend is offline, use demo auth
+                useDemoAdminAuth();
+            }
+        }
+
+        function useDemoAdminAuth() {
+            adminAuth = {
+                isLoggedIn: true,
+                user: { 
+                    username: 'demo-admin', 
+                    role: 'superadmin',
+                    email: 'demo@techsolutions.com'
+                },
+                token: 'demo-token-offline',
+                permissions: ['read', 'write', 'delete', 'manage_users']
+            };
+            
+            localStorage.setItem('adminAuth', JSON.stringify(adminAuth));
+            closeModal('adminLoginModal');
+            showAdminDashboard();
+            loadAdminStats();
+            loadManagementData();
+            updateAdminNavigation();
+            
+            alert('Backend offline - Using demo admin mode');
+        }
+
+        async function adminLogout() {
+            const isBackendOnline = await checkBackendStatus();
+            
+            if (isBackendOnline && adminAuth.token && !adminAuth.token.includes('demo')) {
+                try {
+                    await fetch(ADMIN_LOGOUT_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': adminAuth.token
+                        }
+                    });
+                } catch (error) {
+                    console.error('Logout error:', error);
+                }
+            }
+            
+            adminAuth = { isLoggedIn: false, user: null, token: null, permissions: [] };
+            localStorage.removeItem('adminAuth');
+            document.getElementById('admin').style.display = 'none';
+            updateAdminNavigation();
+            
+            alert('Admin logged out successfully');
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('adminWelcome').textContent = 
+                `Welcome, ${adminAuth.user.username} (${adminAuth.user.role})`;
+            
+            // Show management panel for admins with appropriate permissions
+            if (adminAuth.permissions.includes('manage_services') || 
+                adminAuth.permissions.includes('manage_courses') ||
+                adminAuth.user.role === 'superadmin') {
+                document.getElementById('adminManagement').style.display = 'block';
+            }
+        }
+
+        function updateAdminNavigation() {
+            const adminLink = document.getElementById('adminNavLink');
+            if (adminAuth.isLoggedIn) {
+                adminLink.innerHTML = `Admin <span class="admin-badge">${adminAuth.user.role}</span>`;
+            } else {
+                adminLink.innerHTML = 'Admin <span class="admin-badge">Login Required</span>';
+            }
+        }
+
+        function checkAdminAccess(event) {
+            if (event) event.preventDefault();
+            
+            if (!adminAuth.isLoggedIn) {
+                openModal('adminLoginModal');
+            } else {
+                showAdminDashboard();
+                document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function checkSavedAdminAuth() {
+            const savedAuth = localStorage.getItem('adminAuth');
+            if (savedAuth) {
+                adminAuth = JSON.parse(savedAuth);
+                if (adminAuth.isLoggedIn) {
+                    showAdminDashboard();
+                    loadAdminStats();
+                    loadManagementData();
+                    updateAdminNavigation();
+                }
+            }
+        }
+
+        // Load services from backend or use sample data
+        async function loadServices() {
+            const isBackendOnline = await checkBackendStatus();
+            let services = sampleServices;
+
+            if (isBackendOnline) {
+                try {
+                    const response = await fetch(SERVICES_URL);
+                    services = await response.json();
+                } catch (error) {
+                    console.error('Error loading services from backend, using sample data:', error);
+                }
             }
 
+            const container = document.getElementById('services-container');
             container.innerHTML = '';
             
             services.forEach(service => {
@@ -1835,20 +1583,21 @@
             });
         }
 
-        function renderCourses(courses = sampleCourses) {
-            const container = document.getElementById('courses-container');
-            
-            if (courses.length === 0) {
-                container.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <h3>No courses found</h3>
-                        <p>Try adjusting your search or filters</p>
-                    </div>
-                `;
-                return;
+        // Load courses from backend or use sample data
+        async function loadCourses() {
+            const isBackendOnline = await checkBackendStatus();
+            let courses = sampleCourses;
+
+            if (isBackendOnline) {
+                try {
+                    const response = await fetch(COURSES_URL);
+                    courses = await response.json();
+                } catch (error) {
+                    console.error('Error loading courses from backend, using sample data:', error);
+                }
             }
 
+            const container = document.getElementById('courses-container');
             container.innerHTML = '';
             
             courses.forEach(course => {
@@ -1869,31 +1618,379 @@
                         </div>
                         <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
                             <i class="fas fa-signal"></i> ${course.level}
-                            <span class="feature-tag">${course.category}</span>
                         </div>
-                        <a href="#" class="btn btn-primary" onclick="openCourseModal(${course.id})">Enroll Now - ${course.price}</a>
+                        <a href="#" class="btn btn-primary" onclick="openCourseModal(${course.id})">Enroll Now</a>
                     </div>
                 `;
                 container.appendChild(courseCard);
             });
         }
 
+        // Load admin dashboard data
+        async function loadAdminStats() {
+            const isBackendOnline = await checkBackendStatus();
+            let stats = {
+                totalUsers: 5247,
+                totalServices: sampleServices.length,
+                totalCourses: sampleCourses.length,
+                revenue: "£12,847",
+                activeProjects: 47,
+                completionRate: "94%",
+                newRegistrations: 23,
+                monthlyGrowth: "12%",
+                recentActivities: [
+                    { action: "user_registration", user: "John Doe", timestamp: new Date(Date.now() - 3600000).toISOString() },
+                    { action: "course_enrollment", course: "Web Development Bootcamp", user: "Jane Smith", timestamp: new Date(Date.now() - 7200000).toISOString() },
+                    { action: "service_purchase", service: "Website Development", amount: "£999", timestamp: new Date(Date.now() - 10800000).toISOString() }
+                ]
+            };
+
+            if (isBackendOnline && adminAuth.isLoggedIn) {
+                try {
+                    const response = await fetch(ADMIN_URL, {
+                        headers: {
+                            'Authorization': adminAuth.token
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const backendStats = await response.json();
+                        stats = { ...stats, ...backendStats };
+                    }
+                } catch (error) {
+                    console.error('Error loading admin stats from backend, using sample data:', error);
+                }
+            }
+
+            const container = document.getElementById('admin-stats');
+            container.innerHTML = '';
+            
+            // Update hero stats
+            document.getElementById('total-users').textContent = stats.totalUsers.toLocaleString();
+            document.getElementById('total-services').textContent = stats.totalServices;
+            
+            // Create admin stat cards
+            const statCards = [
+                { icon: 'fa-users', number: stats.totalUsers.toLocaleString(), label: 'Total Users' },
+                { icon: 'fa-laptop-code', number: stats.totalServices, label: 'Active Services' },
+                { icon: 'fa-book', number: stats.totalCourses, label: 'Courses' },
+                { icon: 'fa-chart-line', number: stats.revenue, label: 'Monthly Revenue' },
+                { icon: 'fa-project-diagram', number: stats.activeProjects, label: 'Active Projects' },
+                { icon: 'fa-check-circle', number: stats.completionRate, label: 'Completion Rate' },
+                { icon: 'fa-user-plus', number: stats.newRegistrations, label: 'New Registrations' },
+                { icon: 'fa-arrow-up', number: stats.monthlyGrowth, label: 'Monthly Growth' }
+            ];
+            
+            statCards.forEach(stat => {
+                const statCard = document.createElement('div');
+                statCard.className = 'stat-card';
+                statCard.innerHTML = `
+                    <i class="fas ${stat.icon}"></i>
+                    <div class="number">${stat.number}</div>
+                    <div class="label">${stat.label}</div>
+                `;
+                container.appendChild(statCard);
+            });
+
+            // Load recent activities
+            const activitiesContainer = document.getElementById('recentActivities');
+            if (stats.recentActivities && stats.recentActivities.length > 0) {
+                activitiesContainer.innerHTML = '<ul class="activity-list"></ul>';
+                const activityList = activitiesContainer.querySelector('ul');
+                
+                stats.recentActivities.forEach(activity => {
+                    const li = document.createElement('li');
+                    let icon = 'fa-bell';
+                    let text = '';
+                    
+                    switch(activity.action) {
+                        case 'user_registration':
+                            icon = 'fa-user-plus';
+                            text = `New user registered: ${activity.user}`;
+                            break;
+                        case 'course_enrollment':
+                            icon = 'fa-book';
+                            text = `Course enrollment: ${activity.course} by ${activity.user}`;
+                            break;
+                        case 'service_purchase':
+                            icon = 'fa-shopping-cart';
+                            text = `Service purchased: ${activity.service} for ${activity.amount}`;
+                            break;
+                        case 'user_login':
+                            icon = 'fa-sign-in-alt';
+                            text = `User login: ${activity.user}`;
+                            break;
+                        default:
+                            text = activity.action;
+                    }
+                    
+                    li.innerHTML = `
+                        <div class="activity-icon">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                        <div>
+                            <div>${text}</div>
+                            <small style="color: var(--gray);">${new Date(activity.timestamp).toLocaleString()}</small>
+                        </div>
+                    `;
+                    activityList.appendChild(li);
+                });
+            } else {
+                activitiesContainer.innerHTML = '<p>No recent activities</p>';
+            }
+        }
+
+        // Load management data for admin panel
+        function loadManagementData() {
+            // Load services table
+            const servicesTableBody = document.getElementById('services-table-body');
+            servicesTableBody.innerHTML = '';
+            sampleServices.forEach(service => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${service.id}</td>
+                    <td>${service.name}</td>
+                    <td>${service.category}</td>
+                    <td>${service.price}</td>
+                    <td><span class="status-badge status-online">${service.status}</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn edit-btn" onclick="editService(${service.id})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteService(${service.id})">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </td>
+                `;
+                servicesTableBody.appendChild(row);
+            });
+
+            // Load courses table
+            const coursesTableBody = document.getElementById('courses-table-body');
+            coursesTableBody.innerHTML = '';
+            sampleCourses.forEach(course => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${course.id}</td>
+                    <td>${course.name}</td>
+                    <td>${course.duration}</td>
+                    <td>${course.enrolled}</td>
+                    <td>${course.rating}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn edit-btn" onclick="editCourse(${course.id})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteCourse(${course.id})">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </td>
+                `;
+                coursesTableBody.appendChild(row);
+            });
+
+            // Load users table
+            const usersTableBody = document.getElementById('users-table-body');
+            usersTableBody.innerHTML = '';
+            sampleUsers.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td>${user.joined}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn edit-btn" onclick="editUser(${user.id})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteUser(${user.id})">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </td>
+                `;
+                usersTableBody.appendChild(row);
+            });
+
+            // Load orders table
+            const ordersTableBody = document.getElementById('orders-table-body');
+            ordersTableBody.innerHTML = '';
+            sampleOrders.forEach(order => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>#${order.id}</td>
+                    <td>${order.customer}</td>
+                    <td>${order.item}</td>
+                    <td>${order.amount}</td>
+                    <td>${order.date}</td>
+                    <td><span class="status-badge ${order.status === 'Completed' ? 'status-online' : order.status === 'In Progress' ? 'status-badge' : 'status-offline'}">${order.status}</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn edit-btn" onclick="viewOrder(${order.id})">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            <button class="action-btn delete-btn" onclick="cancelOrder(${order.id})">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </td>
+                `;
+                ordersTableBody.appendChild(row);
+            });
+        }
+
+        // Helper function to get appropriate icons for services
+        function getServiceIcon(category) {
+            const icons = {
+                'development': 'fa-code',
+                'support': 'fa-headset',
+                'testing': 'fa-bug',
+                'consultation': 'fa-comments',
+                'cloud': 'fa-cloud',
+                'security': 'fa-shield-alt',
+                'analytics': 'fa-chart-bar',
+                'database': 'fa-database',
+                'infrastructure': 'fa-server'
+            };
+            return icons[category.toLowerCase()] || 'fa-laptop-code';
+        }
+
+        // Helper function to get appropriate icons for courses
+        function getCourseIcon(courseName) {
+            if (courseName.toLowerCase().includes('software') || courseName.toLowerCase().includes('developer')) return 'fa-code';
+            if (courseName.toLowerCase().includes('web')) return 'fa-globe';
+            if (courseName.toLowerCase().includes('application')) return 'fa-window-restore';
+            if (courseName.toLowerCase().includes('mobile')) return 'fa-mobile-alt';
+            if (courseName.toLowerCase().includes('game')) return 'fa-gamepad';
+            if (courseName.toLowerCase().includes('support')) return 'fa-headset';
+            if (courseName.toLowerCase().includes('programmer')) return 'fa-terminal';
+            if (courseName.toLowerCase().includes('assistant')) return 'fa-hands-helping';
+            if (courseName.toLowerCase().includes('test')) return 'fa-vial';
+            return 'fa-laptop-code';
+        }
+
+        // Admin management functions
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content and activate button
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function openAddServiceModal() {
+            alert('Add Service functionality would open here in a real application');
+        }
+
+        function openAddCourseModal() {
+            alert('Add Course functionality would open here in a real application');
+        }
+
+        function editService(id) {
+            alert(`Edit Service ${id} - This would open an edit form in a real application`);
+        }
+
+        function deleteService(id) {
+            if (confirm('Are you sure you want to delete this service?')) {
+                alert(`Service ${id} would be deleted in a real application`);
+            }
+        }
+
+        function editCourse(id) {
+            alert(`Edit Course ${id} - This would open an edit form in a real application`);
+        }
+
+        function deleteCourse(id) {
+            if (confirm('Are you sure you want to delete this course?')) {
+                alert(`Course ${id} would be deleted in a real application`);
+            }
+        }
+
+        function editUser(id) {
+            alert(`Edit User ${id} - This would open an edit form in a real application`);
+        }
+
+        function deleteUser(id) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                alert(`User ${id} would be deleted in a real application`);
+            }
+        }
+
+        function viewOrder(id) {
+            alert(`View Order ${id} - This would show order details in a real application`);
+        }
+
+        function cancelOrder(id) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                alert(`Order ${id} would be cancelled in a real application`);
+            }
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function openServiceModal(serviceId) {
+            const service = sampleServices.find(s => s.id === serviceId);
+            if (service) {
+                alert(`Service Inquiry: ${service.name}\n\nPrice: ${service.price}\n\nWe'll contact you shortly with more details!`);
+            }
+        }
+
+        function openCourseModal(courseId) {
+            const course = sampleCourses.find(c => c.id === courseId);
+            if (course) {
+                alert(`Course Enrollment: ${course.name}\n\nDuration: ${course.duration}\n\nYou'll be redirected to the enrollment page!`);
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            // ... existing initialization code ...
+            checkSavedAdminAuth();
+            loadServices();
+            loadCourses();
             
-            // Initialize filters
-            initializeFilters();
+            if (adminAuth.isLoggedIn) {
+                loadAdminStats();
+                loadManagementData();
+            }
             
-            // Load initial data
-            renderServices();
-            renderCourses();
-            loadPricingTable();
+            // Intercept admin link clicks
+            document.querySelector('a[href="#admin"]').addEventListener('click', checkAdminAccess);
             
-            // ... rest of existing initialization code ...
+            // Refresh data every 30 seconds if backend is online and admin is logged in
+            setInterval(async () => {
+                const isOnline = await checkBackendStatus();
+                if (isOnline && adminAuth.isLoggedIn) {
+                    loadAdminStats();
+                }
+            }, 30000);
         });
-
-        // ... rest of existing JavaScript code (admin functions, modals, etc.) ...
     </script>
 </body>
 </html>
