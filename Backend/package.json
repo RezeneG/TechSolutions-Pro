@@ -1,5 +1,4 @@
-# Create backend/package.json
-@'
+
 {
   "name": "techsolutions-backend",
   "version": "1.0.0",
@@ -13,4 +12,4 @@
     "cors": "^2.8.5"
   }
 }
-'@ | Out-File -FilePath "backend/package.json" -Encoding UTF8
+
