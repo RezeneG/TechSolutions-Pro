@@ -485,6 +485,7 @@
         .footer-column h3 {
             margin-bottom: 20px;
             font-size: 1.2rem;
+            color: var(--accent);
         }
         
         .footer-column ul {
@@ -503,6 +504,23 @@
         
         .footer-column a:hover {
             color: white;
+        }
+        
+        .career-highlights {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .career-highlights li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .career-highlights li i {
+            color: var(--accent);
+            font-size: 0.8rem;
         }
         
         .footer-bottom {
@@ -544,6 +562,11 @@
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
         }
         
@@ -995,16 +1018,31 @@
                     </ul>
                 </div>
                 <div class="footer-column">
+                    <h3>Work For Us</h3>
+                    <p>Join our team of talented professionals and grow your career in the tech industry.</p>
+                    <ul class="career-highlights">
+                        <li><i class="fas fa-check"></i> Competitive salaries</li>
+                        <li><i class="fas fa-check"></i> Remote work options</li>
+                        <li><i class="fas fa-check"></i> Professional development</li>
+                        <li><i class="fas fa-check"></i> Health benefits</li>
+                        <li><i class="fas fa-check"></i> Flexible hours</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-small" style="margin-top: 15px; display: inline-block;">
+                        <i class="fas fa-briefcase"></i> View Open Positions
+                    </a>
+                </div>
+                <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul>
                         <li><i class="fas fa-envelope"></i> info@techsolutions.com</li>
                         <li><i class="fas fa-phone"></i> +44 123 456 7890</li>
                         <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, London, UK</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Newsletter</h3>
-                    <p>Subscribe to get updates on new courses and services.</p>
+                    <p>Subscribe to get updates on new courses, services, and career opportunities.</p>
                     <div class="form-group" style="margin-top: 15px;">
                         <input type="email" placeholder="Your email address" style="margin-bottom: 10px;">
                         <button class="btn btn-primary btn-small">Subscribe</button>
@@ -1012,7 +1050,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | <a href="#" style="color: var(--light-gray);">Privacy Policy</a> | <a href="#" style="color: var(--light-gray);">Terms of Service</a></p>
+                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | <a href="#" style="color: var(--light-gray);">Privacy Policy</a> | <a href="#" style="color: var(--light-gray);">Terms of Service</a> | <a href="#" style="color: var(--light-gray);">Careers</a></p>
             </div>
         </div>
     </footer>
@@ -1191,8 +1229,7 @@
                 enrolled: 1247,
                 rating: 4.8,
                 level: "Beginner to Advanced",
-                badge: "BESTSELLER",
-                status: "active"
+                badge: "BESTSELLER"
             },
             {
                 id: 2,
@@ -1202,8 +1239,7 @@
                 enrolled: 892,
                 rating: 4.7,
                 level: "Intermediate",
-                badge: "HOT",
-                status: "active"
+                badge: "HOT"
             },
             {
                 id: 3,
@@ -1213,8 +1249,7 @@
                 enrolled: 756,
                 rating: 4.6,
                 level: "Intermediate",
-                badge: "NEW",
-                status: "active"
+                badge: "NEW"
             },
             {
                 id: 4,
@@ -1224,8 +1259,7 @@
                 enrolled: 543,
                 rating: 4.9,
                 level: "Intermediate",
-                badge: "TRENDING",
-                status: "active"
+                badge: "TRENDING"
             },
             {
                 id: 5,
@@ -1235,8 +1269,7 @@
                 enrolled: 621,
                 rating: 4.7,
                 level: "Advanced",
-                badge: "POPULAR",
-                status: "active"
+                badge: "POPULAR"
             },
             {
                 id: 6,
@@ -1246,8 +1279,7 @@
                 enrolled: 432,
                 rating: 4.8,
                 level: "Intermediate",
-                badge: "HOT",
-                status: "active"
+                badge: "HOT"
             },
             {
                 id: 7,
@@ -1257,8 +1289,7 @@
                 enrolled: 389,
                 rating: 4.6,
                 level: "Beginner",
-                badge: "NEW",
-                status: "active"
+                badge: "NEW"
             },
             {
                 id: 8,
@@ -1268,23 +1299,8 @@
                 enrolled: 298,
                 rating: 4.5,
                 level: "Advanced",
-                badge: "EMERGING",
-                status: "active"
+                badge: "EMERGING"
             }
-        ];
-
-        // Sample users and orders data for admin panel
-        const sampleUsers = [
-            { id: 1, name: "John Smith", email: "john@example.com", role: "Customer", joined: "2024-01-15" },
-            { id: 2, name: "Sarah Johnson", email: "sarah@example.com", role: "Customer", joined: "2024-02-03" },
-            { id: 3, name: "Mike Wilson", email: "mike@example.com", role: "Premium", joined: "2024-01-28" },
-            { id: 4, name: "Emily Davis", email: "emily@example.com", role: "Admin", joined: "2023-12-10" }
-        ];
-
-        const sampleOrders = [
-            { id: 1001, customer: "John Smith", item: "Website Development", amount: "£999", date: "2024-03-15", status: "Completed" },
-            { id: 1002, customer: "Sarah Johnson", item: "Web Development Bootcamp", amount: "£299", date: "2024-03-14", status: "In Progress" },
-            { id: 1003, customer: "Mike Wilson", item: "Cybersecurity Audit", amount: "£2,000", date: "2024-03-12", status: "Pending" }
         ];
 
         // Check backend status
