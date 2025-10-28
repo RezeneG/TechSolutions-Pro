@@ -198,94 +198,24 @@
             opacity: 0.8;
         }
         
-        /* Main Content Layout */
-        .content-with-sidebar {
+        /* Filter & Search Section */
+        .filters-section {
+            background: white;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filters-container {
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-        
-        /* Filter Sidebar */
-        .filter-sidebar {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 100px;
-        }
-        
-        .filter-group {
-            margin-bottom: 30px;
-        }
-        
-        .filter-group h4 {
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .filter-group h4 i {
-            color: var(--primary);
-        }
-        
-        .checkbox-list {
-            list-style: none;
-        }
-        
-        .checkbox-list li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .checkbox-list input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-            cursor: pointer;
-        }
-        
-        .checkbox-list label {
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: var(--dark);
-            transition: color 0.3s;
-        }
-        
-        .checkbox-list label:hover {
-            color: var(--primary);
-        }
-        
-        .filter-count {
-            background: var(--accent);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            margin-left: auto;
-        }
-        
-        /* Search & Sort Bar */
-        .search-sort-bar {
-            background: white;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-            display: flex;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 20px;
-            align-items: center;
+            align-items: end;
         }
         
         .search-box {
             position: relative;
-            flex: 1;
         }
         
         .search-box input {
@@ -310,41 +240,45 @@
             color: var(--gray);
         }
         
-        .sort-group {
+        .filter-group {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
+            gap: 8px;
         }
         
-        .sort-group label {
+        .filter-group label {
             font-weight: 600;
             color: var(--dark);
             font-size: 0.9rem;
-            white-space: nowrap;
         }
         
-        .sort-group select {
-            padding: 10px 15px;
+        .filter-group select {
+            padding: 12px 15px;
             border: 2px solid var(--light-gray);
             border-radius: 8px;
             font-size: 0.9rem;
             background: white;
             cursor: pointer;
             transition: border-color 0.3s;
-            min-width: 150px;
         }
         
-        .sort-group select:focus {
+        .filter-group select:focus {
             outline: none;
             border-color: var(--primary);
         }
         
-        /* Active Filters */
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
         .active-filters {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
         }
         
         .filter-tag {
@@ -598,6 +532,7 @@
         
         /* Results Count */
         .results-count {
+            text-align: center;
             margin-bottom: 30px;
             color: var(--gray);
             font-size: 1rem;
@@ -612,7 +547,6 @@
             text-align: center;
             padding: 60px 20px;
             color: var(--gray);
-            grid-column: 1 / -1;
         }
         
         .no-results i {
@@ -621,33 +555,160 @@
             color: var(--light-gray);
         }
         
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .content-with-sidebar {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .filter-sidebar {
-                position: static;
-                order: 2;
-            }
-            
-            .search-sort-bar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .search-box {
-                width: 100%;
-            }
-            
-            .sort-group {
-                width: 100%;
-                justify-content: space-between;
-            }
+        /* Admin Dashboard */
+        .dashboard {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
+        .dashboard-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 25px;
+        }
+        
+        .stat-card {
+            background: var(--light);
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .stat-card i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .stat-card .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        .dashboard-charts {
+            padding: 0 25px 25px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+        
+        .chart-container {
+            background: var(--light);
+            padding: 18px;
+            border-radius: 8px;
+        }
+        
+        .chart-placeholder {
+            height: 180px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .activity-list {
+            list-style: none;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+        
+        .activity-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .activity-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 18px;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -681,6 +742,32 @@
                 gap: 10px;
             }
             
+            .filters-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .filter-actions {
+                grid-column: 1;
+            }
+            
+            .dashboard-charts {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 15px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
             .services-grid,
             .courses-grid {
                 grid-template-columns: 1fr;
@@ -692,8 +779,230 @@
                 overflow-x: auto;
             }
         }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-online {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status-offline {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            margin-left: 6px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 450px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal h3 {
+            margin-bottom: 18px;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .demo-credentials {
+            background: var(--light);
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+        
+        .admin-badge {
+            background: var(--warning);
+            color: var(--dark);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+        
+        .user-welcome {
+            opacity: 0.9;
+            font-size: 0.85rem;
+        }
 
-        /* Rest of the CSS remains the same... */
+        /* Admin Management Section */
+        .admin-management {
+            padding: 25px;
+            background: var(--light);
+            margin: 25px;
+            border-radius: 8px;
+        }
+
+        .management-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--light-gray);
+            padding-bottom: 8px;
+        }
+
+        .tab-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 0.85rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .data-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .data-table tr:hover {
+            background: var(--light);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 4px;
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        .edit-btn {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .delete-btn {
+            background: var(--danger);
+            color: white;
+        }
+
+        .add-btn {
+            background: var(--success);
+            color: white;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+        }
     </style>
 </head>
 <body>
@@ -757,121 +1066,54 @@
                 <p>We offer a wide range of IT services to help your business grow and succeed in the digital age.</p>
             </div>
 
-            <div class="content-with-sidebar">
-                <!-- Services Sidebar -->
-                <div class="filter-sidebar">
+            <!-- Services Filters -->
+            <div class="filters-section">
+                <div class="filters-container">
+                    <div class="search-box">
+                        <input type="text" id="serviceSearch" placeholder="Search services...">
+                        <i class="fas fa-search"></i>
+                    </div>
                     <div class="filter-group">
-                        <h4><i class="fas fa-filter"></i> Service Categories</h4>
-                        <ul class="checkbox-list" id="serviceCategories">
-                            <li>
-                                <input type="checkbox" id="cat-dev" value="development" checked>
-                                <label for="cat-dev">Development</label>
-                                <span class="filter-count">5</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-support" value="support" checked>
-                                <label for="cat-support">Support</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-testing" value="testing" checked>
-                                <label for="cat-testing">Testing</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-consultation" value="consultation" checked>
-                                <label for="cat-consultation">Consultation</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-cloud" value="cloud" checked>
-                                <label for="cat-cloud">Cloud</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-security" value="security" checked>
-                                <label for="cat-security">Security</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-analytics" value="analytics" checked>
-                                <label for="cat-analytics">Analytics</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-database" value="database" checked>
-                                <label for="cat-database">Database</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-infrastructure" value="infrastructure" checked>
-                                <label for="cat-infrastructure">Infrastructure</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                        </ul>
+                        <label for="serviceCategory">Category</label>
+                        <select id="serviceCategory">
+                            <option value="">All Categories</option>
+                            <option value="development">Development</option>
+                            <option value="support">Support</option>
+                            <option value="testing">Testing</option>
+                            <option value="consultation">Consultation</option>
+                            <option value="cloud">Cloud</option>
+                            <option value="security">Security</option>
+                            <option value="analytics">Analytics</option>
+                            <option value="database">Database</option>
+                            <option value="infrastructure">Infrastructure</option>
+                        </select>
                     </div>
-                    
                     <div class="filter-group">
-                        <h4><i class="fas fa-pound-sign"></i> Price Range</h4>
-                        <ul class="checkbox-list" id="servicePriceRange">
-                            <li>
-                                <input type="checkbox" id="price-under-500" value="under-500" checked>
-                                <label for="price-under-500">Under £500</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="price-500-1000" value="500-1000" checked>
-                                <label for="price-500-1000">£500 - £1,000</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="price-1000-2000" value="1000-2000" checked>
-                                <label for="price-1000-2000">£1,000 - £2,000</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="price-over-2000" value="over-2000" checked>
-                                <label for="price-over-2000">Over £2,000</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="price-quote" value="quote" checked>
-                                <label for="price-quote">Get Quote</label>
-                            </li>
-                        </ul>
+                        <label for="serviceSort">Sort By</label>
+                        <select id="serviceSort">
+                            <option value="name">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="price">Price (Low to High)</option>
+                            <option value="price-desc">Price (High to Low)</option>
+                        </select>
                     </div>
-
-                    <button class="btn btn-outline btn-small" onclick="clearServiceFilters()" style="width: 100%;">
-                        <i class="fas fa-times"></i> Clear All Filters
-                    </button>
-                </div>
-
-                <!-- Services Content -->
-                <div class="services-content">
-                    <div class="search-sort-bar">
-                        <div class="search-box">
-                            <input type="text" id="serviceSearch" placeholder="Search services...">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="sort-group">
-                            <label for="serviceSort">Sort by:</label>
-                            <select id="serviceSort">
-                                <option value="name">Name (A-Z)</option>
-                                <option value="name-desc">Name (Z-A)</option>
-                                <option value="price">Price (Low to High)</option>
-                                <option value="price-desc">Price (High to Low)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="active-filters" id="serviceActiveFilters">
-                        <!-- Active filters will appear here -->
-                    </div>
-
-                    <div class="results-count" id="serviceResultsCount">
-                        Showing <strong>12</strong> services
-                    </div>
-
-                    <div class="services-grid" id="services-container">
-                        <!-- Services populated by JavaScript -->
+                    <div class="filter-actions">
+                        <button class="btn btn-outline btn-small" onclick="clearServiceFilters()">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
                     </div>
                 </div>
+                <div class="active-filters" id="serviceActiveFilters">
+                    <!-- Active filters will appear here -->
+                </div>
+            </div>
+
+            <div class="results-count" id="serviceResultsCount">
+                Showing <strong>12</strong> services
+            </div>
+
+            <div class="services-grid" id="services-container">
+                <!-- Services populated by JavaScript -->
             </div>
         </div>
     </section>
@@ -884,121 +1126,56 @@
                 <p>Enhance your skills with our comprehensive IT training programs designed for all levels.</p>
             </div>
 
-            <div class="content-with-sidebar">
-                <!-- Courses Sidebar -->
-                <div class="filter-sidebar">
+            <!-- Courses Filters -->
+            <div class="filters-section">
+                <div class="filters-container">
+                    <div class="search-box">
+                        <input type="text" id="courseSearch" placeholder="Search courses...">
+                        <i class="fas fa-search"></i>
+                    </div>
                     <div class="filter-group">
-                        <h4><i class="fas fa-filter"></i> Course Categories</h4>
-                        <ul class="checkbox-list" id="courseCategories">
-                            <li>
-                                <input type="checkbox" id="cat-bootcamp" value="bootcamp" checked>
-                                <label for="cat-bootcamp">Bootcamp</label>
-                                <span class="filter-count">3</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-web" value="web" checked>
-                                <label for="cat-web">Web Development</label>
-                                <span class="filter-count">2</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-mobile" value="mobile" checked>
-                                <label for="cat-mobile">Mobile Development</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-software" value="software" checked>
-                                <label for="cat-software">Software Development</label>
-                                <span class="filter-count">4</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-support" value="support" checked>
-                                <label for="cat-support">Support & Analysis</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-testing" value="testing" checked>
-                                <label for="cat-testing">Testing</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                        </ul>
+                        <label for="courseCategory">Category</label>
+                        <select id="courseCategory">
+                            <option value="">All Categories</option>
+                            <option value="bootcamp">Bootcamp</option>
+                            <option value="web">Web Development</option>
+                            <option value="mobile">Mobile Development</option>
+                            <option value="software">Software Development</option>
+                            <option value="support">Support & Analysis</option>
+                            <option value="testing">Testing</option>
+                        </select>
                     </div>
-                    
                     <div class="filter-group">
-                        <h4><i class="fas fa-signal"></i> Experience Level</h4>
-                        <ul class="checkbox-list" id="courseLevels">
-                            <li>
-                                <input type="checkbox" id="level-beginner" value="Beginner" checked>
-                                <label for="level-beginner">Beginner</label>
-                                <span class="filter-count">10</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="level-intermediate" value="Intermediate" checked>
-                                <label for="level-intermediate">Intermediate</label>
-                                <span class="filter-count">2</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="level-advanced" value="Advanced" checked>
-                                <label for="level-advanced">Advanced</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                        </ul>
+                        <label for="courseLevel">Level</label>
+                        <select id="courseLevel">
+                            <option value="">All Levels</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
                     </div>
-
                     <div class="filter-group">
-                        <h4><i class="fas fa-pound-sign"></i> Course Price</h4>
-                        <ul class="checkbox-list" id="coursePriceRange">
-                            <li>
-                                <input type="checkbox" id="course-under-1500" value="under-1500" checked>
-                                <label for="course-under-1500">Under £1,500</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="course-1500-2000" value="1500-2000" checked>
-                                <label for="course-1500-2000">£1,500 - £2,000</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="course-over-2000" value="over-2000" checked>
-                                <label for="course-over-2000">Over £2,000</label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <button class="btn btn-outline btn-small" onclick="clearCourseFilters()" style="width: 100%;">
-                        <i class="fas fa-times"></i> Clear All Filters
-                    </button>
-                </div>
-
-                <!-- Courses Content -->
-                <div class="services-content">
-                    <div class="search-sort-bar">
-                        <div class="search-box">
-                            <input type="text" id="courseSearch" placeholder="Search courses...">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="sort-group">
-                            <label for="courseSort">Sort by:</label>
-                            <select id="courseSort">
-                                <option value="name">Name (A-Z)</option>
-                                <option value="name-desc">Name (Z-A)</option>
-                                <option value="rating">Rating (High to Low)</option>
-                                <option value="enrolled">Popularity</option>
-                                <option value="duration">Duration</option>
-                                <option value="price">Price (Low to High)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="active-filters" id="courseActiveFilters">
-                        <!-- Active filters will appear here -->
-                    </div>
-
-                    <div class="results-count" id="courseResultsCount">
-                        Showing <strong>12</strong> courses
-                    </div>
-
-                    <div class="courses-grid" id="courses-container">
-                        <!-- Courses populated by JavaScript -->
+                        <label for="courseSort">Sort By</label>
+                        <select id="courseSort">
+                            <option value="name">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="rating">Rating (High to Low)</option>
+                            <option value="enrolled">Popularity</option>
+                            <option value="duration">Duration</option>
+                        </select>
                     </div>
                 </div>
+                <div class="active-filters" id="courseActiveFilters">
+                    <!-- Active filters will appear here -->
+                </div>
+            </div>
+
+            <div class="results-count" id="courseResultsCount">
+                Showing <strong>12</strong> courses
+            </div>
+
+            <div class="courses-grid" id="courses-container">
+                <!-- Courses populated by JavaScript -->
             </div>
         </div>
     </section>
@@ -1033,90 +1210,328 @@
         </div>
     </section>
 
-    <!-- Rest of the HTML remains the same... -->
+    <!-- Admin Dashboard -->
+    <section class="section" id="admin" style="display: none;">
+        <!-- Admin content remains the same -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Footer content remains the same -->
+    </footer>
+
+    <!-- Modals -->
+    <!-- All modal content remains the same -->
 
     <script>
-        // Enhanced filter state with checkboxes
+        // Enhanced sample data with categories and pricing
+        const sampleServices = [
+            {
+                id: 1,
+                name: "Website Development",
+                description: "Custom website development with modern technologies. We create responsive, SEO-friendly websites that drive results.",
+                price: "£999",
+                category: "development",
+                type: "service",
+                features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
+                status: "active"
+            },
+            {
+                id: 2,
+                name: "IT Support & Maintenance",
+                description: "Professional IT support and maintenance services to keep your systems running smoothly.",
+                price: "£45/hour",
+                category: "support",
+                type: "service",
+                features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
+                status: "active"
+            },
+            {
+                id: 3,
+                name: "Software Testing",
+                description: "Comprehensive software testing services to ensure your applications are bug-free and performant.",
+                price: "Get Quote",
+                category: "testing",
+                type: "service",
+                features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"],
+                status: "active"
+            },
+            {
+                id: 4,
+                name: "Game Development Consultation",
+                description: "Expert consultation for game development projects, from concept to deployment.",
+                price: "£65/hour",
+                category: "consultation",
+                type: "service",
+                features: ["Game Design", "Technical Architecture", "Performance Optimization", "Platform Guidance"],
+                status: "active"
+            },
+            {
+                id: 5,
+                name: "Cloud Migration Services",
+                description: "Seamlessly migrate your infrastructure to cloud platforms like AWS, Azure, or Google Cloud.",
+                price: "£1,500+",
+                category: "cloud",
+                type: "service",
+                features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"],
+                status: "active"
+            },
+            {
+                id: 6,
+                name: "Cybersecurity Audit",
+                description: "Comprehensive security assessment to identify vulnerabilities and protect your business.",
+                price: "£2,000",
+                category: "security",
+                type: "service",
+                features: ["Vulnerability Assessment", "Penetration Testing", "Security Report", "Remediation Plan"],
+                status: "active"
+            },
+            {
+                id: 7,
+                name: "Mobile App Development",
+                description: "Create powerful mobile applications for iOS and Android platforms.",
+                price: "£1,200+",
+                category: "development",
+                type: "service",
+                features: ["Native & Cross-platform", "UI/UX Design", "App Store Deployment", "Maintenance"],
+                status: "active"
+            },
+            {
+                id: 8,
+                name: "Data Analytics & BI",
+                description: "Transform your data into actionable insights with advanced analytics and business intelligence.",
+                price: "£85/hour",
+                category: "analytics",
+                type: "service",
+                features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"],
+                status: "active"
+            },
+            {
+                id: 9,
+                name: "E-commerce Solutions",
+                description: "Build robust online stores with secure payment gateways and inventory management.",
+                price: "£1,800+",
+                category: "development",
+                type: "service",
+                features: ["Payment Integration", "Inventory Management", "Order Processing", "Security"],
+                status: "active"
+            },
+            {
+                id: 10,
+                name: "API Development",
+                description: "Create scalable and secure APIs for your applications and third-party integrations.",
+                price: "£75/hour",
+                category: "development",
+                type: "service",
+                features: ["RESTful APIs", "Documentation", "Security", "Rate Limiting"],
+                status: "active"
+            },
+            {
+                id: 11,
+                name: "Database Optimization",
+                description: "Optimize your database performance and ensure data integrity and security.",
+                price: "£90/hour",
+                category: "database",
+                type: "service",
+                features: ["Performance Tuning", "Backup Solutions", "Security", "Monitoring"],
+                status: "active"
+            },
+            {
+                id: 12,
+                name: "IT Infrastructure Setup",
+                description: "Design and implement complete IT infrastructure solutions for businesses.",
+                price: "Get Quote",
+                category: "infrastructure",
+                type: "service",
+                features: ["Network Setup", "Server Configuration", "Security", "Monitoring"],
+                status: "active"
+            }
+        ];
+
+        // Updated courses with categories
+        const sampleCourses = [
+            {
+                id: 1,
+                name: "Software Development Technician",
+                description: "Entry-level training for software development technicians. Learn fundamental programming concepts and development tools.",
+                duration: "12 weeks",
+                enrolled: 856,
+                rating: 4.6,
+                level: "Beginner",
+                badge: "ENTRY LEVEL",
+                category: "bootcamp",
+                type: "course",
+                price: "£1,499"
+            },
+            {
+                id: 2,
+                name: "Junior Developer Bootcamp",
+                description: "Comprehensive training for aspiring junior developers. Master essential programming skills and development methodologies.",
+                duration: "16 weeks",
+                enrolled: 723,
+                rating: 4.7,
+                level: "Beginner",
+                badge: "POPULAR",
+                category: "bootcamp",
+                type: "course",
+                price: "£2,199"
+            },
+            {
+                id: 3,
+                name: "Junior Web Developer",
+                description: "Specialized training in web development technologies including HTML, CSS, JavaScript and modern frameworks.",
+                duration: "14 weeks",
+                enrolled: 645,
+                rating: 4.8,
+                level: "Beginner",
+                badge: "HOT",
+                category: "web",
+                type: "course",
+                price: "£1,799"
+            },
+            {
+                id: 4,
+                name: "Junior Application Developer",
+                description: "Learn to develop desktop and business applications using modern programming languages and development tools.",
+                duration: "15 weeks",
+                enrolled: 512,
+                rating: 4.5,
+                level: "Beginner",
+                badge: "NEW",
+                category: "software",
+                type: "course",
+                price: "£1,899"
+            },
+            {
+                id: 5,
+                name: "Junior Mobile App Developer",
+                description: "Master mobile app development for iOS and Android platforms using native and cross-platform technologies.",
+                duration: "16 weeks",
+                enrolled: 489,
+                rating: 4.7,
+                level: "Beginner",
+                badge: "TRENDING",
+                category: "mobile",
+                type: "course",
+                price: "£2,099"
+            },
+            {
+                id: 6,
+                name: "Junior Games Developer",
+                description: "Introduction to game development principles, game engines, and interactive programming for aspiring game developers.",
+                duration: "18 weeks",
+                enrolled: 367,
+                rating: 4.4,
+                level: "Beginner",
+                badge: "SPECIALIZED",
+                category: "software",
+                type: "course",
+                price: "£2,299"
+            },
+            {
+                id: 7,
+                name: "Junior Software Developer",
+                description: "Comprehensive software development training covering multiple programming languages and development methodologies.",
+                duration: "20 weeks",
+                enrolled: 598,
+                rating: 4.8,
+                level: "Beginner to Intermediate",
+                badge: "BESTSELLER",
+                category: "bootcamp",
+                type: "course",
+                price: "£2,499"
+            },
+            {
+                id: 8,
+                name: "Junior Application Support Analyst",
+                description: "Learn to support and maintain business applications, troubleshoot issues, and provide technical support.",
+                duration: "10 weeks",
+                enrolled: 423,
+                rating: 4.3,
+                level: "Beginner",
+                badge: "SUPPORT",
+                category: "support",
+                type: "course",
+                price: "£1,299"
+            },
+            {
+                id: 9,
+                name: "Junior Programmer",
+                description: "Fundamental programming course covering algorithms, data structures, and problem-solving techniques.",
+                duration: "12 weeks",
+                enrolled: 781,
+                rating: 4.6,
+                level: "Beginner",
+                badge: "FOUNDATION",
+                category: "software",
+                type: "course",
+                price: "£1,599"
+            },
+            {
+                id: 10,
+                name: "Assistant Programmer",
+                description: "Training for assistant programmer roles focusing on code maintenance, debugging, and collaborative development.",
+                duration: "10 weeks",
+                enrolled: 334,
+                rating: 4.2,
+                level: "Beginner",
+                badge: "ASSISTANT",
+                category: "software",
+                type: "course",
+                price: "£1,199"
+            },
+            {
+                id: 11,
+                name: "Automated Test Developer",
+                description: "Learn automated testing frameworks, test scripting, and quality assurance processes for software development.",
+                duration: "14 weeks",
+                enrolled: 456,
+                rating: 4.7,
+                level: "Beginner to Intermediate",
+                badge: "TESTING",
+                category: "testing",
+                type: "course",
+                price: "£1,899"
+            },
+            {
+                id: 12,
+                name: "Complete Web Development Bootcamp",
+                description: "Master full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
+                duration: "24 weeks",
+                enrolled: 1247,
+                rating: 4.9,
+                level: "Beginner to Advanced",
+                badge: "BESTSELLER",
+                category: "bootcamp",
+                type: "course",
+                price: "£2,999"
+            }
+        ];
+
+        // Filter state
         let serviceFilters = {
             search: '',
-            categories: ['development', 'support', 'testing', 'consultation', 'cloud', 'security', 'analytics', 'database', 'infrastructure'],
-            priceRanges: ['under-500', '500-1000', '1000-2000', 'over-2000', 'quote'],
+            category: '',
             sort: 'name'
         };
 
         let courseFilters = {
             search: '',
-            categories: ['bootcamp', 'web', 'mobile', 'software', 'support', 'testing'],
-            levels: ['Beginner', 'Intermediate', 'Advanced'],
-            priceRanges: ['under-1500', '1500-2000', 'over-2000'],
+            category: '',
+            level: '',
             sort: 'name'
         };
 
-        // Initialize filters with checkboxes
+        // Initialize filters
         function initializeFilters() {
-            // Service category checkboxes
-            document.querySelectorAll('#serviceCategories input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        serviceFilters.categories.push(this.value);
-                    } else {
-                        serviceFilters.categories = serviceFilters.categories.filter(cat => cat !== this.value);
-                    }
-                    filterServices();
-                });
-            });
-
-            // Service price range checkboxes
-            document.querySelectorAll('#servicePriceRange input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        serviceFilters.priceRanges.push(this.value);
-                    } else {
-                        serviceFilters.priceRanges = serviceFilters.priceRanges.filter(range => range !== this.value);
-                    }
-                    filterServices();
-                });
-            });
-
-            // Course category checkboxes
-            document.querySelectorAll('#courseCategories input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        courseFilters.categories.push(this.value);
-                    } else {
-                        courseFilters.categories = courseFilters.categories.filter(cat => cat !== this.value);
-                    }
-                    filterCourses();
-                });
-            });
-
-            // Course level checkboxes
-            document.querySelectorAll('#courseLevels input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        courseFilters.levels.push(this.value);
-                    } else {
-                        courseFilters.levels = courseFilters.levels.filter(level => level !== this.value);
-                    }
-                    filterCourses();
-                });
-            });
-
-            // Course price range checkboxes
-            document.querySelectorAll('#coursePriceRange input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        courseFilters.priceRanges.push(this.value);
-                    } else {
-                        courseFilters.priceRanges = courseFilters.priceRanges.filter(range => range !== this.value);
-                    }
-                    filterCourses();
-                });
-            });
-
-            // Search and sort event listeners (same as before)
+            // Add event listeners for service filters
             document.getElementById('serviceSearch').addEventListener('input', function(e) {
                 serviceFilters.search = e.target.value;
+                filterServices();
+            });
+
+            document.getElementById('serviceCategory').addEventListener('change', function(e) {
+                serviceFilters.category = e.target.value;
                 filterServices();
             });
 
@@ -1125,8 +1540,19 @@
                 filterServices();
             });
 
+            // Add event listeners for course filters
             document.getElementById('courseSearch').addEventListener('input', function(e) {
                 courseFilters.search = e.target.value;
+                filterCourses();
+            });
+
+            document.getElementById('courseCategory').addEventListener('change', function(e) {
+                courseFilters.category = e.target.value;
+                filterCourses();
+            });
+
+            document.getElementById('courseLevel').addEventListener('change', function(e) {
+                courseFilters.level = e.target.value;
                 filterCourses();
             });
 
@@ -1136,7 +1562,7 @@
             });
         }
 
-        // Enhanced filter functions with checkbox support
+        // Filter services
         function filterServices() {
             let filteredServices = [...sampleServices];
 
@@ -1145,51 +1571,46 @@
                 const searchTerm = serviceFilters.search.toLowerCase();
                 filteredServices = filteredServices.filter(service => 
                     service.name.toLowerCase().includes(searchTerm) ||
-                    service.description.toLowerCase().includes(searchTerm)
+                    service.description.toLowerCase().includes(searchTerm) ||
+                    service.category.toLowerCase().includes(searchTerm)
                 );
             }
 
-            // Apply category filter with checkboxes
-            if (serviceFilters.categories.length > 0) {
+            // Apply category filter
+            if (serviceFilters.category) {
                 filteredServices = filteredServices.filter(service => 
-                    serviceFilters.categories.includes(service.category)
+                    service.category === serviceFilters.category
                 );
-            }
-
-            // Apply price range filter
-            if (serviceFilters.priceRanges.length > 0) {
-                filteredServices = filteredServices.filter(service => {
-                    const price = extractPrice(service.price);
-                    return serviceFilters.priceRanges.some(range => {
-                        switch (range) {
-                            case 'under-500': return price > 0 && price < 500;
-                            case '500-1000': return price >= 500 && price <= 1000;
-                            case '1000-2000': return price >= 1000 && price <= 2000;
-                            case 'over-2000': return price > 2000;
-                            case 'quote': return service.price.toLowerCase().includes('quote');
-                            default: return true;
-                        }
-                    });
-                });
             }
 
             // Apply sorting
             filteredServices.sort((a, b) => {
                 switch (serviceFilters.sort) {
-                    case 'name': return a.name.localeCompare(b.name);
-                    case 'name-desc': return b.name.localeCompare(a.name);
-                    case 'price': return extractPrice(a.price) - extractPrice(b.price);
-                    case 'price-desc': return extractPrice(b.price) - extractPrice(a.price);
-                    default: return 0;
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    case 'price':
+                        return extractPrice(a.price) - extractPrice(b.price);
+                    case 'price-desc':
+                        return extractPrice(b.price) - extractPrice(a.price);
+                    default:
+                        return 0;
                 }
             });
 
+            // Update active filters display
             updateServiceActiveFilters();
+
+            // Update results count
             document.getElementById('serviceResultsCount').innerHTML = 
                 `Showing <strong>${filteredServices.length}</strong> services`;
+
+            // Render filtered services
             renderServices(filteredServices);
         }
 
+        // Filter courses
         function filterCourses() {
             let filteredCourses = [...sampleCourses];
 
@@ -1198,118 +1619,281 @@
                 const searchTerm = courseFilters.search.toLowerCase();
                 filteredCourses = filteredCourses.filter(course => 
                     course.name.toLowerCase().includes(searchTerm) ||
-                    course.description.toLowerCase().includes(searchTerm)
+                    course.description.toLowerCase().includes(searchTerm) ||
+                    course.category.toLowerCase().includes(searchTerm) ||
+                    course.level.toLowerCase().includes(searchTerm)
                 );
             }
 
-            // Apply category filter with checkboxes
-            if (courseFilters.categories.length > 0) {
+            // Apply category filter
+            if (courseFilters.category) {
                 filteredCourses = filteredCourses.filter(course => 
-                    courseFilters.categories.includes(course.category)
+                    course.category === courseFilters.category
                 );
             }
 
-            // Apply level filter with checkboxes
-            if (courseFilters.levels.length > 0) {
+            // Apply level filter
+            if (courseFilters.level) {
                 filteredCourses = filteredCourses.filter(course => 
-                    courseFilters.levels.includes(course.level)
+                    course.level === courseFilters.level
                 );
-            }
-
-            // Apply price range filter
-            if (courseFilters.priceRanges.length > 0) {
-                filteredCourses = filteredCourses.filter(course => {
-                    const price = extractPrice(course.price);
-                    return courseFilters.priceRanges.some(range => {
-                        switch (range) {
-                            case 'under-1500': return price > 0 && price < 1500;
-                            case '1500-2000': return price >= 1500 && price <= 2000;
-                            case 'over-2000': return price > 2000;
-                            default: return true;
-                        }
-                    });
-                });
             }
 
             // Apply sorting
             filteredCourses.sort((a, b) => {
                 switch (courseFilters.sort) {
-                    case 'name': return a.name.localeCompare(b.name);
-                    case 'name-desc': return b.name.localeCompare(a.name);
-                    case 'rating': return b.rating - a.rating;
-                    case 'enrolled': return b.enrolled - a.enrolled;
-                    case 'duration': return extractWeeks(a.duration) - extractWeeks(b.duration);
-                    case 'price': return extractPrice(a.price) - extractPrice(b.price);
-                    default: return 0;
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    case 'rating':
+                        return b.rating - a.rating;
+                    case 'enrolled':
+                        return b.enrolled - a.enrolled;
+                    case 'duration':
+                        return extractWeeks(a.duration) - extractWeeks(b.duration);
+                    default:
+                        return 0;
                 }
             });
 
+            // Update active filters display
             updateCourseActiveFilters();
+
+            // Update results count
             document.getElementById('courseResultsCount').innerHTML = 
                 `Showing <strong>${filteredCourses.length}</strong> courses`;
+
+            // Render filtered courses
             renderCourses(filteredCourses);
+        }
+
+        // Helper function to extract price from string
+        function extractPrice(priceStr) {
+            const match = priceStr.match(/£([\d,]+)/);
+            return match ? parseInt(match[1].replace(/,/g, '')) : 0;
+        }
+
+        // Helper function to extract weeks from duration string
+        function extractWeeks(durationStr) {
+            const match = durationStr.match(/(\d+)\s*weeks?/);
+            return match ? parseInt(match[1]) : 0;
+        }
+
+        // Update active filters display for services
+        function updateServiceActiveFilters() {
+            const container = document.getElementById('serviceActiveFilters');
+            container.innerHTML = '';
+
+            if (serviceFilters.search) {
+                container.appendChild(createFilterTag('Search: ' + serviceFilters.search, 'search'));
+            }
+
+            if (serviceFilters.category) {
+                const categoryText = document.getElementById('serviceCategory').options[document.getElementById('serviceCategory').selectedIndex].text;
+                container.appendChild(createFilterTag('Category: ' + categoryText, 'category'));
+            }
+
+            if (serviceFilters.sort !== 'name') {
+                const sortText = document.getElementById('serviceSort').options[document.getElementById('serviceSort').selectedIndex].text;
+                container.appendChild(createFilterTag('Sorted by: ' + sortText, 'sort'));
+            }
+        }
+
+        // Update active filters display for courses
+        function updateCourseActiveFilters() {
+            const container = document.getElementById('courseActiveFilters');
+            container.innerHTML = '';
+
+            if (courseFilters.search) {
+                container.appendChild(createFilterTag('Search: ' + courseFilters.search, 'search'));
+            }
+
+            if (courseFilters.category) {
+                const categoryText = document.getElementById('courseCategory').options[document.getElementById('courseCategory').selectedIndex].text;
+                container.appendChild(createFilterTag('Category: ' + categoryText, 'category'));
+            }
+
+            if (courseFilters.level) {
+                container.appendChild(createFilterTag('Level: ' + courseFilters.level, 'level'));
+            }
+
+            if (courseFilters.sort !== 'name') {
+                const sortText = document.getElementById('courseSort').options[document.getElementById('courseSort').selectedIndex].text;
+                container.appendChild(createFilterTag('Sorted by: ' + sortText, 'sort'));
+            }
+        }
+
+        // Create filter tag element
+        function createFilterTag(text, type) {
+            const tag = document.createElement('div');
+            tag.className = 'filter-tag';
+            tag.innerHTML = `
+                ${text}
+                <i class="fas fa-times" onclick="removeFilter('${type}')"></i>
+            `;
+            return tag;
+        }
+
+        // Remove specific filter
+        function removeFilter(type) {
+            if (type === 'search') {
+                serviceFilters.search = '';
+                courseFilters.search = '';
+                document.getElementById('serviceSearch').value = '';
+                document.getElementById('courseSearch').value = '';
+            } else if (type === 'category') {
+                serviceFilters.category = '';
+                courseFilters.category = '';
+                document.getElementById('serviceCategory').value = '';
+                document.getElementById('courseCategory').value = '';
+            } else if (type === 'level') {
+                courseFilters.level = '';
+                document.getElementById('courseLevel').value = '';
+            } else if (type === 'sort') {
+                serviceFilters.sort = 'name';
+                courseFilters.sort = 'name';
+                document.getElementById('serviceSort').value = 'name';
+                document.getElementById('courseSort').value = 'name';
+            }
+
+            filterServices();
+            filterCourses();
         }
 
         // Clear all service filters
         function clearServiceFilters() {
             serviceFilters = {
                 search: '',
-                categories: ['development', 'support', 'testing', 'consultation', 'cloud', 'security', 'analytics', 'database', 'infrastructure'],
-                priceRanges: ['under-500', '500-1000', '1000-2000', 'over-2000', 'quote'],
+                category: '',
                 sort: 'name'
             };
-            
             document.getElementById('serviceSearch').value = '';
+            document.getElementById('serviceCategory').value = '';
             document.getElementById('serviceSort').value = 'name';
-            
-            // Reset all checkboxes
-            document.querySelectorAll('#serviceCategories input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            document.querySelectorAll('#servicePriceRange input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            
             filterServices();
         }
 
-        // Clear all course filters
-        function clearCourseFilters() {
-            courseFilters = {
-                search: '',
-                categories: ['bootcamp', 'web', 'mobile', 'software', 'support', 'testing'],
-                levels: ['Beginner', 'Intermediate', 'Advanced'],
-                priceRanges: ['under-1500', '1500-2000', 'over-2000'],
-                sort: 'name'
-            };
-            
-            document.getElementById('courseSearch').value = '';
-            document.getElementById('courseSort').value = 'name';
-            
-            // Reset all checkboxes
-            document.querySelectorAll('#courseCategories input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
+        // Load pricing table
+        function loadPricingTable() {
+            const container = document.getElementById('pricing-table-body');
+            container.innerHTML = '';
+
+            // Combine services and courses for pricing table
+            const allItems = [...sampleServices, ...sampleCourses];
+
+            allItems.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td><span class="price-category">${item.category}</span></td>
+                    <td>${item.type === 'service' ? 'Service' : 'Course'}</td>
+                    <td class="price-amount">${item.price}</td>
+                    <td>${item.duration || 'Ongoing'}</td>
+                `;
+                container.appendChild(row);
             });
-            document.querySelectorAll('#courseLevels input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            document.querySelectorAll('#coursePriceRange input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
+        }
+
+        // Enhanced render functions with filtering
+        function renderServices(services = sampleServices) {
+            const container = document.getElementById('services-container');
             
-            filterCourses();
+            if (services.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No services found</h3>
+                        <p>Try adjusting your search or filters</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.innerHTML = `
+                    <div class="service-icon">
+                        <i class="fas ${getServiceIcon(service.category)}"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>${service.name}</h3>
+                        <p>${service.description}</p>
+                        <ul class="service-features">
+                            ${service.features ? service.features.map(feature => 
+                                `<li><i class="fas fa-check"></i> ${feature}</li>`
+                            ).join('') : ''}
+                        </ul>
+                        <div class="service-price">${service.price}</div>
+                        <a href="#" class="btn btn-primary" onclick="openServiceModal(${service.id})">Get Started</a>
+                    </div>
+                `;
+                container.appendChild(serviceCard);
+            });
+        }
+
+        function renderCourses(courses = sampleCourses) {
+            const container = document.getElementById('courses-container');
+            
+            if (courses.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No courses found</h3>
+                        <p>Try adjusting your search or filters</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            
+            courses.forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.className = 'course-card';
+                courseCard.innerHTML = `
+                    <div class="course-image">
+                        <i class="fas ${getCourseIcon(course.name)}"></i>
+                        ${course.badge ? `<div class="course-badge">${course.badge}</div>` : ''}
+                    </div>
+                    <div class="course-content">
+                        <h3>${course.name}</h3>
+                        <p>${course.description}</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                            <span><i class="fas fa-user-graduate"></i> ${course.enrolled} enrolled</span>
+                            <span class="course-rating"><i class="fas fa-star"></i> ${course.rating}</span>
+                        </div>
+                        <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
+                            <i class="fas fa-signal"></i> ${course.level}
+                            <span class="feature-tag">${course.category}</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" onclick="openCourseModal(${course.id})">Enroll Now - ${course.price}</a>
+                    </div>
+                `;
+                container.appendChild(courseCard);
+            });
         }
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
+            // ... existing initialization code ...
+            
+            // Initialize filters
             initializeFilters();
-            filterServices();
-            filterCourses();
+            
+            // Load initial data
+            renderServices();
+            renderCourses();
             loadPricingTable();
-            // ... rest of initialization code
+            
+            // ... rest of existing initialization code ...
         });
 
-        // ... rest of JavaScript code remains the same
+        // ... rest of existing JavaScript code (admin functions, modals, etc.) ...
     </script>
 </body>
 </html>
