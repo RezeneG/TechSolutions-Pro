@@ -1,5 +1,1319 @@
 <!DOCTYPE html>
+<html lang="en"><!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSolutions Pro | IT Services & Training Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+            --warning: #ffcc00;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: space-around;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* Main Content Layout */
+        .content-with-sidebar {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        /* Filter Sidebar */
+        .filter-sidebar {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 100px;
+        }
+        
+        .filter-group {
+            margin-bottom: 30px;
+        }
+        
+        .filter-group h4 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-group h4 i {
+            color: var(--primary);
+        }
+        
+        .checkbox-list {
+            list-style: none;
+        }
+        
+        .checkbox-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-list input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+        
+        .checkbox-list label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+        
+        .checkbox-list label:hover {
+            color: var(--primary);
+        }
+        
+        .filter-count {
+            background: var(--accent);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-left: auto;
+        }
+        
+        /* Search & Sort Bar */
+        .search-sort-bar {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .search-box {
+            position: relative;
+            flex: 1;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .sort-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sort-group label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .sort-group select {
+            padding: 10px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            min-width: 150px;
+        }
+        
+        .sort-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Active Filters */
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-tag {
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .filter-tag i {
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+        
+        /* Services Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            background: var(--primary);
+            color: white;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .service-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+        
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            flex-grow: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .service-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+        
+        .service-features li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .service-features li i {
+            color: var(--success);
+            font-size: 0.8rem;
+        }
+        
+        /* Courses Section */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .course-image {
+            height: 160px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .course-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--accent);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .course-content {
+            padding: 20px;
+        }
+        
+        .course-content h3 {
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+        
+        .course-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .course-rating {
+            color: var(--warning);
+        }
+        
+        /* Price List Section */
+        .price-list {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 50px;
+        }
+        
+        .price-list-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px 30px;
+        }
+        
+        .price-list-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .price-table th,
+        .price-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .price-table th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .price-table tr:hover {
+            background: var(--light);
+        }
+        
+        .price-amount {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .price-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        /* Results Count */
+        .results-count {
+            margin-bottom: 30px;
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .results-count strong {
+            color: var(--primary);
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+            grid-column: 1 / -1;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--light-gray);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-with-sidebar {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .filter-sidebar {
+                position: static;
+                order: 2;
+            }
+            
+            .search-sort-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .sort-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 25px;
+                padding: 20px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .services-grid,
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .price-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* Rest of the CSS remains the same... */
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>TechSolutions Pro</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="active">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#courses">Courses</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#admin" id="adminNavLink">Admin <span class="admin-badge">Login Required</span></a>
+                </div>
+                <div class="auth-buttons">
+                    <span class="status-badge status-online" id="backend-status">Backend Online</span>
+                    <a href="#" class="btn btn-outline" onclick="openModal('loginModal')">Login</a>
+                    <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">Sign Up</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Professional IT Services & Training</h1>
+            <p>Transform your business with our expert IT solutions and comprehensive training programs. Join thousands of satisfied clients worldwide.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Explore Services</a>
+                <a href="#courses" class="btn btn-outline">View Courses</a>
+                <a href="#pricing" class="btn btn-outline">View Pricing</a>
+                <a href="#admin" class="btn btn-outline" onclick="checkAdminAccess(event)">Admin Dashboard</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number" id="total-users">5,247</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="total-services">32</div>
+                    <div class="stat-label">Services Offered</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="success-rate">98.2%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Professional Services</h2>
+                <p>We offer a wide range of IT services to help your business grow and succeed in the digital age.</p>
+            </div>
+
+            <div class="content-with-sidebar">
+                <!-- Services Sidebar -->
+                <div class="filter-sidebar">
+                    <div class="filter-group">
+                        <h4><i class="fas fa-filter"></i> Service Categories</h4>
+                        <ul class="checkbox-list" id="serviceCategories">
+                            <li>
+                                <input type="checkbox" id="cat-dev" value="development" checked>
+                                <label for="cat-dev">Development</label>
+                                <span class="filter-count">5</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-support" value="support" checked>
+                                <label for="cat-support">Support</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-testing" value="testing" checked>
+                                <label for="cat-testing">Testing</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-consultation" value="consultation" checked>
+                                <label for="cat-consultation">Consultation</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-cloud" value="cloud" checked>
+                                <label for="cat-cloud">Cloud</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-security" value="security" checked>
+                                <label for="cat-security">Security</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-analytics" value="analytics" checked>
+                                <label for="cat-analytics">Analytics</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-database" value="database" checked>
+                                <label for="cat-database">Database</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-infrastructure" value="infrastructure" checked>
+                                <label for="cat-infrastructure">Infrastructure</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4><i class="fas fa-pound-sign"></i> Price Range</h4>
+                        <ul class="checkbox-list" id="servicePriceRange">
+                            <li>
+                                <input type="checkbox" id="price-under-500" value="under-500" checked>
+                                <label for="price-under-500">Under £500</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="price-500-1000" value="500-1000" checked>
+                                <label for="price-500-1000">£500 - £1,000</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="price-1000-2000" value="1000-2000" checked>
+                                <label for="price-1000-2000">£1,000 - £2,000</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="price-over-2000" value="over-2000" checked>
+                                <label for="price-over-2000">Over £2,000</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="price-quote" value="quote" checked>
+                                <label for="price-quote">Get Quote</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-outline btn-small" onclick="clearServiceFilters()" style="width: 100%;">
+                        <i class="fas fa-times"></i> Clear All Filters
+                    </button>
+                </div>
+
+                <!-- Services Content -->
+                <div class="services-content">
+                    <div class="search-sort-bar">
+                        <div class="search-box">
+                            <input type="text" id="serviceSearch" placeholder="Search services...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="sort-group">
+                            <label for="serviceSort">Sort by:</label>
+                            <select id="serviceSort">
+                                <option value="name">Name (A-Z)</option>
+                                <option value="name-desc">Name (Z-A)</option>
+                                <option value="price">Price (Low to High)</option>
+                                <option value="price-desc">Price (High to Low)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="active-filters" id="serviceActiveFilters">
+                        <!-- Active filters will appear here -->
+                    </div>
+
+                    <div class="results-count" id="serviceResultsCount">
+                        Showing <strong>12</strong> services
+                    </div>
+
+                    <div class="services-grid" id="services-container">
+                        <!-- Services populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="section" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Training Courses</h2>
+                <p>Enhance your skills with our comprehensive IT training programs designed for all levels.</p>
+            </div>
+
+            <div class="content-with-sidebar">
+                <!-- Courses Sidebar -->
+                <div class="filter-sidebar">
+                    <div class="filter-group">
+                        <h4><i class="fas fa-filter"></i> Course Categories</h4>
+                        <ul class="checkbox-list" id="courseCategories">
+                            <li>
+                                <input type="checkbox" id="cat-bootcamp" value="bootcamp" checked>
+                                <label for="cat-bootcamp">Bootcamp</label>
+                                <span class="filter-count">3</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-web" value="web" checked>
+                                <label for="cat-web">Web Development</label>
+                                <span class="filter-count">2</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-mobile" value="mobile" checked>
+                                <label for="cat-mobile">Mobile Development</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-software" value="software" checked>
+                                <label for="cat-software">Software Development</label>
+                                <span class="filter-count">4</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-support" value="support" checked>
+                                <label for="cat-support">Support & Analysis</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat-testing" value="testing" checked>
+                                <label for="cat-testing">Testing</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4><i class="fas fa-signal"></i> Experience Level</h4>
+                        <ul class="checkbox-list" id="courseLevels">
+                            <li>
+                                <input type="checkbox" id="level-beginner" value="Beginner" checked>
+                                <label for="level-beginner">Beginner</label>
+                                <span class="filter-count">10</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="level-intermediate" value="Intermediate" checked>
+                                <label for="level-intermediate">Intermediate</label>
+                                <span class="filter-count">2</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="level-advanced" value="Advanced" checked>
+                                <label for="level-advanced">Advanced</label>
+                                <span class="filter-count">1</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4><i class="fas fa-pound-sign"></i> Course Price</h4>
+                        <ul class="checkbox-list" id="coursePriceRange">
+                            <li>
+                                <input type="checkbox" id="course-under-1500" value="under-1500" checked>
+                                <label for="course-under-1500">Under £1,500</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="course-1500-2000" value="1500-2000" checked>
+                                <label for="course-1500-2000">£1,500 - £2,000</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="course-over-2000" value="over-2000" checked>
+                                <label for="course-over-2000">Over £2,000</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-outline btn-small" onclick="clearCourseFilters()" style="width: 100%;">
+                        <i class="fas fa-times"></i> Clear All Filters
+                    </button>
+                </div>
+
+                <!-- Courses Content -->
+                <div class="services-content">
+                    <div class="search-sort-bar">
+                        <div class="search-box">
+                            <input type="text" id="courseSearch" placeholder="Search courses...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="sort-group">
+                            <label for="courseSort">Sort by:</label>
+                            <select id="courseSort">
+                                <option value="name">Name (A-Z)</option>
+                                <option value="name-desc">Name (Z-A)</option>
+                                <option value="rating">Rating (High to Low)</option>
+                                <option value="enrolled">Popularity</option>
+                                <option value="duration">Duration</option>
+                                <option value="price">Price (Low to High)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="active-filters" id="courseActiveFilters">
+                        <!-- Active filters will appear here -->
+                    </div>
+
+                    <div class="results-count" id="courseResultsCount">
+                        Showing <strong>12</strong> courses
+                    </div>
+
+                    <div class="courses-grid" id="courses-container">
+                        <!-- Courses populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Comprehensive Pricing</h2>
+                <p>Transparent pricing for all our services and training programs. No hidden fees.</p>
+            </div>
+
+            <div class="price-list">
+                <div class="price-list-header">
+                    <h3><i class="fas fa-tags"></i> Service & Course Pricing</h3>
+                </div>
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Service/Course</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Price</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pricing-table-body">
+                        <!-- Pricing data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rest of the HTML remains the same... -->
+
+    <script>
+        // Enhanced filter state with checkboxes
+        let serviceFilters = {
+            search: '',
+            categories: ['development', 'support', 'testing', 'consultation', 'cloud', 'security', 'analytics', 'database', 'infrastructure'],
+            priceRanges: ['under-500', '500-1000', '1000-2000', 'over-2000', 'quote'],
+            sort: 'name'
+        };
+
+        let courseFilters = {
+            search: '',
+            categories: ['bootcamp', 'web', 'mobile', 'software', 'support', 'testing'],
+            levels: ['Beginner', 'Intermediate', 'Advanced'],
+            priceRanges: ['under-1500', '1500-2000', 'over-2000'],
+            sort: 'name'
+        };
+
+        // Initialize filters with checkboxes
+        function initializeFilters() {
+            // Service category checkboxes
+            document.querySelectorAll('#serviceCategories input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        serviceFilters.categories.push(this.value);
+                    } else {
+                        serviceFilters.categories = serviceFilters.categories.filter(cat => cat !== this.value);
+                    }
+                    filterServices();
+                });
+            });
+
+            // Service price range checkboxes
+            document.querySelectorAll('#servicePriceRange input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        serviceFilters.priceRanges.push(this.value);
+                    } else {
+                        serviceFilters.priceRanges = serviceFilters.priceRanges.filter(range => range !== this.value);
+                    }
+                    filterServices();
+                });
+            });
+
+            // Course category checkboxes
+            document.querySelectorAll('#courseCategories input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        courseFilters.categories.push(this.value);
+                    } else {
+                        courseFilters.categories = courseFilters.categories.filter(cat => cat !== this.value);
+                    }
+                    filterCourses();
+                });
+            });
+
+            // Course level checkboxes
+            document.querySelectorAll('#courseLevels input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        courseFilters.levels.push(this.value);
+                    } else {
+                        courseFilters.levels = courseFilters.levels.filter(level => level !== this.value);
+                    }
+                    filterCourses();
+                });
+            });
+
+            // Course price range checkboxes
+            document.querySelectorAll('#coursePriceRange input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        courseFilters.priceRanges.push(this.value);
+                    } else {
+                        courseFilters.priceRanges = courseFilters.priceRanges.filter(range => range !== this.value);
+                    }
+                    filterCourses();
+                });
+            });
+
+            // Search and sort event listeners (same as before)
+            document.getElementById('serviceSearch').addEventListener('input', function(e) {
+                serviceFilters.search = e.target.value;
+                filterServices();
+            });
+
+            document.getElementById('serviceSort').addEventListener('change', function(e) {
+                serviceFilters.sort = e.target.value;
+                filterServices();
+            });
+
+            document.getElementById('courseSearch').addEventListener('input', function(e) {
+                courseFilters.search = e.target.value;
+                filterCourses();
+            });
+
+            document.getElementById('courseSort').addEventListener('change', function(e) {
+                courseFilters.sort = e.target.value;
+                filterCourses();
+            });
+        }
+
+        // Enhanced filter functions with checkbox support
+        function filterServices() {
+            let filteredServices = [...sampleServices];
+
+            // Apply search filter
+            if (serviceFilters.search) {
+                const searchTerm = serviceFilters.search.toLowerCase();
+                filteredServices = filteredServices.filter(service => 
+                    service.name.toLowerCase().includes(searchTerm) ||
+                    service.description.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            // Apply category filter with checkboxes
+            if (serviceFilters.categories.length > 0) {
+                filteredServices = filteredServices.filter(service => 
+                    serviceFilters.categories.includes(service.category)
+                );
+            }
+
+            // Apply price range filter
+            if (serviceFilters.priceRanges.length > 0) {
+                filteredServices = filteredServices.filter(service => {
+                    const price = extractPrice(service.price);
+                    return serviceFilters.priceRanges.some(range => {
+                        switch (range) {
+                            case 'under-500': return price > 0 && price < 500;
+                            case '500-1000': return price >= 500 && price <= 1000;
+                            case '1000-2000': return price >= 1000 && price <= 2000;
+                            case 'over-2000': return price > 2000;
+                            case 'quote': return service.price.toLowerCase().includes('quote');
+                            default: return true;
+                        }
+                    });
+                });
+            }
+
+            // Apply sorting
+            filteredServices.sort((a, b) => {
+                switch (serviceFilters.sort) {
+                    case 'name': return a.name.localeCompare(b.name);
+                    case 'name-desc': return b.name.localeCompare(a.name);
+                    case 'price': return extractPrice(a.price) - extractPrice(b.price);
+                    case 'price-desc': return extractPrice(b.price) - extractPrice(a.price);
+                    default: return 0;
+                }
+            });
+
+            updateServiceActiveFilters();
+            document.getElementById('serviceResultsCount').innerHTML = 
+                `Showing <strong>${filteredServices.length}</strong> services`;
+            renderServices(filteredServices);
+        }
+
+        function filterCourses() {
+            let filteredCourses = [...sampleCourses];
+
+            // Apply search filter
+            if (courseFilters.search) {
+                const searchTerm = courseFilters.search.toLowerCase();
+                filteredCourses = filteredCourses.filter(course => 
+                    course.name.toLowerCase().includes(searchTerm) ||
+                    course.description.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            // Apply category filter with checkboxes
+            if (courseFilters.categories.length > 0) {
+                filteredCourses = filteredCourses.filter(course => 
+                    courseFilters.categories.includes(course.category)
+                );
+            }
+
+            // Apply level filter with checkboxes
+            if (courseFilters.levels.length > 0) {
+                filteredCourses = filteredCourses.filter(course => 
+                    courseFilters.levels.includes(course.level)
+                );
+            }
+
+            // Apply price range filter
+            if (courseFilters.priceRanges.length > 0) {
+                filteredCourses = filteredCourses.filter(course => {
+                    const price = extractPrice(course.price);
+                    return courseFilters.priceRanges.some(range => {
+                        switch (range) {
+                            case 'under-1500': return price > 0 && price < 1500;
+                            case '1500-2000': return price >= 1500 && price <= 2000;
+                            case 'over-2000': return price > 2000;
+                            default: return true;
+                        }
+                    });
+                });
+            }
+
+            // Apply sorting
+            filteredCourses.sort((a, b) => {
+                switch (courseFilters.sort) {
+                    case 'name': return a.name.localeCompare(b.name);
+                    case 'name-desc': return b.name.localeCompare(a.name);
+                    case 'rating': return b.rating - a.rating;
+                    case 'enrolled': return b.enrolled - a.enrolled;
+                    case 'duration': return extractWeeks(a.duration) - extractWeeks(b.duration);
+                    case 'price': return extractPrice(a.price) - extractPrice(b.price);
+                    default: return 0;
+                }
+            });
+
+            updateCourseActiveFilters();
+            document.getElementById('courseResultsCount').innerHTML = 
+                `Showing <strong>${filteredCourses.length}</strong> courses`;
+            renderCourses(filteredCourses);
+        }
+
+        // Clear all service filters
+        function clearServiceFilters() {
+            serviceFilters = {
+                search: '',
+                categories: ['development', 'support', 'testing', 'consultation', 'cloud', 'security', 'analytics', 'database', 'infrastructure'],
+                priceRanges: ['under-500', '500-1000', '1000-2000', 'over-2000', 'quote'],
+                sort: 'name'
+            };
+            
+            document.getElementById('serviceSearch').value = '';
+            document.getElementById('serviceSort').value = 'name';
+            
+            // Reset all checkboxes
+            document.querySelectorAll('#serviceCategories input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            document.querySelectorAll('#servicePriceRange input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            
+            filterServices();
+        }
+
+        // Clear all course filters
+        function clearCourseFilters() {
+            courseFilters = {
+                search: '',
+                categories: ['bootcamp', 'web', 'mobile', 'software', 'support', 'testing'],
+                levels: ['Beginner', 'Intermediate', 'Advanced'],
+                priceRanges: ['under-1500', '1500-2000', 'over-2000'],
+                sort: 'name'
+            };
+            
+            document.getElementById('courseSearch').value = '';
+            document.getElementById('courseSort').value = 'name';
+            
+            // Reset all checkboxes
+            document.querySelectorAll('#courseCategories input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            document.querySelectorAll('#courseLevels input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            document.querySelectorAll('#coursePriceRange input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            
+            filterCourses();
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFilters();
+            filterServices();
+            filterCourses();
+            loadPricingTable();
+            // ... rest of initialization code
+        });
+
+        // ... rest of JavaScript code remains the same
+    </script>
+</body>
+</html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
