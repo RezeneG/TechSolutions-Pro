@@ -786,53 +786,6 @@
             color: white;
             margin-bottom: 15px;
         }
-
-        /* Search and Filter */
-        .search-filter {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .filter-select {
-            min-width: 150px;
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 5px;
-            color: white;
-            z-index: 1002;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transform: translateX(150%);
-            transition: transform 0.3s ease;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            background: var(--success);
-        }
-
-        .notification.error {
-            background: var(--danger);
-        }
-
-        .notification.info {
-            background: var(--primary);
-        }
     </style>
 </head>
 <body>
@@ -893,25 +846,6 @@
                 <h2>Our Professional Services</h2>
                 <p>We offer a wide range of IT services to help your business grow and succeed in the digital age.</p>
             </div>
-            
-            <div class="search-filter">
-                <div class="search-box">
-                    <input type="text" id="serviceSearch" placeholder="Search services..." class="form-group input">
-                </div>
-                <div class="filter-select">
-                    <select id="serviceCategory" class="form-group select">
-                        <option value="">All Categories</option>
-                        <option value="development">Development</option>
-                        <option value="support">Support</option>
-                        <option value="testing">Testing</option>
-                        <option value="consultation">Consultation</option>
-                        <option value="cloud">Cloud</option>
-                        <option value="security">Security</option>
-                        <option value="analytics">Analytics</option>
-                    </select>
-                </div>
-            </div>
-            
             <div class="services-grid" id="services-container">
                 <!-- Services populated by JavaScript -->
             </div>
@@ -925,21 +859,6 @@
                 <h2>Training Courses</h2>
                 <p>Enhance your skills with our comprehensive IT training programs designed for all levels.</p>
             </div>
-            
-            <div class="search-filter">
-                <div class="search-box">
-                    <input type="text" id="courseSearch" placeholder="Search courses..." class="form-group input">
-                </div>
-                <div class="filter-select">
-                    <select id="courseLevel" class="form-group select">
-                        <option value="">All Levels</option>
-                        <option value="Beginner">Beginner</option>
-                        <option value="Intermediate">Intermediate</option>
-                        <option value="Advanced">Advanced</option>
-                    </select>
-                </div>
-            </div>
-            
             <div class="courses-grid" id="courses-container">
                 <!-- Courses populated by JavaScript -->
             </div>
@@ -1136,9 +1055,6 @@
         </div>
     </footer>
 
-    <!-- Notification -->
-    <div id="notification" class="notification"></div>
-
     <!-- Modals -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
@@ -1146,13 +1062,13 @@
             <h3>Login to Your Account</h3>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" id="loginEmail" placeholder="Enter your email">
+                <input type="email" placeholder="Enter your email">
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="loginPassword" placeholder="Enter your password">
+                <input type="password" placeholder="Enter your password">
             </div>
-            <button class="btn btn-primary" onclick="userLogin()" style="width: 100%;">Login</button>
+            <button class="btn btn-primary" style="width: 100%;">Login</button>
             <p style="text-align: center; margin-top: 15px;">Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('registerModal');" style="color: var(--primary);">Sign up</a></p>
         </div>
     </div>
@@ -1163,21 +1079,21 @@
             <h3>Create New Account</h3>
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" id="registerName" placeholder="Enter your full name">
+                <input type="text" placeholder="Enter your full name">
             </div>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" id="registerEmail" placeholder="Enter your email">
+                <input type="email" placeholder="Enter your email">
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="registerPassword" placeholder="Create a password">
+                <input type="password" placeholder="Create a password">
             </div>
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" id="registerConfirmPassword" placeholder="Confirm your password">
+                <input type="password" placeholder="Confirm your password">
             </div>
-            <button class="btn btn-primary" onclick="userRegister()" style="width: 100%;">Create Account</button>
+            <button class="btn btn-primary" style="width: 100%;">Create Account</button>
             <p style="text-align: center; margin-top: 15px;">Already have an account? <a href="#" onclick="closeModal('registerModal'); openModal('loginModal');" style="color: var(--primary);">Login</a></p>
         </div>
     </div>
@@ -1219,8 +1135,6 @@
         const ADMIN_LOGIN_URL = `${API_BASE}/admin/login`;
         const ADMIN_LOGOUT_URL = `${API_BASE}/admin/logout`;
         const HEALTH_URL = `${API_BASE}/health`;
-        const USER_LOGIN_URL = `${API_BASE}/user/login`;
-        const USER_REGISTER_URL = `${API_BASE}/user/register`;
 
         // Admin authentication state
         let adminAuth = {
@@ -1228,13 +1142,6 @@
             user: null,
             token: null,
             permissions: []
-        };
-
-        // User authentication state
-        let userAuth = {
-            isLoggedIn: false,
-            user: null,
-            token: null
         };
 
         // Enhanced sample data with more services and courses
@@ -1321,7 +1228,7 @@
                 duration: "12 weeks",
                 enrolled: 1247,
                 rating: 4.8,
-                level: "Beginner",
+                level: "Beginner to Advanced",
                 badge: "BESTSELLER"
             },
             {
@@ -1396,35 +1303,6 @@
             }
         ];
 
-        // Sample data for admin panel
-        const sampleUsers = [
-            { id: 1, name: "John Smith", email: "john@example.com", role: "Customer", joined: "2023-05-15" },
-            { id: 2, name: "Emma Johnson", email: "emma@example.com", role: "Customer", joined: "2023-06-22" },
-            { id: 3, name: "Michael Brown", email: "michael@example.com", role: "Premium", joined: "2023-04-10" },
-            { id: 4, name: "Sarah Davis", email: "sarah@example.com", role: "Admin", joined: "2022-11-30" },
-            { id: 5, name: "David Wilson", email: "david@example.com", role: "Customer", joined: "2023-07-05" }
-        ];
-
-        const sampleOrders = [
-            { id: 1001, customer: "John Smith", item: "Website Development", amount: "£999", date: "2023-08-15", status: "Completed" },
-            { id: 1002, customer: "Emma Johnson", item: "Cybersecurity Essentials", amount: "£299", date: "2023-08-18", status: "In Progress" },
-            { id: 1003, customer: "Michael Brown", item: "IT Support Package", amount: "£1,200", date: "2023-08-20", status: "Pending" },
-            { id: 1004, customer: "Sarah Davis", item: "Cloud Migration", amount: "£1,500", date: "2023-08-22", status: "Completed" },
-            { id: 1005, customer: "David Wilson", item: "Mobile App Development", amount: "£2,500", date: "2023-08-25", status: "In Progress" }
-        ];
-
-        // Notification system
-        function showNotification(message, type = 'info') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
         // Check backend status
         async function checkBackendStatus() {
             try {
@@ -1438,149 +1316,6 @@
                 document.getElementById('backend-status').textContent = 'Backend Offline';
                 return false;
             }
-        }
-
-        // User authentication functions
-        async function userLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            if (!email || !password) {
-                showNotification('Please enter both email and password', 'error');
-                return;
-            }
-            
-            const isBackendOnline = await checkBackendStatus();
-            
-            if (isBackendOnline) {
-                try {
-                    const response = await fetch(USER_LOGIN_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email, password })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        userAuth = {
-                            isLoggedIn: true,
-                            user: result.user,
-                            token: result.token
-                        };
-                        
-                        localStorage.setItem('userAuth', JSON.stringify(userAuth));
-                        closeModal('loginModal');
-                        showNotification('Login successful!', 'success');
-                        
-                        // Update UI for logged in user
-                        updateUserNavigation();
-                        
-                    } else {
-                        showNotification('Login failed: ' + result.message, 'error');
-                    }
-                } catch (error) {
-                    console.error('User login error:', error);
-                    useDemoUserAuth(email);
-                }
-            } else {
-                // Backend is offline, use demo auth
-                useDemoUserAuth(email);
-            }
-        }
-
-        async function userRegister() {
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            
-            if (!name || !email || !password || !confirmPassword) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showNotification('Passwords do not match', 'error');
-                return;
-            }
-            
-            const isBackendOnline = await checkBackendStatus();
-            
-            if (isBackendOnline) {
-                try {
-                    const response = await fetch(USER_REGISTER_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ name, email, password })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        showNotification('Registration successful! Please login.', 'success');
-                        closeModal('registerModal');
-                        openModal('loginModal');
-                    } else {
-                        showNotification('Registration failed: ' + result.message, 'error');
-                    }
-                } catch (error) {
-                    console.error('User registration error:', error);
-                    showNotification('Registration successful! Please login.', 'success');
-                    closeModal('registerModal');
-                    openModal('loginModal');
-                }
-            } else {
-                // Backend is offline, simulate successful registration
-                showNotification('Registration successful! Please login.', 'success');
-                closeModal('registerModal');
-                openModal('loginModal');
-            }
-        }
-
-        function useDemoUserAuth(email) {
-            userAuth = {
-                isLoggedIn: true,
-                user: { 
-                    name: email.split('@')[0],
-                    email: email,
-                    role: 'customer'
-                },
-                token: 'demo-token-offline'
-            };
-            
-            localStorage.setItem('userAuth', JSON.stringify(userAuth));
-            closeModal('loginModal');
-            showNotification('Login successful! (Demo Mode)', 'success');
-            updateUserNavigation();
-        }
-
-        function updateUserNavigation() {
-            const authButtons = document.querySelector('.auth-buttons');
-            if (userAuth.isLoggedIn) {
-                authButtons.innerHTML = `
-                    <span class="status-badge status-online" id="backend-status">Backend Online</span>
-                    <span style="margin-right: 10px;">Hello, ${userAuth.user.name}</span>
-                    <a href="#" class="btn btn-outline" onclick="userLogout()">Logout</a>
-                `;
-            } else {
-                authButtons.innerHTML = `
-                    <span class="status-badge status-online" id="backend-status">Backend Online</span>
-                    <a href="#" class="btn btn-outline" onclick="openModal('loginModal')">Login</a>
-                    <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">Sign Up</a>
-                `;
-            }
-        }
-
-        function userLogout() {
-            userAuth = { isLoggedIn: false, user: null, token: null };
-            localStorage.removeItem('userAuth');
-            showNotification('Logged out successfully', 'info');
-            updateUserNavigation();
         }
 
         // Admin authentication functions
@@ -1619,10 +1354,9 @@
                         loadManagementData();
                         
                         updateAdminNavigation();
-                        showNotification('Admin login successful!', 'success');
                         
                     } else {
-                        showNotification('Admin login failed: ' + result.message, 'error');
+                        alert('Admin login failed: ' + result.message);
                     }
                 } catch (error) {
                     console.error('Admin login error:', error);
@@ -1653,7 +1387,7 @@
             loadManagementData();
             updateAdminNavigation();
             
-            showNotification('Backend offline - Using demo admin mode', 'info');
+            alert('Backend offline - Using demo admin mode');
         }
 
         async function adminLogout() {
@@ -1677,7 +1411,7 @@
             document.getElementById('admin').style.display = 'none';
             updateAdminNavigation();
             
-            showNotification('Admin logged out successfully', 'info');
+            alert('Admin logged out successfully');
         }
 
         function showAdminDashboard() {
@@ -1691,9 +1425,6 @@
                 adminAuth.user.role === 'superadmin') {
                 document.getElementById('adminManagement').style.display = 'block';
             }
-            
-            // Scroll to admin section
-            document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
         }
 
         function updateAdminNavigation() {
@@ -1712,6 +1443,7 @@
                 openModal('adminLoginModal');
             } else {
                 showAdminDashboard();
+                document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -1724,16 +1456,6 @@
                     loadAdminStats();
                     loadManagementData();
                     updateAdminNavigation();
-                }
-            }
-        }
-
-        function checkSavedUserAuth() {
-            const savedAuth = localStorage.getItem('userAuth');
-            if (savedAuth) {
-                userAuth = JSON.parse(savedAuth);
-                if (userAuth.isLoggedIn) {
-                    updateUserNavigation();
                 }
             }
         }
@@ -1752,17 +1474,8 @@
                 }
             }
 
-            renderServices(services);
-        }
-
-        function renderServices(services) {
             const container = document.getElementById('services-container');
             container.innerHTML = '';
-            
-            if (services.length === 0) {
-                container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">No services found matching your criteria.</p>';
-                return;
-            }
             
             services.forEach(service => {
                 const serviceCard = document.createElement('div');
@@ -1801,17 +1514,8 @@
                 }
             }
 
-            renderCourses(courses);
-        }
-
-        function renderCourses(courses) {
             const container = document.getElementById('courses-container');
             container.innerHTML = '';
-            
-            if (courses.length === 0) {
-                container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">No courses found matching your criteria.</p>';
-                return;
-            }
             
             courses.forEach(course => {
                 const courseCard = document.createElement('div');
@@ -2041,7 +1745,7 @@
                     <td>${order.item}</td>
                     <td>${order.amount}</td>
                     <td>${order.date}</td>
-                    <td><span class="status-badge ${order.status === 'Completed' ? 'status-online' : order.status === 'In Progress' ? 'status-warning' : 'status-offline'}">${order.status}</span></td>
+                    <td><span class="status-badge ${order.status === 'Completed' ? 'status-online' : order.status === 'In Progress' ? 'status-badge' : 'status-offline'}">${order.status}</span></td>
                     <td>
                         <div class="action-buttons">
                             <button class="action-btn edit-btn" onclick="viewOrder(${order.id})">
@@ -2084,53 +1788,6 @@
             return 'fa-book';
         }
 
-        // Search and filter functionality
-        function setupSearchAndFilter() {
-            // Service search and filter
-            const serviceSearch = document.getElementById('serviceSearch');
-            const serviceCategory = document.getElementById('serviceCategory');
-            
-            serviceSearch.addEventListener('input', filterServices);
-            serviceCategory.addEventListener('change', filterServices);
-            
-            // Course search and filter
-            const courseSearch = document.getElementById('courseSearch');
-            const courseLevel = document.getElementById('courseLevel');
-            
-            courseSearch.addEventListener('input', filterCourses);
-            courseLevel.addEventListener('change', filterCourses);
-        }
-
-        function filterServices() {
-            const searchTerm = document.getElementById('serviceSearch').value.toLowerCase();
-            const category = document.getElementById('serviceCategory').value;
-            
-            const filteredServices = sampleServices.filter(service => {
-                const matchesSearch = service.name.toLowerCase().includes(searchTerm) || 
-                                     service.description.toLowerCase().includes(searchTerm);
-                const matchesCategory = !category || service.category === category;
-                
-                return matchesSearch && matchesCategory;
-            });
-            
-            renderServices(filteredServices);
-        }
-
-        function filterCourses() {
-            const searchTerm = document.getElementById('courseSearch').value.toLowerCase();
-            const level = document.getElementById('courseLevel').value;
-            
-            const filteredCourses = sampleCourses.filter(course => {
-                const matchesSearch = course.name.toLowerCase().includes(searchTerm) || 
-                                     course.description.toLowerCase().includes(searchTerm);
-                const matchesLevel = !level || course.level === level;
-                
-                return matchesSearch && matchesLevel;
-            });
-            
-            renderCourses(filteredCourses);
-        }
-
         // Admin management functions
         function switchTab(tabId) {
             // Hide all tab contents
@@ -2162,4 +1819,92 @@
 
         function deleteService(id) {
             if (confirm('Are you sure you want to delete this service?')) {
-                showNotification(`Service ${id} would be deleted in a real application`,
+                alert(`Service ${id} would be deleted in a real application`);
+            }
+        }
+
+        function editCourse(id) {
+            alert(`Edit Course ${id} - This would open an edit form in a real application`);
+        }
+
+        function deleteCourse(id) {
+            if (confirm('Are you sure you want to delete this course?')) {
+                alert(`Course ${id} would be deleted in a real application`);
+            }
+        }
+
+        function editUser(id) {
+            alert(`Edit User ${id} - This would open an edit form in a real application`);
+        }
+
+        function deleteUser(id) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                alert(`User ${id} would be deleted in a real application`);
+            }
+        }
+
+        function viewOrder(id) {
+            alert(`View Order ${id} - This would show order details in a real application`);
+        }
+
+        function cancelOrder(id) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                alert(`Order ${id} would be cancelled in a real application`);
+            }
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function openServiceModal(serviceId) {
+            const service = sampleServices.find(s => s.id === serviceId);
+            if (service) {
+                alert(`Service Inquiry: ${service.name}\n\nPrice: ${service.price}\n\nWe'll contact you shortly with more details!`);
+            }
+        }
+
+        function openCourseModal(courseId) {
+            const course = sampleCourses.find(c => c.id === courseId);
+            if (course) {
+                alert(`Course Enrollment: ${course.name}\n\nDuration: ${course.duration}\n\nYou'll be redirected to the enrollment page!`);
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSavedAdminAuth();
+            loadServices();
+            loadCourses();
+            
+            if (adminAuth.isLoggedIn) {
+                loadAdminStats();
+                loadManagementData();
+            }
+            
+            // Intercept admin link clicks
+            document.querySelector('a[href="#admin"]').addEventListener('click', checkAdminAccess);
+            
+            // Refresh data every 30 seconds if backend is online and admin is logged in
+            setInterval(async () => {
+                const isOnline = await checkBackendStatus();
+                if (isOnline && adminAuth.isLoggedIn) {
+                    loadAdminStats();
+                }
+            }, 30000);
+        });
+    </script>
+</body>
+</html>
