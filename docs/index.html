@@ -520,24 +520,6 @@
             color: white;
         }
         
-        .career-highlights {
-            list-style: none;
-            margin-top: 12px;
-        }
-        
-        .career-highlights li {
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .career-highlights li i {
-            color: var(--accent);
-            font-size: 0.75rem;
-        }
-        
         .footer-bottom {
             text-align: center;
             padding-top: 25px;
@@ -1056,30 +1038,6 @@
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>About Us</h3>
-                    <p>We are a leading IT solutions provider dedicated to helping businesses succeed through technology innovation and expert training.</p>
-                    <ul>
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Testimonials</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Work For Us</h3>
-                    <p>Join our team of talented professionals and grow your career in the tech industry.</p>
-                    <ul class="career-highlights">
-                        <li><i class="fas fa-check"></i> Competitive salaries</li>
-                        <li><i class="fas fa-check"></i> Remote work options</li>
-                        <li><i class="fas fa-check"></i> Professional development</li>
-                        <li><i class="fas fa-check"></i> Health benefits</li>
-                        <li><i class="fas fa-check"></i> Flexible hours</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary btn-small" style="margin-top: 15px; display: inline-block;">
-                        <i class="fas fa-briefcase"></i> View Careers
-                    </a>
-                </div>
-                <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul>
                         <li><i class="fas fa-envelope"></i> info@techsolutions.com</li>
@@ -1098,7 +1056,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | <a href="#" style="color: var(--light-gray);">Privacy Policy</a> | <a href="#" style="color: var(--light-gray);">Terms of Service</a> | <a href="#" style="color: var(--light-gray);">Careers</a></p>
+                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | <a href="#" style="color: var(--light-gray);">Privacy Policy</a> | <a href="#" style="color: var(--light-gray);">Terms of Service</a></p>
             </div>
         </div>
     </footer>
@@ -1304,126 +1262,127 @@
             }
         ];
 
+        // Updated courses with the requested bootcamps
         const sampleCourses = [
             {
                 id: 1,
-                name: "Complete Web Development Bootcamp",
-                description: "Master full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
+                name: "Software Development Technician",
+                description: "Entry-level training for software development technicians. Learn fundamental programming concepts and development tools.",
                 duration: "12 weeks",
-                enrolled: 1247,
-                rating: 4.8,
-                level: "Beginner to Advanced",
-                badge: "BESTSELLER"
+                enrolled: 856,
+                rating: 4.6,
+                level: "Beginner",
+                badge: "ENTRY LEVEL"
             },
             {
                 id: 2,
-                name: "Cybersecurity Essentials",
-                description: "Learn essential cybersecurity principles, threat detection, and protection strategies.",
-                duration: "8 weeks",
-                enrolled: 892,
+                name: "Junior Developer Bootcamp",
+                description: "Comprehensive training for aspiring junior developers. Master essential programming skills and development methodologies.",
+                duration: "16 weeks",
+                enrolled: 723,
                 rating: 4.7,
-                level: "Intermediate",
-                badge: "HOT"
-            },
-            {
-                id: 3,
-                name: "Mobile App Development",
-                description: "Build native and cross-platform mobile applications for iOS and Android.",
-                duration: "10 weeks",
-                enrolled: 756,
-                rating: 4.6,
-                level: "Intermediate",
-                badge: "NEW"
-            },
-            {
-                id: 4,
-                name: "Cloud Computing with AWS",
-                description: "Master Amazon Web Services and learn to deploy scalable cloud infrastructure.",
-                duration: "6 weeks",
-                enrolled: 543,
-                rating: 4.9,
-                level: "Intermediate",
-                badge: "TRENDING"
-            },
-            {
-                id: 5,
-                name: "Data Science & Machine Learning",
-                description: "Learn data analysis, visualization, and machine learning algorithms with Python.",
-                duration: "14 weeks",
-                enrolled: 621,
-                rating: 4.7,
-                level: "Advanced",
+                level: "Beginner",
                 badge: "POPULAR"
             },
             {
-                id: 6,
-                name: "DevOps & CI/CD Pipeline",
-                description: "Master DevOps practices, containerization with Docker, and CI/CD pipeline setup.",
-                duration: "8 weeks",
-                enrolled: 432,
+                id: 3,
+                name: "Junior Web Developer",
+                description: "Specialized training in web development technologies including HTML, CSS, JavaScript and modern frameworks.",
+                duration: "14 weeks",
+                enrolled: 645,
                 rating: 4.8,
-                level: "Intermediate",
+                level: "Beginner",
                 badge: "HOT"
             },
             {
-                id: 7,
-                name: "UI/UX Design Fundamentals",
-                description: "Learn user-centered design principles, prototyping, and design tools.",
-                duration: "6 weeks",
-                enrolled: 389,
-                rating: 4.6,
+                id: 4,
+                name: "Junior Application Developer",
+                description: "Learn to develop desktop and business applications using modern programming languages and development tools.",
+                duration: "15 weeks",
+                enrolled: 512,
+                rating: 4.5,
                 level: "Beginner",
                 badge: "NEW"
             },
             {
-                id: 8,
-                name: "Blockchain Development",
-                description: "Build decentralized applications and smart contracts on Ethereum blockchain.",
-                duration: "10 weeks",
-                enrolled: 298,
-                rating: 4.5,
-                level: "Advanced",
-                badge: "EMERGING"
+                id: 5,
+                name: "Junior Mobile App Developer",
+                description: "Master mobile app development for iOS and Android platforms using native and cross-platform technologies.",
+                duration: "16 weeks",
+                enrolled: 489,
+                rating: 4.7,
+                level: "Beginner",
+                badge: "TRENDING"
             },
             {
-                id: 9,
-                name: "Python Programming Mastery",
-                description: "Comprehensive Python programming course from basics to advanced concepts.",
-                duration: "8 weeks",
-                enrolled: 1123,
-                rating: 4.7,
-                level: "Beginner to Advanced",
+                id: 6,
+                name: "Junior Games Developer",
+                description: "Introduction to game development principles, game engines, and interactive programming for aspiring game developers.",
+                duration: "18 weeks",
+                enrolled: 367,
+                rating: 4.4,
+                level: "Beginner",
+                badge: "SPECIALIZED"
+            },
+            {
+                id: 7,
+                name: "Junior Software Developer",
+                description: "Comprehensive software development training covering multiple programming languages and development methodologies.",
+                duration: "20 weeks",
+                enrolled: 598,
+                rating: 4.8,
+                level: "Beginner to Intermediate",
                 badge: "BESTSELLER"
             },
             {
-                id: 10,
-                name: "React & Next.js Development",
-                description: "Build modern web applications with React, Next.js, and modern frontend tools.",
+                id: 8,
+                name: "Junior Application Support Analyst",
+                description: "Learn to support and maintain business applications, troubleshoot issues, and provide technical support.",
                 duration: "10 weeks",
-                enrolled: 867,
-                rating: 4.8,
-                level: "Intermediate",
-                badge: "POPULAR"
+                enrolled: 423,
+                rating: 4.3,
+                level: "Beginner",
+                badge: "SUPPORT"
+            },
+            {
+                id: 9,
+                name: "Junior Programmer",
+                description: "Fundamental programming course covering algorithms, data structures, and problem-solving techniques.",
+                duration: "12 weeks",
+                enrolled: 781,
+                rating: 4.6,
+                level: "Beginner",
+                badge: "FOUNDATION"
+            },
+            {
+                id: 10,
+                name: "Assistant Programmer",
+                description: "Training for assistant programmer roles focusing on code maintenance, debugging, and collaborative development.",
+                duration: "10 weeks",
+                enrolled: 334,
+                rating: 4.2,
+                level: "Beginner",
+                badge: "ASSISTANT"
             },
             {
                 id: 11,
-                name: "Database Design & SQL",
-                description: "Learn database design principles and master SQL for efficient data management.",
-                duration: "6 weeks",
-                enrolled: 534,
-                rating: 4.6,
+                name: "Automated Test Developer",
+                description: "Learn automated testing frameworks, test scripting, and quality assurance processes for software development.",
+                duration: "14 weeks",
+                enrolled: 456,
+                rating: 4.7,
                 level: "Beginner to Intermediate",
-                badge: "ESSENTIAL"
+                badge: "TESTING"
             },
             {
                 id: 12,
-                name: "Agile & Scrum Methodology",
-                description: "Master Agile project management and Scrum framework for software development.",
-                duration: "4 weeks",
-                enrolled: 678,
-                rating: 4.5,
-                level: "All Levels",
-                badge: "PROFESSIONAL"
+                name: "Complete Web Development Bootcamp",
+                description: "Master full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
+                duration: "24 weeks",
+                enrolled: 1247,
+                rating: 4.9,
+                level: "Beginner to Advanced",
+                badge: "BESTSELLER"
             }
         ];
 
@@ -1903,19 +1862,16 @@
 
         // Helper function to get appropriate icons for courses
         function getCourseIcon(courseName) {
+            if (courseName.toLowerCase().includes('software') || courseName.toLowerCase().includes('developer')) return 'fa-code';
             if (courseName.toLowerCase().includes('web')) return 'fa-globe';
-            if (courseName.toLowerCase().includes('cyber')) return 'fa-shield-alt';
+            if (courseName.toLowerCase().includes('application')) return 'fa-window-restore';
             if (courseName.toLowerCase().includes('mobile')) return 'fa-mobile-alt';
-            if (courseName.toLowerCase().includes('cloud')) return 'fa-cloud';
-            if (courseName.toLowerCase().includes('data')) return 'fa-chart-line';
-            if (courseName.toLowerCase().includes('devops')) return 'fa-cogs';
-            if (courseName.toLowerCase().includes('design')) return 'fa-palette';
-            if (courseName.toLowerCase().includes('blockchain')) return 'fa-link';
-            if (courseName.toLowerCase().includes('python')) return 'fa-python';
-            if (courseName.toLowerCase().includes('react')) return 'fa-react';
-            if (courseName.toLowerCase().includes('sql')) return 'fa-database';
-            if (courseName.toLowerCase().includes('agile')) return 'fa-tasks';
-            return 'fa-book';
+            if (courseName.toLowerCase().includes('game')) return 'fa-gamepad';
+            if (courseName.toLowerCase().includes('support')) return 'fa-headset';
+            if (courseName.toLowerCase().includes('programmer')) return 'fa-terminal';
+            if (courseName.toLowerCase().includes('assistant')) return 'fa-hands-helping';
+            if (courseName.toLowerCase().includes('test')) return 'fa-vial';
+            return 'fa-laptop-code';
         }
 
         // Admin management functions
