@@ -1,3 +1,7 @@
+# Create enhanced frontend
+cd ..\frontend
+
+@'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -786,4 +790,6 @@
     </script>
 </body>
 </html>
+'@ | Out-File -FilePath "index.html" -Encoding UTF8
 
+Write-Host "✅ Enhanced frontend created with all features!" -ForegroundColor Green
