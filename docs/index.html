@@ -70,7 +70,7 @@
         
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 30px;
         }
         
         .nav-links a {
@@ -78,13 +78,10 @@
             color: var(--dark);
             font-weight: 500;
             transition: color 0.3s;
-            padding: 8px 12px;
-            border-radius: 5px;
         }
         
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
         }
         
         .auth-buttons {
@@ -223,7 +220,7 @@
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
         
         .service-card {
@@ -237,43 +234,40 @@
         }
         
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
         .service-icon {
             background: var(--primary);
             color: white;
-            height: 70px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
         
         .service-content {
-            padding: 20px;
+            padding: 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
         .service-content h3 {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             color: var(--dark);
-            font-size: 1.3rem;
         }
         
         .service-content p {
             color: var(--gray);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             flex-grow: 1;
-            font-size: 0.95rem;
-            line-height: 1.5;
         }
         
         .service-price {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 15px;
@@ -281,27 +275,25 @@
         
         .service-features {
             list-style: none;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .service-features li {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            gap: 10px;
         }
         
         .service-features li i {
             color: var(--success);
-            font-size: 0.8rem;
         }
         
         /* Courses Section */
         .courses-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
         
         .course-card {
@@ -317,51 +309,47 @@
         }
         
         .course-image {
-            height: 160px;
+            height: 180px;
             background: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2.5rem;
+            font-size: 3rem;
             position: relative;
         }
         
         .course-badge {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 15px;
+            right: 15px;
             background: var(--accent);
             color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
             font-weight: 600;
         }
         
         .course-content {
-            padding: 20px;
+            padding: 25px;
         }
         
         .course-content h3 {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             color: var(--dark);
-            font-size: 1.3rem;
         }
         
         .course-content p {
             color: var(--gray);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            margin-bottom: 20px;
         }
         
         .course-meta {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--gray);
-            font-size: 0.9rem;
         }
         
         .course-meta span {
@@ -395,75 +383,73 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            padding: 25px;
+            padding: 30px;
         }
         
         .stat-card {
             background: var(--light);
-            padding: 18px;
+            padding: 20px;
             border-radius: 8px;
             text-align: center;
             transition: transform 0.3s;
         }
         
         .stat-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
         
         .stat-card i {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--primary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .stat-card .number {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 5px;
         }
         
         .stat-card .label {
             color: var(--gray);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         
         .dashboard-charts {
-            padding: 0 25px 25px;
+            padding: 0 30px 30px;
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 25px;
+            gap: 30px;
         }
         
         .chart-container {
             background: var(--light);
-            padding: 18px;
+            padding: 20px;
             border-radius: 8px;
         }
         
         .chart-placeholder {
-            height: 180px;
+            height: 200px;
             background: linear-gradient(45deg, #f8f9fa, #e9ecef);
             border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--gray);
-            font-size: 0.9rem;
         }
         
         .activity-list {
             list-style: none;
-            max-height: 180px;
+            max-height: 200px;
             overflow-y: auto;
         }
         
         .activity-list li {
-            padding: 8px 10px;
+            padding: 10px;
             border-bottom: 1px solid var(--light-gray);
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 0.9rem;
         }
         
         .activity-list li:last-child {
@@ -471,15 +457,15 @@
         }
         
         .activity-icon {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: var(--primary);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
         }
         
         /* Footer */
@@ -492,12 +478,12 @@
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 35px;
+            gap: 40px;
             margin-bottom: 40px;
         }
         
         .footer-column h3 {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             font-size: 1.2rem;
             color: var(--accent);
         }
@@ -507,7 +493,7 @@
         }
         
         .footer-column ul li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .footer-column a {
@@ -522,45 +508,36 @@
         
         .career-highlights {
             list-style: none;
-            margin-top: 12px;
+            margin-top: 15px;
         }
         
         .career-highlights li {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9rem;
         }
         
         .career-highlights li i {
             color: var(--accent);
-            font-size: 0.75rem;
+            font-size: 0.8rem;
         }
         
         .footer-bottom {
             text-align: center;
-            padding-top: 25px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
         }
         
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
             }
             
             .nav-links {
-                gap: 12px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-links a {
-                padding: 6px 10px;
-                font-size: 0.9rem;
+                gap: 15px;
             }
             
             .hero h1 {
@@ -569,37 +546,27 @@
             
             .hero-stats {
                 flex-direction: column;
-                gap: 25px;
-                padding: 20px;
+                gap: 30px;
             }
             
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
-                gap: 10px;
             }
             
             .dashboard-charts {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
             
             .dashboard-header {
                 flex-direction: column;
-                gap: 12px;
+                gap: 15px;
                 text-align: center;
-                padding: 15px 20px;
             }
             
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 30px;
-            }
-            
-            .services-grid,
-            .courses-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
             }
         }
         
@@ -608,10 +575,10 @@
             border: 4px solid rgba(0, 0, 0, 0.1);
             border-left-color: var(--primary);
             border-radius: 50%;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 15px auto;
+            margin: 20px auto;
         }
         
         @keyframes spin {
@@ -624,9 +591,9 @@
         
         .status-badge {
             display: inline-block;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
         }
         
@@ -644,10 +611,10 @@
             display: inline-block;
             background: var(--accent);
             color: white;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.65rem;
-            margin-left: 6px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-left: 8px;
         }
         
         /* Modal Styles */
@@ -666,93 +633,90 @@
         
         .modal-content {
             background: white;
-            padding: 25px;
-            border-radius: 8px;
-            max-width: 450px;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
         }
         
         .modal h3 {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             color: var(--primary);
-            font-size: 1.3rem;
         }
         
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            font-size: 0.9rem;
         }
         
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 8px 12px;
+            padding: 10px;
             border: 1px solid var(--light-gray);
             border-radius: 5px;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
         
         .close-modal {
             float: right;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             cursor: pointer;
             color: var(--gray);
         }
         
         .demo-credentials {
             background: var(--light);
-            padding: 12px;
+            padding: 15px;
             border-radius: 5px;
-            margin-top: 12px;
-            font-size: 0.85rem;
+            margin-top: 15px;
+            font-size: 0.9rem;
         }
         
         .admin-badge {
             background: var(--warning);
             color: var(--dark);
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: 600;
-            margin-left: 6px;
+            margin-left: 8px;
         }
         
         .user-welcome {
             opacity: 0.9;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         /* Admin Management Section */
         .admin-management {
-            padding: 25px;
+            padding: 30px;
             background: var(--light);
-            margin: 25px;
-            border-radius: 8px;
+            margin: 30px;
+            border-radius: 10px;
         }
 
         .management-tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 18px;
+            gap: 10px;
+            margin-bottom: 20px;
             border-bottom: 1px solid var(--light-gray);
-            padding-bottom: 8px;
+            padding-bottom: 10px;
         }
 
         .tab-btn {
-            padding: 8px 16px;
+            padding: 10px 20px;
             background: transparent;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.3s;
-            font-size: 0.9rem;
         }
 
         .tab-btn.active {
@@ -772,15 +736,14 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            font-size: 0.85rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .data-table th,
         .data-table td {
-            padding: 10px 12px;
+            padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid var(--light-gray);
         }
@@ -789,7 +752,6 @@
             background: var(--primary);
             color: white;
             font-weight: 600;
-            font-size: 0.8rem;
         }
 
         .data-table tr:hover {
@@ -798,15 +760,15 @@
 
         .action-buttons {
             display: flex;
-            gap: 4px;
+            gap: 5px;
         }
 
         .action-btn {
-            padding: 4px 8px;
+            padding: 5px 10px;
             border: none;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
         }
 
         .edit-btn {
@@ -822,9 +784,7 @@
         .add-btn {
             background: var(--success);
             color: white;
-            margin-bottom: 12px;
-            font-size: 0.85rem;
-            padding: 6px 12px;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -841,7 +801,6 @@
                     <a href="#" class="active">Home</a>
                     <a href="#services">Services</a>
                     <a href="#courses">Courses</a>
-                    <a href="#work">Work For Us</a>
                     <a href="#admin" id="adminNavLink">Admin <span class="admin-badge">Login Required</span></a>
                 </div>
                 <div class="auth-buttons">
@@ -861,7 +820,6 @@
             <div class="hero-buttons">
                 <a href="#services" class="btn btn-primary">Explore Services</a>
                 <a href="#courses" class="btn btn-outline">View Courses</a>
-                <a href="#work" class="btn btn-outline">Career Opportunities</a>
                 <a href="#admin" class="btn btn-outline" onclick="checkAdminAccess(event)">Admin Dashboard</a>
             </div>
             <div class="hero-stats">
@@ -870,7 +828,7 @@
                     <div class="stat-label">Happy Clients</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number" id="total-services">32</div>
+                    <div class="stat-number" id="total-services">24</div>
                     <div class="stat-label">Services Offered</div>
                 </div>
                 <div class="stat">
@@ -907,66 +865,6 @@
         </div>
     </section>
 
-    <!-- Work For Us Section -->
-    <section class="section" id="work">
-        <div class="container">
-            <div class="section-header">
-                <h2>Join Our Team</h2>
-                <p>Build your career with TechSolutions Pro and work on exciting projects with cutting-edge technologies.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon" style="background: var(--success);">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Software Developer</h3>
-                        <p>Join our development team to build innovative solutions using modern technologies and agile methodologies.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Full-time & Remote Options</li>
-                            <li><i class="fas fa-check"></i> Competitive Salary + Bonus</li>
-                            <li><i class="fas fa-check"></i> Tech Stack: React, Node.js, Python</li>
-                            <li><i class="fas fa-check"></i> 5+ Years Experience</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary">Apply Now</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon" style="background: var(--warning);">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Cybersecurity Specialist</h3>
-                        <p>Protect our clients' digital assets and implement robust security measures across various platforms.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> On-site & Hybrid Options</li>
-                            <li><i class="fas fa-check"></i> Comprehensive Benefits</li>
-                            <li><i class="fas fa-check"></i> Certifications Support</li>
-                            <li><i class="fas fa-check"></i> 3+ Years Experience</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary">Apply Now</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon" style="background: var(--accent);">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>IT Trainer</h3>
-                        <p>Share your knowledge and expertise by training the next generation of IT professionals.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Flexible Schedule</li>
-                            <li><i class="fas fa-check"></i> Course Development</li>
-                            <li><i class="fas fa-check"></i> Public Speaking Opportunities</li>
-                            <li><i class="fas fa-check"></i> 2+ Years Teaching Experience</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Admin Dashboard -->
     <section class="section" id="admin" style="display: none;">
         <div class="container">
@@ -989,8 +887,8 @@
                     <div class="chart-container">
                         <h4><i class="fas fa-chart-bar"></i> Revenue Overview</h4>
                         <div class="chart-placeholder">
-                            <i class="fas fa-chart-bar" style="font-size: 2.5rem; opacity: 0.5;"></i>
-                            <span style="margin-left: 12px;">Revenue Analytics</span>
+                            <i class="fas fa-chart-bar" style="font-size: 3rem; opacity: 0.5;"></i>
+                            <span style="margin-left: 15px;">Revenue Analytics</span>
                         </div>
                     </div>
                     <div class="chart-container">
@@ -1114,8 +1012,9 @@
                         <li><a href="#">Home</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#courses">Courses</a></li>
-                        <li><a href="#work">Work For Us</a></li>
                         <li><a href="#admin" onclick="checkAdminAccess(event)">Admin</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1128,7 +1027,7 @@
                         <li><i class="fas fa-check"></i> Health benefits</li>
                         <li><i class="fas fa-check"></i> Flexible hours</li>
                     </ul>
-                    <a href="#work" class="btn btn-primary btn-small" style="margin-top: 15px; display: inline-block;">
+                    <a href="#" class="btn btn-primary btn-small" style="margin-top: 15px; display: inline-block;">
                         <i class="fas fa-briefcase"></i> View Open Positions
                     </a>
                 </div>
@@ -1318,42 +1217,6 @@
                 category: "analytics",
                 features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"],
                 status: "active"
-            },
-            {
-                id: 9,
-                name: "E-commerce Solutions",
-                description: "Build robust online stores with secure payment gateways and inventory management.",
-                price: "£1,800+",
-                category: "development",
-                features: ["Payment Integration", "Inventory Management", "Order Processing", "Security"],
-                status: "active"
-            },
-            {
-                id: 10,
-                name: "API Development",
-                description: "Create scalable and secure APIs for your applications and third-party integrations.",
-                price: "£75/hour",
-                category: "development",
-                features: ["RESTful APIs", "Documentation", "Security", "Rate Limiting"],
-                status: "active"
-            },
-            {
-                id: 11,
-                name: "Database Optimization",
-                description: "Optimize your database performance and ensure data integrity and security.",
-                price: "£90/hour",
-                category: "database",
-                features: ["Performance Tuning", "Backup Solutions", "Security", "Monitoring"],
-                status: "active"
-            },
-            {
-                id: 12,
-                name: "IT Infrastructure Setup",
-                description: "Design and implement complete IT infrastructure solutions for businesses.",
-                price: "Get Quote",
-                category: "infrastructure",
-                features: ["Network Setup", "Server Configuration", "Security", "Monitoring"],
-                status: "active"
             }
         ];
 
@@ -1437,46 +1300,6 @@
                 rating: 4.5,
                 level: "Advanced",
                 badge: "EMERGING"
-            },
-            {
-                id: 9,
-                name: "Python Programming Mastery",
-                description: "Comprehensive Python programming course from basics to advanced concepts.",
-                duration: "8 weeks",
-                enrolled: 1123,
-                rating: 4.7,
-                level: "Beginner to Advanced",
-                badge: "BESTSELLER"
-            },
-            {
-                id: 10,
-                name: "React & Next.js Development",
-                description: "Build modern web applications with React, Next.js, and modern frontend tools.",
-                duration: "10 weeks",
-                enrolled: 867,
-                rating: 4.8,
-                level: "Intermediate",
-                badge: "POPULAR"
-            },
-            {
-                id: 11,
-                name: "Database Design & SQL",
-                description: "Learn database design principles and master SQL for efficient data management.",
-                duration: "6 weeks",
-                enrolled: 534,
-                rating: 4.6,
-                level: "Beginner to Intermediate",
-                badge: "ESSENTIAL"
-            },
-            {
-                id: 12,
-                name: "Agile & Scrum Methodology",
-                description: "Master Agile project management and Scrum framework for software development.",
-                duration: "4 weeks",
-                enrolled: 678,
-                rating: 4.5,
-                level: "All Levels",
-                badge: "PROFESSIONAL"
             }
         ];
 
@@ -1947,9 +1770,7 @@
                 'consultation': 'fa-comments',
                 'cloud': 'fa-cloud',
                 'security': 'fa-shield-alt',
-                'analytics': 'fa-chart-bar',
-                'database': 'fa-database',
-                'infrastructure': 'fa-server'
+                'analytics': 'fa-chart-bar'
             };
             return icons[category.toLowerCase()] || 'fa-laptop-code';
         }
@@ -1964,10 +1785,6 @@
             if (courseName.toLowerCase().includes('devops')) return 'fa-cogs';
             if (courseName.toLowerCase().includes('design')) return 'fa-palette';
             if (courseName.toLowerCase().includes('blockchain')) return 'fa-link';
-            if (courseName.toLowerCase().includes('python')) return 'fa-python';
-            if (courseName.toLowerCase().includes('react')) return 'fa-react';
-            if (courseName.toLowerCase().includes('sql')) return 'fa-database';
-            if (courseName.toLowerCase().includes('agile')) return 'fa-tasks';
             return 'fa-book';
         }
 
