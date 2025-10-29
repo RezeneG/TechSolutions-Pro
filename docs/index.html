@@ -130,6 +130,28 @@
             font-size: 0.9rem;
         }
         
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--dark);
+            border: 2px solid var(--light-gray);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn-group .btn {
+            flex: 1;
+        }
+        
         /* Hero Section */
         .hero {
             padding: 60px 0;
@@ -627,6 +649,60 @@
             color: var(--light-gray);
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            background: none;
+            border: none;
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
@@ -681,6 +757,10 @@
             
             .standard-logo {
                 max-width: 80px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
             }
         }
     </style>
@@ -913,6 +993,40 @@
         </div>
     </footer>
 
+    <!-- Service Details Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="serviceModalTitle">Service Details</h3>
+                <button class="close-modal" onclick="closeModal('serviceModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="serviceModalBody">
+                <!-- Service details will be populated here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('serviceModal')">Close</button>
+                <button class="btn btn-primary" id="serviceModalAction">Get Started</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Details Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="courseModalTitle">Course Details</h3>
+                <button class="close-modal" onclick="closeModal('courseModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="courseModalBody">
+                <!-- Course details will be populated here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('courseModal')">Close</button>
+                <button class="btn btn-primary" id="courseModalAction">Enroll Now</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Sample data - 20 Services
         const sampleServices = [
@@ -922,7 +1036,8 @@
                 description: "Custom website development with modern technologies. We create responsive, SEO-friendly websites that drive results.",
                 price: "£999",
                 category: "development",
-                features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"]
+                features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
+                details: "Our website development service includes comprehensive planning, design, development, and deployment. We use the latest technologies to ensure your website is fast, secure, and scalable. Our team works closely with you to understand your business needs and create a solution that meets your objectives."
             },
             {
                 id: 2,
@@ -930,7 +1045,8 @@
                 description: "Professional IT support and maintenance services to keep your systems running smoothly.",
                 price: "£45/hour",
                 category: "support",
-                features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"]
+                features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
+                details: "Our IT support service provides comprehensive technical assistance for all your IT needs. We offer proactive monitoring, regular maintenance, and quick response times to minimize downtime. Our certified technicians are available 24/7 to resolve any issues and keep your business running smoothly."
             },
             {
                 id: 3,
@@ -938,7 +1054,8 @@
                 description: "Comprehensive software testing services to ensure your applications are bug-free and performant.",
                 price: "Get Quote",
                 category: "testing",
-                features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"]
+                features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"],
+                details: "Our software testing service ensures your applications meet quality standards and perform as expected. We use a combination of manual and automated testing approaches to identify bugs, performance issues, and security vulnerabilities. Our detailed reports help you make informed decisions about your software quality."
             },
             {
                 id: 4,
@@ -946,7 +1063,8 @@
                 description: "Seamlessly migrate your infrastructure to cloud platforms like AWS, Azure, or Google Cloud.",
                 price: "£1,500+",
                 category: "cloud",
-                features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"]
+                features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"],
+                details: "Our cloud migration service helps businesses transition to the cloud with minimal disruption. We assess your current infrastructure, develop a migration strategy, and execute the move while ensuring data integrity and security. We also provide post-migration support to optimize your cloud environment."
             },
             {
                 id: 5,
@@ -954,7 +1072,8 @@
                 description: "Comprehensive security assessment to identify vulnerabilities and protect your business.",
                 price: "£2,000",
                 category: "security",
-                features: ["Vulnerability Assessment", "Penetration Testing", "Security Report", "Remediation Plan"]
+                features: ["Vulnerability Assessment", "Penetration Testing", "Security Report", "Remediation Plan"],
+                details: "Our cybersecurity audit service provides a thorough assessment of your security posture. We identify vulnerabilities, test your defenses, and provide a detailed report with actionable recommendations. Our experts help you implement security measures to protect your business from cyber threats."
             },
             {
                 id: 6,
@@ -962,7 +1081,8 @@
                 description: "Create powerful mobile applications for iOS and Android platforms.",
                 price: "£1,200+",
                 category: "development",
-                features: ["Native & Cross-platform", "UI/UX Design", "App Store Deployment", "Maintenance"]
+                features: ["Native & Cross-platform", "UI/UX Design", "App Store Deployment", "Maintenance"],
+                details: "Our mobile app development service creates engaging and functional applications for iOS and Android. We focus on user experience, performance, and security to deliver apps that meet your business goals. Our services include design, development, testing, and deployment to app stores."
             },
             {
                 id: 7,
@@ -970,7 +1090,8 @@
                 description: "Transform your data into actionable insights with advanced analytics and business intelligence.",
                 price: "£85/hour",
                 category: "analytics",
-                features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"]
+                features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"],
+                details: "Our data analytics service helps you make sense of your data and derive valuable insights. We create interactive dashboards, perform predictive analysis, and help you track key performance indicators. Our solutions enable data-driven decision making across your organization."
             },
             {
                 id: 8,
@@ -978,7 +1099,8 @@
                 description: "Design and implement robust network infrastructure for optimal performance and security.",
                 price: "£1,800+",
                 category: "infrastructure",
-                features: ["Network Design", "Hardware Setup", "Security Implementation", "Performance Monitoring"]
+                features: ["Network Design", "Hardware Setup", "Security Implementation", "Performance Monitoring"],
+                details: "Our network infrastructure service designs and implements reliable and secure networks for businesses of all sizes. We ensure optimal performance, scalability, and security while minimizing downtime. Our solutions include ongoing monitoring and maintenance to keep your network running smoothly."
             },
             {
                 id: 9,
@@ -986,7 +1108,8 @@
                 description: "Professional database design, optimization, and management services.",
                 price: "£75/hour",
                 category: "database",
-                features: ["Database Design", "Performance Tuning", "Backup Solutions", "Security Implementation"]
+                features: ["Database Design", "Performance Tuning", "Backup Solutions", "Security Implementation"],
+                details: "Our database management service ensures your data is organized, secure, and accessible. We design efficient database structures, optimize performance, implement backup solutions, and enhance security. Our experts help you manage your data effectively to support your business operations."
             },
             {
                 id: 10,
@@ -994,7 +1117,8 @@
                 description: "Strategic IT consulting to align technology with your business objectives.",
                 price: "£120/hour",
                 category: "consultation",
-                features: ["Technology Assessment", "Strategic Planning", "Implementation Guidance", "ROI Analysis"]
+                features: ["Technology Assessment", "Strategic Planning", "Implementation Guidance", "ROI Analysis"],
+                details: "Our IT consulting service provides strategic guidance to align technology with your business goals. We assess your current technology landscape, identify opportunities for improvement, and develop a roadmap for implementation. Our consultants help you make informed technology decisions that drive business value."
             },
             {
                 id: 11,
@@ -1002,7 +1126,8 @@
                 description: "Complete e-commerce platform development with payment integration and inventory management.",
                 price: "£2,500+",
                 category: "development",
-                features: ["Platform Development", "Payment Integration", "Inventory Management", "Analytics"]
+                features: ["Platform Development", "Payment Integration", "Inventory Management", "Analytics"],
+                details: "Our e-commerce solutions create powerful online stores that drive sales and enhance customer experience. We develop custom e-commerce platforms with secure payment processing, inventory management, and analytics. Our solutions are scalable and designed to grow with your business."
             },
             {
                 id: 12,
@@ -1010,7 +1135,8 @@
                 description: "Implement DevOps practices to streamline development and deployment processes.",
                 price: "£3,000+",
                 category: "development",
-                features: ["CI/CD Pipeline", "Containerization", "Infrastructure as Code", "Monitoring"]
+                features: ["CI/CD Pipeline", "Containerization", "Infrastructure as Code", "Monitoring"],
+                details: "Our DevOps implementation service helps you adopt DevOps practices to improve software delivery and operational efficiency. We set up CI/CD pipelines, implement containerization, and automate infrastructure management. Our solutions enable faster deployments and more reliable software releases."
             },
             {
                 id: 13,
@@ -1018,7 +1144,8 @@
                 description: "Guide your business through digital transformation with modern technologies.",
                 price: "Get Quote",
                 category: "consultation",
-                features: ["Strategy Development", "Technology Selection", "Implementation Support", "Change Management"]
+                features: ["Strategy Development", "Technology Selection", "Implementation Support", "Change Management"],
+                details: "Our digital transformation service helps businesses adapt to the digital age by implementing modern technologies and processes. We develop a comprehensive strategy, select appropriate technologies, and support implementation while managing organizational change. Our approach ensures a smooth transition to digital operations."
             },
             {
                 id: 14,
@@ -1026,7 +1153,8 @@
                 description: "Comprehensive security awareness and technical training for your team.",
                 price: "£1,200",
                 category: "training",
-                features: ["Security Awareness", "Technical Training", "Phishing Simulations", "Compliance Guidance"]
+                features: ["Security Awareness", "Technical Training", "Phishing Simulations", "Compliance Guidance"],
+                details: "Our IT security training service educates your team on cybersecurity best practices and threats. We offer customized training programs that include security awareness, technical skills development, and phishing simulations. Our training helps reduce security risks and ensures compliance with industry standards."
             },
             {
                 id: 15,
@@ -1034,7 +1162,8 @@
                 description: "Reliable backup solutions and disaster recovery planning to protect your data.",
                 price: "£800+",
                 category: "infrastructure",
-                features: ["Automated Backups", "Disaster Recovery Plan", "Regular Testing", "24/7 Monitoring"]
+                features: ["Automated Backups", "Disaster Recovery Plan", "Regular Testing", "24/7 Monitoring"],
+                details: "Our backup and disaster recovery service ensures your data is protected and can be restored quickly in case of emergencies. We implement automated backup solutions, develop comprehensive recovery plans, and regularly test the recovery process. Our service minimizes downtime and data loss in disaster scenarios."
             },
             {
                 id: 16,
@@ -1042,7 +1171,8 @@
                 description: "Custom API development to connect your systems and enable integrations.",
                 price: "£1,500+",
                 category: "development",
-                features: ["RESTful API Design", "Documentation", "Security Implementation", "Testing & Validation"]
+                features: ["RESTful API Design", "Documentation", "Security Implementation", "Testing & Validation"],
+                details: "Our API development service creates robust and secure APIs that enable seamless integration between systems. We design RESTful APIs, implement security measures, and provide comprehensive documentation. Our APIs are tested thoroughly to ensure reliability and performance."
             },
             {
                 id: 17,
@@ -1050,7 +1180,8 @@
                 description: "Analyze and optimize your cloud spending without compromising performance.",
                 price: "£950",
                 category: "cloud",
-                features: ["Cost Analysis", "Optimization Strategies", "Implementation Support", "Monthly Reporting"]
+                features: ["Cost Analysis", "Optimization Strategies", "Implementation Support", "Monthly Reporting"],
+                details: "Our cloud cost optimization service helps you reduce cloud spending while maintaining performance and reliability. We analyze your cloud usage, identify cost-saving opportunities, and implement optimization strategies. Our service includes ongoing monitoring and reporting to ensure continued cost efficiency."
             },
             {
                 id: 18,
@@ -1058,7 +1189,8 @@
                 description: "Create intuitive and engaging user interfaces and experiences for your applications.",
                 price: "£65/hour",
                 category: "design",
-                features: ["User Research", "Wireframing", "Prototyping", "Usability Testing"]
+                features: ["User Research", "Wireframing", "Prototyping", "Usability Testing"],
+                details: "Our UI/UX design service creates user-centered designs that enhance usability and engagement. We conduct user research, create wireframes and prototypes, and perform usability testing. Our designs are visually appealing, intuitive, and aligned with your brand identity."
             },
             {
                 id: 19,
@@ -1066,7 +1198,8 @@
                 description: "Ensure your IT systems comply with industry regulations and standards.",
                 price: "£2,500",
                 category: "security",
-                features: ["Compliance Assessment", "Gap Analysis", "Remediation Plan", "Documentation"]
+                features: ["Compliance Assessment", "Gap Analysis", "Remediation Plan", "Documentation"],
+                details: "Our IT compliance audit service ensures your systems meet regulatory requirements and industry standards. We assess your compliance status, identify gaps, and develop a remediation plan. Our service helps you avoid penalties and maintain trust with customers and stakeholders."
             },
             {
                 id: 20,
@@ -1074,7 +1207,8 @@
                 description: "Professional technical documentation for your systems and processes.",
                 price: "£55/hour",
                 category: "consultation",
-                features: ["System Documentation", "Process Documentation", "API Documentation", "User Manuals"]
+                features: ["System Documentation", "Process Documentation", "API Documentation", "User Manuals"],
+                details: "Our technical documentation service creates clear and comprehensive documentation for your systems and processes. We document system architecture, APIs, procedures, and user guides. Our documentation improves knowledge sharing, training, and support efficiency."
             }
         ];
 
@@ -1088,7 +1222,9 @@
                 enrolled: 1247,
                 rating: 4.8,
                 level: "Beginner",
-                badge: "BESTSELLER"
+                badge: "BESTSELLER",
+                price: "£1,499",
+                details: "This comprehensive bootcamp covers everything you need to become a full-stack web developer. You'll learn front-end technologies like HTML, CSS, and JavaScript, as well as back-end development with Node.js and databases like MongoDB. The course includes hands-on projects, real-world scenarios, and career support to help you land your first developer job."
             },
             {
                 id: 2,
@@ -1098,7 +1234,9 @@
                 enrolled: 892,
                 rating: 4.7,
                 level: "Intermediate",
-                badge: "HOT"
+                badge: "HOT",
+                price: "£899",
+                details: "This course provides a solid foundation in cybersecurity principles and practices. You'll learn about common threats, vulnerability assessment, security controls, and incident response. The curriculum includes hands-on labs and simulations to give you practical experience in protecting systems and networks from cyber attacks."
             },
             {
                 id: 3,
@@ -1108,7 +1246,9 @@
                 enrolled: 756,
                 rating: 4.6,
                 level: "Intermediate",
-                badge: "NEW"
+                badge: "NEW",
+                price: "£1,199",
+                details: "Learn to develop mobile applications for both iOS and Android platforms. This course covers native development with Swift and Kotlin, as well as cross-platform development with React Native. You'll build real apps, learn about app store submission, and understand mobile UX best practices."
             },
             {
                 id: 4,
@@ -1118,7 +1258,9 @@
                 enrolled: 543,
                 rating: 4.9,
                 level: "Intermediate",
-                badge: "TRENDING"
+                badge: "TRENDING",
+                price: "£799",
+                details: "This course provides comprehensive training in Amazon Web Services (AWS). You'll learn to design, deploy, and manage scalable cloud infrastructure using services like EC2, S3, RDS, and Lambda. The curriculum includes hands-on labs and prepares you for AWS certification exams."
             },
             {
                 id: 5,
@@ -1128,7 +1270,9 @@
                 enrolled: 621,
                 rating: 4.7,
                 level: "Advanced",
-                badge: "POPULAR"
+                badge: "POPULAR",
+                price: "£1,699",
+                details: "This advanced course covers the complete data science workflow from data collection to machine learning model deployment. You'll learn Python programming, statistical analysis, data visualization, and machine learning algorithms. The course includes real-world projects and prepares you for a career in data science."
             },
             {
                 id: 6,
@@ -1138,7 +1282,9 @@
                 enrolled: 432,
                 rating: 4.8,
                 level: "Intermediate",
-                badge: "HOT"
+                badge: "HOT",
+                price: "£1,099",
+                details: "Learn DevOps principles and practices to streamline software development and deployment. This course covers containerization with Docker, orchestration with Kubernetes, and setting up CI/CD pipelines. You'll gain hands-on experience with industry-standard tools and methodologies."
             },
             {
                 id: 7,
@@ -1148,7 +1294,9 @@
                 enrolled: 389,
                 rating: 4.6,
                 level: "Beginner",
-                badge: "NEW"
+                badge: "NEW",
+                price: "£699",
+                details: "This course introduces the fundamentals of UI/UX design. You'll learn user research methods, information architecture, wireframing, prototyping, and usability testing. The curriculum includes hands-on projects using popular design tools like Figma and Adobe XD."
             },
             {
                 id: 8,
@@ -1158,7 +1306,9 @@
                 enrolled: 298,
                 rating: 4.5,
                 level: "Advanced",
-                badge: "EMERGING"
+                badge: "EMERGING",
+                price: "£1,399",
+                details: "Learn to develop decentralized applications (dApps) and smart contracts on the Ethereum blockchain. This course covers Solidity programming, smart contract security, and dApp development frameworks. You'll build real blockchain projects and understand the fundamentals of Web3 technology."
             },
             {
                 id: 9,
@@ -1168,7 +1318,9 @@
                 enrolled: 1124,
                 rating: 4.8,
                 level: "Beginner",
-                badge: "BESTSELLER"
+                badge: "BESTSELLER",
+                price: "£799",
+                details: "This course provides a complete introduction to Python programming. You'll learn Python syntax, data structures, object-oriented programming, and popular libraries. The curriculum includes practical exercises and projects to build your programming skills from the ground up."
             },
             {
                 id: 10,
@@ -1178,7 +1330,9 @@
                 enrolled: 687,
                 rating: 4.6,
                 level: "Intermediate",
-                badge: "POPULAR"
+                badge: "POPULAR",
+                price: "£1,199",
+                details: "Master enterprise Java development with this comprehensive course. You'll learn Spring Boot, REST API development, database integration, and microservices architecture. The curriculum includes building real-world enterprise applications and prepares you for professional Java development roles."
             },
             {
                 id: 11,
@@ -1188,7 +1342,9 @@
                 enrolled: 534,
                 rating: 4.7,
                 level: "Advanced",
-                badge: "HOT"
+                badge: "HOT",
+                price: "£1,499",
+                details: "This advanced course covers network security principles and ethical hacking techniques. You'll learn about penetration testing, vulnerability assessment, and security controls. The curriculum includes hands-on labs in a controlled environment to practice ethical hacking skills safely."
             },
             {
                 id: 12,
@@ -1198,7 +1354,9 @@
                 enrolled: 421,
                 rating: 4.5,
                 level: "Intermediate",
-                badge: "NEW"
+                badge: "NEW",
+                price: "£899",
+                details: "Learn to build cross-platform mobile applications using React Native. This course covers React Native fundamentals, navigation, state management, and native module integration. You'll build real mobile apps that run on both iOS and Android from a single codebase."
             },
             {
                 id: 13,
@@ -1208,7 +1366,9 @@
                 enrolled: 876,
                 rating: 4.8,
                 level: "Beginner",
-                badge: "POPULAR"
+                badge: "POPULAR",
+                price: "£699",
+                details: "This course provides comprehensive training in SQL and database design. You'll learn to write complex queries, design normalized databases, and optimize database performance. The curriculum includes hands-on exercises with real databases and prepares you for database-related roles."
             },
             {
                 id: 14,
@@ -1218,7 +1378,9 @@
                 enrolled: 345,
                 rating: 4.7,
                 level: "Advanced",
-                badge: "TRENDING"
+                badge: "TRENDING",
+                price: "£999",
+                details: "Master Kubernetes and container orchestration with this intensive course. You'll learn to deploy, scale, and manage containerized applications in production environments. The curriculum includes hands-on labs with real Kubernetes clusters and prepares you for cloud-native development roles."
             },
             {
                 id: 15,
@@ -1228,7 +1390,9 @@
                 enrolled: 512,
                 rating: 4.6,
                 level: "Intermediate",
-                badge: "POPULAR"
+                badge: "POPULAR",
+                price: "£899",
+                details: "This course covers IT project management principles and methodologies. You'll learn Agile, Waterfall, and hybrid approaches to managing IT projects. The curriculum includes project planning, risk management, and stakeholder communication, preparing you for project management roles in IT."
             },
             {
                 id: 16,
@@ -1238,7 +1402,9 @@
                 enrolled: 298,
                 rating: 4.7,
                 level: "Intermediate",
-                badge: "HOT"
+                badge: "HOT",
+                price: "£799",
+                details: "Learn cloud security fundamentals for major cloud platforms including AWS, Azure, and Google Cloud. This course covers identity and access management, data protection, network security, and compliance in cloud environments. You'll gain practical skills to secure cloud infrastructure and applications."
             },
             {
                 id: 17,
@@ -1248,7 +1414,9 @@
                 enrolled: 387,
                 rating: 4.5,
                 level: "Intermediate",
-                badge: "NEW"
+                badge: "NEW",
+                price: "£899",
+                details: "Master frontend development with Vue.js in this comprehensive course. You'll learn Vue.js fundamentals, component-based architecture, state management with Vuex, and routing with Vue Router. The curriculum includes building real-world applications and prepares you for Vue.js development roles."
             },
             {
                 id: 18,
@@ -1258,7 +1426,9 @@
                 enrolled: 234,
                 rating: 4.6,
                 level: "Beginner",
-                badge: "POPULAR"
+                badge: "POPULAR",
+                price: "£799",
+                details: "This course introduces IT Service Management (ITSM) principles and the ITIL framework. You'll learn service strategy, design, transition, operation, and continual service improvement. The curriculum prepares you for ITSM roles and ITIL certification exams."
             },
             {
                 id: 19,
@@ -1268,7 +1438,9 @@
                 enrolled: 198,
                 rating: 4.8,
                 level: "Advanced",
-                badge: "EMERGING"
+                badge: "EMERGING",
+                price: "£1,299",
+                details: "Master MLOps practices to deploy and maintain machine learning models in production. This course covers model deployment, monitoring, versioning, and automation. You'll learn industry-standard tools and practices for managing the complete machine learning lifecycle."
             },
             {
                 id: 20,
@@ -1278,7 +1450,9 @@
                 enrolled: 765,
                 rating: 4.7,
                 level: "Intermediate",
-                badge: "BESTSELLER"
+                badge: "BESTSELLER",
+                price: "£1,299",
+                details: "Become a full-stack JavaScript developer with this comprehensive course. You'll learn frontend development with React, backend development with Node.js, and database integration. The curriculum includes building complete web applications and prepares you for full-stack development roles."
             }
         ];
 
@@ -1340,7 +1514,14 @@
                             ).join('')}
                         </ul>
                         <div class="service-price">${service.price}</div>
-                        <a href="#" class="btn btn-primary">Get Started</a>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary" onclick="showServiceDetails(${service.id})">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                            <button class="btn btn-primary" onclick="getStarted(${service.id})">
+                                Get Started
+                            </button>
+                        </div>
                     </div>
                 `;
                 container.appendChild(serviceCard);
@@ -1371,7 +1552,14 @@
                         <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
                             <i class="fas fa-signal"></i> ${course.level}
                         </div>
-                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary" onclick="showCourseDetails(${course.id})">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                            <button class="btn btn-primary" onclick="enrollNow(${course.id})">
+                                Enroll Now
+                            </button>
+                        </div>
                     </div>
                 `;
                 container.appendChild(courseCard);
@@ -1411,6 +1599,73 @@
                 `;
                 container.appendChild(positionCard);
             });
+        }
+
+        // Show service details in modal
+        function showServiceDetails(serviceId) {
+            const service = sampleServices.find(s => s.id === serviceId);
+            if (!service) return;
+            
+            document.getElementById('serviceModalTitle').textContent = service.name;
+            document.getElementById('serviceModalBody').innerHTML = `
+                <p><strong>Description:</strong> ${service.details}</p>
+                <p><strong>Price:</strong> ${service.price}</p>
+                <p><strong>Category:</strong> ${service.category.charAt(0).toUpperCase() + service.category.slice(1)}</p>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    ${service.features.map(feature => `<li>${feature}</li>`).join('')}
+                </ul>
+            `;
+            document.getElementById('serviceModalAction').textContent = 'Get Started';
+            document.getElementById('serviceModalAction').onclick = function() { getStarted(serviceId); };
+            
+            openModal('serviceModal');
+        }
+
+        // Show course details in modal
+        function showCourseDetails(courseId) {
+            const course = sampleCourses.find(c => c.id === courseId);
+            if (!course) return;
+            
+            document.getElementById('courseModalTitle').textContent = course.name;
+            document.getElementById('courseModalBody').innerHTML = `
+                <p><strong>Description:</strong> ${course.details}</p>
+                <p><strong>Duration:</strong> ${course.duration}</p>
+                <p><strong>Level:</strong> ${course.level}</p>
+                <p><strong>Price:</strong> ${course.price}</p>
+                <p><strong>Rating:</strong> ${course.rating}/5 (${course.enrolled} enrolled)</p>
+            `;
+            document.getElementById('courseModalAction').textContent = 'Enroll Now';
+            document.getElementById('courseModalAction').onclick = function() { enrollNow(courseId); };
+            
+            openModal('courseModal');
+        }
+
+        // Get Started function for services
+        function getStarted(serviceId) {
+            const service = sampleServices.find(s => s.id === serviceId);
+            if (service) {
+                alert(`Thank you for your interest in ${service.name}! Our team will contact you shortly to discuss your requirements.`);
+                closeModal('serviceModal');
+            }
+        }
+
+        // Enroll Now function for courses
+        function enrollNow(courseId) {
+            const course = sampleCourses.find(c => c.id === courseId);
+            if (course) {
+                alert(`Thank you for your interest in ${course.name}! You will be redirected to the enrollment page.`);
+                closeModal('courseModal');
+            }
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
 
         // Helper functions
@@ -1455,6 +1710,13 @@
             loadServices();
             loadCourses();
             loadPositions();
+            
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            }
         });
     </script>
 </body>
