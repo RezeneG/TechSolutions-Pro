@@ -170,6 +170,57 @@
             flex: 1;
         }
         
+        /* Search and Categories in Header */
+        .nav-search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+        
+        .nav-search-box {
+            position: relative;
+            flex: 1;
+        }
+        
+        .nav-search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+        
+        .nav-search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .nav-search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .nav-categories {
+            min-width: 160px;
+        }
+        
+        .nav-categories select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+        }
+        
         /* Hero Section */
         .hero {
             padding: 60px 0;
@@ -617,6 +668,17 @@
             font-size: 0.9rem;
         }
         
+        .footer-bottom a {
+            color: var(--light-gray);
+            text-decoration: none;
+            margin: 0 8px;
+            transition: color 0.3s;
+        }
+        
+        .footer-bottom a:hover {
+            color: white;
+        }
+        
         /* Standards Section */
         .standards-section {
             background: rgba(255, 255, 255, 0.05);
@@ -1024,6 +1086,24 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-search-container {
+                max-width: 400px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .nav-search-container {
+                order: 3;
+                max-width: 100%;
+                margin: 15px 0 0;
+            }
+            
+            .navbar {
+                flex-wrap: wrap;
+            }
+        }
+        
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -1039,6 +1119,12 @@
             .nav-links a {
                 padding: 6px 10px;
                 font-size: 0.9rem;
+            }
+            
+            .nav-search-container {
+                order: 0;
+                margin: 15px 0;
+                width: 100%;
             }
             
             .hero h1 {
@@ -1105,6 +1191,24 @@
                     <i class="fas fa-laptop-code" aria-hidden="true"></i>
                     <span>TechSolutions Pro</span>
                 </div>
+                
+                <!-- Search and Categories in Navigation -->
+                <div class="nav-search-container">
+                    <div class="nav-search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="global-search" placeholder="Search services, courses..." aria-label="Search website">
+                    </div>
+                    <div class="nav-categories">
+                        <select id="global-category" aria-label="Browse categories">
+                            <option value="">All Categories</option>
+                            <option value="services">Services</option>
+                            <option value="courses">Courses</option>
+                            <option value="careers">Careers</option>
+                            <option value="blog">Blog</option>
+                        </select>
+                    </div>
+                </div>
+                
                 <div class="nav-links">
                     <a href="#" class="active">Home</a>
                     <a href="#services">Services</a>
@@ -1494,7 +1598,12 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | <a href="#" style="color: var(--light-gray);">Privacy Policy</a> | <a href="#" style="color: var(--light-gray);">Terms of Service</a> | <a href="#careers" style="color: var(--light-gray);">Careers</a></p>
+                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | 
+                    <a href="#">Privacy Policy</a> | 
+                    <a href="#">Cookies Policy</a> | 
+                    <a href="#">Terms of Service</a> | 
+                    <a href="#careers">Careers</a>
+                </p>
             </div>
         </div>
     </footer>
@@ -2284,6 +2393,29 @@
             }, 500); // Simulate loading delay
         }
 
+        // Global search functionality
+        function handleGlobalSearch() {
+            const searchTerm = document.getElementById('global-search').value.toLowerCase();
+            const category = document.getElementById('global-category').value;
+            
+            if (!searchTerm && !category) return;
+            
+            // Navigate to appropriate section based on category
+            if (category === 'services' || (!category && searchTerm)) {
+                window.location.href = '#services';
+                document.getElementById('service-search').value = searchTerm;
+                setTimeout(loadServices, 300);
+            } else if (category === 'courses') {
+                window.location.href = '#courses';
+                document.getElementById('course-search').value = searchTerm;
+                setTimeout(loadCourses, 300);
+            } else if (category === 'careers') {
+                window.location.href = '#careers';
+            } else if (category === 'blog') {
+                window.location.href = '#blog';
+            }
+        }
+
         // Show service details in modal
         function showServiceDetails(serviceId) {
             const service = sampleServices.find(s => s.id === serviceId);
@@ -2468,6 +2600,19 @@
             document.getElementById('service-category').addEventListener('change', loadServices);
             document.getElementById('course-search').addEventListener('input', loadCourses);
             document.getElementById('course-level').addEventListener('change', loadCourses);
+            
+            // Global search functionality
+            document.getElementById('global-search').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleGlobalSearch();
+                }
+            });
+            
+            document.getElementById('global-category').addEventListener('change', function() {
+                if (document.getElementById('global-search').value) {
+                    handleGlobalSearch();
+                }
+            });
             
             // Close modal when clicking outside
             window.onclick = function(event) {
