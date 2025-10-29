@@ -223,7 +223,7 @@
         
         /* Hero Section */
         .hero {
-            padding: 60px 0;
+            padding: 80px 0 60px;
             background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
             color: white;
             text-align: center;
@@ -276,12 +276,12 @@
         
         /* Services Section */
         .section {
-            padding: 60px 0;
+            padding: 80px 0;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         
         .section-header h2 {
@@ -294,12 +294,13 @@
             color: var(--gray);
             max-width: 600px;
             margin: 0 auto;
+            font-size: 1.1rem;
         }
         
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
         
         .service-card {
@@ -328,7 +329,7 @@
         }
         
         .service-content {
-            padding: 20px;
+            padding: 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -377,7 +378,7 @@
         .courses-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
         
         .course-card {
@@ -416,7 +417,7 @@
         }
         
         .course-content {
-            padding: 20px;
+            padding: 25px;
         }
         
         .course-content h3 {
@@ -865,7 +866,7 @@
         /* Testimonials */
         .testimonials {
             background: white;
-            padding: 60px 0;
+            padding: 80px 0;
         }
         
         .testimonials-grid {
@@ -917,7 +918,7 @@
         
         /* Blog Section */
         .blog-section {
-            padding: 60px 0;
+            padding: 80px 0;
         }
         
         .blog-grid {
@@ -970,45 +971,6 @@
             justify-content: space-between;
             color: var(--gray);
             font-size: 0.8rem;
-        }
-        
-        /* Client Logos */
-        .clients-section {
-            padding: 40px 0;
-            background: white;
-        }
-        
-        .clients-grid {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-        
-        .client-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-        
-        .client-logo:hover {
-            opacity: 1;
-        }
-        
-        .client-logo .logo-placeholder {
-            width: 120px;
-            height: 60px;
-            background: var(--light);
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--dark);
         }
         
         /* Form Styles */
@@ -1144,7 +1106,7 @@
             }
             
             .section {
-                padding: 50px 0;
+                padding: 60px 0;
             }
             
             .services-grid,
@@ -1246,29 +1208,6 @@
                 <div class="stat">
                     <div class="stat-number">98.2%</div>
                     <div class="stat-label">Success Rate</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Client Logos -->
-    <section class="clients-section">
-        <div class="container">
-            <div class="clients-grid">
-                <div class="client-logo">
-                    <div class="logo-placeholder">TechCorp</div>
-                </div>
-                <div class="client-logo">
-                    <div class="logo-placeholder">InnoSoft</div>
-                </div>
-                <div class="client-logo">
-                    <div class="logo-placeholder">DataFlow</div>
-                </div>
-                <div class="client-logo">
-                    <div class="logo-placeholder">CloudNet</div>
-                </div>
-                <div class="client-logo">
-                    <div class="logo-placeholder">SecureIT</div>
                 </div>
             </div>
         </div>
