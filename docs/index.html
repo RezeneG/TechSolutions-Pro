@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechSolutions Pro | IT Services & Training Marketplace</title>
+    <meta name="description" content="Professional IT services and training programs. Transform your business with our expert solutions.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -37,6 +38,23 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+        
+        /* Skip Navigation for Accessibility */
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px;
+            z-index: 10000;
+            text-decoration: none;
+            border-radius: 0 0 4px 0;
+        }
+        
+        .skip-nav:focus {
+            top: 0;
         }
         
         /* Header & Navigation */
@@ -703,6 +721,308 @@
             justify-content: flex-end;
         }
         
+        /* Search and Filter Styles */
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .filter-dropdown {
+            min-width: 200px;
+        }
+        
+        .filter-dropdown select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb span {
+            color: var(--gray);
+        }
+        
+        /* Loading States */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: white;
+            padding: 60px 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .testimonial-card {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-content {
+            margin-bottom: 15px;
+            font-style: italic;
+            color: var(--dark);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        /* Blog Section */
+        .blog-section {
+            padding: 60px 0;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .blog-image {
+            height: 180px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .blog-content {
+            padding: 20px;
+        }
+        
+        .blog-content h3 {
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+        
+        .blog-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+        
+        /* Client Logos */
+        .clients-section {
+            padding: 40px 0;
+            background: white;
+        }
+        
+        .clients-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .client-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .client-logo:hover {
+            opacity: 1;
+        }
+        
+        .client-logo .logo-placeholder {
+            width: 120px;
+            height: 60px;
+            background: var(--light);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* Instructor Profiles */
+        .instructor-card {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .instructor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .instructor-info h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .instructor-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .instructor-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
@@ -762,16 +1082,27 @@
             .btn-group {
                 flex-direction: column;
             }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .search-box, .filter-dropdown {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+
     <!-- Header -->
     <header>
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
-                    <i class="fas fa-laptop-code"></i>
+                    <i class="fas fa-laptop-code" aria-hidden="true"></i>
                     <span>TechSolutions Pro</span>
                 </div>
                 <div class="nav-links">
@@ -779,6 +1110,7 @@
                     <a href="#services">Services</a>
                     <a href="#courses">Courses</a>
                     <a href="#careers">Careers</a>
+                    <a href="#blog">Blog</a>
                 </div>
                 <div class="auth-buttons">
                     <a href="#" class="btn btn-outline">Login</a>
@@ -815,15 +1147,62 @@
         </div>
     </section>
 
+    <!-- Client Logos -->
+    <section class="clients-section">
+        <div class="container">
+            <div class="clients-grid">
+                <div class="client-logo">
+                    <div class="logo-placeholder">TechCorp</div>
+                </div>
+                <div class="client-logo">
+                    <div class="logo-placeholder">InnoSoft</div>
+                </div>
+                <div class="client-logo">
+                    <div class="logo-placeholder">DataFlow</div>
+                </div>
+                <div class="client-logo">
+                    <div class="logo-placeholder">CloudNet</div>
+                </div>
+                <div class="client-logo">
+                    <div class="logo-placeholder">SecureIT</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Services Section -->
     <section class="section" id="services">
         <div class="container">
+            <div class="breadcrumb">
+                <a href="#">Home</a> > <span>Services</span>
+            </div>
+            
             <div class="section-header">
                 <h2>Our Professional Services</h2>
                 <p>We offer a wide range of IT services to help your business grow and succeed in the digital age.</p>
             </div>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="service-search" placeholder="Search services..." aria-label="Search services">
+                </div>
+                <div class="filter-dropdown">
+                    <select id="service-category" aria-label="Filter by category">
+                        <option value="all">All Categories</option>
+                        <option value="development">Development</option>
+                        <option value="support">Support</option>
+                        <option value="security">Security</option>
+                        <option value="cloud">Cloud</option>
+                        <option value="consultation">Consultation</option>
+                    </select>
+                </div>
+            </div>
+            
             <div class="services-grid" id="services-container">
-                <!-- Services will be populated by JavaScript -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -831,12 +1210,82 @@
     <!-- Courses Section -->
     <section class="section" id="courses">
         <div class="container">
+            <div class="breadcrumb">
+                <a href="#">Home</a> > <span>Courses</span>
+            </div>
+            
             <div class="section-header">
                 <h2>Training Courses</h2>
                 <p>Enhance your skills with our comprehensive IT training programs designed for all levels.</p>
             </div>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="course-search" placeholder="Search courses..." aria-label="Search courses">
+                </div>
+                <div class="filter-dropdown">
+                    <select id="course-level" aria-label="Filter by level">
+                        <option value="all">All Levels</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>
+            
             <div class="courses-grid" id="courses-container">
-                <!-- Courses will be populated by JavaScript -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <p>Don't just take our word for it - hear from some of our satisfied clients.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "TechSolutions Pro transformed our IT infrastructure and provided excellent training for our team. Their expertise and professionalism are unmatched."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JS</div>
+                        <div class="author-info">
+                            <h4>John Smith</h4>
+                            <p>CTO, TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The cybersecurity training from TechSolutions Pro was comprehensive and practical. Our team is now much better equipped to handle security threats."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <h4>Maria Johnson</h4>
+                            <p>Security Director, SecureIT</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "We partnered with TechSolutions Pro for our cloud migration, and the process was seamless. Their team was knowledgeable and supportive throughout."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DW</div>
+                        <div class="author-info">
+                            <h4>David Wilson</h4>
+                            <p>Operations Manager, CloudNet</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -844,6 +1293,10 @@
     <!-- Careers Section -->
     <section class="section" id="careers">
         <div class="container">
+            <div class="breadcrumb">
+                <a href="#">Home</a> > <span>Careers</span>
+            </div>
+            
             <div class="section-header">
                 <h2>Join Our Team</h2>
                 <p>We're always looking for talented individuals to join our growing team of IT professionals.</p>
@@ -892,16 +1345,69 @@
             <div class="open-positions">
                 <h3>Current Open Positions</h3>
                 <div class="positions-grid" id="positions-container">
-                    <!-- Positions will be loaded here -->
+                    <div class="loading">
+                        <div class="spinner"></div>
+                    </div>
                 </div>
             </div>
             
             <div class="application-cta">
                 <h3>Don't See the Perfect Role?</h3>
                 <p>We're always interested in meeting talented people. Send us your resume and tell us how you can contribute to our team.</p>
-                <button class="btn btn-outline" style="background: rgba(255,255,255,0.2); border-color: white;">
+                <button class="btn btn-outline" style="background: rgba(255,255,255,0.2); border-color: white;" onclick="openModal('generalApplicationModal')">
                     <i class="fas fa-paper-plane"></i> Submit General Application
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest from Our Blog</h2>
+                <p>Stay updated with the latest trends, insights, and news in the IT industry.</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Cybersecurity Trends to Watch in 2025</h3>
+                        <p>Explore the emerging cybersecurity threats and the latest defense strategies to protect your business.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> May 15, 2025</span>
+                            <span><i class="far fa-clock"></i> 5 min read</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Cloud Migration Best Practices</h3>
+                        <p>Learn how to successfully migrate your infrastructure to the cloud with minimal disruption.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> April 28, 2025</span>
+                            <span><i class="far fa-clock"></i> 7 min read</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>The Future of Web Development</h3>
+                        <p>Discover the latest frameworks, tools, and methodologies shaping modern web development.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> April 10, 2025</span>
+                            <span><i class="far fa-clock"></i> 6 min read</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -914,10 +1420,10 @@
                     <h3>TechSolutions Pro</h3>
                     <p>Your trusted partner for IT services and professional training. We deliver excellence in every project.</p>
                     <div style="margin-top: 15px;">
-                        <a href="#" style="margin-right: 10px;"><i class="fab fa-facebook"></i></a>
-                        <a href="#" style="margin-right: 10px;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="margin-right: 10px;"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter" style="margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn" style="margin-right: 10px;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -927,7 +1433,7 @@
                         <li><a href="#services">Services</a></li>
                         <li><a href="#courses">Courses</a></li>
                         <li><a href="#careers">Careers</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="#blog">Blog</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
@@ -994,11 +1500,11 @@
     </footer>
 
     <!-- Service Details Modal -->
-    <div id="serviceModal" class="modal">
+    <div id="serviceModal" class="modal" role="dialog" aria-labelledby="serviceModalTitle" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="serviceModalTitle">Service Details</h3>
-                <button class="close-modal" onclick="closeModal('serviceModal')">&times;</button>
+                <button class="close-modal" onclick="closeModal('serviceModal')" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body" id="serviceModalBody">
                 <!-- Service details will be populated here -->
@@ -1011,11 +1517,11 @@
     </div>
 
     <!-- Course Details Modal -->
-    <div id="courseModal" class="modal">
+    <div id="courseModal" class="modal" role="dialog" aria-labelledby="courseModalTitle" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="courseModalTitle">Course Details</h3>
-                <button class="close-modal" onclick="closeModal('courseModal')">&times;</button>
+                <button class="close-modal" onclick="closeModal('courseModal')" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body" id="courseModalBody">
                 <!-- Course details will be populated here -->
@@ -1023,6 +1529,60 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" onclick="closeModal('courseModal')">Close</button>
                 <button class="btn btn-primary" id="courseModalAction">Enroll Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- General Application Modal -->
+    <div id="generalApplicationModal" class="modal" role="dialog" aria-labelledby="generalApplicationTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="generalApplicationTitle">General Application</h3>
+                <button class="close-modal" onclick="closeModal('generalApplicationModal')" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="generalApplicationForm">
+                    <div class="form-group">
+                        <label for="applicant-name">Full Name</label>
+                        <input type="text" id="applicant-name" required>
+                        <div class="error-message" id="name-error">Please enter your full name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-email">Email</label>
+                        <input type="email" id="applicant-email" required>
+                        <div class="error-message" id="email-error">Please enter a valid email address</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-phone">Phone</label>
+                        <input type="tel" id="applicant-phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-position">Position of Interest</label>
+                        <input type="text" id="applicant-position">
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-experience">Years of Experience</label>
+                        <select id="applicant-experience">
+                            <option value="">Select</option>
+                            <option value="0-2">0-2 years</option>
+                            <option value="3-5">3-5 years</option>
+                            <option value="6-10">6-10 years</option>
+                            <option value="10+">10+ years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-message">Why are you interested in joining our team?</label>
+                        <textarea id="applicant-message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-resume">Upload Resume</label>
+                        <input type="file" id="applicant-resume" accept=".pdf,.doc,.docx">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('generalApplicationModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
             </div>
         </div>
     </div>
@@ -1224,7 +1784,11 @@
                 level: "Beginner",
                 badge: "BESTSELLER",
                 price: "£1,499",
-                details: "This comprehensive bootcamp covers everything you need to become a full-stack web developer. You'll learn front-end technologies like HTML, CSS, and JavaScript, as well as back-end development with Node.js and databases like MongoDB. The course includes hands-on projects, real-world scenarios, and career support to help you land your first developer job."
+                details: "This comprehensive bootcamp covers everything you need to become a full-stack web developer. You'll learn front-end technologies like HTML, CSS, and JavaScript, as well as back-end development with Node.js and databases like MongoDB. The course includes hands-on projects, real-world scenarios, and career support to help you land your first developer job.",
+                instructors: [
+                    { name: "Sarah Johnson", role: "Lead Instructor", experience: "10+ years", students: 2500, rating: 4.9 },
+                    { name: "Michael Chen", role: "Senior Developer", experience: "8 years", students: 1800, rating: 4.8 }
+                ]
             },
             {
                 id: 2,
@@ -1236,7 +1800,10 @@
                 level: "Intermediate",
                 badge: "HOT",
                 price: "£899",
-                details: "This course provides a solid foundation in cybersecurity principles and practices. You'll learn about common threats, vulnerability assessment, security controls, and incident response. The curriculum includes hands-on labs and simulations to give you practical experience in protecting systems and networks from cyber attacks."
+                details: "This course provides a solid foundation in cybersecurity principles and practices. You'll learn about common threats, vulnerability assessment, security controls, and incident response. The curriculum includes hands-on labs and simulations to give you practical experience in protecting systems and networks from cyber attacks.",
+                instructors: [
+                    { name: "David Wilson", role: "Security Expert", experience: "12+ years", students: 3200, rating: 4.9 }
+                ]
             },
             {
                 id: 3,
@@ -1248,7 +1815,10 @@
                 level: "Intermediate",
                 badge: "NEW",
                 price: "£1,199",
-                details: "Learn to develop mobile applications for both iOS and Android platforms. This course covers native development with Swift and Kotlin, as well as cross-platform development with React Native. You'll build real apps, learn about app store submission, and understand mobile UX best practices."
+                details: "Learn to develop mobile applications for both iOS and Android platforms. This course covers native development with Swift and Kotlin, as well as cross-platform development with React Native. You'll build real apps, learn about app store submission, and understand mobile UX best practices.",
+                instructors: [
+                    { name: "Emma Rodriguez", role: "Mobile Specialist", experience: "7 years", students: 1500, rating: 4.7 }
+                ]
             },
             {
                 id: 4,
@@ -1260,7 +1830,10 @@
                 level: "Intermediate",
                 badge: "TRENDING",
                 price: "£799",
-                details: "This course provides comprehensive training in Amazon Web Services (AWS). You'll learn to design, deploy, and manage scalable cloud infrastructure using services like EC2, S3, RDS, and Lambda. The curriculum includes hands-on labs and prepares you for AWS certification exams."
+                details: "This course provides comprehensive training in Amazon Web Services (AWS). You'll learn to design, deploy, and manage scalable cloud infrastructure using services like EC2, S3, RDS, and Lambda. The curriculum includes hands-on labs and prepares you for AWS certification exams.",
+                instructors: [
+                    { name: "James Thompson", role: "Cloud Architect", experience: "9 years", students: 2100, rating: 4.8 }
+                ]
             },
             {
                 id: 5,
@@ -1272,7 +1845,11 @@
                 level: "Advanced",
                 badge: "POPULAR",
                 price: "£1,699",
-                details: "This advanced course covers the complete data science workflow from data collection to machine learning model deployment. You'll learn Python programming, statistical analysis, data visualization, and machine learning algorithms. The course includes real-world projects and prepares you for a career in data science."
+                details: "This advanced course covers the complete data science workflow from data collection to machine learning model deployment. You'll learn Python programming, statistical analysis, data visualization, and machine learning algorithms. The course includes real-world projects and prepares you for a career in data science.",
+                instructors: [
+                    { name: "Lisa Wang", role: "Data Scientist", experience: "8 years", students: 1800, rating: 4.8 },
+                    { name: "Robert Kim", role: "ML Engineer", experience: "6 years", students: 1200, rating: 4.7 }
+                ]
             },
             {
                 id: 6,
@@ -1284,7 +1861,10 @@
                 level: "Intermediate",
                 badge: "HOT",
                 price: "£1,099",
-                details: "Learn DevOps principles and practices to streamline software development and deployment. This course covers containerization with Docker, orchestration with Kubernetes, and setting up CI/CD pipelines. You'll gain hands-on experience with industry-standard tools and methodologies."
+                details: "Learn DevOps principles and practices to streamline software development and deployment. This course covers containerization with Docker, orchestration with Kubernetes, and setting up CI/CD pipelines. You'll gain hands-on experience with industry-standard tools and methodologies.",
+                instructors: [
+                    { name: "Alex Turner", role: "DevOps Engineer", experience: "7 years", students: 1600, rating: 4.8 }
+                ]
             },
             {
                 id: 7,
@@ -1296,7 +1876,10 @@
                 level: "Beginner",
                 badge: "NEW",
                 price: "£699",
-                details: "This course introduces the fundamentals of UI/UX design. You'll learn user research methods, information architecture, wireframing, prototyping, and usability testing. The curriculum includes hands-on projects using popular design tools like Figma and Adobe XD."
+                details: "This course introduces the fundamentals of UI/UX design. You'll learn user research methods, information architecture, wireframing, prototyping, and usability testing. The curriculum includes hands-on projects using popular design tools like Figma and Adobe XD.",
+                instructors: [
+                    { name: "Sophia Martinez", role: "UX Designer", experience: "5 years", students: 900, rating: 4.7 }
+                ]
             },
             {
                 id: 8,
@@ -1308,7 +1891,10 @@
                 level: "Advanced",
                 badge: "EMERGING",
                 price: "£1,399",
-                details: "Learn to develop decentralized applications (dApps) and smart contracts on the Ethereum blockchain. This course covers Solidity programming, smart contract security, and dApp development frameworks. You'll build real blockchain projects and understand the fundamentals of Web3 technology."
+                details: "Learn to develop decentralized applications (dApps) and smart contracts on the Ethereum blockchain. This course covers Solidity programming, smart contract security, and dApp development frameworks. You'll build real blockchain projects and understand the fundamentals of Web3 technology.",
+                instructors: [
+                    { name: "Kevin O'Reilly", role: "Blockchain Developer", experience: "4 years", students: 600, rating: 4.6 }
+                ]
             },
             {
                 id: 9,
@@ -1320,7 +1906,10 @@
                 level: "Beginner",
                 badge: "BESTSELLER",
                 price: "£799",
-                details: "This course provides a complete introduction to Python programming. You'll learn Python syntax, data structures, object-oriented programming, and popular libraries. The curriculum includes practical exercises and projects to build your programming skills from the ground up."
+                details: "This course provides a complete introduction to Python programming. You'll learn Python syntax, data structures, object-oriented programming, and popular libraries. The curriculum includes practical exercises and projects to build your programming skills from the ground up.",
+                instructors: [
+                    { name: "Sarah Johnson", role: "Lead Instructor", experience: "10+ years", students: 2500, rating: 4.9 }
+                ]
             },
             {
                 id: 10,
@@ -1332,7 +1921,10 @@
                 level: "Intermediate",
                 badge: "POPULAR",
                 price: "£1,199",
-                details: "Master enterprise Java development with this comprehensive course. You'll learn Spring Boot, REST API development, database integration, and microservices architecture. The curriculum includes building real-world enterprise applications and prepares you for professional Java development roles."
+                details: "Master enterprise Java development with this comprehensive course. You'll learn Spring Boot, REST API development, database integration, and microservices architecture. The curriculum includes building real-world enterprise applications and prepares you for professional Java development roles.",
+                instructors: [
+                    { name: "Daniel Lee", role: "Java Developer", experience: "8 years", students: 1400, rating: 4.7 }
+                ]
             },
             {
                 id: 11,
@@ -1344,7 +1936,10 @@
                 level: "Advanced",
                 badge: "HOT",
                 price: "£1,499",
-                details: "This advanced course covers network security principles and ethical hacking techniques. You'll learn about penetration testing, vulnerability assessment, and security controls. The curriculum includes hands-on labs in a controlled environment to practice ethical hacking skills safely."
+                details: "This advanced course covers network security principles and ethical hacking techniques. You'll learn about penetration testing, vulnerability assessment, and security controls. The curriculum includes hands-on labs in a controlled environment to practice ethical hacking skills safely.",
+                instructors: [
+                    { name: "David Wilson", role: "Security Expert", experience: "12+ years", students: 3200, rating: 4.9 }
+                ]
             },
             {
                 id: 12,
@@ -1356,7 +1951,10 @@
                 level: "Intermediate",
                 badge: "NEW",
                 price: "£899",
-                details: "Learn to build cross-platform mobile applications using React Native. This course covers React Native fundamentals, navigation, state management, and native module integration. You'll build real mobile apps that run on both iOS and Android from a single codebase."
+                details: "Learn to build cross-platform mobile applications using React Native. This course covers React Native fundamentals, navigation, state management, and native module integration. You'll build real mobile apps that run on both iOS and Android from a single codebase.",
+                instructors: [
+                    { name: "Emma Rodriguez", role: "Mobile Specialist", experience: "7 years", students: 1500, rating: 4.7 }
+                ]
             },
             {
                 id: 13,
@@ -1368,7 +1966,10 @@
                 level: "Beginner",
                 badge: "POPULAR",
                 price: "£699",
-                details: "This course provides comprehensive training in SQL and database design. You'll learn to write complex queries, design normalized databases, and optimize database performance. The curriculum includes hands-on exercises with real databases and prepares you for database-related roles."
+                details: "This course provides comprehensive training in SQL and database design. You'll learn to write complex queries, design normalized databases, and optimize database performance. The curriculum includes hands-on exercises with real databases and prepares you for database-related roles.",
+                instructors: [
+                    { name: "Maria Garcia", role: "Database Administrator", experience: "9 years", students: 1900, rating: 4.8 }
+                ]
             },
             {
                 id: 14,
@@ -1380,7 +1981,10 @@
                 level: "Advanced",
                 badge: "TRENDING",
                 price: "£999",
-                details: "Master Kubernetes and container orchestration with this intensive course. You'll learn to deploy, scale, and manage containerized applications in production environments. The curriculum includes hands-on labs with real Kubernetes clusters and prepares you for cloud-native development roles."
+                details: "Master Kubernetes and container orchestration with this intensive course. You'll learn to deploy, scale, and manage containerized applications in production environments. The curriculum includes hands-on labs with real Kubernetes clusters and prepares you for cloud-native development roles.",
+                instructors: [
+                    { name: "Alex Turner", role: "DevOps Engineer", experience: "7 years", students: 1600, rating: 4.8 }
+                ]
             },
             {
                 id: 15,
@@ -1392,7 +1996,10 @@
                 level: "Intermediate",
                 badge: "POPULAR",
                 price: "£899",
-                details: "This course covers IT project management principles and methodologies. You'll learn Agile, Waterfall, and hybrid approaches to managing IT projects. The curriculum includes project planning, risk management, and stakeholder communication, preparing you for project management roles in IT."
+                details: "This course covers IT project management principles and methodologies. You'll learn Agile, Waterfall, and hybrid approaches to managing IT projects. The curriculum includes project planning, risk management, and stakeholder communication, preparing you for project management roles in IT.",
+                instructors: [
+                    { name: "Jennifer Adams", role: "Project Manager", experience: "11 years", students: 2300, rating: 4.7 }
+                ]
             },
             {
                 id: 16,
@@ -1404,7 +2011,10 @@
                 level: "Intermediate",
                 badge: "HOT",
                 price: "£799",
-                details: "Learn cloud security fundamentals for major cloud platforms including AWS, Azure, and Google Cloud. This course covers identity and access management, data protection, network security, and compliance in cloud environments. You'll gain practical skills to secure cloud infrastructure and applications."
+                details: "Learn cloud security fundamentals for major cloud platforms including AWS, Azure, and Google Cloud. This course covers identity and access management, data protection, network security, and compliance in cloud environments. You'll gain practical skills to secure cloud infrastructure and applications.",
+                instructors: [
+                    { name: "David Wilson", role: "Security Expert", experience: "12+ years", students: 3200, rating: 4.9 }
+                ]
             },
             {
                 id: 17,
@@ -1416,7 +2026,10 @@
                 level: "Intermediate",
                 badge: "NEW",
                 price: "£899",
-                details: "Master frontend development with Vue.js in this comprehensive course. You'll learn Vue.js fundamentals, component-based architecture, state management with Vuex, and routing with Vue Router. The curriculum includes building real-world applications and prepares you for Vue.js development roles."
+                details: "Master frontend development with Vue.js in this comprehensive course. You'll learn Vue.js fundamentals, component-based architecture, state management with Vuex, and routing with Vue Router. The curriculum includes building real-world applications and prepares you for Vue.js development roles.",
+                instructors: [
+                    { name: "Thomas Wright", role: "Frontend Developer", experience: "6 years", students: 1100, rating: 4.7 }
+                ]
             },
             {
                 id: 18,
@@ -1428,7 +2041,10 @@
                 level: "Beginner",
                 badge: "POPULAR",
                 price: "£799",
-                details: "This course introduces IT Service Management (ITSM) principles and the ITIL framework. You'll learn service strategy, design, transition, operation, and continual service improvement. The curriculum prepares you for ITSM roles and ITIL certification exams."
+                details: "This course introduces IT Service Management (ITSM) principles and the ITIL framework. You'll learn service strategy, design, transition, operation, and continual service improvement. The curriculum prepares you for ITSM roles and ITIL certification exams.",
+                instructors: [
+                    { name: "Jennifer Adams", role: "Project Manager", experience: "11 years", students: 2300, rating: 4.7 }
+                ]
             },
             {
                 id: 19,
@@ -1440,7 +2056,10 @@
                 level: "Advanced",
                 badge: "EMERGING",
                 price: "£1,299",
-                details: "Master MLOps practices to deploy and maintain machine learning models in production. This course covers model deployment, monitoring, versioning, and automation. You'll learn industry-standard tools and practices for managing the complete machine learning lifecycle."
+                details: "Master MLOps practices to deploy and maintain machine learning models in production. This course covers model deployment, monitoring, versioning, and automation. You'll learn industry-standard tools and practices for managing the complete machine learning lifecycle.",
+                instructors: [
+                    { name: "Robert Kim", role: "ML Engineer", experience: "6 years", students: 1200, rating: 4.7 }
+                ]
             },
             {
                 id: 20,
@@ -1452,7 +2071,11 @@
                 level: "Intermediate",
                 badge: "BESTSELLER",
                 price: "£1,299",
-                details: "Become a full-stack JavaScript developer with this comprehensive course. You'll learn frontend development with React, backend development with Node.js, and database integration. The curriculum includes building complete web applications and prepares you for full-stack development roles."
+                details: "Become a full-stack JavaScript developer with this comprehensive course. You'll learn frontend development with React, backend development with Node.js, and database integration. The curriculum includes building complete web applications and prepares you for full-stack development roles.",
+                instructors: [
+                    { name: "Sarah Johnson", role: "Lead Instructor", experience: "10+ years", students: 2500, rating: 4.9 },
+                    { name: "Thomas Wright", role: "Frontend Developer", experience: "6 years", students: 1100, rating: 4.7 }
+                ]
             }
         ];
 
@@ -1493,112 +2116,172 @@
             }
         ];
 
-        // Load services
+        // Load services with search and filter functionality
         function loadServices() {
             const container = document.getElementById('services-container');
-            container.innerHTML = '';
+            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
             
-            sampleServices.forEach(service => {
-                const serviceCard = document.createElement('div');
-                serviceCard.className = 'service-card';
-                serviceCard.innerHTML = `
-                    <div class="service-icon">
-                        <i class="fas ${getServiceIcon(service.category)}"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>${service.name}</h3>
-                        <p>${service.description}</p>
-                        <ul class="service-features">
-                            ${service.features.map(feature => 
-                                `<li><i class="fas fa-check"></i> ${feature}</li>`
-                            ).join('')}
-                        </ul>
-                        <div class="service-price">${service.price}</div>
-                        <div class="btn-group">
-                            <button class="btn btn-secondary" onclick="showServiceDetails(${service.id})">
-                                <i class="fas fa-info-circle"></i> Details
-                            </button>
-                            <button class="btn btn-primary" onclick="getStarted(${service.id})">
-                                Get Started
-                            </button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(serviceCard);
-            });
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                try {
+                    const searchTerm = document.getElementById('service-search').value.toLowerCase();
+                    const categoryFilter = document.getElementById('service-category').value;
+                    
+                    const filteredServices = sampleServices.filter(service => {
+                        const matchesSearch = service.name.toLowerCase().includes(searchTerm) || 
+                                            service.description.toLowerCase().includes(searchTerm);
+                        const matchesCategory = categoryFilter === 'all' || service.category === categoryFilter;
+                        return matchesSearch && matchesCategory;
+                    });
+                    
+                    container.innerHTML = '';
+                    
+                    if (filteredServices.length === 0) {
+                        container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px;">No services found matching your criteria.</p>';
+                        return;
+                    }
+                    
+                    filteredServices.forEach(service => {
+                        const serviceCard = document.createElement('div');
+                        serviceCard.className = 'service-card';
+                        serviceCard.innerHTML = `
+                            <div class="service-icon">
+                                <i class="fas ${getServiceIcon(service.category)}"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>${service.name}</h3>
+                                <p>${service.description}</p>
+                                <ul class="service-features">
+                                    ${service.features.map(feature => 
+                                        `<li><i class="fas fa-check"></i> ${feature}</li>`
+                                    ).join('')}
+                                </ul>
+                                <div class="service-price">${service.price}</div>
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary" onclick="showServiceDetails(${service.id})">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                    <button class="btn btn-primary" onclick="getStarted(${service.id})">
+                                        Get Started
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(serviceCard);
+                    });
+                } catch (error) {
+                    console.error('Failed to load services:', error);
+                    container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px; color: var(--danger);">Error loading services. Please try again later.</p>';
+                }
+            }, 500); // Simulate loading delay
         }
 
-        // Load courses
+        // Load courses with search and filter functionality
         function loadCourses() {
             const container = document.getElementById('courses-container');
-            container.innerHTML = '';
+            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
             
-            sampleCourses.forEach(course => {
-                const courseCard = document.createElement('div');
-                courseCard.className = 'course-card';
-                courseCard.innerHTML = `
-                    <div class="course-image">
-                        <i class="fas ${getCourseIcon(course.name)}"></i>
-                        ${course.badge ? `<div class="course-badge">${course.badge}</div>` : ''}
-                    </div>
-                    <div class="course-content">
-                        <h3>${course.name}</h3>
-                        <p>${course.description}</p>
-                        <div class="course-meta">
-                            <span><i class="fas fa-clock"></i> ${course.duration}</span>
-                            <span><i class="fas fa-user-graduate"></i> ${course.enrolled} enrolled</span>
-                            <span class="course-rating"><i class="fas fa-star"></i> ${course.rating}</span>
-                        </div>
-                        <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
-                            <i class="fas fa-signal"></i> ${course.level}
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn btn-secondary" onclick="showCourseDetails(${course.id})">
-                                <i class="fas fa-info-circle"></i> Details
-                            </button>
-                            <button class="btn btn-primary" onclick="enrollNow(${course.id})">
-                                Enroll Now
-                            </button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(courseCard);
-            });
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                try {
+                    const searchTerm = document.getElementById('course-search').value.toLowerCase();
+                    const levelFilter = document.getElementById('course-level').value;
+                    
+                    const filteredCourses = sampleCourses.filter(course => {
+                        const matchesSearch = course.name.toLowerCase().includes(searchTerm) || 
+                                            course.description.toLowerCase().includes(searchTerm);
+                        const matchesLevel = levelFilter === 'all' || course.level.toLowerCase() === levelFilter;
+                        return matchesSearch && matchesLevel;
+                    });
+                    
+                    container.innerHTML = '';
+                    
+                    if (filteredCourses.length === 0) {
+                        container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px;">No courses found matching your criteria.</p>';
+                        return;
+                    }
+                    
+                    filteredCourses.forEach(course => {
+                        const courseCard = document.createElement('div');
+                        courseCard.className = 'course-card';
+                        courseCard.innerHTML = `
+                            <div class="course-image">
+                                <i class="fas ${getCourseIcon(course.name)}"></i>
+                                ${course.badge ? `<div class="course-badge">${course.badge}</div>` : ''}
+                            </div>
+                            <div class="course-content">
+                                <h3>${course.name}</h3>
+                                <p>${course.description}</p>
+                                <div class="course-meta">
+                                    <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                                    <span><i class="fas fa-user-graduate"></i> ${course.enrolled} enrolled</span>
+                                    <span class="course-rating"><i class="fas fa-star"></i> ${course.rating}</span>
+                                </div>
+                                <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
+                                    <i class="fas fa-signal"></i> ${course.level}
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary" onclick="showCourseDetails(${course.id})">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                    <button class="btn btn-primary" onclick="enrollNow(${course.id})">
+                                        Enroll Now
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(courseCard);
+                    });
+                } catch (error) {
+                    console.error('Failed to load courses:', error);
+                    container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px; color: var(--danger);">Error loading courses. Please try again later.</p>';
+                }
+            }, 500); // Simulate loading delay
         }
 
         // Load positions
         function loadPositions() {
             const container = document.getElementById('positions-container');
-            container.innerHTML = '';
+            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
             
-            samplePositions.forEach(position => {
-                const positionCard = document.createElement('div');
-                positionCard.className = 'position-card';
-                positionCard.innerHTML = `
-                    <div class="position-header">
-                        <div class="position-title">
-                            <h4>${position.title}</h4>
-                            <div class="position-meta">
-                                <span class="meta-item"><i class="fas fa-building"></i> ${position.department}</span>
-                                <span class="meta-item"><i class="fas fa-clock"></i> ${position.type}</span>
-                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> ${position.location}</span>
-                                <span class="meta-item"><i class="fas fa-briefcase"></i> ${position.experience}</span>
-                                <span class="meta-item"><i class="fas fa-money-bill-wave"></i> ${position.salary}</span>
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                try {
+                    container.innerHTML = '';
+                    
+                    samplePositions.forEach(position => {
+                        const positionCard = document.createElement('div');
+                        positionCard.className = 'position-card';
+                        positionCard.innerHTML = `
+                            <div class="position-header">
+                                <div class="position-title">
+                                    <h4>${position.title}</h4>
+                                    <div class="position-meta">
+                                        <span class="meta-item"><i class="fas fa-building"></i> ${position.department}</span>
+                                        <span class="meta-item"><i class="fas fa-clock"></i> ${position.type}</span>
+                                        <span class="meta-item"><i class="fas fa-map-marker-alt"></i> ${position.location}</span>
+                                        <span class="meta-item"><i class="fas fa-briefcase"></i> ${position.experience}</span>
+                                        <span class="meta-item"><i class="fas fa-money-bill-wave"></i> ${position.salary}</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-small" onclick="applyForPosition(${position.id})">
+                                    Apply Now
+                                </button>
                             </div>
-                        </div>
-                        <button class="btn btn-primary btn-small">
-                            Apply Now
-                        </button>
-                    </div>
-                    <div class="position-tags">
-                        ${position.requirements.map(req => `<span class="position-tag">${req}</span>`).join('')}
-                    </div>
-                    <div class="position-description">
-                        ${position.description}
-                    </div>
-                `;
-                container.appendChild(positionCard);
-            });
+                            <div class="position-tags">
+                                ${position.requirements.map(req => `<span class="position-tag">${req}</span>`).join('')}
+                            </div>
+                            <div class="position-description">
+                                ${position.description}
+                            </div>
+                        `;
+                        container.appendChild(positionCard);
+                    });
+                } catch (error) {
+                    console.error('Failed to load positions:', error);
+                    container.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--danger);">Error loading positions. Please try again later.</p>';
+                }
+            }, 500); // Simulate loading delay
         }
 
         // Show service details in modal
@@ -1634,6 +2317,22 @@
                 <p><strong>Level:</strong> ${course.level}</p>
                 <p><strong>Price:</strong> ${course.price}</p>
                 <p><strong>Rating:</strong> ${course.rating}/5 (${course.enrolled} enrolled)</p>
+                <div class="instructors-section">
+                    <h4>Instructors</h4>
+                    ${course.instructors.map(instructor => `
+                        <div class="instructor-card">
+                            <div class="instructor-avatar">${instructor.name.split(' ').map(n => n[0]).join('')}</div>
+                            <div class="instructor-info">
+                                <h4>${instructor.name}</h4>
+                                <p>${instructor.role} • ${instructor.experience} experience</p>
+                                <div class="instructor-stats">
+                                    <span><i class="fas fa-user-graduate"></i> ${instructor.students} students</span>
+                                    <span><i class="fas fa-star"></i> ${instructor.rating}/5 rating</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
             `;
             document.getElementById('courseModalAction').textContent = 'Enroll Now';
             document.getElementById('courseModalAction').onclick = function() { enrollNow(courseId); };
@@ -1659,13 +2358,66 @@
             }
         }
 
+        // Apply for position
+        function applyForPosition(positionId) {
+            const position = samplePositions.find(p => p.id === positionId);
+            if (position) {
+                alert(`Thank you for your interest in the ${position.title} position! Our HR team will review your application and contact you if there's a match.`);
+            }
+        }
+
+        // Submit general application
+        function submitApplication() {
+            const name = document.getElementById('applicant-name').value;
+            const email = document.getElementById('applicant-email').value;
+            const phone = document.getElementById('applicant-phone').value;
+            
+            // Simple validation
+            let isValid = true;
+            
+            if (!name) {
+                document.getElementById('name-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('name-error').style.display = 'none';
+            }
+            
+            if (!email || !isValidEmail(email)) {
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('email-error').style.display = 'none';
+            }
+            
+            if (isValid) {
+                alert(`Thank you for your application, ${name}! We'll review your information and contact you if there's a potential match.`);
+                closeModal('generalApplicationModal');
+                document.getElementById('generalApplicationForm').reset();
+            }
+        }
+        
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
         // Modal functions
         function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+            
+            // Focus management for accessibility
+            const closeButton = modal.querySelector('.close-modal');
+            if (closeButton) {
+                closeButton.focus();
+            }
         }
 
         function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
         }
 
         // Helper functions
@@ -1711,12 +2463,32 @@
             loadCourses();
             loadPositions();
             
+            // Add event listeners for search and filter
+            document.getElementById('service-search').addEventListener('input', loadServices);
+            document.getElementById('service-category').addEventListener('change', loadServices);
+            document.getElementById('course-search').addEventListener('input', loadCourses);
+            document.getElementById('course-level').addEventListener('change', loadCourses);
+            
             // Close modal when clicking outside
             window.onclick = function(event) {
                 if (event.target.classList.contains('modal')) {
                     event.target.style.display = 'none';
+                    event.target.setAttribute('aria-hidden', 'true');
                 }
             }
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    const modals = document.querySelectorAll('.modal');
+                    modals.forEach(modal => {
+                        if (modal.style.display === 'flex') {
+                            modal.style.display = 'none';
+                            modal.setAttribute('aria-hidden', 'true');
+                        }
+                    });
+                }
+            });
         });
     </script>
 </body>
