@@ -588,16 +588,17 @@
             max-width: 120px;
         }
         
-        .standard-logo img {
+        .standard-logo .logo-box {
+            width: 50px;
             height: 50px;
-            width: auto;
-            filter: brightness(0) invert(1);
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        .standard-logo:hover img {
-            opacity: 1;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark);
+            font-size: 0.8rem;
         }
         
         .standard-logo span {
@@ -641,10 +642,6 @@
             .standard-logo {
                 max-width: 100px;
             }
-            
-            .standard-logo img {
-                height: 40px;
-            }
         }
     </style>
 </head>
@@ -662,7 +659,6 @@
                     <a href="#services">Services</a>
                     <a href="#courses">Courses</a>
                     <a href="#careers">Careers</a>
-                    <a href="#admin" id="adminNavLink">Admin</a>
                 </div>
                 <div class="auth-buttons">
                     <a href="#" class="btn btn-outline">Login</a>
@@ -845,27 +841,27 @@
                 <h4>Committed to Industry Standards</h4>
                 <div class="standards-logos">
                     <div class="standard-logo">
-                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">ISO</div>
+                        <div class="logo-box">ISO</div>
                         <span>ISO Standards</span>
                     </div>
                     <div class="standard-logo">
-                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">WCAG</div>
+                        <div class="logo-box">WCAG</div>
                         <span>WCAG Compliant</span>
                     </div>
                     <div class="standard-logo">
-                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">W3C</div>
+                        <div class="logo-box">W3C</div>
                         <span>W3C Standards</span>
                     </div>
                     <div class="standard-logo">
-                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">IETF</div>
+                        <div class="logo-box">IETF</div>
                         <span>IETF Protocols</span>
                     </div>
                     <div class="standard-logo">
-                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">IEEE</div>
+                        <div class="logo-box">IEEE</div>
                         <span>IEEE Standards</span>
                     </div>
                     <div class="standard-logo">
-                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">PCI</div>
+                        <div class="logo-box">PCI</div>
                         <span>PCI DSS Compliant</span>
                     </div>
                 </div>
@@ -903,6 +899,14 @@
                 price: "Get Quote",
                 category: "testing",
                 features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"]
+            },
+            {
+                id: 4,
+                name: "Cloud Migration",
+                description: "Seamlessly migrate your infrastructure to cloud platforms like AWS, Azure, or Google Cloud.",
+                price: "£1,500+",
+                category: "cloud",
+                features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"]
             }
         ];
 
@@ -936,6 +940,16 @@
                 rating: 4.6,
                 level: "Intermediate",
                 badge: "NEW"
+            },
+            {
+                id: 4,
+                name: "Cloud Computing with AWS",
+                description: "Master Amazon Web Services and learn to deploy scalable cloud infrastructure.",
+                duration: "6 weeks",
+                enrolled: 543,
+                rating: 4.9,
+                level: "Intermediate",
+                badge: "TRENDING"
             }
         ];
 
@@ -1075,7 +1089,8 @@
             const icons = {
                 'development': 'fa-code',
                 'support': 'fa-headset',
-                'testing': 'fa-bug'
+                'testing': 'fa-bug',
+                'cloud': 'fa-cloud'
             };
             return icons[category] || 'fa-laptop-code';
         }
@@ -1084,6 +1099,7 @@
             if (courseName.toLowerCase().includes('web')) return 'fa-globe';
             if (courseName.toLowerCase().includes('cyber')) return 'fa-shield-alt';
             if (courseName.toLowerCase().includes('mobile')) return 'fa-mobile-alt';
+            if (courseName.toLowerCase().includes('cloud')) return 'fa-cloud';
             return 'fa-book';
         }
 
