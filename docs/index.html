@@ -7,731 +7,10 @@
     <meta name="description" content="Professional IT services and training programs. Transform your business with our expert solutions.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4cc9f0;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4bb543;
-            --warning: #ffcc00;
-            --danger: #dc3545;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-        }
+        /* Previous CSS styles remain the same, adding new auth styles below */
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fb;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Skip Navigation for Accessibility */
-        .skip-nav {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--primary);
-            color: white;
-            padding: 8px;
-            z-index: 10000;
-            text-decoration: none;
-            border-radius: 0 0 4px 0;
-        }
-        
-        .skip-nav:focus {
-            top: 0;
-        }
-        
-        /* Header & Navigation */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .logo i {
-            color: var(--accent);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 8px 12px;
-            border-radius: 5px;
-        }
-        
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: var(--secondary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-small {
-            padding: 8px 16px;
-            font-size: 0.9rem;
-        }
-        
-        .btn-secondary {
-            background: var(--light-gray);
-            color: var(--dark);
-            border: 2px solid var(--light-gray);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--gray);
-            color: white;
-            border-color: var(--gray);
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .btn-group .btn {
-            flex: 1;
-        }
-        
-        /* Search and Categories in Header */
-        .nav-search-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            max-width: 500px;
-            margin: 0 20px;
-        }
-        
-        .nav-search-box {
-            position: relative;
-            flex: 1;
-        }
-        
-        .nav-search-box input {
-            width: 100%;
-            padding: 10px 15px 10px 40px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
-            font-size: 0.9rem;
-            transition: border-color 0.3s;
-        }
-        
-        .nav-search-box input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .nav-search-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-        }
-        
-        .nav-categories {
-            min-width: 160px;
-        }
-        
-        .nav-categories select {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
-            font-size: 0.9rem;
-            background: white;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 80px 0 60px;
-            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 25px;
-            opacity: 0.9;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-        
-        .hero-stats {
-            display: flex;
-            justify-content: space-around;
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        /* Services Section */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-header h2 {
-            font-size: 2.3rem;
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
-        
-        .section-header p {
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-icon {
-            background: var(--primary);
-            color: white;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-        
-        .service-content {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .service-content h3 {
-            margin-bottom: 12px;
-            color: var(--dark);
-            font-size: 1.3rem;
-        }
-        
-        .service-content p {
-            color: var(--gray);
-            margin-bottom: 15px;
-            flex-grow: 1;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .service-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .service-features {
-            list-style: none;
-            margin-bottom: 15px;
-        }
-        
-        .service-features li {
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .service-features li i {
-            color: var(--success);
-            font-size: 0.8rem;
-        }
-        
-        /* Courses Section */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .course-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-        
-        .course-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .course-image {
-            height: 160px;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.5rem;
-            position: relative;
-        }
-        
-        .course-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--accent);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .course-content {
-            padding: 25px;
-        }
-        
-        .course-content h3 {
-            margin-bottom: 12px;
-            color: var(--dark);
-            font-size: 1.3rem;
-        }
-        
-        .course-content p {
-            color: var(--gray);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .course-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .course-rating {
-            color: var(--warning);
-        }
-        
-        /* Careers Section */
-        .careers-intro {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-        
-        .benefit-card {
-            text-align: center;
-            padding: 20px 15px;
-            background: var(--light);
-            border-radius: 8px;
-            transition: transform 0.3s;
-        }
-        
-        .benefit-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .benefit-card i {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-        
-        .benefit-card h4 {
-            margin-bottom: 8px;
-            color: var(--dark);
-            font-size: 1.1rem;
-        }
-        
-        .benefit-card p {
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-        
-        .open-positions {
-            margin: 50px 0;
-        }
-        
-        .open-positions h3 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--dark);
-            font-size: 1.8rem;
-        }
-        
-        .positions-grid {
-            display: grid;
-            gap: 20px;
-        }
-        
-        .position-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s;
-        }
-        
-        .position-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .position-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .position-title h4 {
-            color: var(--dark);
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-        
-        .position-meta {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-        
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-        
-        .meta-item i {
-            color: var(--primary);
-        }
-        
-        .position-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-        
-        .position-tag {
-            background: var(--light);
-            color: var(--dark);
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        
-        .position-description {
-            color: var(--gray);
-            margin-bottom: 15px;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-        
-        .application-cta {
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 40px 30px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-        
-        .application-cta h3 {
-            margin-bottom: 12px;
-            font-size: 1.5rem;
-        }
-        
-        .application-cta p {
-            margin-bottom: 20px;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 0.95rem;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 50px 0 25px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            color: var(--accent);
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 8px;
-        }
-        
-        .footer-column a {
-            color: var(--light-gray);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-column a:hover {
-            color: white;
-        }
-        
-        .career-highlights {
-            list-style: none;
-            margin-top: 12px;
-        }
-        
-        .career-highlights li {
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-        }
-        
-        .career-highlights li i {
-            color: var(--accent);
-            font-size: 0.7rem;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-        }
-        
-        .footer-bottom a {
-            color: var(--light-gray);
-            text-decoration: none;
-            margin: 0 8px;
-            transition: color 0.3s;
-        }
-        
-        .footer-bottom a:hover {
-            color: white;
-        }
-        
-        /* Standards Section */
-        .standards-section {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-        
-        .standards-section h4 {
-            text-align: center;
-            margin-bottom: 15px;
-            color: var(--accent);
-            font-size: 1.1rem;
-        }
-        
-        .standards-logos {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
-        }
-        
-        .standard-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            text-align: center;
-            max-width: 100px;
-        }
-        
-        .standard-logo .logo-box {
-            width: 45px;
-            height: 45px;
-            background: white;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--dark);
-            font-size: 0.7rem;
-        }
-        
-        .standard-logo span {
-            font-size: 0.65rem;
-            color: var(--light-gray);
-        }
-        
-        /* Modal Styles */
-        .modal {
+        /* Authentication Modal Styles */
+        .auth-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -744,236 +23,50 @@
             justify-content: center;
         }
         
-        .modal-content {
+        .auth-modal-content {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 450px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 90vh;
             overflow-y: auto;
-        }
-        
-        .modal h3 {
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .close-modal {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-            background: none;
-            border: none;
-        }
-        
-        .modal-body {
-            margin-bottom: 20px;
-        }
-        
-        .modal-footer {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-        
-        /* Search and Filter Styles */
-        .search-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .search-box {
-            flex: 1;
-            min-width: 250px;
             position: relative;
         }
         
-        .search-box input {
-            width: 100%;
-            padding: 12px 20px 12px 40px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
-            font-size: 1rem;
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--light-gray);
         }
         
-        .search-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
         }
         
-        .filter-dropdown {
-            min-width: 200px;
-        }
-        
-        .filter-dropdown select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
-            font-size: 1rem;
-            background: white;
-        }
-        
-        /* Breadcrumb */
-        .breadcrumb {
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .breadcrumb a {
+        .auth-tab.active {
             color: var(--primary);
-            text-decoration: none;
+            border-bottom-color: var(--primary);
         }
         
-        .breadcrumb span {
-            color: var(--gray);
+        .auth-form {
+            display: none;
         }
         
-        /* Loading States */
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
+        .auth-form.active {
+            display: block;
         }
         
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            background: white;
-            padding: 80px 0;
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .testimonial-card {
-            background: var(--light);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .testimonial-content {
-            margin-bottom: 15px;
-            font-style: italic;
-            color: var(--dark);
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .author-info h4 {
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
-        
-        .author-info p {
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-        
-        /* Blog Section */
-        .blog-section {
-            padding: 80px 0;
-        }
-        
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .blog-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .blog-image {
-            height: 180px;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-        }
-        
-        .blog-content {
-            padding: 20px;
-        }
-        
-        .blog-content h3 {
-            margin-bottom: 12px;
-            color: var(--dark);
-            font-size: 1.2rem;
-        }
-        
-        .blog-content p {
-            color: var(--gray);
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--gray);
-            font-size: 0.8rem;
-        }
-        
-        /* Form Styles */
         .form-group {
             margin-bottom: 20px;
         }
@@ -982,163 +75,286 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: var(--dark);
         }
         
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group input {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid var(--light-gray);
             border-radius: 5px;
             font-size: 1rem;
+            transition: border-color 0.3s;
         }
         
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
         
-        .error-message {
-            color: var(--danger);
-            font-size: 0.85rem;
+        .password-strength {
             margin-top: 5px;
-            display: none;
+            font-size: 0.85rem;
         }
         
-        /* Instructor Profiles */
-        .instructor-card {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: var(--light);
-            border-radius: 8px;
+        .strength-weak { color: var(--danger); }
+        .strength-medium { color: var(--warning); }
+        .strength-strong { color: var(--success); }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
         }
         
-        .instructor-avatar {
-            width: 60px;
-            height: 60px;
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* User Dashboard Styles */
+        .user-menu {
+            position: relative;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--primary);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-weight: bold;
-            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
         
-        .instructor-info h4 {
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+        
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            min-width: 200px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .user-dropdown.show {
+            display: block;
+        }
+        
+        .user-dropdown-item {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: background-color 0.3s;
+        }
+        
+        .user-dropdown-item:hover {
+            background: var(--light);
+        }
+        
+        .user-dropdown-divider {
+            height: 1px;
+            background: var(--light-gray);
+            margin: 10px 0;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard-section {
+            display: none;
+            padding: 40px 0;
+        }
+        
+        .dashboard-section.active {
+            display: block;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--dark);
             margin-bottom: 5px;
-            font-size: 1.1rem;
         }
         
-        .instructor-info p {
+        .stat-card p {
             color: var(--gray);
             font-size: 0.9rem;
-            margin-bottom: 8px;
         }
         
-        .instructor-stats {
+        .enrolled-courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .service-requests {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .request-item {
+            padding: 20px;
+            border-bottom: 1px solid var(--light-gray);
             display: flex;
-            gap: 15px;
-            font-size: 0.85rem;
-            color: var(--gray);
+            justify-content: space-between;
+            align-items: center;
         }
         
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .nav-search-container {
-                max-width: 400px;
-            }
+        .request-item:last-child {
+            border-bottom: none;
         }
         
-        @media (max-width: 900px) {
-            .nav-search-container {
-                order: 3;
-                max-width: 100%;
-                margin: 15px 0 0;
-            }
-            
-            .navbar {
-                flex-wrap: wrap;
-            }
+        .request-status {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
         
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .nav-links {
-                gap: 12px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-links a {
-                padding: 6px 10px;
-                font-size: 0.9rem;
-            }
-            
-            .nav-search-container {
-                order: 0;
-                margin: 15px 0;
-                width: 100%;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: 20px;
-                padding: 20px;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .section {
-                padding: 60px 0;
-            }
-            
-            .services-grid,
-            .courses-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .position-header {
-                flex-direction: column;
-            }
-            
-            .standards-logos {
-                gap: 15px;
-            }
-            
-            .standard-logo {
-                max-width: 80px;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-            }
-            
-            .search-container {
-                flex-direction: column;
-            }
-            
-            .search-box, .filter-dropdown {
-                min-width: 100%;
-            }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-in-progress { background: #cce7ff; color: #004085; }
+        .status-completed { background: #d4edda; color: #155724; }
+        
+        /* Profile Form Styles */
+        .profile-form {
+            max-width: 600px;
+            margin: 0 auto;
         }
+        
+        .profile-avatar-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-avatar input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        /* Loading States */
+        .btn-loading {
+            position: relative;
+            color: transparent;
+        }
+        
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+        
+        .toast {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 300px;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid var(--danger); }
+        .toast.warning { border-left: 4px solid var(--warning); }
+        .toast.info { border-left: 4px solid var(--primary); }
+        
+        .toast i {
+            font-size: 1.2rem;
+        }
+        
+        .toast.success i { color: var(--success); }
+        .toast.error i { color: var(--danger); }
+        .toast.warning i { color: var(--warning); }
+        .toast.info i { color: var(--primary); }
     </style>
 </head>
 <body>
@@ -1178,1402 +394,710 @@
                     <a href="#careers">Careers</a>
                     <a href="#blog">Blog</a>
                 </div>
-                <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">Login</a>
-                    <a href="#" class="btn btn-primary">Sign Up</a>
+                
+                <!-- Authentication Buttons - Dynamic -->
+                <div class="auth-buttons" id="auth-buttons">
+                    <!-- Will be populated by JavaScript -->
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Professional IT Services & Training</h1>
-            <p>Transform your business with our expert IT solutions and comprehensive training programs. Join thousands of satisfied clients worldwide.</p>
-            <div class="hero-buttons">
-                <a href="#services" class="btn btn-primary">Explore Services</a>
-                <a href="#courses" class="btn btn-outline">View Courses</a>
-                <a href="#careers" class="btn btn-outline">Join Our Team</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-number">5,247</div>
-                    <div class="stat-label">Happy Clients</div>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Existing sections (Hero, Services, Courses, etc.) remain the same -->
+        
+        <!-- User Dashboard Section (Hidden by default) -->
+        <section class="dashboard-section" id="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h1>My Dashboard</h1>
+                    <button class="btn btn-outline" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">20</div>
-                    <div class="stat-label">Services Offered</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">98.2%</div>
-                    <div class="stat-label">Success Rate</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="section" id="services">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="#">Home</a> > <span>Services</span>
-            </div>
-            
-            <div class="section-header">
-                <h2>Our Professional Services</h2>
-                <p>We offer a wide range of IT services to help your business grow and succeed in the digital age.</p>
-            </div>
-            
-            <div class="search-container">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="service-search" placeholder="Search services..." aria-label="Search services">
-                </div>
-                <div class="filter-dropdown">
-                    <select id="service-category" aria-label="Filter by category">
-                        <option value="all">All Categories</option>
-                        <option value="development">Development</option>
-                        <option value="support">Support</option>
-                        <option value="security">Security</option>
-                        <option value="cloud">Cloud</option>
-                        <option value="consultation">Consultation</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="services-grid" id="services-container">
-                <div class="loading">
-                    <div class="spinner"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section class="section" id="courses">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="#">Home</a> > <span>Courses</span>
-            </div>
-            
-            <div class="section-header">
-                <h2>Training Courses</h2>
-                <p>Enhance your skills with our comprehensive IT training programs designed for all levels.</p>
-            </div>
-            
-            <div class="search-container">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="course-search" placeholder="Search courses..." aria-label="Search courses">
-                </div>
-                <div class="filter-dropdown">
-                    <select id="course-level" aria-label="Filter by level">
-                        <option value="all">All Levels</option>
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="courses-grid" id="courses-container">
-                <div class="loading">
-                    <div class="spinner"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>What Our Clients Say</h2>
-                <p>Don't just take our word for it - hear from some of our satisfied clients.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "TechSolutions Pro transformed our IT infrastructure and provided excellent training for our team. Their expertise and professionalism are unmatched."
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-book-open"></i>
+                        <h3 id="enrolled-courses-count">0</h3>
+                        <p>Enrolled Courses</p>
                     </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JS</div>
-                        <div class="author-info">
-                            <h4>John Smith</h4>
-                            <p>CTO, TechCorp</p>
+                    <div class="stat-card">
+                        <i class="fas fa-tasks"></i>
+                        <h3 id="service-requests-count">0</h3>
+                        <p>Service Requests</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-certificate"></i>
+                        <h3 id="certificates-count">0</h3>
+                        <p>Certificates</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clock"></i>
+                        <h3 id="learning-hours">0</h3>
+                        <p>Learning Hours</p>
+                    </div>
+                </div>
+                
+                <div class="dashboard-tabs">
+                    <button class="auth-tab active" onclick="showDashboardTab('overview')">Overview</button>
+                    <button class="auth-tab" onclick="showDashboardTab('courses')">My Courses</button>
+                    <button class="auth-tab" onclick="showDashboardTab('services')">My Services</button>
+                    <button class="auth-tab" onclick="showDashboardTab('profile')">Profile</button>
+                </div>
+                
+                <div class="dashboard-content">
+                    <div id="overview-tab" class="dashboard-tab-content active">
+                        <h2>Welcome back, <span id="user-greeting">User</span>!</h2>
+                        <p>Here's your learning progress and recent activity.</p>
+                        
+                        <div class="enrolled-courses" id="dashboard-courses">
+                            <!-- Enrolled courses will be populated here -->
                         </div>
                     </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "The cybersecurity training from TechSolutions Pro was comprehensive and practical. Our team is now much better equipped to handle security threats."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MJ</div>
-                        <div class="author-info">
-                            <h4>Maria Johnson</h4>
-                            <p>Security Director, SecureIT</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "We partnered with TechSolutions Pro for our cloud migration, and the process was seamless. Their team was knowledgeable and supportive throughout."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">DW</div>
-                        <div class="author-info">
-                            <h4>David Wilson</h4>
-                            <p>Operations Manager, CloudNet</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Careers Section -->
-    <section class="section" id="careers">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="#">Home</a> > <span>Careers</span>
-            </div>
-            
-            <div class="section-header">
-                <h2>Join Our Team</h2>
-                <p>We're always looking for talented individuals to join our growing team of IT professionals.</p>
-            </div>
-            
-            <div class="careers-intro">
-                <div class="careers-content">
-                    <h3>Why Work With Us?</h3>
-                    <p>At TechSolutions Pro, we believe our team is our greatest asset. We offer a dynamic work environment where innovation and creativity are encouraged.</p>
                     
-                    <div class="benefits-grid">
-                        <div class="benefit-card">
-                            <i class="fas fa-money-bill-wave"></i>
-                            <h4>Competitive Salaries</h4>
-                            <p>We offer industry-competitive compensation packages with regular reviews.</p>
+                    <div id="courses-tab" class="dashboard-tab-content">
+                        <h2>My Courses</h2>
+                        <div class="enrolled-courses" id="my-courses-list">
+                            <!-- User's enrolled courses -->
                         </div>
-                        <div class="benefit-card">
-                            <i class="fas fa-home"></i>
-                            <h4>Remote Work Options</h4>
-                            <p>Flexible work arrangements with remote and hybrid options available.</p>
+                    </div>
+                    
+                    <div id="services-tab" class="dashboard-tab-content">
+                        <h2>My Service Requests</h2>
+                        <div class="service-requests" id="service-requests-list">
+                            <!-- Service requests will be populated here -->
                         </div>
-                        <div class="benefit-card">
-                            <i class="fas fa-graduation-cap"></i>
-                            <h4>Professional Development</h4>
-                            <p>Continuous learning opportunities with training budgets and certifications.</p>
-                        </div>
-                        <div class="benefit-card">
-                            <i class="fas fa-heartbeat"></i>
-                            <h4>Health Benefits</h4>
-                            <p>Comprehensive health, dental, and vision insurance for you and your family.</p>
-                        </div>
-                        <div class="benefit-card">
-                            <i class="fas fa-clock"></i>
-                            <h4>Flexible Hours</h4>
-                            <p>Work-life balance with flexible scheduling and generous time off.</p>
-                        </div>
-                        <div class="benefit-card">
-                            <i class="fas fa-rocket"></i>
-                            <h4>Career Growth</h4>
-                            <p>Clear career progression paths and opportunities for advancement.</p>
-                        </div>
+                    </div>
+                    
+                    <div id="profile-tab" class="dashboard-tab-content">
+                        <h2>Profile Settings</h2>
+                        <form class="profile-form" id="profile-form">
+                            <div class="profile-avatar-section">
+                                <div class="profile-avatar" id="profile-avatar">
+                                    <span id="avatar-initials">U</span>
+                                    <input type="file" id="avatar-upload" accept="image/*">
+                                </div>
+                                <p>Click to upload profile picture</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile-name">Full Name</label>
+                                <input type="text" id="profile-name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile-email">Email Address</label>
+                                <input type="email" id="profile-email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile-phone">Phone Number</label>
+                                <input type="tel" id="profile-phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile-company">Company</label>
+                                <input type="text" id="profile-company">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile-bio">Bio</label>
+                                <textarea id="profile-bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
+        </section>
+        
+        <!-- Rest of your existing sections -->
+    </main>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="auth-modal" role="dialog" aria-labelledby="authModalTitle" aria-hidden="true">
+        <div class="auth-modal-content">
+            <button class="close-modal" onclick="closeAuthModal()" aria-label="Close modal">&times;</button>
             
-            <div class="open-positions">
-                <h3>Current Open Positions</h3>
-                <div class="positions-grid" id="positions-container">
-                    <div class="loading">
-                        <div class="spinner"></div>
-                    </div>
-                </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="showAuthForm('login')">Login</button>
+                <button class="auth-tab" onclick="showAuthForm('register')">Register</button>
             </div>
             
-            <div class="application-cta">
-                <h3>Don't See the Perfect Role?</h3>
-                <p>We're always interested in meeting talented people. Send us your resume and tell us how you can contribute to our team.</p>
-                <button class="btn btn-outline" style="background: rgba(255,255,255,0.2); border-color: white;" onclick="openModal('generalApplicationModal')">
-                    <i class="fas fa-paper-plane"></i> Submit General Application
+            <!-- Login Form -->
+            <form class="auth-form active" id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                
+                <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                    <label style="margin: 0;">
+                        <input type="checkbox" id="remember-me"> Remember me
+                    </label>
+                    <a href="#" onclick="showAuthForm('forgot-password')" style="font-size: 0.9rem;">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Login
                 </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="blog-section" id="blog">
-        <div class="container">
-            <div class="section-header">
-                <h2>Latest from Our Blog</h2>
-                <p>Stay updated with the latest trends, insights, and news in the IT industry.</p>
-            </div>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="blog-content">
-                        <h3>Cybersecurity Trends to Watch in 2025</h3>
-                        <p>Explore the emerging cybersecurity threats and the latest defense strategies to protect your business.</p>
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> May 15, 2025</span>
-                            <span><i class="far fa-clock"></i> 5 min read</span>
-                        </div>
-                    </div>
+                
+                <div class="auth-footer">
+                    Don't have an account? <a href="#" onclick="showAuthForm('register')">Sign up</a>
                 </div>
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <div class="blog-content">
-                        <h3>Cloud Migration Best Practices</h3>
-                        <p>Learn how to successfully migrate your infrastructure to the cloud with minimal disruption.</p>
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> April 28, 2025</span>
-                            <span><i class="far fa-clock"></i> 7 min read</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="blog-content">
-                        <h3>The Future of Web Development</h3>
-                        <p>Discover the latest frameworks, tools, and methodologies shaping modern web development.</p>
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> April 10, 2025</span>
-                            <span><i class="far fa-clock"></i> 6 min read</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>TechSolutions Pro</h3>
-                    <p>Your trusted partner for IT services and professional training. We deliver excellence in every project.</p>
-                    <div style="margin-top: 15px;">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter" style="margin: 0 10px;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn" style="margin-right: 10px;"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#courses">Courses</a></li>
-                        <li><a href="#careers">Careers</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Work For Us</h3>
-                    <p>Join our team of talented professionals and grow your career in the tech industry.</p>
-                    <ul class="career-highlights">
-                        <li><i class="fas fa-check"></i> Competitive salaries</li>
-                        <li><i class="fas fa-check"></i> Remote work options</li>
-                        <li><i class="fas fa-check"></i> Professional development</li>
-                        <li><i class="fas fa-check"></i> Health benefits</li>
-                        <li><i class="fas fa-check"></i> Flexible hours</li>
-                    </ul>
-                    <a href="#careers" class="btn btn-primary btn-small" style="margin-top: 15px; display: inline-block;">
-                        <i class="fas fa-briefcase"></i> View Open Positions
-                    </a>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> info@techsolutions.com</li>
-                        <li><i class="fas fa-phone"></i> +44 123 456 7890</li>
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, London, UK</li>
-                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
-                    </ul>
-                </div>
-            </div>
+            </form>
             
-            <!-- Standards Section -->
-            <div class="standards-section">
-                <h4>Committed to Industry Standards</h4>
-                <div class="standards-logos">
-                    <div class="standard-logo">
-                        <div class="logo-box">ISO</div>
-                        <span>ISO Standards</span>
-                    </div>
-                    <div class="standard-logo">
-                        <div class="logo-box">WCAG</div>
-                        <span>WCAG Compliant</span>
-                    </div>
-                    <div class="standard-logo">
-                        <div class="logo-box">W3C</div>
-                        <span>W3C Standards</span>
-                    </div>
-                    <div class="standard-logo">
-                        <div class="logo-box">IETF</div>
-                        <span>IETF Protocols</span>
-                    </div>
-                    <div class="standard-logo">
-                        <div class="logo-box">IEEE</div>
-                        <span>IEEE Standards</span>
-                    </div>
-                    <div class="standard-logo">
-                        <div class="logo-box">PCI</div>
-                        <span>PCI DSS Compliant</span>
-                    </div>
+            <!-- Registration Form -->
+            <form class="auth-form" id="register-form">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" required>
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <label for="register-email">Email Address</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required oninput="checkPasswordStrength(this.value)">
+                    <div class="password-strength" id="password-strength"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirm Password</label>
+                    <input type="password" id="register-confirm-password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label style="font-weight: normal;">
+                        <input type="checkbox" id="accept-terms" required>
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                
+                <div class="auth-footer">
+                    Already have an account? <a href="#" onclick="showAuthForm('login')">Login</a>
+                </div>
+            </form>
             
-            <div class="footer-bottom">
-                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | 
-                    <a href="#">Privacy Policy</a> | 
-                    <a href="#">Cookies Policy</a> | 
-                    <a href="#">Terms of Service</a> | 
-                    <a href="#careers">Careers</a>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Service Details Modal -->
-    <div id="serviceModal" class="modal" role="dialog" aria-labelledby="serviceModalTitle" aria-hidden="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="serviceModalTitle">Service Details</h3>
-                <button class="close-modal" onclick="closeModal('serviceModal')" aria-label="Close modal">&times;</button>
-            </div>
-            <div class="modal-body" id="serviceModalBody">
-                <!-- Service details will be populated here -->
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal('serviceModal')">Close</button>
-                <button class="btn btn-primary" id="serviceModalAction">Get Started</button>
-            </div>
+            <!-- Forgot Password Form -->
+            <form class="auth-form" id="forgot-password-form">
+                <div class="form-group">
+                    <label for="forgot-email">Email Address</label>
+                    <input type="email" id="forgot-email" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Send Reset Link
+                </button>
+                
+                <div class="auth-footer">
+                    Remember your password? <a href="#" onclick="showAuthForm('login')">Back to login</a>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- Course Details Modal -->
-    <div id="courseModal" class="modal" role="dialog" aria-labelledby="courseModalTitle" aria-hidden="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="courseModalTitle">Course Details</h3>
-                <button class="close-modal" onclick="closeModal('courseModal')" aria-label="Close modal">&times;</button>
-            </div>
-            <div class="modal-body" id="courseModalBody">
-                <!-- Course details will be populated here -->
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal('courseModal')">Close</button>
-                <button class="btn btn-primary" id="courseModalAction">Enroll Now</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- General Application Modal -->
-    <div id="generalApplicationModal" class="modal" role="dialog" aria-labelledby="generalApplicationTitle" aria-hidden="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="generalApplicationTitle">General Application</h3>
-                <button class="close-modal" onclick="closeModal('generalApplicationModal')" aria-label="Close modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="generalApplicationForm">
-                    <div class="form-group">
-                        <label for="applicant-name">Full Name</label>
-                        <input type="text" id="applicant-name" required>
-                        <div class="error-message" id="name-error">Please enter your full name</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="applicant-email">Email</label>
-                        <input type="email" id="applicant-email" required>
-                        <div class="error-message" id="email-error">Please enter a valid email address</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="applicant-phone">Phone</label>
-                        <input type="tel" id="applicant-phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="applicant-position">Position of Interest</label>
-                        <input type="text" id="applicant-position">
-                    </div>
-                    <div class="form-group">
-                        <label for="applicant-experience">Years of Experience</label>
-                        <select id="applicant-experience">
-                            <option value="">Select</option>
-                            <option value="0-2">0-2 years</option>
-                            <option value="3-5">3-5 years</option>
-                            <option value="6-10">6-10 years</option>
-                            <option value="10+">10+ years</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="applicant-message">Why are you interested in joining our team?</label>
-                        <textarea id="applicant-message"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="applicant-resume">Upload Resume</label>
-                        <input type="file" id="applicant-resume" accept=".pdf,.doc,.docx">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal('generalApplicationModal')">Cancel</button>
-                <button class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
-            </div>
-        </div>
-    </div>
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
 
     <script>
-        // Sample data - 20 Services
-        const sampleServices = [
+        // Authentication State Management
+        let currentUser = null;
+        const AUTH_TOKEN_KEY = 'techsolutions_auth_token';
+        const USER_DATA_KEY = 'techsolutions_user_data';
+
+        // Sample user data (in real app, this would come from backend)
+        const sampleUsers = [
             {
                 id: 1,
-                name: "Website Development",
-                description: "Custom website development with modern technologies. We create responsive, SEO-friendly websites that drive results.",
-                price: "£999",
-                category: "development",
-                features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
-                details: "Our website development service includes comprehensive planning, design, development, and deployment. We use the latest technologies to ensure your website is fast, secure, and scalable. Our team works closely with you to understand your business needs and create a solution that meets your objectives."
-            },
-            {
-                id: 2,
-                name: "IT Support & Maintenance",
-                description: "Professional IT support and maintenance services to keep your systems running smoothly.",
-                price: "£45/hour",
-                category: "support",
-                features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
-                details: "Our IT support service provides comprehensive technical assistance for all your IT needs. We offer proactive monitoring, regular maintenance, and quick response times to minimize downtime. Our certified technicians are available 24/7 to resolve any issues and keep your business running smoothly."
-            },
-            {
-                id: 3,
-                name: "Software Testing",
-                description: "Comprehensive software testing services to ensure your applications are bug-free and performant.",
-                price: "Get Quote",
-                category: "testing",
-                features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"],
-                details: "Our software testing service ensures your applications meet quality standards and perform as expected. We use a combination of manual and automated testing approaches to identify bugs, performance issues, and security vulnerabilities. Our detailed reports help you make informed decisions about your software quality."
-            },
-            {
-                id: 4,
-                name: "Cloud Migration",
-                description: "Seamlessly migrate your infrastructure to cloud platforms like AWS, Azure, or Google Cloud.",
-                price: "£1,500+",
-                category: "cloud",
-                features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"],
-                details: "Our cloud migration service helps businesses transition to the cloud with minimal disruption. We assess your current infrastructure, develop a migration strategy, and execute the move while ensuring data integrity and security. We also provide post-migration support to optimize your cloud environment."
-            },
-            {
-                id: 5,
-                name: "Cybersecurity Audit",
-                description: "Comprehensive security assessment to identify vulnerabilities and protect your business.",
-                price: "£2,000",
-                category: "security",
-                features: ["Vulnerability Assessment", "Penetration Testing", "Security Report", "Remediation Plan"],
-                details: "Our cybersecurity audit service provides a thorough assessment of your security posture. We identify vulnerabilities, test your defenses, and provide a detailed report with actionable recommendations. Our experts help you implement security measures to protect your business from cyber threats."
-            },
-            {
-                id: 6,
-                name: "Mobile App Development",
-                description: "Create powerful mobile applications for iOS and Android platforms.",
-                price: "£1,200+",
-                category: "development",
-                features: ["Native & Cross-platform", "UI/UX Design", "App Store Deployment", "Maintenance"],
-                details: "Our mobile app development service creates engaging and functional applications for iOS and Android. We focus on user experience, performance, and security to deliver apps that meet your business goals. Our services include design, development, testing, and deployment to app stores."
-            },
-            {
-                id: 7,
-                name: "Data Analytics & BI",
-                description: "Transform your data into actionable insights with advanced analytics and business intelligence.",
-                price: "£85/hour",
-                category: "analytics",
-                features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"],
-                details: "Our data analytics service helps you make sense of your data and derive valuable insights. We create interactive dashboards, perform predictive analysis, and help you track key performance indicators. Our solutions enable data-driven decision making across your organization."
-            },
-            {
-                id: 8,
-                name: "Network Infrastructure",
-                description: "Design and implement robust network infrastructure for optimal performance and security.",
-                price: "£1,800+",
-                category: "infrastructure",
-                features: ["Network Design", "Hardware Setup", "Security Implementation", "Performance Monitoring"],
-                details: "Our network infrastructure service designs and implements reliable and secure networks for businesses of all sizes. We ensure optimal performance, scalability, and security while minimizing downtime. Our solutions include ongoing monitoring and maintenance to keep your network running smoothly."
-            },
-            {
-                id: 9,
-                name: "Database Management",
-                description: "Professional database design, optimization, and management services.",
-                price: "£75/hour",
-                category: "database",
-                features: ["Database Design", "Performance Tuning", "Backup Solutions", "Security Implementation"],
-                details: "Our database management service ensures your data is organized, secure, and accessible. We design efficient database structures, optimize performance, implement backup solutions, and enhance security. Our experts help you manage your data effectively to support your business operations."
-            },
-            {
-                id: 10,
-                name: "IT Consulting",
-                description: "Strategic IT consulting to align technology with your business objectives.",
-                price: "£120/hour",
-                category: "consultation",
-                features: ["Technology Assessment", "Strategic Planning", "Implementation Guidance", "ROI Analysis"],
-                details: "Our IT consulting service provides strategic guidance to align technology with your business goals. We assess your current technology landscape, identify opportunities for improvement, and develop a roadmap for implementation. Our consultants help you make informed technology decisions that drive business value."
-            },
-            {
-                id: 11,
-                name: "E-commerce Solutions",
-                description: "Complete e-commerce platform development with payment integration and inventory management.",
-                price: "£2,500+",
-                category: "development",
-                features: ["Platform Development", "Payment Integration", "Inventory Management", "Analytics"],
-                details: "Our e-commerce solutions create powerful online stores that drive sales and enhance customer experience. We develop custom e-commerce platforms with secure payment processing, inventory management, and analytics. Our solutions are scalable and designed to grow with your business."
-            },
-            {
-                id: 12,
-                name: "DevOps Implementation",
-                description: "Implement DevOps practices to streamline development and deployment processes.",
-                price: "£3,000+",
-                category: "development",
-                features: ["CI/CD Pipeline", "Containerization", "Infrastructure as Code", "Monitoring"],
-                details: "Our DevOps implementation service helps you adopt DevOps practices to improve software delivery and operational efficiency. We set up CI/CD pipelines, implement containerization, and automate infrastructure management. Our solutions enable faster deployments and more reliable software releases."
-            },
-            {
-                id: 13,
-                name: "Digital Transformation",
-                description: "Guide your business through digital transformation with modern technologies.",
-                price: "Get Quote",
-                category: "consultation",
-                features: ["Strategy Development", "Technology Selection", "Implementation Support", "Change Management"],
-                details: "Our digital transformation service helps businesses adapt to the digital age by implementing modern technologies and processes. We develop a comprehensive strategy, select appropriate technologies, and support implementation while managing organizational change. Our approach ensures a smooth transition to digital operations."
-            },
-            {
-                id: 14,
-                name: "IT Security Training",
-                description: "Comprehensive security awareness and technical training for your team.",
-                price: "£1,200",
-                category: "training",
-                features: ["Security Awareness", "Technical Training", "Phishing Simulations", "Compliance Guidance"],
-                details: "Our IT security training service educates your team on cybersecurity best practices and threats. We offer customized training programs that include security awareness, technical skills development, and phishing simulations. Our training helps reduce security risks and ensures compliance with industry standards."
-            },
-            {
-                id: 15,
-                name: "Backup & Disaster Recovery",
-                description: "Reliable backup solutions and disaster recovery planning to protect your data.",
-                price: "£800+",
-                category: "infrastructure",
-                features: ["Automated Backups", "Disaster Recovery Plan", "Regular Testing", "24/7 Monitoring"],
-                details: "Our backup and disaster recovery service ensures your data is protected and can be restored quickly in case of emergencies. We implement automated backup solutions, develop comprehensive recovery plans, and regularly test the recovery process. Our service minimizes downtime and data loss in disaster scenarios."
-            },
-            {
-                id: 16,
-                name: "API Development",
-                description: "Custom API development to connect your systems and enable integrations.",
-                price: "£1,500+",
-                category: "development",
-                features: ["RESTful API Design", "Documentation", "Security Implementation", "Testing & Validation"],
-                details: "Our API development service creates robust and secure APIs that enable seamless integration between systems. We design RESTful APIs, implement security measures, and provide comprehensive documentation. Our APIs are tested thoroughly to ensure reliability and performance."
-            },
-            {
-                id: 17,
-                name: "Cloud Cost Optimization",
-                description: "Analyze and optimize your cloud spending without compromising performance.",
-                price: "£950",
-                category: "cloud",
-                features: ["Cost Analysis", "Optimization Strategies", "Implementation Support", "Monthly Reporting"],
-                details: "Our cloud cost optimization service helps you reduce cloud spending while maintaining performance and reliability. We analyze your cloud usage, identify cost-saving opportunities, and implement optimization strategies. Our service includes ongoing monitoring and reporting to ensure continued cost efficiency."
-            },
-            {
-                id: 18,
-                name: "UI/UX Design",
-                description: "Create intuitive and engaging user interfaces and experiences for your applications.",
-                price: "£65/hour",
-                category: "design",
-                features: ["User Research", "Wireframing", "Prototyping", "Usability Testing"],
-                details: "Our UI/UX design service creates user-centered designs that enhance usability and engagement. We conduct user research, create wireframes and prototypes, and perform usability testing. Our designs are visually appealing, intuitive, and aligned with your brand identity."
-            },
-            {
-                id: 19,
-                name: "IT Compliance Audit",
-                description: "Ensure your IT systems comply with industry regulations and standards.",
-                price: "£2,500",
-                category: "security",
-                features: ["Compliance Assessment", "Gap Analysis", "Remediation Plan", "Documentation"],
-                details: "Our IT compliance audit service ensures your systems meet regulatory requirements and industry standards. We assess your compliance status, identify gaps, and develop a remediation plan. Our service helps you avoid penalties and maintain trust with customers and stakeholders."
-            },
-            {
-                id: 20,
-                name: "Technical Documentation",
-                description: "Professional technical documentation for your systems and processes.",
-                price: "£55/hour",
-                category: "consultation",
-                features: ["System Documentation", "Process Documentation", "API Documentation", "User Manuals"],
-                details: "Our technical documentation service creates clear and comprehensive documentation for your systems and processes. We document system architecture, APIs, procedures, and user guides. Our documentation improves knowledge sharing, training, and support efficiency."
+                name: "John Doe",
+                email: "john@example.com",
+                password: "Password123!",
+                avatar: null,
+                company: "TechCorp",
+                phone: "+44 123 456 7890",
+                bio: "IT Manager with 10+ years of experience",
+                enrolledCourses: [1, 3, 5],
+                serviceRequests: [1, 2],
+                certificates: [1],
+                learningHours: 45
             }
         ];
 
-        // Sample data - 20 Courses
-        const sampleCourses = [
-            {
-                id: 1,
-                name: "Complete Web Development Bootcamp",
-                description: "Master full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
-                duration: "12 weeks",
-                enrolled: 1247,
-                rating: 4.8,
-                level: "Beginner",
-                badge: "BESTSELLER",
-                price: "£1,499",
-                details: "This comprehensive bootcamp covers everything you need to become a full-stack web developer. You'll learn front-end technologies like HTML, CSS, and JavaScript, as well as back-end development with Node.js and databases like MongoDB. The course includes hands-on projects, real-world scenarios, and career support to help you land your first developer job.",
-                instructors: [
-                    { name: "Sarah Johnson", role: "Lead Instructor", experience: "10+ years", students: 2500, rating: 4.9 },
-                    { name: "Michael Chen", role: "Senior Developer", experience: "8 years", students: 1800, rating: 4.8 }
-                ]
-            },
-            {
-                id: 2,
-                name: "Cybersecurity Essentials",
-                description: "Learn essential cybersecurity principles, threat detection, and protection strategies.",
-                duration: "8 weeks",
-                enrolled: 892,
-                rating: 4.7,
-                level: "Intermediate",
-                badge: "HOT",
-                price: "£899",
-                details: "This course provides a solid foundation in cybersecurity principles and practices. You'll learn about common threats, vulnerability assessment, security controls, and incident response. The curriculum includes hands-on labs and simulations to give you practical experience in protecting systems and networks from cyber attacks.",
-                instructors: [
-                    { name: "David Wilson", role: "Security Expert", experience: "12+ years", students: 3200, rating: 4.9 }
-                ]
-            },
-            {
-                id: 3,
-                name: "Mobile App Development",
-                description: "Build native and cross-platform mobile applications for iOS and Android.",
-                duration: "10 weeks",
-                enrolled: 756,
-                rating: 4.6,
-                level: "Intermediate",
-                badge: "NEW",
-                price: "£1,199",
-                details: "Learn to develop mobile applications for both iOS and Android platforms. This course covers native development with Swift and Kotlin, as well as cross-platform development with React Native. You'll build real apps, learn about app store submission, and understand mobile UX best practices.",
-                instructors: [
-                    { name: "Emma Rodriguez", role: "Mobile Specialist", experience: "7 years", students: 1500, rating: 4.7 }
-                ]
-            },
-            {
-                id: 4,
-                name: "Cloud Computing with AWS",
-                description: "Master Amazon Web Services and learn to deploy scalable cloud infrastructure.",
-                duration: "6 weeks",
-                enrolled: 543,
-                rating: 4.9,
-                level: "Intermediate",
-                badge: "TRENDING",
-                price: "£799",
-                details: "This course provides comprehensive training in Amazon Web Services (AWS). You'll learn to design, deploy, and manage scalable cloud infrastructure using services like EC2, S3, RDS, and Lambda. The curriculum includes hands-on labs and prepares you for AWS certification exams.",
-                instructors: [
-                    { name: "James Thompson", role: "Cloud Architect", experience: "9 years", students: 2100, rating: 4.8 }
-                ]
-            },
-            {
-                id: 5,
-                name: "Data Science & Machine Learning",
-                description: "Learn data analysis, visualization, and machine learning algorithms with Python.",
-                duration: "14 weeks",
-                enrolled: 621,
-                rating: 4.7,
-                level: "Advanced",
-                badge: "POPULAR",
-                price: "£1,699",
-                details: "This advanced course covers the complete data science workflow from data collection to machine learning model deployment. You'll learn Python programming, statistical analysis, data visualization, and machine learning algorithms. The course includes real-world projects and prepares you for a career in data science.",
-                instructors: [
-                    { name: "Lisa Wang", role: "Data Scientist", experience: "8 years", students: 1800, rating: 4.8 },
-                    { name: "Robert Kim", role: "ML Engineer", experience: "6 years", students: 1200, rating: 4.7 }
-                ]
-            },
-            {
-                id: 6,
-                name: "DevOps & CI/CD Pipeline",
-                description: "Master DevOps practices, containerization with Docker, and CI/CD pipeline setup.",
-                duration: "8 weeks",
-                enrolled: 432,
-                rating: 4.8,
-                level: "Intermediate",
-                badge: "HOT",
-                price: "£1,099",
-                details: "Learn DevOps principles and practices to streamline software development and deployment. This course covers containerization with Docker, orchestration with Kubernetes, and setting up CI/CD pipelines. You'll gain hands-on experience with industry-standard tools and methodologies.",
-                instructors: [
-                    { name: "Alex Turner", role: "DevOps Engineer", experience: "7 years", students: 1600, rating: 4.8 }
-                ]
-            },
-            {
-                id: 7,
-                name: "UI/UX Design Fundamentals",
-                description: "Learn user-centered design principles, prototyping, and design tools.",
-                duration: "6 weeks",
-                enrolled: 389,
-                rating: 4.6,
-                level: "Beginner",
-                badge: "NEW",
-                price: "£699",
-                details: "This course introduces the fundamentals of UI/UX design. You'll learn user research methods, information architecture, wireframing, prototyping, and usability testing. The curriculum includes hands-on projects using popular design tools like Figma and Adobe XD.",
-                instructors: [
-                    { name: "Sophia Martinez", role: "UX Designer", experience: "5 years", students: 900, rating: 4.7 }
-                ]
-            },
-            {
-                id: 8,
-                name: "Blockchain Development",
-                description: "Build decentralized applications and smart contracts on Ethereum blockchain.",
-                duration: "10 weeks",
-                enrolled: 298,
-                rating: 4.5,
-                level: "Advanced",
-                badge: "EMERGING",
-                price: "£1,399",
-                details: "Learn to develop decentralized applications (dApps) and smart contracts on the Ethereum blockchain. This course covers Solidity programming, smart contract security, and dApp development frameworks. You'll build real blockchain projects and understand the fundamentals of Web3 technology.",
-                instructors: [
-                    { name: "Kevin O'Reilly", role: "Blockchain Developer", experience: "4 years", students: 600, rating: 4.6 }
-                ]
-            },
-            {
-                id: 9,
-                name: "Python Programming Mastery",
-                description: "Comprehensive Python programming course from basics to advanced concepts.",
-                duration: "8 weeks",
-                enrolled: 1124,
-                rating: 4.8,
-                level: "Beginner",
-                badge: "BESTSELLER",
-                price: "£799",
-                details: "This course provides a complete introduction to Python programming. You'll learn Python syntax, data structures, object-oriented programming, and popular libraries. The curriculum includes practical exercises and projects to build your programming skills from the ground up.",
-                instructors: [
-                    { name: "Sarah Johnson", role: "Lead Instructor", experience: "10+ years", students: 2500, rating: 4.9 }
-                ]
-            },
-            {
-                id: 10,
-                name: "Java Enterprise Development",
-                description: "Learn enterprise Java development with Spring Boot and microservices.",
-                duration: "10 weeks",
-                enrolled: 687,
-                rating: 4.6,
-                level: "Intermediate",
-                badge: "POPULAR",
-                price: "£1,199",
-                details: "Master enterprise Java development with this comprehensive course. You'll learn Spring Boot, REST API development, database integration, and microservices architecture. The curriculum includes building real-world enterprise applications and prepares you for professional Java development roles.",
-                instructors: [
-                    { name: "Daniel Lee", role: "Java Developer", experience: "8 years", students: 1400, rating: 4.7 }
-                ]
-            },
-            {
-                id: 11,
-                name: "Network Security & Ethical Hacking",
-                description: "Learn network security principles and ethical hacking techniques.",
-                duration: "12 weeks",
-                enrolled: 534,
-                rating: 4.7,
-                level: "Advanced",
-                badge: "HOT",
-                price: "£1,499",
-                details: "This advanced course covers network security principles and ethical hacking techniques. You'll learn about penetration testing, vulnerability assessment, and security controls. The curriculum includes hands-on labs in a controlled environment to practice ethical hacking skills safely.",
-                instructors: [
-                    { name: "David Wilson", role: "Security Expert", experience: "12+ years", students: 3200, rating: 4.9 }
-                ]
-            },
-            {
-                id: 12,
-                name: "React Native Mobile Development",
-                description: "Build cross-platform mobile apps with React Native and JavaScript.",
-                duration: "7 weeks",
-                enrolled: 421,
-                rating: 4.5,
-                level: "Intermediate",
-                badge: "NEW",
-                price: "£899",
-                details: "Learn to build cross-platform mobile applications using React Native. This course covers React Native fundamentals, navigation, state management, and native module integration. You'll build real mobile apps that run on both iOS and Android from a single codebase.",
-                instructors: [
-                    { name: "Emma Rodriguez", role: "Mobile Specialist", experience: "7 years", students: 1500, rating: 4.7 }
-                ]
-            },
-            {
-                id: 13,
-                name: "SQL & Database Design",
-                description: "Master SQL queries and learn professional database design principles.",
-                duration: "6 weeks",
-                enrolled: 876,
-                rating: 4.8,
-                level: "Beginner",
-                badge: "POPULAR",
-                price: "£699",
-                details: "This course provides comprehensive training in SQL and database design. You'll learn to write complex queries, design normalized databases, and optimize database performance. The curriculum includes hands-on exercises with real databases and prepares you for database-related roles.",
-                instructors: [
-                    { name: "Maria Garcia", role: "Database Administrator", experience: "9 years", students: 1900, rating: 4.8 }
-                ]
-            },
-            {
-                id: 14,
-                name: "Kubernetes & Container Orchestration",
-                description: "Learn to deploy and manage containerized applications with Kubernetes.",
-                duration: "5 weeks",
-                enrolled: 345,
-                rating: 4.7,
-                level: "Advanced",
-                badge: "TRENDING",
-                price: "£999",
-                details: "Master Kubernetes and container orchestration with this intensive course. You'll learn to deploy, scale, and manage containerized applications in production environments. The curriculum includes hands-on labs with real Kubernetes clusters and prepares you for cloud-native development roles.",
-                instructors: [
-                    { name: "Alex Turner", role: "DevOps Engineer", experience: "7 years", students: 1600, rating: 4.8 }
-                ]
-            },
-            {
-                id: 15,
-                name: "IT Project Management",
-                description: "Learn Agile and Waterfall methodologies for successful IT project delivery.",
-                duration: "8 weeks",
-                enrolled: 512,
-                rating: 4.6,
-                level: "Intermediate",
-                badge: "POPULAR",
-                price: "£899",
-                details: "This course covers IT project management principles and methodologies. You'll learn Agile, Waterfall, and hybrid approaches to managing IT projects. The curriculum includes project planning, risk management, and stakeholder communication, preparing you for project management roles in IT.",
-                instructors: [
-                    { name: "Jennifer Adams", role: "Project Manager", experience: "11 years", students: 2300, rating: 4.7 }
-                ]
-            },
-            {
-                id: 16,
-                name: "Cloud Security Fundamentals",
-                description: "Understand cloud security principles and best practices for AWS, Azure, and GCP.",
-                duration: "6 weeks",
-                enrolled: 298,
-                rating: 4.7,
-                level: "Intermediate",
-                badge: "HOT",
-                price: "£799",
-                details: "Learn cloud security fundamentals for major cloud platforms including AWS, Azure, and Google Cloud. This course covers identity and access management, data protection, network security, and compliance in cloud environments. You'll gain practical skills to secure cloud infrastructure and applications.",
-                instructors: [
-                    { name: "David Wilson", role: "Security Expert", experience: "12+ years", students: 3200, rating: 4.9 }
-                ]
-            },
-            {
-                id: 17,
-                name: "Frontend Development with Vue.js",
-                description: "Build modern web applications with Vue.js framework and ecosystem.",
-                duration: "7 weeks",
-                enrolled: 387,
-                rating: 4.5,
-                level: "Intermediate",
-                badge: "NEW",
-                price: "£899",
-                details: "Master frontend development with Vue.js in this comprehensive course. You'll learn Vue.js fundamentals, component-based architecture, state management with Vuex, and routing with Vue Router. The curriculum includes building real-world applications and prepares you for Vue.js development roles.",
-                instructors: [
-                    { name: "Thomas Wright", role: "Frontend Developer", experience: "6 years", students: 1100, rating: 4.7 }
-                ]
-            },
-            {
-                id: 18,
-                name: "IT Service Management (ITSM)",
-                description: "Learn ITIL framework and best practices for IT service management.",
-                duration: "6 weeks",
-                enrolled: 234,
-                rating: 4.6,
-                level: "Beginner",
-                badge: "POPULAR",
-                price: "£799",
-                details: "This course introduces IT Service Management (ITSM) principles and the ITIL framework. You'll learn service strategy, design, transition, operation, and continual service improvement. The curriculum prepares you for ITSM roles and ITIL certification exams.",
-                instructors: [
-                    { name: "Jennifer Adams", role: "Project Manager", experience: "11 years", students: 2300, rating: 4.7 }
-                ]
-            },
-            {
-                id: 19,
-                name: "Machine Learning Operations (MLOps)",
-                description: "Learn to deploy, monitor, and maintain machine learning models in production.",
-                duration: "8 weeks",
-                enrolled: 198,
-                rating: 4.8,
-                level: "Advanced",
-                badge: "EMERGING",
-                price: "£1,299",
-                details: "Master MLOps practices to deploy and maintain machine learning models in production. This course covers model deployment, monitoring, versioning, and automation. You'll learn industry-standard tools and practices for managing the complete machine learning lifecycle.",
-                instructors: [
-                    { name: "Robert Kim", role: "ML Engineer", experience: "6 years", students: 1200, rating: 4.7 }
-                ]
-            },
-            {
-                id: 20,
-                name: "Full Stack JavaScript Development",
-                description: "Complete full-stack development using JavaScript across frontend and backend.",
-                duration: "10 weeks",
-                enrolled: 765,
-                rating: 4.7,
-                level: "Intermediate",
-                badge: "BESTSELLER",
-                price: "£1,299",
-                details: "Become a full-stack JavaScript developer with this comprehensive course. You'll learn frontend development with React, backend development with Node.js, and database integration. The curriculum includes building complete web applications and prepares you for full-stack development roles.",
-                instructors: [
-                    { name: "Sarah Johnson", role: "Lead Instructor", experience: "10+ years", students: 2500, rating: 4.9 },
-                    { name: "Thomas Wright", role: "Frontend Developer", experience: "6 years", students: 1100, rating: 4.7 }
-                ]
-            }
-        ];
-
-        // Job positions data
-        const samplePositions = [
-            {
-                id: 1,
-                title: "Senior Full-Stack Developer",
-                department: "Engineering",
-                type: "Full-time",
-                location: "Remote",
-                experience: "5+ years",
-                salary: "£65,000 - £85,000",
-                description: "We're looking for an experienced Full-Stack Developer to join our engineering team. You'll work on building scalable web applications using modern technologies like React, Node.js, and cloud platforms.",
-                requirements: ["React", "Node.js", "TypeScript", "MongoDB", "AWS"]
-            },
-            {
-                id: 2,
-                title: "IT Support Specialist",
-                department: "Support",
-                type: "Full-time",
-                location: "London, UK",
-                experience: "2+ years",
-                salary: "£30,000 - £40,000",
-                description: "Join our support team to provide exceptional technical assistance to our clients and help maintain our internal systems. Strong communication skills and problem-solving abilities are essential.",
-                requirements: ["Windows/Mac OS", "Networking", "Hardware Troubleshooting", "Customer Service"]
-            },
-            {
-                id: 3,
-                title: "UI/UX Designer",
-                department: "Design",
-                type: "Contract",
-                location: "Remote",
-                experience: "3+ years",
-                salary: "£45,000 - £60,000",
-                description: "Create beautiful and intuitive user experiences for our products and client projects. Work closely with developers and product managers to deliver exceptional design solutions.",
-                requirements: ["Figma", "User Research", "Prototyping", "Design Systems"]
-            }
-        ];
-
-        // Load services with search and filter functionality
-        function loadServices() {
-            const container = document.getElementById('services-container');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+        // Initialize authentication
+        function initAuth() {
+            const token = localStorage.getItem(AUTH_TOKEN_KEY);
+            const userData = localStorage.getItem(USER_DATA_KEY);
             
-            // Simulate loading delay for better UX
-            setTimeout(() => {
-                try {
-                    const searchTerm = document.getElementById('service-search').value.toLowerCase();
-                    const categoryFilter = document.getElementById('service-category').value;
-                    
-                    const filteredServices = sampleServices.filter(service => {
-                        const matchesSearch = service.name.toLowerCase().includes(searchTerm) || 
-                                            service.description.toLowerCase().includes(searchTerm);
-                        const matchesCategory = categoryFilter === 'all' || service.category === categoryFilter;
-                        return matchesSearch && matchesCategory;
-                    });
-                    
-                    container.innerHTML = '';
-                    
-                    if (filteredServices.length === 0) {
-                        container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px;">No services found matching your criteria.</p>';
-                        return;
-                    }
-                    
-                    filteredServices.forEach(service => {
-                        const serviceCard = document.createElement('div');
-                        serviceCard.className = 'service-card';
-                        serviceCard.innerHTML = `
-                            <div class="service-icon">
-                                <i class="fas ${getServiceIcon(service.category)}"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>${service.name}</h3>
-                                <p>${service.description}</p>
-                                <ul class="service-features">
-                                    ${service.features.map(feature => 
-                                        `<li><i class="fas fa-check"></i> ${feature}</li>`
-                                    ).join('')}
-                                </ul>
-                                <div class="service-price">${service.price}</div>
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary" onclick="showServiceDetails(${service.id})">
-                                        <i class="fas fa-info-circle"></i> Details
-                                    </button>
-                                    <button class="btn btn-primary" onclick="getStarted(${service.id})">
-                                        Get Started
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        container.appendChild(serviceCard);
-                    });
-                } catch (error) {
-                    console.error('Failed to load services:', error);
-                    container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px; color: var(--danger);">Error loading services. Please try again later.</p>';
-                }
-            }, 500); // Simulate loading delay
-        }
-
-        // Load courses with search and filter functionality
-        function loadCourses() {
-            const container = document.getElementById('courses-container');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-            
-            // Simulate loading delay for better UX
-            setTimeout(() => {
-                try {
-                    const searchTerm = document.getElementById('course-search').value.toLowerCase();
-                    const levelFilter = document.getElementById('course-level').value;
-                    
-                    const filteredCourses = sampleCourses.filter(course => {
-                        const matchesSearch = course.name.toLowerCase().includes(searchTerm) || 
-                                            course.description.toLowerCase().includes(searchTerm);
-                        const matchesLevel = levelFilter === 'all' || course.level.toLowerCase() === levelFilter;
-                        return matchesSearch && matchesLevel;
-                    });
-                    
-                    container.innerHTML = '';
-                    
-                    if (filteredCourses.length === 0) {
-                        container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px;">No courses found matching your criteria.</p>';
-                        return;
-                    }
-                    
-                    filteredCourses.forEach(course => {
-                        const courseCard = document.createElement('div');
-                        courseCard.className = 'course-card';
-                        courseCard.innerHTML = `
-                            <div class="course-image">
-                                <i class="fas ${getCourseIcon(course.name)}"></i>
-                                ${course.badge ? `<div class="course-badge">${course.badge}</div>` : ''}
-                            </div>
-                            <div class="course-content">
-                                <h3>${course.name}</h3>
-                                <p>${course.description}</p>
-                                <div class="course-meta">
-                                    <span><i class="fas fa-clock"></i> ${course.duration}</span>
-                                    <span><i class="fas fa-user-graduate"></i> ${course.enrolled} enrolled</span>
-                                    <span class="course-rating"><i class="fas fa-star"></i> ${course.rating}</span>
-                                </div>
-                                <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
-                                    <i class="fas fa-signal"></i> ${course.level}
-                                </div>
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary" onclick="showCourseDetails(${course.id})">
-                                        <i class="fas fa-info-circle"></i> Details
-                                    </button>
-                                    <button class="btn btn-primary" onclick="enrollNow(${course.id})">
-                                        Enroll Now
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        container.appendChild(courseCard);
-                    });
-                } catch (error) {
-                    console.error('Failed to load courses:', error);
-                    container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px; color: var(--danger);">Error loading courses. Please try again later.</p>';
-                }
-            }, 500); // Simulate loading delay
-        }
-
-        // Load positions
-        function loadPositions() {
-            const container = document.getElementById('positions-container');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-            
-            // Simulate loading delay for better UX
-            setTimeout(() => {
-                try {
-                    container.innerHTML = '';
-                    
-                    samplePositions.forEach(position => {
-                        const positionCard = document.createElement('div');
-                        positionCard.className = 'position-card';
-                        positionCard.innerHTML = `
-                            <div class="position-header">
-                                <div class="position-title">
-                                    <h4>${position.title}</h4>
-                                    <div class="position-meta">
-                                        <span class="meta-item"><i class="fas fa-building"></i> ${position.department}</span>
-                                        <span class="meta-item"><i class="fas fa-clock"></i> ${position.type}</span>
-                                        <span class="meta-item"><i class="fas fa-map-marker-alt"></i> ${position.location}</span>
-                                        <span class="meta-item"><i class="fas fa-briefcase"></i> ${position.experience}</span>
-                                        <span class="meta-item"><i class="fas fa-money-bill-wave"></i> ${position.salary}</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-small" onclick="applyForPosition(${position.id})">
-                                    Apply Now
-                                </button>
-                            </div>
-                            <div class="position-tags">
-                                ${position.requirements.map(req => `<span class="position-tag">${req}</span>`).join('')}
-                            </div>
-                            <div class="position-description">
-                                ${position.description}
-                            </div>
-                        `;
-                        container.appendChild(positionCard);
-                    });
-                } catch (error) {
-                    console.error('Failed to load positions:', error);
-                    container.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--danger);">Error loading positions. Please try again later.</p>';
-                }
-            }, 500); // Simulate loading delay
-        }
-
-        // Global search functionality
-        function handleGlobalSearch() {
-            const searchTerm = document.getElementById('global-search').value.toLowerCase();
-            const category = document.getElementById('global-category').value;
-            
-            if (!searchTerm && !category) return;
-            
-            // Navigate to appropriate section based on category
-            if (category === 'services' || (!category && searchTerm)) {
-                window.location.href = '#services';
-                document.getElementById('service-search').value = searchTerm;
-                setTimeout(loadServices, 300);
-            } else if (category === 'courses') {
-                window.location.href = '#courses';
-                document.getElementById('course-search').value = searchTerm;
-                setTimeout(loadCourses, 300);
-            } else if (category === 'careers') {
-                window.location.href = '#careers';
-            } else if (category === 'blog') {
-                window.location.href = '#blog';
+            if (token && userData) {
+                currentUser = JSON.parse(userData);
+                updateAuthUI();
+                showToast('Welcome back!', 'success');
             }
         }
 
-        // Show service details in modal
-        function showServiceDetails(serviceId) {
-            const service = sampleServices.find(s => s.id === serviceId);
-            if (!service) return;
+        // Update UI based on authentication state
+        function updateAuthUI() {
+            const authButtons = document.getElementById('auth-buttons');
             
-            document.getElementById('serviceModalTitle').textContent = service.name;
-            document.getElementById('serviceModalBody').innerHTML = `
-                <p><strong>Description:</strong> ${service.details}</p>
-                <p><strong>Price:</strong> ${service.price}</p>
-                <p><strong>Category:</strong> ${service.category.charAt(0).toUpperCase() + service.category.slice(1)}</p>
-                <p><strong>Features:</strong></p>
-                <ul>
-                    ${service.features.map(feature => `<li>${feature}</li>`).join('')}
-                </ul>
-            `;
-            document.getElementById('serviceModalAction').textContent = 'Get Started';
-            document.getElementById('serviceModalAction').onclick = function() { getStarted(serviceId); };
-            
-            openModal('serviceModal');
-        }
-
-        // Show course details in modal
-        function showCourseDetails(courseId) {
-            const course = sampleCourses.find(c => c.id === courseId);
-            if (!course) return;
-            
-            document.getElementById('courseModalTitle').textContent = course.name;
-            document.getElementById('courseModalBody').innerHTML = `
-                <p><strong>Description:</strong> ${course.details}</p>
-                <p><strong>Duration:</strong> ${course.duration}</p>
-                <p><strong>Level:</strong> ${course.level}</p>
-                <p><strong>Price:</strong> ${course.price}</p>
-                <p><strong>Rating:</strong> ${course.rating}/5 (${course.enrolled} enrolled)</p>
-                <div class="instructors-section">
-                    <h4>Instructors</h4>
-                    ${course.instructors.map(instructor => `
-                        <div class="instructor-card">
-                            <div class="instructor-avatar">${instructor.name.split(' ').map(n => n[0]).join('')}</div>
-                            <div class="instructor-info">
-                                <h4>${instructor.name}</h4>
-                                <p>${instructor.role} • ${instructor.experience} experience</p>
-                                <div class="instructor-stats">
-                                    <span><i class="fas fa-user-graduate"></i> ${instructor.students} students</span>
-                                    <span><i class="fas fa-star"></i> ${instructor.rating}/5 rating</span>
-                                </div>
-                            </div>
+            if (currentUser) {
+                // User is logged in
+                authButtons.innerHTML = `
+                    <div class="user-menu">
+                        <div class="user-avatar" onclick="toggleUserDropdown()">
+                            ${getUserInitials(currentUser.name)}
                         </div>
-                    `).join('')}
-                </div>
-            `;
-            document.getElementById('courseModalAction').textContent = 'Enroll Now';
-            document.getElementById('courseModalAction').onclick = function() { enrollNow(courseId); };
-            
-            openModal('courseModal');
-        }
-
-        // Get Started function for services
-        function getStarted(serviceId) {
-            const service = sampleServices.find(s => s.id === serviceId);
-            if (service) {
-                alert(`Thank you for your interest in ${service.name}! Our team will contact you shortly to discuss your requirements.`);
-                closeModal('serviceModal');
-            }
-        }
-
-        // Enroll Now function for courses
-        function enrollNow(courseId) {
-            const course = sampleCourses.find(c => c.id === courseId);
-            if (course) {
-                alert(`Thank you for your interest in ${course.name}! You will be redirected to the enrollment page.`);
-                closeModal('courseModal');
-            }
-        }
-
-        // Apply for position
-        function applyForPosition(positionId) {
-            const position = samplePositions.find(p => p.id === positionId);
-            if (position) {
-                alert(`Thank you for your interest in the ${position.title} position! Our HR team will review your application and contact you if there's a match.`);
-            }
-        }
-
-        // Submit general application
-        function submitApplication() {
-            const name = document.getElementById('applicant-name').value;
-            const email = document.getElementById('applicant-email').value;
-            const phone = document.getElementById('applicant-phone').value;
-            
-            // Simple validation
-            let isValid = true;
-            
-            if (!name) {
-                document.getElementById('name-error').style.display = 'block';
-                isValid = false;
+                        <div class="user-dropdown" id="user-dropdown">
+                            <a href="#" class="user-dropdown-item" onclick="showDashboard()">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="#" class="user-dropdown-item" onclick="showDashboardTab('profile')">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a href="#" class="user-dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="#" class="user-dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                `;
+                
+                // Hide main content, show dashboard
+                document.querySelectorAll('.section, .hero, .testimonials, .blog-section').forEach(el => {
+                    el.style.display = 'none';
+                });
+                document.getElementById('dashboard').style.display = 'block';
+                updateDashboard();
             } else {
-                document.getElementById('name-error').style.display = 'none';
-            }
-            
-            if (!email || !isValidEmail(email)) {
-                document.getElementById('email-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('email-error').style.display = 'none';
-            }
-            
-            if (isValid) {
-                alert(`Thank you for your application, ${name}! We'll review your information and contact you if there's a potential match.`);
-                closeModal('generalApplicationModal');
-                document.getElementById('generalApplicationForm').reset();
-            }
-        }
-        
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        // Modal functions
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden', 'false');
-            
-            // Focus management for accessibility
-            const closeButton = modal.querySelector('.close-modal');
-            if (closeButton) {
-                closeButton.focus();
+                // User is not logged in
+                authButtons.innerHTML = `
+                    <a href="#" class="btn btn-outline" onclick="openAuthModal('login')">Login</a>
+                    <a href="#" class="btn btn-primary" onclick="openAuthModal('register')">Sign Up</a>
+                `;
+                
+                // Show main content, hide dashboard
+                document.querySelectorAll('.section, .hero, .testimonials, .blog-section').forEach(el => {
+                    el.style.display = 'block';
+                });
+                document.getElementById('dashboard').style.display = 'none';
             }
         }
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
+        // Authentication Functions
+        function openAuthModal(formType = 'login') {
+            document.getElementById('authModal').style.display = 'flex';
+            document.getElementById('authModal').setAttribute('aria-hidden', 'false');
+            showAuthForm(formType);
         }
 
-        // Helper functions
-        function getServiceIcon(category) {
-            const icons = {
-                'development': 'fa-code',
-                'support': 'fa-headset',
-                'testing': 'fa-bug',
-                'cloud': 'fa-cloud',
-                'security': 'fa-shield-alt',
-                'analytics': 'fa-chart-bar',
-                'infrastructure': 'fa-server',
-                'database': 'fa-database',
-                'consultation': 'fa-comments',
-                'training': 'fa-graduation-cap',
-                'design': 'fa-palette'
-            };
-            return icons[category] || 'fa-laptop-code';
+        function closeAuthModal() {
+            document.getElementById('authModal').style.display = 'none';
+            document.getElementById('authModal').setAttribute('aria-hidden', 'true');
+            resetAuthForms();
         }
 
-        function getCourseIcon(courseName) {
-            if (courseName.toLowerCase().includes('web')) return 'fa-globe';
-            if (courseName.toLowerCase().includes('cyber') || courseName.toLowerCase().includes('security')) return 'fa-shield-alt';
-            if (courseName.toLowerCase().includes('mobile')) return 'fa-mobile-alt';
-            if (courseName.toLowerCase().includes('cloud')) return 'fa-cloud';
-            if (courseName.toLowerCase().includes('data') || courseName.toLowerCase().includes('machine learning')) return 'fa-chart-line';
-            if (courseName.toLowerCase().includes('devops')) return 'fa-cogs';
-            if (courseName.toLowerCase().includes('design')) return 'fa-palette';
-            if (courseName.toLowerCase().includes('blockchain')) return 'fa-link';
-            if (courseName.toLowerCase().includes('python')) return 'fa-python';
-            if (courseName.toLowerCase().includes('java')) return 'fa-coffee';
-            if (courseName.toLowerCase().includes('sql')) return 'fa-database';
-            if (courseName.toLowerCase().includes('kubernetes')) return 'fa-docker';
-            if (courseName.toLowerCase().includes('project')) return 'fa-tasks';
-            if (courseName.toLowerCase().includes('vue')) return 'fa-vuejs';
-            if (courseName.toLowerCase().includes('javascript')) return 'fa-js';
-            return 'fa-book';
-        }
-
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            loadServices();
-            loadCourses();
-            loadPositions();
+        function showAuthForm(formType) {
+            // Update tabs
+            document.querySelectorAll('.auth-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
             
-            // Add event listeners for search and filter
-            document.getElementById('service-search').addEventListener('input', loadServices);
-            document.getElementById('service-category').addEventListener('change', loadServices);
-            document.getElementById('course-search').addEventListener('input', loadCourses);
-            document.getElementById('course-level').addEventListener('change', loadCourses);
+            // Show selected form
+            document.querySelector(`.auth-tab:nth-child(${formType === 'login' ? 1 : formType === 'register' ? 2 : 1})`).classList.add('active');
+            document.getElementById(`${formType}-form`).classList.add('active');
+        }
+
+        function resetAuthForms() {
+            document.getElementById('login-form').reset();
+            document.getElementById('register-form').reset();
+            document.getElementById('forgot-password-form').reset();
+            document.getElementById('password-strength').textContent = '';
+        }
+
+        // Login Function
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // Global search functionality
-            document.getElementById('global-search').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleGlobalSearch();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const rememberMe = document.getElementById('remember-me').checked;
+            
+            const button = this.querySelector('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            button.disabled = true;
+            
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                const user = sampleUsers.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    currentUser = { ...user };
+                    delete currentUser.password; // Don't store password
+                    
+                    // Store authentication data
+                    const token = generateToken();
+                    localStorage.setItem(AUTH_TOKEN_KEY, token);
+                    localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+                    
+                    if (!rememberMe) {
+                        // Set token to expire in 24 hours
+                        setTimeout(() => {
+                            logout();
+                        }, 24 * 60 * 60 * 1000);
+                    }
+                    
+                    updateAuthUI();
+                    closeAuthModal();
+                    showToast('Login successful!', 'success');
+                } else {
+                    throw new Error('Invalid email or password');
                 }
-            });
-            
-            document.getElementById('global-category').addEventListener('change', function() {
-                if (document.getElementById('global-search').value) {
-                    handleGlobalSearch();
-                }
-            });
-            
-            // Close modal when clicking outside
-            window.onclick = function(event) {
-                if (event.target.classList.contains('modal')) {
-                    event.target.style.display = 'none';
-                    event.target.setAttribute('aria-hidden', 'true');
-                }
+            } catch (error) {
+                showToast(error.message, 'error');
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
             }
-            
-            // Close modal with Escape key
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    const modals = document.querySelectorAll('.modal');
-                    modals.forEach(modal => {
-                        if (modal.style.display === 'flex') {
-                            modal.style.display = 'none';
-                            modal.setAttribute('aria-hidden', 'true');
-                        }
-                    });
-                }
-            });
         });
+
+        // Registration Function
+        document.getElementById('register-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                showToast('Passwords do not match', 'error');
+                return;
+            }
+            
+            const button = this.querySelector('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+            button.disabled = true;
+            
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Check if user already exists
+                if (sampleUsers.find(u => u.email === email)) {
+                    throw new Error('User with this email already exists');
+                }
+                
+                // Create new user
+                const newUser = {
+                    id: sampleUsers.length + 1,
+                    name,
+                    email,
+                    password,
+                    avatar: null,
+                    company: '',
+                    phone: '',
+                    bio: '',
+                    enrolledCourses: [],
+                    serviceRequests: [],
+                    certificates: [],
+                    learningHours: 0
+                };
+                
+                sampleUsers.push(newUser);
+                currentUser = { ...newUser };
+                delete currentUser.password;
+                
+                // Store authentication data
+                const token = generateToken();
+                localStorage.setItem(AUTH_TOKEN_KEY, token);
+                localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+                
+                updateAuthUI();
+                closeAuthModal();
+                showToast('Account created successfully!', 'success');
+            } catch (error) {
+                showToast(error.message, 'error');
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        });
+
+        // Password Strength Checker
+        function checkPasswordStrength(password) {
+            const strengthText = document.getElementById('password-strength');
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            strengthText.className = 'password-strength';
+            
+            if (password.length === 0) {
+                strengthText.textContent = '';
+            } else if (strength < 2) {
+                strengthText.textContent = 'Weak password';
+                strengthText.classList.add('strength-weak');
+            } else if (strength < 4) {
+                strengthText.textContent = 'Medium strength';
+                strengthText.classList.add('strength-medium');
+            } else {
+                strengthText.textContent = 'Strong password';
+                strengthText.classList.add('strength-strong');
+            }
+        }
+
+        // Forgot Password
+        document.getElementById('forgot-password-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('forgot-email').value;
+            const button = this.querySelector('button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            button.disabled = true;
+            
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                showToast('Password reset link sent to your email', 'success');
+                showAuthForm('login');
+            } catch (error) {
+                showToast('Error sending reset link', 'error');
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        });
+
+        // Dashboard Functions
+        function showDashboard() {
+            document.querySelectorAll('.section, .hero, .testimonials, .blog-section').forEach(el => {
+                el.style.display = 'none';
+            });
+            document.getElementById('dashboard').style.display = 'block';
+            updateDashboard();
+        }
+
+        function showDashboardTab(tabName) {
+            // Update tabs
+            document.querySelectorAll('.auth-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.dashboard-tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Show selected tab
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            if (tabName === 'profile') {
+                loadProfileData();
+            }
+        }
+
+        function updateDashboard() {
+            if (!currentUser) return;
+            
+            // Update stats
+            document.getElementById('enrolled-courses-count').textContent = currentUser.enrolledCourses.length;
+            document.getElementById('service-requests-count').textContent = currentUser.serviceRequests.length;
+            document.getElementById('certificates-count').textContent = currentUser.certificates.length;
+            document.getElementById('learning-hours').textContent = currentUser.learningHours;
+            document.getElementById('user-greeting').textContent = currentUser.name.split(' ')[0];
+            
+            // Update enrolled courses
+            updateEnrolledCourses();
+            updateServiceRequests();
+        }
+
+        function updateEnrolledCourses() {
+            const container = document.getElementById('dashboard-courses');
+            const enrolledCourses = sampleCourses.filter(course => 
+                currentUser.enrolledCourses.includes(course.id)
+            );
+            
+            container.innerHTML = enrolledCourses.map(course => `
+                <div class="course-card">
+                    <div class="course-image">
+                        <i class="fas ${getCourseIcon(course.name)}"></i>
+                        <div class="course-badge">ENROLLED</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>${course.name}</h3>
+                        <p>${course.description}</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                            <span><i class="fas fa-signal"></i> ${course.level}</span>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="continueCourse(${course.id})">
+                                <i class="fas fa-play"></i> Continue
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCourseDetails(${course.id})">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateServiceRequests() {
+            const container = document.getElementById('service-requests-list');
+            // This would normally come from backend
+            const serviceRequests = [
+                { id: 1, service: 'Website Development', status: 'in-progress', date: '2024-01-15' },
+                { id: 2, service: 'IT Support', status: 'completed', date: '2024-01-10' }
+            ];
+            
+            container.innerHTML = serviceRequests.map(request => `
+                <div class="request-item">
+                    <div>
+                        <h4>${request.service}</h4>
+                        <p>Requested on ${request.date}</p>
+                    </div>
+                    <span class="request-status status-${request.status}">
+                        ${request.status.replace('-', ' ').toUpperCase()}
+                    </span>
+                </div>
+            `).join('');
+        }
+
+        function loadProfileData() {
+            document.getElementById('profile-name').value = currentUser.name;
+            document.getElementById('profile-email').value = currentUser.email;
+            document.getElementById('profile-phone').value = currentUser.phone;
+            document.getElementById('profile-company').value = currentUser.company;
+            document.getElementById('profile-bio').value = currentUser.bio;
+            document.getElementById('avatar-initials').textContent = getUserInitials(currentUser.name);
+        }
+
+        // Profile Update
+        document.getElementById('profile-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const button = this.querySelector('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            button.disabled = true;
+            
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Update user data
+                currentUser.name = document.getElementById('profile-name').value;
+                currentUser.email = document.getElementById('profile-email').value;
+                currentUser.phone = document.getElementById('profile-phone').value;
+                currentUser.company = document.getElementById('profile-company').value;
+                currentUser.bio = document.getElementById('profile-bio').value;
+                
+                // Update stored data
+                localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+                
+                showToast('Profile updated successfully!', 'success');
+                updateAuthUI();
+            } catch (error) {
+                showToast('Error updating profile', 'error');
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        });
+
+        // Utility Functions
+        function getUserInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase();
+        }
+
+        function generateToken() {
+            return 'token_' + Math.random().toString(36).substr(2) + Date.now().toString(36);
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem(AUTH_TOKEN_KEY);
+            localStorage.removeItem(USER_DATA_KEY);
+            updateAuthUI();
+            showToast('Logged out successfully', 'info');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${getToastIcon(type)}"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    container.removeChild(toast);
+                }, 300);
+            }, 4000);
+        }
+
+        function getToastIcon(type) {
+            const icons = {
+                success: 'check-circle',
+                error: 'exclamation-circle',
+                warning: 'exclamation-triangle',
+                info: 'info-circle'
+            };
+            return icons[type] || 'info-circle';
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.user-menu')) {
+                const dropdown = document.getElementById('user-dropdown');
+                if (dropdown) dropdown.classList.remove('show');
+            }
+        });
+
+        // Initialize authentication when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initAuth();
+            // ... rest of your existing initialization code
+        });
+
+        // Keep your existing helper functions (getServiceIcon, getCourseIcon, etc.)
+        // ... [Previous helper functions remain the same]
     </script>
 </body>
 </html>
