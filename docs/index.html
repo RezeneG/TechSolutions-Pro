@@ -52,7 +52,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 15px 0;
         }
         
         .logo {
@@ -70,7 +70,7 @@
         
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
         
         .nav-links a {
@@ -78,10 +78,13 @@
             color: var(--dark);
             font-weight: 500;
             transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
         }
         
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
         }
         
         .auth-buttons {
@@ -129,21 +132,21 @@
         
         /* Hero Section */
         .hero {
-            padding: 80px 0;
+            padding: 60px 0;
             background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
             color: white;
             text-align: center;
         }
         
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
         }
         
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto 30px;
+            margin: 0 auto 25px;
             opacity: 0.9;
         }
         
@@ -151,7 +154,7 @@
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         
         .hero-stats {
@@ -160,7 +163,7 @@
             max-width: 800px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            padding: 25px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
         }
@@ -170,28 +173,28 @@
         }
         
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 5px;
         }
         
         .stat-label {
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.8;
         }
         
         /* Services Section */
         .section {
-            padding: 80px 0;
+            padding: 60px 0;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             color: var(--dark);
             margin-bottom: 15px;
         }
@@ -204,8 +207,8 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
         }
         
         .service-card {
@@ -219,40 +222,43 @@
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
         .service-icon {
             background: var(--primary);
             color: white;
-            height: 80px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
         
         .service-content {
-            padding: 25px;
+            padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
         .service-content h3 {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: var(--dark);
+            font-size: 1.3rem;
         }
         
         .service-content p {
             color: var(--gray);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             flex-grow: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .service-price {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 15px;
@@ -260,25 +266,27 @@
         
         .service-features {
             list-style: none;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .service-features li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.9rem;
         }
         
         .service-features li i {
             color: var(--success);
+            font-size: 0.8rem;
         }
         
         /* Courses Section */
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
         
         .course-card {
@@ -294,47 +302,51 @@
         }
         
         .course-image {
-            height: 180px;
+            height: 160px;
             background: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 3rem;
+            font-size: 2.5rem;
             position: relative;
         }
         
         .course-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 12px;
+            right: 12px;
             background: var(--accent);
             color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
             font-weight: 600;
         }
         
         .course-content {
-            padding: 25px;
+            padding: 20px;
         }
         
         .course-content h3 {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: var(--dark);
+            font-size: 1.3rem;
         }
         
         .course-content p {
             color: var(--gray);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .course-meta {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--gray);
+            font-size: 0.9rem;
         }
         
         .course-meta span {
@@ -351,21 +363,21 @@
         .careers-intro {
             background: white;
             border-radius: 10px;
-            padding: 40px;
-            margin-bottom: 50px;
+            padding: 30px;
+            margin-bottom: 40px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            gap: 20px;
+            margin-top: 25px;
         }
         
         .benefit-card {
             text-align: center;
-            padding: 25px 20px;
+            padding: 20px 15px;
             background: var(--light);
             border-radius: 8px;
             transition: transform 0.3s;
@@ -376,29 +388,31 @@
         }
         
         .benefit-card i {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         
         .benefit-card h4 {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--dark);
+            font-size: 1.1rem;
         }
         
         .benefit-card p {
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .open-positions {
-            margin: 60px 0;
+            margin: 50px 0;
         }
         
         .open-positions h3 {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: var(--dark);
+            font-size: 1.8rem;
         }
         
         .positions-grid {
@@ -409,7 +423,7 @@
         .position-card {
             background: white;
             border-radius: 10px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             border-left: 4px solid var(--primary);
             transition: all 0.3s;
@@ -432,6 +446,7 @@
         .position-title h4 {
             color: var(--dark);
             margin-bottom: 5px;
+            font-size: 1.2rem;
         }
         
         .position-meta {
@@ -446,7 +461,7 @@
             align-items: center;
             gap: 5px;
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .meta-item i {
@@ -465,53 +480,56 @@
             color: var(--dark);
             padding: 4px 10px;
             border-radius: 15px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
         }
         
         .position-description {
             color: var(--gray);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.6;
+            font-size: 0.9rem;
         }
         
         .application-cta {
             text-align: center;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 50px 40px;
+            padding: 40px 30px;
             border-radius: 10px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
         
         .application-cta h3 {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
         }
         
         .application-cta p {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             opacity: 0.9;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            font-size: 0.95rem;
         }
         
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: 60px 0 30px;
+            padding: 50px 0 25px;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 30px;
+            margin-bottom: 30px;
         }
         
         .footer-column h3 {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-size: 1.2rem;
             color: var(--accent);
         }
@@ -521,7 +539,7 @@
         }
         
         .footer-column ul li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .footer-column a {
@@ -536,46 +554,49 @@
         
         .career-highlights {
             list-style: none;
-            margin-top: 15px;
+            margin-top: 12px;
         }
         
         .career-highlights li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.85rem;
         }
         
         .career-highlights li i {
             color: var(--accent);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
         
         .footer-bottom {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 25px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
         }
         
         /* Standards Section */
         .standards-section {
             background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
+            padding: 25px;
             border-radius: 10px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
         
         .standards-section h4 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--accent);
+            font-size: 1.1rem;
         }
         
         .standards-logos {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 25px;
+            gap: 20px;
             align-items: center;
         }
         
@@ -583,14 +604,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             text-align: center;
-            max-width: 120px;
+            max-width: 100px;
         }
         
         .standard-logo .logo-box {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: white;
             border-radius: 5px;
             display: flex;
@@ -598,11 +619,11 @@
             justify-content: center;
             font-weight: bold;
             color: var(--dark);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
         
         .standard-logo span {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--light-gray);
         }
         
@@ -610,11 +631,18 @@
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
             }
             
             .nav-links {
-                gap: 15px;
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                padding: 6px 10px;
+                font-size: 0.9rem;
             }
             
             .hero h1 {
@@ -623,12 +651,24 @@
             
             .hero-stats {
                 flex-direction: column;
-                gap: 30px;
+                gap: 20px;
+                padding: 20px;
             }
             
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 10px;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+            
+            .services-grid,
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .position-header {
@@ -640,7 +680,7 @@
             }
             
             .standard-logo {
-                max-width: 100px;
+                max-width: 80px;
             }
         }
     </style>
@@ -684,7 +724,7 @@
                     <div class="stat-label">Happy Clients</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">24</div>
+                    <div class="stat-number">20</div>
                     <div class="stat-label">Services Offered</div>
                 </div>
                 <div class="stat">
@@ -874,7 +914,7 @@
     </footer>
 
     <script>
-        // Sample data
+        // Sample data - 20 Services
         const sampleServices = [
             {
                 id: 1,
@@ -907,9 +947,138 @@
                 price: "£1,500+",
                 category: "cloud",
                 features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"]
+            },
+            {
+                id: 5,
+                name: "Cybersecurity Audit",
+                description: "Comprehensive security assessment to identify vulnerabilities and protect your business.",
+                price: "£2,000",
+                category: "security",
+                features: ["Vulnerability Assessment", "Penetration Testing", "Security Report", "Remediation Plan"]
+            },
+            {
+                id: 6,
+                name: "Mobile App Development",
+                description: "Create powerful mobile applications for iOS and Android platforms.",
+                price: "£1,200+",
+                category: "development",
+                features: ["Native & Cross-platform", "UI/UX Design", "App Store Deployment", "Maintenance"]
+            },
+            {
+                id: 7,
+                name: "Data Analytics & BI",
+                description: "Transform your data into actionable insights with advanced analytics and business intelligence.",
+                price: "£85/hour",
+                category: "analytics",
+                features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"]
+            },
+            {
+                id: 8,
+                name: "Network Infrastructure",
+                description: "Design and implement robust network infrastructure for optimal performance and security.",
+                price: "£1,800+",
+                category: "infrastructure",
+                features: ["Network Design", "Hardware Setup", "Security Implementation", "Performance Monitoring"]
+            },
+            {
+                id: 9,
+                name: "Database Management",
+                description: "Professional database design, optimization, and management services.",
+                price: "£75/hour",
+                category: "database",
+                features: ["Database Design", "Performance Tuning", "Backup Solutions", "Security Implementation"]
+            },
+            {
+                id: 10,
+                name: "IT Consulting",
+                description: "Strategic IT consulting to align technology with your business objectives.",
+                price: "£120/hour",
+                category: "consultation",
+                features: ["Technology Assessment", "Strategic Planning", "Implementation Guidance", "ROI Analysis"]
+            },
+            {
+                id: 11,
+                name: "E-commerce Solutions",
+                description: "Complete e-commerce platform development with payment integration and inventory management.",
+                price: "£2,500+",
+                category: "development",
+                features: ["Platform Development", "Payment Integration", "Inventory Management", "Analytics"]
+            },
+            {
+                id: 12,
+                name: "DevOps Implementation",
+                description: "Implement DevOps practices to streamline development and deployment processes.",
+                price: "£3,000+",
+                category: "development",
+                features: ["CI/CD Pipeline", "Containerization", "Infrastructure as Code", "Monitoring"]
+            },
+            {
+                id: 13,
+                name: "Digital Transformation",
+                description: "Guide your business through digital transformation with modern technologies.",
+                price: "Get Quote",
+                category: "consultation",
+                features: ["Strategy Development", "Technology Selection", "Implementation Support", "Change Management"]
+            },
+            {
+                id: 14,
+                name: "IT Security Training",
+                description: "Comprehensive security awareness and technical training for your team.",
+                price: "£1,200",
+                category: "training",
+                features: ["Security Awareness", "Technical Training", "Phishing Simulations", "Compliance Guidance"]
+            },
+            {
+                id: 15,
+                name: "Backup & Disaster Recovery",
+                description: "Reliable backup solutions and disaster recovery planning to protect your data.",
+                price: "£800+",
+                category: "infrastructure",
+                features: ["Automated Backups", "Disaster Recovery Plan", "Regular Testing", "24/7 Monitoring"]
+            },
+            {
+                id: 16,
+                name: "API Development",
+                description: "Custom API development to connect your systems and enable integrations.",
+                price: "£1,500+",
+                category: "development",
+                features: ["RESTful API Design", "Documentation", "Security Implementation", "Testing & Validation"]
+            },
+            {
+                id: 17,
+                name: "Cloud Cost Optimization",
+                description: "Analyze and optimize your cloud spending without compromising performance.",
+                price: "£950",
+                category: "cloud",
+                features: ["Cost Analysis", "Optimization Strategies", "Implementation Support", "Monthly Reporting"]
+            },
+            {
+                id: 18,
+                name: "UI/UX Design",
+                description: "Create intuitive and engaging user interfaces and experiences for your applications.",
+                price: "£65/hour",
+                category: "design",
+                features: ["User Research", "Wireframing", "Prototyping", "Usability Testing"]
+            },
+            {
+                id: 19,
+                name: "IT Compliance Audit",
+                description: "Ensure your IT systems comply with industry regulations and standards.",
+                price: "£2,500",
+                category: "security",
+                features: ["Compliance Assessment", "Gap Analysis", "Remediation Plan", "Documentation"]
+            },
+            {
+                id: 20,
+                name: "Technical Documentation",
+                description: "Professional technical documentation for your systems and processes.",
+                price: "£55/hour",
+                category: "consultation",
+                features: ["System Documentation", "Process Documentation", "API Documentation", "User Manuals"]
             }
         ];
 
+        // Sample data - 20 Courses
         const sampleCourses = [
             {
                 id: 1,
@@ -950,6 +1119,166 @@
                 rating: 4.9,
                 level: "Intermediate",
                 badge: "TRENDING"
+            },
+            {
+                id: 5,
+                name: "Data Science & Machine Learning",
+                description: "Learn data analysis, visualization, and machine learning algorithms with Python.",
+                duration: "14 weeks",
+                enrolled: 621,
+                rating: 4.7,
+                level: "Advanced",
+                badge: "POPULAR"
+            },
+            {
+                id: 6,
+                name: "DevOps & CI/CD Pipeline",
+                description: "Master DevOps practices, containerization with Docker, and CI/CD pipeline setup.",
+                duration: "8 weeks",
+                enrolled: 432,
+                rating: 4.8,
+                level: "Intermediate",
+                badge: "HOT"
+            },
+            {
+                id: 7,
+                name: "UI/UX Design Fundamentals",
+                description: "Learn user-centered design principles, prototyping, and design tools.",
+                duration: "6 weeks",
+                enrolled: 389,
+                rating: 4.6,
+                level: "Beginner",
+                badge: "NEW"
+            },
+            {
+                id: 8,
+                name: "Blockchain Development",
+                description: "Build decentralized applications and smart contracts on Ethereum blockchain.",
+                duration: "10 weeks",
+                enrolled: 298,
+                rating: 4.5,
+                level: "Advanced",
+                badge: "EMERGING"
+            },
+            {
+                id: 9,
+                name: "Python Programming Mastery",
+                description: "Comprehensive Python programming course from basics to advanced concepts.",
+                duration: "8 weeks",
+                enrolled: 1124,
+                rating: 4.8,
+                level: "Beginner",
+                badge: "BESTSELLER"
+            },
+            {
+                id: 10,
+                name: "Java Enterprise Development",
+                description: "Learn enterprise Java development with Spring Boot and microservices.",
+                duration: "10 weeks",
+                enrolled: 687,
+                rating: 4.6,
+                level: "Intermediate",
+                badge: "POPULAR"
+            },
+            {
+                id: 11,
+                name: "Network Security & Ethical Hacking",
+                description: "Learn network security principles and ethical hacking techniques.",
+                duration: "12 weeks",
+                enrolled: 534,
+                rating: 4.7,
+                level: "Advanced",
+                badge: "HOT"
+            },
+            {
+                id: 12,
+                name: "React Native Mobile Development",
+                description: "Build cross-platform mobile apps with React Native and JavaScript.",
+                duration: "7 weeks",
+                enrolled: 421,
+                rating: 4.5,
+                level: "Intermediate",
+                badge: "NEW"
+            },
+            {
+                id: 13,
+                name: "SQL & Database Design",
+                description: "Master SQL queries and learn professional database design principles.",
+                duration: "6 weeks",
+                enrolled: 876,
+                rating: 4.8,
+                level: "Beginner",
+                badge: "POPULAR"
+            },
+            {
+                id: 14,
+                name: "Kubernetes & Container Orchestration",
+                description: "Learn to deploy and manage containerized applications with Kubernetes.",
+                duration: "5 weeks",
+                enrolled: 345,
+                rating: 4.7,
+                level: "Advanced",
+                badge: "TRENDING"
+            },
+            {
+                id: 15,
+                name: "IT Project Management",
+                description: "Learn Agile and Waterfall methodologies for successful IT project delivery.",
+                duration: "8 weeks",
+                enrolled: 512,
+                rating: 4.6,
+                level: "Intermediate",
+                badge: "POPULAR"
+            },
+            {
+                id: 16,
+                name: "Cloud Security Fundamentals",
+                description: "Understand cloud security principles and best practices for AWS, Azure, and GCP.",
+                duration: "6 weeks",
+                enrolled: 298,
+                rating: 4.7,
+                level: "Intermediate",
+                badge: "HOT"
+            },
+            {
+                id: 17,
+                name: "Frontend Development with Vue.js",
+                description: "Build modern web applications with Vue.js framework and ecosystem.",
+                duration: "7 weeks",
+                enrolled: 387,
+                rating: 4.5,
+                level: "Intermediate",
+                badge: "NEW"
+            },
+            {
+                id: 18,
+                name: "IT Service Management (ITSM)",
+                description: "Learn ITIL framework and best practices for IT service management.",
+                duration: "6 weeks",
+                enrolled: 234,
+                rating: 4.6,
+                level: "Beginner",
+                badge: "POPULAR"
+            },
+            {
+                id: 19,
+                name: "Machine Learning Operations (MLOps)",
+                description: "Learn to deploy, monitor, and maintain machine learning models in production.",
+                duration: "8 weeks",
+                enrolled: 198,
+                rating: 4.8,
+                level: "Advanced",
+                badge: "EMERGING"
+            },
+            {
+                id: 20,
+                name: "Full Stack JavaScript Development",
+                description: "Complete full-stack development using JavaScript across frontend and backend.",
+                duration: "10 weeks",
+                enrolled: 765,
+                rating: 4.7,
+                level: "Intermediate",
+                badge: "BESTSELLER"
             }
         ];
 
@@ -1090,16 +1419,34 @@
                 'development': 'fa-code',
                 'support': 'fa-headset',
                 'testing': 'fa-bug',
-                'cloud': 'fa-cloud'
+                'cloud': 'fa-cloud',
+                'security': 'fa-shield-alt',
+                'analytics': 'fa-chart-bar',
+                'infrastructure': 'fa-server',
+                'database': 'fa-database',
+                'consultation': 'fa-comments',
+                'training': 'fa-graduation-cap',
+                'design': 'fa-palette'
             };
             return icons[category] || 'fa-laptop-code';
         }
 
         function getCourseIcon(courseName) {
             if (courseName.toLowerCase().includes('web')) return 'fa-globe';
-            if (courseName.toLowerCase().includes('cyber')) return 'fa-shield-alt';
+            if (courseName.toLowerCase().includes('cyber') || courseName.toLowerCase().includes('security')) return 'fa-shield-alt';
             if (courseName.toLowerCase().includes('mobile')) return 'fa-mobile-alt';
             if (courseName.toLowerCase().includes('cloud')) return 'fa-cloud';
+            if (courseName.toLowerCase().includes('data') || courseName.toLowerCase().includes('machine learning')) return 'fa-chart-line';
+            if (courseName.toLowerCase().includes('devops')) return 'fa-cogs';
+            if (courseName.toLowerCase().includes('design')) return 'fa-palette';
+            if (courseName.toLowerCase().includes('blockchain')) return 'fa-link';
+            if (courseName.toLowerCase().includes('python')) return 'fa-python';
+            if (courseName.toLowerCase().includes('java')) return 'fa-coffee';
+            if (courseName.toLowerCase().includes('sql')) return 'fa-database';
+            if (courseName.toLowerCase().includes('kubernetes')) return 'fa-docker';
+            if (courseName.toLowerCase().includes('project')) return 'fa-tasks';
+            if (courseName.toLowerCase().includes('vue')) return 'fa-vuejs';
+            if (courseName.toLowerCase().includes('javascript')) return 'fa-js';
             return 'fa-book';
         }
 
