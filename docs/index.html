@@ -1,1319 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechSolutions Pro | IT Services & Training Marketplace</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4cc9f0;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4bb543;
-            --warning: #ffcc00;
-            --danger: #dc3545;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fb;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header & Navigation */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .logo i {
-            color: var(--accent);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 8px 12px;
-            border-radius: 5px;
-        }
-        
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: var(--secondary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-small {
-            padding: 8px 16px;
-            font-size: 0.9rem;
-        }
-        
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-        
-        .btn-warning {
-            background: var(--warning);
-            color: var(--dark);
-        }
-        
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 50px;
-        }
-        
-        .hero-stats {
-            display: flex;
-            justify-content: space-around;
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-        
-        /* Main Content Layout */
-        .content-with-sidebar {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-        
-        /* Filter Sidebar */
-        .filter-sidebar {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 100px;
-        }
-        
-        .filter-group {
-            margin-bottom: 30px;
-        }
-        
-        .filter-group h4 {
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .filter-group h4 i {
-            color: var(--primary);
-        }
-        
-        .checkbox-list {
-            list-style: none;
-        }
-        
-        .checkbox-list li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .checkbox-list input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-            cursor: pointer;
-        }
-        
-        .checkbox-list label {
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: var(--dark);
-            transition: color 0.3s;
-        }
-        
-        .checkbox-list label:hover {
-            color: var(--primary);
-        }
-        
-        .filter-count {
-            background: var(--accent);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            margin-left: auto;
-        }
-        
-        /* Search & Sort Bar */
-        .search-sort-bar {
-            background: white;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        
-        .search-box {
-            position: relative;
-            flex: 1;
-        }
-        
-        .search-box input {
-            width: 100%;
-            padding: 12px 45px 12px 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .search-box i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-        }
-        
-        .sort-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .sort-group label {
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-        
-        .sort-group select {
-            padding: 10px 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            background: white;
-            cursor: pointer;
-            transition: border-color 0.3s;
-            min-width: 150px;
-        }
-        
-        .sort-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        /* Active Filters */
-        .active-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .filter-tag {
-            background: var(--primary);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .filter-tag i {
-            cursor: pointer;
-            font-size: 0.7rem;
-        }
-        
-        /* Services Section */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
-        
-        .section-header p {
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-icon {
-            background: var(--primary);
-            color: white;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-        
-        .service-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .service-content h3 {
-            margin-bottom: 12px;
-            color: var(--dark);
-            font-size: 1.3rem;
-        }
-        
-        .service-content p {
-            color: var(--gray);
-            margin-bottom: 15px;
-            flex-grow: 1;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .service-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .service-features {
-            list-style: none;
-            margin-bottom: 15px;
-        }
-        
-        .service-features li {
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .service-features li i {
-            color: var(--success);
-            font-size: 0.8rem;
-        }
-        
-        /* Courses Section */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .course-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-        
-        .course-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .course-image {
-            height: 160px;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.5rem;
-            position: relative;
-        }
-        
-        .course-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--accent);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .course-content {
-            padding: 20px;
-        }
-        
-        .course-content h3 {
-            margin-bottom: 12px;
-            color: var(--dark);
-            font-size: 1.3rem;
-        }
-        
-        .course-content p {
-            color: var(--gray);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .course-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .course-rating {
-            color: var(--warning);
-        }
-        
-        /* Price List Section */
-        .price-list {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-top: 50px;
-        }
-        
-        .price-list-header {
-            background: var(--primary);
-            color: white;
-            padding: 20px 30px;
-        }
-        
-        .price-list-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        
-        .price-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .price-table th,
-        .price-table td {
-            padding: 15px 20px;
-            text-align: left;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .price-table th {
-            background: var(--light);
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .price-table tr:hover {
-            background: var(--light);
-        }
-        
-        .price-amount {
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .price-category {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        
-        /* Results Count */
-        .results-count {
-            margin-bottom: 30px;
-            color: var(--gray);
-            font-size: 1rem;
-        }
-        
-        .results-count strong {
-            color: var(--primary);
-        }
-        
-        /* No Results */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--gray);
-            grid-column: 1 / -1;
-        }
-        
-        .no-results i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--light-gray);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .content-with-sidebar {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .filter-sidebar {
-                position: static;
-                order: 2;
-            }
-            
-            .search-sort-bar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .search-box {
-                width: 100%;
-            }
-            
-            .sort-group {
-                width: 100%;
-                justify-content: space-between;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .nav-links {
-                gap: 12px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-links a {
-                padding: 6px 10px;
-                font-size: 0.9rem;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: 25px;
-                padding: 20px;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .services-grid,
-            .courses-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .price-table {
-                display: block;
-                overflow-x: auto;
-            }
-        }
-
-        /* Rest of the CSS remains the same... */
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <i class="fas fa-laptop-code"></i>
-                    <span>TechSolutions Pro</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#" class="active">Home</a>
-                    <a href="#services">Services</a>
-                    <a href="#courses">Courses</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#admin" id="adminNavLink">Admin <span class="admin-badge">Login Required</span></a>
-                </div>
-                <div class="auth-buttons">
-                    <span class="status-badge status-online" id="backend-status">Backend Online</span>
-                    <a href="#" class="btn btn-outline" onclick="openModal('loginModal')">Login</a>
-                    <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">Sign Up</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Professional IT Services & Training</h1>
-            <p>Transform your business with our expert IT solutions and comprehensive training programs. Join thousands of satisfied clients worldwide.</p>
-            <div class="hero-buttons">
-                <a href="#services" class="btn btn-primary">Explore Services</a>
-                <a href="#courses" class="btn btn-outline">View Courses</a>
-                <a href="#pricing" class="btn btn-outline">View Pricing</a>
-                <a href="#admin" class="btn btn-outline" onclick="checkAdminAccess(event)">Admin Dashboard</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-number" id="total-users">5,247</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number" id="total-services">32</div>
-                    <div class="stat-label">Services Offered</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number" id="success-rate">98.2%</div>
-                    <div class="stat-label">Success Rate</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="section" id="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Professional Services</h2>
-                <p>We offer a wide range of IT services to help your business grow and succeed in the digital age.</p>
-            </div>
-
-            <div class="content-with-sidebar">
-                <!-- Services Sidebar -->
-                <div class="filter-sidebar">
-                    <div class="filter-group">
-                        <h4><i class="fas fa-filter"></i> Service Categories</h4>
-                        <ul class="checkbox-list" id="serviceCategories">
-                            <li>
-                                <input type="checkbox" id="cat-dev" value="development" checked>
-                                <label for="cat-dev">Development</label>
-                                <span class="filter-count">5</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-support" value="support" checked>
-                                <label for="cat-support">Support</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-testing" value="testing" checked>
-                                <label for="cat-testing">Testing</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-consultation" value="consultation" checked>
-                                <label for="cat-consultation">Consultation</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-cloud" value="cloud" checked>
-                                <label for="cat-cloud">Cloud</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-security" value="security" checked>
-                                <label for="cat-security">Security</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-analytics" value="analytics" checked>
-                                <label for="cat-analytics">Analytics</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-database" value="database" checked>
-                                <label for="cat-database">Database</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-infrastructure" value="infrastructure" checked>
-                                <label for="cat-infrastructure">Infrastructure</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <h4><i class="fas fa-pound-sign"></i> Price Range</h4>
-                        <ul class="checkbox-list" id="servicePriceRange">
-                            <li>
-                                <input type="checkbox" id="price-under-500" value="under-500" checked>
-                                <label for="price-under-500">Under £500</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="price-500-1000" value="500-1000" checked>
-                                <label for="price-500-1000">£500 - £1,000</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="price-1000-2000" value="1000-2000" checked>
-                                <label for="price-1000-2000">£1,000 - £2,000</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="price-over-2000" value="over-2000" checked>
-                                <label for="price-over-2000">Over £2,000</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="price-quote" value="quote" checked>
-                                <label for="price-quote">Get Quote</label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <button class="btn btn-outline btn-small" onclick="clearServiceFilters()" style="width: 100%;">
-                        <i class="fas fa-times"></i> Clear All Filters
-                    </button>
-                </div>
-
-                <!-- Services Content -->
-                <div class="services-content">
-                    <div class="search-sort-bar">
-                        <div class="search-box">
-                            <input type="text" id="serviceSearch" placeholder="Search services...">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="sort-group">
-                            <label for="serviceSort">Sort by:</label>
-                            <select id="serviceSort">
-                                <option value="name">Name (A-Z)</option>
-                                <option value="name-desc">Name (Z-A)</option>
-                                <option value="price">Price (Low to High)</option>
-                                <option value="price-desc">Price (High to Low)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="active-filters" id="serviceActiveFilters">
-                        <!-- Active filters will appear here -->
-                    </div>
-
-                    <div class="results-count" id="serviceResultsCount">
-                        Showing <strong>12</strong> services
-                    </div>
-
-                    <div class="services-grid" id="services-container">
-                        <!-- Services populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section class="section" id="courses">
-        <div class="container">
-            <div class="section-header">
-                <h2>Training Courses</h2>
-                <p>Enhance your skills with our comprehensive IT training programs designed for all levels.</p>
-            </div>
-
-            <div class="content-with-sidebar">
-                <!-- Courses Sidebar -->
-                <div class="filter-sidebar">
-                    <div class="filter-group">
-                        <h4><i class="fas fa-filter"></i> Course Categories</h4>
-                        <ul class="checkbox-list" id="courseCategories">
-                            <li>
-                                <input type="checkbox" id="cat-bootcamp" value="bootcamp" checked>
-                                <label for="cat-bootcamp">Bootcamp</label>
-                                <span class="filter-count">3</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-web" value="web" checked>
-                                <label for="cat-web">Web Development</label>
-                                <span class="filter-count">2</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-mobile" value="mobile" checked>
-                                <label for="cat-mobile">Mobile Development</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-software" value="software" checked>
-                                <label for="cat-software">Software Development</label>
-                                <span class="filter-count">4</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-support" value="support" checked>
-                                <label for="cat-support">Support & Analysis</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat-testing" value="testing" checked>
-                                <label for="cat-testing">Testing</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <h4><i class="fas fa-signal"></i> Experience Level</h4>
-                        <ul class="checkbox-list" id="courseLevels">
-                            <li>
-                                <input type="checkbox" id="level-beginner" value="Beginner" checked>
-                                <label for="level-beginner">Beginner</label>
-                                <span class="filter-count">10</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="level-intermediate" value="Intermediate" checked>
-                                <label for="level-intermediate">Intermediate</label>
-                                <span class="filter-count">2</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="level-advanced" value="Advanced" checked>
-                                <label for="level-advanced">Advanced</label>
-                                <span class="filter-count">1</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="filter-group">
-                        <h4><i class="fas fa-pound-sign"></i> Course Price</h4>
-                        <ul class="checkbox-list" id="coursePriceRange">
-                            <li>
-                                <input type="checkbox" id="course-under-1500" value="under-1500" checked>
-                                <label for="course-under-1500">Under £1,500</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="course-1500-2000" value="1500-2000" checked>
-                                <label for="course-1500-2000">£1,500 - £2,000</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="course-over-2000" value="over-2000" checked>
-                                <label for="course-over-2000">Over £2,000</label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <button class="btn btn-outline btn-small" onclick="clearCourseFilters()" style="width: 100%;">
-                        <i class="fas fa-times"></i> Clear All Filters
-                    </button>
-                </div>
-
-                <!-- Courses Content -->
-                <div class="services-content">
-                    <div class="search-sort-bar">
-                        <div class="search-box">
-                            <input type="text" id="courseSearch" placeholder="Search courses...">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="sort-group">
-                            <label for="courseSort">Sort by:</label>
-                            <select id="courseSort">
-                                <option value="name">Name (A-Z)</option>
-                                <option value="name-desc">Name (Z-A)</option>
-                                <option value="rating">Rating (High to Low)</option>
-                                <option value="enrolled">Popularity</option>
-                                <option value="duration">Duration</option>
-                                <option value="price">Price (Low to High)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="active-filters" id="courseActiveFilters">
-                        <!-- Active filters will appear here -->
-                    </div>
-
-                    <div class="results-count" id="courseResultsCount">
-                        Showing <strong>12</strong> courses
-                    </div>
-
-                    <div class="courses-grid" id="courses-container">
-                        <!-- Courses populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="section" id="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2>Comprehensive Pricing</h2>
-                <p>Transparent pricing for all our services and training programs. No hidden fees.</p>
-            </div>
-
-            <div class="price-list">
-                <div class="price-list-header">
-                    <h3><i class="fas fa-tags"></i> Service & Course Pricing</h3>
-                </div>
-                <table class="price-table">
-                    <thead>
-                        <tr>
-                            <th>Service/Course</th>
-                            <th>Category</th>
-                            <th>Type</th>
-                            <th>Price</th>
-                            <th>Duration</th>
-                        </tr>
-                    </thead>
-                    <tbody id="pricing-table-body">
-                        <!-- Pricing data will be populated here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rest of the HTML remains the same... -->
-
-    <script>
-        // Enhanced filter state with checkboxes
-        let serviceFilters = {
-            search: '',
-            categories: ['development', 'support', 'testing', 'consultation', 'cloud', 'security', 'analytics', 'database', 'infrastructure'],
-            priceRanges: ['under-500', '500-1000', '1000-2000', 'over-2000', 'quote'],
-            sort: 'name'
-        };
-
-        let courseFilters = {
-            search: '',
-            categories: ['bootcamp', 'web', 'mobile', 'software', 'support', 'testing'],
-            levels: ['Beginner', 'Intermediate', 'Advanced'],
-            priceRanges: ['under-1500', '1500-2000', 'over-2000'],
-            sort: 'name'
-        };
-
-        // Initialize filters with checkboxes
-        function initializeFilters() {
-            // Service category checkboxes
-            document.querySelectorAll('#serviceCategories input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        serviceFilters.categories.push(this.value);
-                    } else {
-                        serviceFilters.categories = serviceFilters.categories.filter(cat => cat !== this.value);
-                    }
-                    filterServices();
-                });
-            });
-
-            // Service price range checkboxes
-            document.querySelectorAll('#servicePriceRange input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        serviceFilters.priceRanges.push(this.value);
-                    } else {
-                        serviceFilters.priceRanges = serviceFilters.priceRanges.filter(range => range !== this.value);
-                    }
-                    filterServices();
-                });
-            });
-
-            // Course category checkboxes
-            document.querySelectorAll('#courseCategories input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        courseFilters.categories.push(this.value);
-                    } else {
-                        courseFilters.categories = courseFilters.categories.filter(cat => cat !== this.value);
-                    }
-                    filterCourses();
-                });
-            });
-
-            // Course level checkboxes
-            document.querySelectorAll('#courseLevels input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        courseFilters.levels.push(this.value);
-                    } else {
-                        courseFilters.levels = courseFilters.levels.filter(level => level !== this.value);
-                    }
-                    filterCourses();
-                });
-            });
-
-            // Course price range checkboxes
-            document.querySelectorAll('#coursePriceRange input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        courseFilters.priceRanges.push(this.value);
-                    } else {
-                        courseFilters.priceRanges = courseFilters.priceRanges.filter(range => range !== this.value);
-                    }
-                    filterCourses();
-                });
-            });
-
-            // Search and sort event listeners (same as before)
-            document.getElementById('serviceSearch').addEventListener('input', function(e) {
-                serviceFilters.search = e.target.value;
-                filterServices();
-            });
-
-            document.getElementById('serviceSort').addEventListener('change', function(e) {
-                serviceFilters.sort = e.target.value;
-                filterServices();
-            });
-
-            document.getElementById('courseSearch').addEventListener('input', function(e) {
-                courseFilters.search = e.target.value;
-                filterCourses();
-            });
-
-            document.getElementById('courseSort').addEventListener('change', function(e) {
-                courseFilters.sort = e.target.value;
-                filterCourses();
-            });
-        }
-
-        // Enhanced filter functions with checkbox support
-        function filterServices() {
-            let filteredServices = [...sampleServices];
-
-            // Apply search filter
-            if (serviceFilters.search) {
-                const searchTerm = serviceFilters.search.toLowerCase();
-                filteredServices = filteredServices.filter(service => 
-                    service.name.toLowerCase().includes(searchTerm) ||
-                    service.description.toLowerCase().includes(searchTerm)
-                );
-            }
-
-            // Apply category filter with checkboxes
-            if (serviceFilters.categories.length > 0) {
-                filteredServices = filteredServices.filter(service => 
-                    serviceFilters.categories.includes(service.category)
-                );
-            }
-
-            // Apply price range filter
-            if (serviceFilters.priceRanges.length > 0) {
-                filteredServices = filteredServices.filter(service => {
-                    const price = extractPrice(service.price);
-                    return serviceFilters.priceRanges.some(range => {
-                        switch (range) {
-                            case 'under-500': return price > 0 && price < 500;
-                            case '500-1000': return price >= 500 && price <= 1000;
-                            case '1000-2000': return price >= 1000 && price <= 2000;
-                            case 'over-2000': return price > 2000;
-                            case 'quote': return service.price.toLowerCase().includes('quote');
-                            default: return true;
-                        }
-                    });
-                });
-            }
-
-            // Apply sorting
-            filteredServices.sort((a, b) => {
-                switch (serviceFilters.sort) {
-                    case 'name': return a.name.localeCompare(b.name);
-                    case 'name-desc': return b.name.localeCompare(a.name);
-                    case 'price': return extractPrice(a.price) - extractPrice(b.price);
-                    case 'price-desc': return extractPrice(b.price) - extractPrice(a.price);
-                    default: return 0;
-                }
-            });
-
-            updateServiceActiveFilters();
-            document.getElementById('serviceResultsCount').innerHTML = 
-                `Showing <strong>${filteredServices.length}</strong> services`;
-            renderServices(filteredServices);
-        }
-
-        function filterCourses() {
-            let filteredCourses = [...sampleCourses];
-
-            // Apply search filter
-            if (courseFilters.search) {
-                const searchTerm = courseFilters.search.toLowerCase();
-                filteredCourses = filteredCourses.filter(course => 
-                    course.name.toLowerCase().includes(searchTerm) ||
-                    course.description.toLowerCase().includes(searchTerm)
-                );
-            }
-
-            // Apply category filter with checkboxes
-            if (courseFilters.categories.length > 0) {
-                filteredCourses = filteredCourses.filter(course => 
-                    courseFilters.categories.includes(course.category)
-                );
-            }
-
-            // Apply level filter with checkboxes
-            if (courseFilters.levels.length > 0) {
-                filteredCourses = filteredCourses.filter(course => 
-                    courseFilters.levels.includes(course.level)
-                );
-            }
-
-            // Apply price range filter
-            if (courseFilters.priceRanges.length > 0) {
-                filteredCourses = filteredCourses.filter(course => {
-                    const price = extractPrice(course.price);
-                    return courseFilters.priceRanges.some(range => {
-                        switch (range) {
-                            case 'under-1500': return price > 0 && price < 1500;
-                            case '1500-2000': return price >= 1500 && price <= 2000;
-                            case 'over-2000': return price > 2000;
-                            default: return true;
-                        }
-                    });
-                });
-            }
-
-            // Apply sorting
-            filteredCourses.sort((a, b) => {
-                switch (courseFilters.sort) {
-                    case 'name': return a.name.localeCompare(b.name);
-                    case 'name-desc': return b.name.localeCompare(a.name);
-                    case 'rating': return b.rating - a.rating;
-                    case 'enrolled': return b.enrolled - a.enrolled;
-                    case 'duration': return extractWeeks(a.duration) - extractWeeks(b.duration);
-                    case 'price': return extractPrice(a.price) - extractPrice(b.price);
-                    default: return 0;
-                }
-            });
-
-            updateCourseActiveFilters();
-            document.getElementById('courseResultsCount').innerHTML = 
-                `Showing <strong>${filteredCourses.length}</strong> courses`;
-            renderCourses(filteredCourses);
-        }
-
-        // Clear all service filters
-        function clearServiceFilters() {
-            serviceFilters = {
-                search: '',
-                categories: ['development', 'support', 'testing', 'consultation', 'cloud', 'security', 'analytics', 'database', 'infrastructure'],
-                priceRanges: ['under-500', '500-1000', '1000-2000', 'over-2000', 'quote'],
-                sort: 'name'
-            };
-            
-            document.getElementById('serviceSearch').value = '';
-            document.getElementById('serviceSort').value = 'name';
-            
-            // Reset all checkboxes
-            document.querySelectorAll('#serviceCategories input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            document.querySelectorAll('#servicePriceRange input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            
-            filterServices();
-        }
-
-        // Clear all course filters
-        function clearCourseFilters() {
-            courseFilters = {
-                search: '',
-                categories: ['bootcamp', 'web', 'mobile', 'software', 'support', 'testing'],
-                levels: ['Beginner', 'Intermediate', 'Advanced'],
-                priceRanges: ['under-1500', '1500-2000', 'over-2000'],
-                sort: 'name'
-            };
-            
-            document.getElementById('courseSearch').value = '';
-            document.getElementById('courseSort').value = 'name';
-            
-            // Reset all checkboxes
-            document.querySelectorAll('#courseCategories input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            document.querySelectorAll('#courseLevels input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            document.querySelectorAll('#coursePriceRange input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            
-            filterCourses();
-        }
-
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeFilters();
-            filterServices();
-            filterCourses();
-            loadPricingTable();
-            // ... rest of initialization code
-        });
-
-        // ... rest of JavaScript code remains the same
-    </script>
-</body>
-</html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1439,21 +125,6 @@
         .btn-small {
             padding: 8px 16px;
             font-size: 0.9rem;
-        }
-        
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-        
-        .btn-warning {
-            background: var(--warning);
-            color: var(--dark);
-        }
-        
-        .btn-danger {
-            background: var(--danger);
-            color: white;
         }
         
         /* Hero Section */
@@ -1676,110 +347,153 @@
             color: var(--warning);
         }
         
-        /* Admin Dashboard */
-        .dashboard {
+        /* Careers Section */
+        .careers-intro {
             background: white;
             border-radius: 10px;
-            overflow: hidden;
+            padding: 40px;
+            margin-bottom: 50px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
-        .dashboard-header {
-            background: var(--primary);
-            color: white;
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .dashboard-stats {
+        .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
         
-        .stat-card {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 8px;
+        .benefit-card {
             text-align: center;
+            padding: 25px 20px;
+            background: var(--light);
+            border-radius: 8px;
             transition: transform 0.3s;
         }
         
-        .stat-card:hover {
+        .benefit-card:hover {
             transform: translateY(-5px);
         }
         
-        .stat-card i {
-            font-size: 2rem;
+        .benefit-card i {
+            font-size: 2.5rem;
             color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .benefit-card h4 {
             margin-bottom: 10px;
+            color: var(--dark);
         }
         
-        .stat-card .number {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .stat-card .label {
+        .benefit-card p {
             color: var(--gray);
             font-size: 0.9rem;
         }
         
-        .dashboard-charts {
-            padding: 0 30px 30px;
+        .open-positions {
+            margin: 60px 0;
+        }
+        
+        .open-positions h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+        
+        .positions-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
+            gap: 20px;
         }
         
-        .chart-container {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 8px;
+        .position-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
         }
         
-        .chart-placeholder {
-            height: 200px;
-            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
-            border-radius: 5px;
+        .position-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .position-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .position-title h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .position-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .meta-item {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 5px;
             color: var(--gray);
+            font-size: 0.9rem;
         }
         
-        .activity-list {
-            list-style: none;
-            max-height: 200px;
-            overflow-y: auto;
+        .meta-item i {
+            color: var(--primary);
         }
         
-        .activity-list li {
-            padding: 10px;
-            border-bottom: 1px solid var(--light-gray);
+        .position-tags {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
         }
         
-        .activity-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .activity-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .position-tag {
+            background: var(--light);
+            color: var(--dark);
+            padding: 4px 10px;
+            border-radius: 15px;
             font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .position-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .application-cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .application-cta h3 {
+            margin-bottom: 15px;
+        }
+        
+        .application-cta p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         /* Footer */
@@ -1843,6 +557,54 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* Standards Section */
+        .standards-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .standards-section h4 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .standards-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            align-items: center;
+        }
+        
+        .standard-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+            max-width: 120px;
+        }
+        
+        .standard-logo img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .standard-logo:hover img {
+            opacity: 1;
+        }
+        
+        .standard-logo span {
+            font-size: 0.7rem;
+            color: var(--light-gray);
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
@@ -1868,284 +630,21 @@
                 align-items: center;
             }
             
-            .dashboard-charts {
-                grid-template-columns: 1fr;
-            }
-            
-            .dashboard-header {
+            .position-header {
                 flex-direction: column;
-                gap: 15px;
-                text-align: center;
             }
             
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .standards-logos {
+                gap: 15px;
             }
-        }
-        
-        /* Loading Spinner */
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: var(--primary);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .status-online {
-            background: var(--success);
-            color: white;
-        }
-        
-        .status-offline {
-            background: var(--danger);
-            color: white;
-        }
-        
-        .feature-tag {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            margin-left: 8px;
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .modal h3 {
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        
-        .close-modal {
-            float: right;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-        }
-        
-        .demo-credentials {
-            background: var(--light);
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-        
-        .admin-badge {
-            background: var(--warning);
-            color: var(--dark);
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-left: 8px;
-        }
-        
-        .user-welcome {
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-
-        /* Admin Management Section */
-        .admin-management {
-            padding: 30px;
-            background: var(--light);
-            margin: 30px;
-            border-radius: 10px;
-        }
-
-        .management-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--light-gray);
-            padding-bottom: 10px;
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .data-table th,
-        .data-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .data-table th {
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-        }
-
-        .data-table tr:hover {
-            background: var(--light);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 5px;
-        }
-
-        .action-btn {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        .edit-btn {
-            background: var(--warning);
-            color: var(--dark);
-        }
-
-        .delete-btn {
-            background: var(--danger);
-            color: white;
-        }
-
-        .add-btn {
-            background: var(--success);
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        /* Search and Filter */
-        .search-filter {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .filter-select {
-            min-width: 150px;
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 5px;
-            color: white;
-            z-index: 1002;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transform: translateX(150%);
-            transition: transform 0.3s ease;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            background: var(--success);
-        }
-
-        .notification.error {
-            background: var(--danger);
-        }
-
-        .notification.info {
-            background: var(--primary);
+            
+            .standard-logo {
+                max-width: 100px;
+            }
+            
+            .standard-logo img {
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -2162,12 +661,12 @@
                     <a href="#" class="active">Home</a>
                     <a href="#services">Services</a>
                     <a href="#courses">Courses</a>
-                    <a href="#admin" id="adminNavLink">Admin <span class="admin-badge">Login Required</span></a>
+                    <a href="#careers">Careers</a>
+                    <a href="#admin" id="adminNavLink">Admin</a>
                 </div>
                 <div class="auth-buttons">
-                    <span class="status-badge status-online" id="backend-status">Backend Online</span>
-                    <a href="#" class="btn btn-outline" onclick="openModal('loginModal')">Login</a>
-                    <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">Sign Up</a>
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Sign Up</a>
                 </div>
             </nav>
         </div>
@@ -2181,19 +680,19 @@
             <div class="hero-buttons">
                 <a href="#services" class="btn btn-primary">Explore Services</a>
                 <a href="#courses" class="btn btn-outline">View Courses</a>
-                <a href="#admin" class="btn btn-outline" onclick="checkAdminAccess(event)">Admin Dashboard</a>
+                <a href="#careers" class="btn btn-outline">Join Our Team</a>
             </div>
             <div class="hero-stats">
                 <div class="stat">
-                    <div class="stat-number" id="total-users">5,247</div>
+                    <div class="stat-number">5,247</div>
                     <div class="stat-label">Happy Clients</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number" id="total-services">24</div>
+                    <div class="stat-number">24</div>
                     <div class="stat-label">Services Offered</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number" id="success-rate">98.2%</div>
+                    <div class="stat-number">98.2%</div>
                     <div class="stat-label">Success Rate</div>
                 </div>
             </div>
@@ -2207,27 +706,8 @@
                 <h2>Our Professional Services</h2>
                 <p>We offer a wide range of IT services to help your business grow and succeed in the digital age.</p>
             </div>
-            
-            <div class="search-filter">
-                <div class="search-box">
-                    <input type="text" id="serviceSearch" placeholder="Search services..." class="form-group input">
-                </div>
-                <div class="filter-select">
-                    <select id="serviceCategory" class="form-group select">
-                        <option value="">All Categories</option>
-                        <option value="development">Development</option>
-                        <option value="support">Support</option>
-                        <option value="testing">Testing</option>
-                        <option value="consultation">Consultation</option>
-                        <option value="cloud">Cloud</option>
-                        <option value="security">Security</option>
-                        <option value="analytics">Analytics</option>
-                    </select>
-                </div>
-            </div>
-            
             <div class="services-grid" id="services-container">
-                <!-- Services populated by JavaScript -->
+                <!-- Services will be populated by JavaScript -->
             </div>
         </div>
     </section>
@@ -2239,150 +719,73 @@
                 <h2>Training Courses</h2>
                 <p>Enhance your skills with our comprehensive IT training programs designed for all levels.</p>
             </div>
-            
-            <div class="search-filter">
-                <div class="search-box">
-                    <input type="text" id="courseSearch" placeholder="Search courses..." class="form-group input">
-                </div>
-                <div class="filter-select">
-                    <select id="courseLevel" class="form-group select">
-                        <option value="">All Levels</option>
-                        <option value="Beginner">Beginner</option>
-                        <option value="Intermediate">Intermediate</option>
-                        <option value="Advanced">Advanced</option>
-                    </select>
-                </div>
-            </div>
-            
             <div class="courses-grid" id="courses-container">
-                <!-- Courses populated by JavaScript -->
+                <!-- Courses will be populated by JavaScript -->
             </div>
         </div>
     </section>
 
-    <!-- Admin Dashboard -->
-    <section class="section" id="admin" style="display: none;">
+    <!-- Careers Section -->
+    <section class="section" id="careers">
         <div class="container">
             <div class="section-header">
-                <h2>Admin Dashboard</h2>
-                <p>Platform management and analytics</p>
-                <button class="btn btn-outline btn-small" onclick="adminLogout()" style="margin-top: 10px;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
+                <h2>Join Our Team</h2>
+                <p>We're always looking for talented individuals to join our growing team of IT professionals.</p>
             </div>
-            <div class="dashboard">
-                <div class="dashboard-header">
-                    <h3><i class="fas fa-chart-line"></i> Platform Analytics</h3>
-                    <span id="adminWelcome" class="user-welcome">Welcome, Administrator</span>
-                </div>
-                <div class="dashboard-stats" id="admin-stats">
-                    <!-- Admin stats will load here after login -->
-                </div>
-                <div class="dashboard-charts">
-                    <div class="chart-container">
-                        <h4><i class="fas fa-chart-bar"></i> Revenue Overview</h4>
-                        <div class="chart-placeholder">
-                            <i class="fas fa-chart-bar" style="font-size: 3rem; opacity: 0.5;"></i>
-                            <span style="margin-left: 15px;">Revenue Analytics</span>
+            
+            <div class="careers-intro">
+                <div class="careers-content">
+                    <h3>Why Work With Us?</h3>
+                    <p>At TechSolutions Pro, we believe our team is our greatest asset. We offer a dynamic work environment where innovation and creativity are encouraged.</p>
+                    
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <h4>Competitive Salaries</h4>
+                            <p>We offer industry-competitive compensation packages with regular reviews.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <i class="fas fa-home"></i>
+                            <h4>Remote Work Options</h4>
+                            <p>Flexible work arrangements with remote and hybrid options available.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h4>Professional Development</h4>
+                            <p>Continuous learning opportunities with training budgets and certifications.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>Health Benefits</h4>
+                            <p>Comprehensive health, dental, and vision insurance for you and your family.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <i class="fas fa-clock"></i>
+                            <h4>Flexible Hours</h4>
+                            <p>Work-life balance with flexible scheduling and generous time off.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <i class="fas fa-rocket"></i>
+                            <h4>Career Growth</h4>
+                            <p>Clear career progression paths and opportunities for advancement.</p>
                         </div>
                     </div>
-                    <div class="chart-container">
-                        <h4><i class="fas fa-bell"></i> Recent Activity</h4>
-                        <div id="recentActivities">
-                            <!-- Recent activities will load here -->
-                        </div>
-                    </div>
                 </div>
-                
-                <!-- Admin Management Section -->
-                <div class="admin-management" id="adminManagement" style="display: none;">
-                    <h3><i class="fas fa-cogs"></i> Management Panel</h3>
-                    <div class="management-tabs">
-                        <button class="tab-btn active" onclick="switchTab('services-tab')">Services</button>
-                        <button class="tab-btn" onclick="switchTab('courses-tab')">Courses</button>
-                        <button class="tab-btn" onclick="switchTab('users-tab')">Users</button>
-                        <button class="tab-btn" onclick="switchTab('orders-tab')">Orders</button>
-                    </div>
-                    
-                    <div id="services-tab" class="tab-content active">
-                        <button class="btn btn-success add-btn" onclick="openAddServiceModal()">
-                            <i class="fas fa-plus"></i> Add New Service
-                        </button>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="services-table-body">
-                                <!-- Services table data will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div id="courses-tab" class="tab-content">
-                        <button class="btn btn-success add-btn" onclick="openAddCourseModal()">
-                            <i class="fas fa-plus"></i> Add New Course
-                        </button>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Duration</th>
-                                    <th>Enrolled</th>
-                                    <th>Rating</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="courses-table-body">
-                                <!-- Courses table data will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div id="users-tab" class="tab-content">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Joined</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="users-table-body">
-                                <!-- Users table data will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div id="orders-tab" class="tab-content">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Service/Course</th>
-                                    <th>Amount</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="orders-table-body">
-                                <!-- Orders table data will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
+            </div>
+            
+            <div class="open-positions">
+                <h3>Current Open Positions</h3>
+                <div class="positions-grid" id="positions-container">
+                    <!-- Positions will be loaded here -->
                 </div>
+            </div>
+            
+            <div class="application-cta">
+                <h3>Don't See the Perfect Role?</h3>
+                <p>We're always interested in meeting talented people. Send us your resume and tell us how you can contribute to our team.</p>
+                <button class="btn btn-outline" style="background: rgba(255,255,255,0.2); border-color: white;">
+                    <i class="fas fa-paper-plane"></i> Submit General Application
+                </button>
             </div>
         </div>
     </section>
@@ -2407,7 +810,7 @@
                         <li><a href="#">Home</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#courses">Courses</a></li>
-                        <li><a href="#admin" onclick="checkAdminAccess(event)">Admin</a></li>
+                        <li><a href="#careers">Careers</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
@@ -2422,7 +825,7 @@
                         <li><i class="fas fa-check"></i> Health benefits</li>
                         <li><i class="fas fa-check"></i> Flexible hours</li>
                     </ul>
-                    <a href="#" class="btn btn-primary btn-small" style="margin-top: 15px; display: inline-block;">
+                    <a href="#careers" class="btn btn-primary btn-small" style="margin-top: 15px; display: inline-block;">
                         <i class="fas fa-briefcase"></i> View Open Positions
                     </a>
                 </div>
@@ -2435,123 +838,47 @@
                         <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to get updates on new courses, services, and career opportunities.</p>
-                    <div class="form-group" style="margin-top: 15px;">
-                        <input type="email" placeholder="Your email address" style="margin-bottom: 10px;">
-                        <button class="btn btn-primary btn-small">Subscribe</button>
+            </div>
+            
+            <!-- Standards Section -->
+            <div class="standards-section">
+                <h4>Committed to Industry Standards</h4>
+                <div class="standards-logos">
+                    <div class="standard-logo">
+                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">ISO</div>
+                        <span>ISO Standards</span>
+                    </div>
+                    <div class="standard-logo">
+                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">WCAG</div>
+                        <span>WCAG Compliant</span>
+                    </div>
+                    <div class="standard-logo">
+                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">W3C</div>
+                        <span>W3C Standards</span>
+                    </div>
+                    <div class="standard-logo">
+                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">IETF</div>
+                        <span>IETF Protocols</span>
+                    </div>
+                    <div class="standard-logo">
+                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">IEEE</div>
+                        <span>IEEE Standards</span>
+                    </div>
+                    <div class="standard-logo">
+                        <div style="width: 50px; height: 50px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--dark);">PCI</div>
+                        <span>PCI DSS Compliant</span>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | <a href="#" style="color: var(--light-gray);">Privacy Policy</a> | <a href="#" style="color: var(--light-gray);">Terms of Service</a> | <a href="#" style="color: var(--light-gray);">Careers</a></p>
+                <p>&copy; 2025 TechSolutions Pro. All rights reserved. | <a href="#" style="color: var(--light-gray);">Privacy Policy</a> | <a href="#" style="color: var(--light-gray);">Terms of Service</a> | <a href="#careers" style="color: var(--light-gray);">Careers</a></p>
             </div>
         </div>
     </footer>
 
-    <!-- Notification -->
-    <div id="notification" class="notification"></div>
-
-    <!-- Modals -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
-            <h3>Login to Your Account</h3>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="loginEmail" placeholder="Enter your email">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="loginPassword" placeholder="Enter your password">
-            </div>
-            <button class="btn btn-primary" onclick="userLogin()" style="width: 100%;">Login</button>
-            <p style="text-align: center; margin-top: 15px;">Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('registerModal');" style="color: var(--primary);">Sign up</a></p>
-        </div>
-    </div>
-
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('registerModal')">&times;</span>
-            <h3>Create New Account</h3>
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="registerName" placeholder="Enter your full name">
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="registerEmail" placeholder="Enter your email">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="registerPassword" placeholder="Create a password">
-            </div>
-            <div class="form-group">
-                <label>Confirm Password</label>
-                <input type="password" id="registerConfirmPassword" placeholder="Confirm your password">
-            </div>
-            <button class="btn btn-primary" onclick="userRegister()" style="width: 100%;">Create Account</button>
-            <p style="text-align: center; margin-top: 15px;">Already have an account? <a href="#" onclick="closeModal('registerModal'); openModal('loginModal');" style="color: var(--primary);">Login</a></p>
-        </div>
-    </div>
-
-    <!-- Admin Login Modal -->
-    <div id="adminLoginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('adminLoginModal')">&times;</span>
-            <h3><i class="fas fa-lock"></i> Admin Login</h3>
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" id="adminUsername" placeholder="Enter admin username" value="admin">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="adminPassword" placeholder="Enter admin password" value="admin123">
-            </div>
-            <button class="btn btn-primary" onclick="adminLogin()" style="width: 100%;">
-                <i class="fas fa-sign-in-alt"></i> Login to Admin Dashboard
-            </button>
-            
-            <div class="demo-credentials">
-                <strong><i class="fas fa-key"></i> Demo Credentials:</strong><br>
-                <div style="margin-top: 8px;">
-                    <strong>Admin:</strong> admin / admin123<br>
-                    <strong>Manager:</strong> manager / manager123<br>
-                    <strong>Viewer:</strong> demo / demo123
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Backend API URLs
-        const API_BASE = 'http://localhost:5000/api';
-        const SERVICES_URL = `${API_BASE}/services`;
-        const COURSES_URL = `${API_BASE}/courses`;
-        const ADMIN_URL = `${API_BASE}/admin/dashboard`;
-        const ADMIN_LOGIN_URL = `${API_BASE}/admin/login`;
-        const ADMIN_LOGOUT_URL = `${API_BASE}/admin/logout`;
-        const HEALTH_URL = `${API_BASE}/health`;
-        const USER_LOGIN_URL = `${API_BASE}/user/login`;
-        const USER_REGISTER_URL = `${API_BASE}/user/register`;
-
-        // Admin authentication state
-        let adminAuth = {
-            isLoggedIn: false,
-            user: null,
-            token: null,
-            permissions: []
-        };
-
-        // User authentication state
-        let userAuth = {
-            isLoggedIn: false,
-            user: null,
-            token: null
-        };
-
-        // Enhanced sample data with more services and courses
+        // Sample data
         const sampleServices = [
             {
                 id: 1,
@@ -2559,8 +886,7 @@
                 description: "Custom website development with modern technologies. We create responsive, SEO-friendly websites that drive results.",
                 price: "£999",
                 category: "development",
-                features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
-                status: "active"
+                features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"]
             },
             {
                 id: 2,
@@ -2568,8 +894,7 @@
                 description: "Professional IT support and maintenance services to keep your systems running smoothly.",
                 price: "£45/hour",
                 category: "support",
-                features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
-                status: "active"
+                features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"]
             },
             {
                 id: 3,
@@ -2577,53 +902,7 @@
                 description: "Comprehensive software testing services to ensure your applications are bug-free and performant.",
                 price: "Get Quote",
                 category: "testing",
-                features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"],
-                status: "active"
-            },
-            {
-                id: 4,
-                name: "Game Development Consultation",
-                description: "Expert consultation for game development projects, from concept to deployment.",
-                price: "£65/hour",
-                category: "consultation",
-                features: ["Game Design", "Technical Architecture", "Performance Optimization", "Platform Guidance"],
-                status: "active"
-            },
-            {
-                id: 5,
-                name: "Cloud Migration Services",
-                description: "Seamlessly migrate your infrastructure to cloud platforms like AWS, Azure, or Google Cloud.",
-                price: "£1,500+",
-                category: "cloud",
-                features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"],
-                status: "active"
-            },
-            {
-                id: 6,
-                name: "Cybersecurity Audit",
-                description: "Comprehensive security assessment to identify vulnerabilities and protect your business.",
-                price: "£2,000",
-                category: "security",
-                features: ["Vulnerability Assessment", "Penetration Testing", "Security Report", "Remediation Plan"],
-                status: "active"
-            },
-            {
-                id: 7,
-                name: "Mobile App Development",
-                description: "Create powerful mobile applications for iOS and Android platforms.",
-                price: "£1,200+",
-                category: "development",
-                features: ["Native & Cross-platform", "UI/UX Design", "App Store Deployment", "Maintenance"],
-                status: "active"
-            },
-            {
-                id: 8,
-                name: "Data Analytics & BI",
-                description: "Transform your data into actionable insights with advanced analytics and business intelligence.",
-                price: "£85/hour",
-                category: "analytics",
-                features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"],
-                status: "active"
+                features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"]
             }
         ];
 
@@ -2657,428 +936,52 @@
                 rating: 4.6,
                 level: "Intermediate",
                 badge: "NEW"
-            },
-            {
-                id: 4,
-                name: "Cloud Computing with AWS",
-                description: "Master Amazon Web Services and learn to deploy scalable cloud infrastructure.",
-                duration: "6 weeks",
-                enrolled: 543,
-                rating: 4.9,
-                level: "Intermediate",
-                badge: "TRENDING"
-            },
-            {
-                id: 5,
-                name: "Data Science & Machine Learning",
-                description: "Learn data analysis, visualization, and machine learning algorithms with Python.",
-                duration: "14 weeks",
-                enrolled: 621,
-                rating: 4.7,
-                level: "Advanced",
-                badge: "POPULAR"
-            },
-            {
-                id: 6,
-                name: "DevOps & CI/CD Pipeline",
-                description: "Master DevOps practices, containerization with Docker, and CI/CD pipeline setup.",
-                duration: "8 weeks",
-                enrolled: 432,
-                rating: 4.8,
-                level: "Intermediate",
-                badge: "HOT"
-            },
-            {
-                id: 7,
-                name: "UI/UX Design Fundamentals",
-                description: "Learn user-centered design principles, prototyping, and design tools.",
-                duration: "6 weeks",
-                enrolled: 389,
-                rating: 4.6,
-                level: "Beginner",
-                badge: "NEW"
-            },
-            {
-                id: 8,
-                name: "Blockchain Development",
-                description: "Build decentralized applications and smart contracts on Ethereum blockchain.",
-                duration: "10 weeks",
-                enrolled: 298,
-                rating: 4.5,
-                level: "Advanced",
-                badge: "EMERGING"
             }
         ];
 
-        // Sample data for admin panel
-        const sampleUsers = [
-            { id: 1, name: "John Smith", email: "john@example.com", role: "Customer", joined: "2023-05-15" },
-            { id: 2, name: "Emma Johnson", email: "emma@example.com", role: "Customer", joined: "2023-06-22" },
-            { id: 3, name: "Michael Brown", email: "michael@example.com", role: "Premium", joined: "2023-04-10" },
-            { id: 4, name: "Sarah Davis", email: "sarah@example.com", role: "Admin", joined: "2022-11-30" },
-            { id: 5, name: "David Wilson", email: "david@example.com", role: "Customer", joined: "2023-07-05" }
+        // Job positions data
+        const samplePositions = [
+            {
+                id: 1,
+                title: "Senior Full-Stack Developer",
+                department: "Engineering",
+                type: "Full-time",
+                location: "Remote",
+                experience: "5+ years",
+                salary: "£65,000 - £85,000",
+                description: "We're looking for an experienced Full-Stack Developer to join our engineering team. You'll work on building scalable web applications using modern technologies like React, Node.js, and cloud platforms.",
+                requirements: ["React", "Node.js", "TypeScript", "MongoDB", "AWS"]
+            },
+            {
+                id: 2,
+                title: "IT Support Specialist",
+                department: "Support",
+                type: "Full-time",
+                location: "London, UK",
+                experience: "2+ years",
+                salary: "£30,000 - £40,000",
+                description: "Join our support team to provide exceptional technical assistance to our clients and help maintain our internal systems. Strong communication skills and problem-solving abilities are essential.",
+                requirements: ["Windows/Mac OS", "Networking", "Hardware Troubleshooting", "Customer Service"]
+            },
+            {
+                id: 3,
+                title: "UI/UX Designer",
+                department: "Design",
+                type: "Contract",
+                location: "Remote",
+                experience: "3+ years",
+                salary: "£45,000 - £60,000",
+                description: "Create beautiful and intuitive user experiences for our products and client projects. Work closely with developers and product managers to deliver exceptional design solutions.",
+                requirements: ["Figma", "User Research", "Prototyping", "Design Systems"]
+            }
         ];
 
-        const sampleOrders = [
-            { id: 1001, customer: "John Smith", item: "Website Development", amount: "£999", date: "2023-08-15", status: "Completed" },
-            { id: 1002, customer: "Emma Johnson", item: "Cybersecurity Essentials", amount: "£299", date: "2023-08-18", status: "In Progress" },
-            { id: 1003, customer: "Michael Brown", item: "IT Support Package", amount: "£1,200", date: "2023-08-20", status: "Pending" },
-            { id: 1004, customer: "Sarah Davis", item: "Cloud Migration", amount: "£1,500", date: "2023-08-22", status: "Completed" },
-            { id: 1005, customer: "David Wilson", item: "Mobile App Development", amount: "£2,500", date: "2023-08-25", status: "In Progress" }
-        ];
-
-        // Notification system
-        function showNotification(message, type = 'info') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // Check backend status
-        async function checkBackendStatus() {
-            try {
-                const response = await fetch(HEALTH_URL);
-                const data = await response.json();
-                document.getElementById('backend-status').className = 'status-badge status-online';
-                document.getElementById('backend-status').textContent = 'Backend Online';
-                return true;
-            } catch (error) {
-                document.getElementById('backend-status').className = 'status-badge status-offline';
-                document.getElementById('backend-status').textContent = 'Backend Offline';
-                return false;
-            }
-        }
-
-        // User authentication functions
-        async function userLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            if (!email || !password) {
-                showNotification('Please enter both email and password', 'error');
-                return;
-            }
-            
-            const isBackendOnline = await checkBackendStatus();
-            
-            if (isBackendOnline) {
-                try {
-                    const response = await fetch(USER_LOGIN_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email, password })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        userAuth = {
-                            isLoggedIn: true,
-                            user: result.user,
-                            token: result.token
-                        };
-                        
-                        localStorage.setItem('userAuth', JSON.stringify(userAuth));
-                        closeModal('loginModal');
-                        showNotification('Login successful!', 'success');
-                        
-                        // Update UI for logged in user
-                        updateUserNavigation();
-                        
-                    } else {
-                        showNotification('Login failed: ' + result.message, 'error');
-                    }
-                } catch (error) {
-                    console.error('User login error:', error);
-                    useDemoUserAuth(email);
-                }
-            } else {
-                // Backend is offline, use demo auth
-                useDemoUserAuth(email);
-            }
-        }
-
-        async function userRegister() {
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            
-            if (!name || !email || !password || !confirmPassword) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showNotification('Passwords do not match', 'error');
-                return;
-            }
-            
-            const isBackendOnline = await checkBackendStatus();
-            
-            if (isBackendOnline) {
-                try {
-                    const response = await fetch(USER_REGISTER_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ name, email, password })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        showNotification('Registration successful! Please login.', 'success');
-                        closeModal('registerModal');
-                        openModal('loginModal');
-                    } else {
-                        showNotification('Registration failed: ' + result.message, 'error');
-                    }
-                } catch (error) {
-                    console.error('User registration error:', error);
-                    showNotification('Registration successful! Please login.', 'success');
-                    closeModal('registerModal');
-                    openModal('loginModal');
-                }
-            } else {
-                // Backend is offline, simulate successful registration
-                showNotification('Registration successful! Please login.', 'success');
-                closeModal('registerModal');
-                openModal('loginModal');
-            }
-        }
-
-        function useDemoUserAuth(email) {
-            userAuth = {
-                isLoggedIn: true,
-                user: { 
-                    name: email.split('@')[0],
-                    email: email,
-                    role: 'customer'
-                },
-                token: 'demo-token-offline'
-            };
-            
-            localStorage.setItem('userAuth', JSON.stringify(userAuth));
-            closeModal('loginModal');
-            showNotification('Login successful! (Demo Mode)', 'success');
-            updateUserNavigation();
-        }
-
-        function updateUserNavigation() {
-            const authButtons = document.querySelector('.auth-buttons');
-            if (userAuth.isLoggedIn) {
-                authButtons.innerHTML = `
-                    <span class="status-badge status-online" id="backend-status">Backend Online</span>
-                    <span style="margin-right: 10px;">Hello, ${userAuth.user.name}</span>
-                    <a href="#" class="btn btn-outline" onclick="userLogout()">Logout</a>
-                `;
-            } else {
-                authButtons.innerHTML = `
-                    <span class="status-badge status-online" id="backend-status">Backend Online</span>
-                    <a href="#" class="btn btn-outline" onclick="openModal('loginModal')">Login</a>
-                    <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">Sign Up</a>
-                `;
-            }
-        }
-
-        function userLogout() {
-            userAuth = { isLoggedIn: false, user: null, token: null };
-            localStorage.removeItem('userAuth');
-            showNotification('Logged out successfully', 'info');
-            updateUserNavigation();
-        }
-
-        // Admin authentication functions
-        async function adminLogin() {
-            const username = document.getElementById('adminUsername').value;
-            const password = document.getElementById('adminPassword').value;
-            
-            const isBackendOnline = await checkBackendStatus();
-            
-            if (isBackendOnline) {
-                try {
-                    const response = await fetch(ADMIN_LOGIN_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ username, password })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        adminAuth = {
-                            isLoggedIn: true,
-                            user: result.user,
-                            token: result.token,
-                            permissions: result.permissions
-                        };
-                        
-                        // Save to localStorage
-                        localStorage.setItem('adminAuth', JSON.stringify(adminAuth));
-                        
-                        closeModal('adminLoginModal');
-                        showAdminDashboard();
-                        loadAdminStats();
-                        loadManagementData();
-                        
-                        updateAdminNavigation();
-                        showNotification('Admin login successful!', 'success');
-                        
-                    } else {
-                        showNotification('Admin login failed: ' + result.message, 'error');
-                    }
-                } catch (error) {
-                    console.error('Admin login error:', error);
-                    useDemoAdminAuth();
-                }
-            } else {
-                // Backend is offline, use demo auth
-                useDemoAdminAuth();
-            }
-        }
-
-        function useDemoAdminAuth() {
-            adminAuth = {
-                isLoggedIn: true,
-                user: { 
-                    username: 'demo-admin', 
-                    role: 'superadmin',
-                    email: 'demo@techsolutions.com'
-                },
-                token: 'demo-token-offline',
-                permissions: ['read', 'write', 'delete', 'manage_users']
-            };
-            
-            localStorage.setItem('adminAuth', JSON.stringify(adminAuth));
-            closeModal('adminLoginModal');
-            showAdminDashboard();
-            loadAdminStats();
-            loadManagementData();
-            updateAdminNavigation();
-            
-            showNotification('Backend offline - Using demo admin mode', 'info');
-        }
-
-        async function adminLogout() {
-            const isBackendOnline = await checkBackendStatus();
-            
-            if (isBackendOnline && adminAuth.token && !adminAuth.token.includes('demo')) {
-                try {
-                    await fetch(ADMIN_LOGOUT_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': adminAuth.token
-                        }
-                    });
-                } catch (error) {
-                    console.error('Logout error:', error);
-                }
-            }
-            
-            adminAuth = { isLoggedIn: false, user: null, token: null, permissions: [] };
-            localStorage.removeItem('adminAuth');
-            document.getElementById('admin').style.display = 'none';
-            updateAdminNavigation();
-            
-            showNotification('Admin logged out successfully', 'info');
-        }
-
-        function showAdminDashboard() {
-            document.getElementById('admin').style.display = 'block';
-            document.getElementById('adminWelcome').textContent = 
-                `Welcome, ${adminAuth.user.username} (${adminAuth.user.role})`;
-            
-            // Show management panel for admins with appropriate permissions
-            if (adminAuth.permissions.includes('manage_services') || 
-                adminAuth.permissions.includes('manage_courses') ||
-                adminAuth.user.role === 'superadmin') {
-                document.getElementById('adminManagement').style.display = 'block';
-            }
-            
-            // Scroll to admin section
-            document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function updateAdminNavigation() {
-            const adminLink = document.getElementById('adminNavLink');
-            if (adminAuth.isLoggedIn) {
-                adminLink.innerHTML = `Admin <span class="admin-badge">${adminAuth.user.role}</span>`;
-            } else {
-                adminLink.innerHTML = 'Admin <span class="admin-badge">Login Required</span>';
-            }
-        }
-
-        function checkAdminAccess(event) {
-            if (event) event.preventDefault();
-            
-            if (!adminAuth.isLoggedIn) {
-                openModal('adminLoginModal');
-            } else {
-                showAdminDashboard();
-            }
-        }
-
-        function checkSavedAdminAuth() {
-            const savedAuth = localStorage.getItem('adminAuth');
-            if (savedAuth) {
-                adminAuth = JSON.parse(savedAuth);
-                if (adminAuth.isLoggedIn) {
-                    showAdminDashboard();
-                    loadAdminStats();
-                    loadManagementData();
-                    updateAdminNavigation();
-                }
-            }
-        }
-
-        function checkSavedUserAuth() {
-            const savedAuth = localStorage.getItem('userAuth');
-            if (savedAuth) {
-                userAuth = JSON.parse(savedAuth);
-                if (userAuth.isLoggedIn) {
-                    updateUserNavigation();
-                }
-            }
-        }
-
-        // Load services from backend or use sample data
-        async function loadServices() {
-            const isBackendOnline = await checkBackendStatus();
-            let services = sampleServices;
-
-            if (isBackendOnline) {
-                try {
-                    const response = await fetch(SERVICES_URL);
-                    services = await response.json();
-                } catch (error) {
-                    console.error('Error loading services from backend, using sample data:', error);
-                }
-            }
-
-            renderServices(services);
-        }
-
-        function renderServices(services) {
+        // Load services
+        function loadServices() {
             const container = document.getElementById('services-container');
             container.innerHTML = '';
             
-            if (services.length === 0) {
-                container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">No services found matching your criteria.</p>';
-                return;
-            }
-            
-            services.forEach(service => {
+            sampleServices.forEach(service => {
                 const serviceCard = document.createElement('div');
                 serviceCard.className = 'service-card';
                 serviceCard.innerHTML = `
@@ -3089,45 +992,24 @@
                         <h3>${service.name}</h3>
                         <p>${service.description}</p>
                         <ul class="service-features">
-                            ${service.features ? service.features.map(feature => 
+                            ${service.features.map(feature => 
                                 `<li><i class="fas fa-check"></i> ${feature}</li>`
-                            ).join('') : ''}
+                            ).join('')}
                         </ul>
                         <div class="service-price">${service.price}</div>
-                        <a href="#" class="btn btn-primary" onclick="openServiceModal(${service.id})">Get Started</a>
+                        <a href="#" class="btn btn-primary">Get Started</a>
                     </div>
                 `;
                 container.appendChild(serviceCard);
             });
         }
 
-        // Load courses from backend or use sample data
-        async function loadCourses() {
-            const isBackendOnline = await checkBackendStatus();
-            let courses = sampleCourses;
-
-            if (isBackendOnline) {
-                try {
-                    const response = await fetch(COURSES_URL);
-                    courses = await response.json();
-                } catch (error) {
-                    console.error('Error loading courses from backend, using sample data:', error);
-                }
-            }
-
-            renderCourses(courses);
-        }
-
-        function renderCourses(courses) {
+        // Load courses
+        function loadCourses() {
             const container = document.getElementById('courses-container');
             container.innerHTML = '';
             
-            if (courses.length === 0) {
-                container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">No courses found matching your criteria.</p>';
-                return;
-            }
-            
-            courses.forEach(course => {
+            sampleCourses.forEach(course => {
                 const courseCard = document.createElement('div');
                 courseCard.className = 'course-card';
                 courseCard.innerHTML = `
@@ -3146,334 +1028,71 @@
                         <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
                             <i class="fas fa-signal"></i> ${course.level}
                         </div>
-                        <a href="#" class="btn btn-primary" onclick="openCourseModal(${course.id})">Enroll Now</a>
+                        <a href="#" class="btn btn-primary">Enroll Now</a>
                     </div>
                 `;
                 container.appendChild(courseCard);
             });
         }
 
-        // Load admin dashboard data
-        async function loadAdminStats() {
-            const isBackendOnline = await checkBackendStatus();
-            let stats = {
-                totalUsers: 5247,
-                totalServices: sampleServices.length,
-                totalCourses: sampleCourses.length,
-                revenue: "£12,847",
-                activeProjects: 47,
-                completionRate: "94%",
-                newRegistrations: 23,
-                monthlyGrowth: "12%",
-                recentActivities: [
-                    { action: "user_registration", user: "John Doe", timestamp: new Date(Date.now() - 3600000).toISOString() },
-                    { action: "course_enrollment", course: "Web Development Bootcamp", user: "Jane Smith", timestamp: new Date(Date.now() - 7200000).toISOString() },
-                    { action: "service_purchase", service: "Website Development", amount: "£999", timestamp: new Date(Date.now() - 10800000).toISOString() }
-                ]
-            };
-
-            if (isBackendOnline && adminAuth.isLoggedIn) {
-                try {
-                    const response = await fetch(ADMIN_URL, {
-                        headers: {
-                            'Authorization': adminAuth.token
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        const backendStats = await response.json();
-                        stats = { ...stats, ...backendStats };
-                    }
-                } catch (error) {
-                    console.error('Error loading admin stats from backend, using sample data:', error);
-                }
-            }
-
-            const container = document.getElementById('admin-stats');
+        // Load positions
+        function loadPositions() {
+            const container = document.getElementById('positions-container');
             container.innerHTML = '';
             
-            // Update hero stats
-            document.getElementById('total-users').textContent = stats.totalUsers.toLocaleString();
-            document.getElementById('total-services').textContent = stats.totalServices;
-            
-            // Create admin stat cards
-            const statCards = [
-                { icon: 'fa-users', number: stats.totalUsers.toLocaleString(), label: 'Total Users' },
-                { icon: 'fa-laptop-code', number: stats.totalServices, label: 'Active Services' },
-                { icon: 'fa-book', number: stats.totalCourses, label: 'Courses' },
-                { icon: 'fa-chart-line', number: stats.revenue, label: 'Monthly Revenue' },
-                { icon: 'fa-project-diagram', number: stats.activeProjects, label: 'Active Projects' },
-                { icon: 'fa-check-circle', number: stats.completionRate, label: 'Completion Rate' },
-                { icon: 'fa-user-plus', number: stats.newRegistrations, label: 'New Registrations' },
-                { icon: 'fa-arrow-up', number: stats.monthlyGrowth, label: 'Monthly Growth' }
-            ];
-            
-            statCards.forEach(stat => {
-                const statCard = document.createElement('div');
-                statCard.className = 'stat-card';
-                statCard.innerHTML = `
-                    <i class="fas ${stat.icon}"></i>
-                    <div class="number">${stat.number}</div>
-                    <div class="label">${stat.label}</div>
+            samplePositions.forEach(position => {
+                const positionCard = document.createElement('div');
+                positionCard.className = 'position-card';
+                positionCard.innerHTML = `
+                    <div class="position-header">
+                        <div class="position-title">
+                            <h4>${position.title}</h4>
+                            <div class="position-meta">
+                                <span class="meta-item"><i class="fas fa-building"></i> ${position.department}</span>
+                                <span class="meta-item"><i class="fas fa-clock"></i> ${position.type}</span>
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> ${position.location}</span>
+                                <span class="meta-item"><i class="fas fa-briefcase"></i> ${position.experience}</span>
+                                <span class="meta-item"><i class="fas fa-money-bill-wave"></i> ${position.salary}</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-small">
+                            Apply Now
+                        </button>
+                    </div>
+                    <div class="position-tags">
+                        ${position.requirements.map(req => `<span class="position-tag">${req}</span>`).join('')}
+                    </div>
+                    <div class="position-description">
+                        ${position.description}
+                    </div>
                 `;
-                container.appendChild(statCard);
-            });
-
-            // Load recent activities
-            const activitiesContainer = document.getElementById('recentActivities');
-            if (stats.recentActivities && stats.recentActivities.length > 0) {
-                activitiesContainer.innerHTML = '<ul class="activity-list"></ul>';
-                const activityList = activitiesContainer.querySelector('ul');
-                
-                stats.recentActivities.forEach(activity => {
-                    const li = document.createElement('li');
-                    let icon = 'fa-bell';
-                    let text = '';
-                    
-                    switch(activity.action) {
-                        case 'user_registration':
-                            icon = 'fa-user-plus';
-                            text = `New user registered: ${activity.user}`;
-                            break;
-                        case 'course_enrollment':
-                            icon = 'fa-book';
-                            text = `Course enrollment: ${activity.course} by ${activity.user}`;
-                            break;
-                        case 'service_purchase':
-                            icon = 'fa-shopping-cart';
-                            text = `Service purchased: ${activity.service} for ${activity.amount}`;
-                            break;
-                        case 'user_login':
-                            icon = 'fa-sign-in-alt';
-                            text = `User login: ${activity.user}`;
-                            break;
-                        default:
-                            text = activity.action;
-                    }
-                    
-                    li.innerHTML = `
-                        <div class="activity-icon">
-                            <i class="fas ${icon}"></i>
-                        </div>
-                        <div>
-                            <div>${text}</div>
-                            <small style="color: var(--gray);">${new Date(activity.timestamp).toLocaleString()}</small>
-                        </div>
-                    `;
-                    activityList.appendChild(li);
-                });
-            } else {
-                activitiesContainer.innerHTML = '<p>No recent activities</p>';
-            }
-        }
-
-        // Load management data for admin panel
-        function loadManagementData() {
-            // Load services table
-            const servicesTableBody = document.getElementById('services-table-body');
-            servicesTableBody.innerHTML = '';
-            sampleServices.forEach(service => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${service.id}</td>
-                    <td>${service.name}</td>
-                    <td>${service.category}</td>
-                    <td>${service.price}</td>
-                    <td><span class="status-badge status-online">${service.status}</span></td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn edit-btn" onclick="editService(${service.id})">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button class="action-btn delete-btn" onclick="deleteService(${service.id})">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-                        </div>
-                    </td>
-                `;
-                servicesTableBody.appendChild(row);
-            });
-
-            // Load courses table
-            const coursesTableBody = document.getElementById('courses-table-body');
-            coursesTableBody.innerHTML = '';
-            sampleCourses.forEach(course => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${course.id}</td>
-                    <td>${course.name}</td>
-                    <td>${course.duration}</td>
-                    <td>${course.enrolled}</td>
-                    <td>${course.rating}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn edit-btn" onclick="editCourse(${course.id})">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button class="action-btn delete-btn" onclick="deleteCourse(${course.id})">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-                        </div>
-                    </td>
-                `;
-                coursesTableBody.appendChild(row);
-            });
-
-            // Load users table
-            const usersTableBody = document.getElementById('users-table-body');
-            usersTableBody.innerHTML = '';
-            sampleUsers.forEach(user => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td>${user.role}</td>
-                    <td>${user.joined}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn edit-btn" onclick="editUser(${user.id})">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button class="action-btn delete-btn" onclick="deleteUser(${user.id})">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-                        </div>
-                    </td>
-                `;
-                usersTableBody.appendChild(row);
-            });
-
-            // Load orders table
-            const ordersTableBody = document.getElementById('orders-table-body');
-            ordersTableBody.innerHTML = '';
-            sampleOrders.forEach(order => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>#${order.id}</td>
-                    <td>${order.customer}</td>
-                    <td>${order.item}</td>
-                    <td>${order.amount}</td>
-                    <td>${order.date}</td>
-                    <td><span class="status-badge ${order.status === 'Completed' ? 'status-online' : order.status === 'In Progress' ? 'status-warning' : 'status-offline'}">${order.status}</span></td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn edit-btn" onclick="viewOrder(${order.id})">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                            <button class="action-btn delete-btn" onclick="cancelOrder(${order.id})">
-                                <i class="fas fa-times"></i> Cancel
-                            </button>
-                        </div>
-                    </td>
-                `;
-                ordersTableBody.appendChild(row);
+                container.appendChild(positionCard);
             });
         }
 
-        // Helper function to get appropriate icons for services
+        // Helper functions
         function getServiceIcon(category) {
             const icons = {
                 'development': 'fa-code',
                 'support': 'fa-headset',
-                'testing': 'fa-bug',
-                'consultation': 'fa-comments',
-                'cloud': 'fa-cloud',
-                'security': 'fa-shield-alt',
-                'analytics': 'fa-chart-bar'
+                'testing': 'fa-bug'
             };
-            return icons[category.toLowerCase()] || 'fa-laptop-code';
+            return icons[category] || 'fa-laptop-code';
         }
 
-        // Helper function to get appropriate icons for courses
         function getCourseIcon(courseName) {
             if (courseName.toLowerCase().includes('web')) return 'fa-globe';
             if (courseName.toLowerCase().includes('cyber')) return 'fa-shield-alt';
             if (courseName.toLowerCase().includes('mobile')) return 'fa-mobile-alt';
-            if (courseName.toLowerCase().includes('cloud')) return 'fa-cloud';
-            if (courseName.toLowerCase().includes('data')) return 'fa-chart-line';
-            if (courseName.toLowerCase().includes('devops')) return 'fa-cogs';
-            if (courseName.toLowerCase().includes('design')) return 'fa-palette';
-            if (courseName.toLowerCase().includes('blockchain')) return 'fa-link';
             return 'fa-book';
         }
 
-        // Search and filter functionality
-        function setupSearchAndFilter() {
-            // Service search and filter
-            const serviceSearch = document.getElementById('serviceSearch');
-            const serviceCategory = document.getElementById('serviceCategory');
-            
-            serviceSearch.addEventListener('input', filterServices);
-            serviceCategory.addEventListener('change', filterServices);
-            
-            // Course search and filter
-            const courseSearch = document.getElementById('courseSearch');
-            const courseLevel = document.getElementById('courseLevel');
-            
-            courseSearch.addEventListener('input', filterCourses);
-            courseLevel.addEventListener('change', filterCourses);
-        }
-
-        function filterServices() {
-            const searchTerm = document.getElementById('serviceSearch').value.toLowerCase();
-            const category = document.getElementById('serviceCategory').value;
-            
-            const filteredServices = sampleServices.filter(service => {
-                const matchesSearch = service.name.toLowerCase().includes(searchTerm) || 
-                                     service.description.toLowerCase().includes(searchTerm);
-                const matchesCategory = !category || service.category === category;
-                
-                return matchesSearch && matchesCategory;
-            });
-            
-            renderServices(filteredServices);
-        }
-
-        function filterCourses() {
-            const searchTerm = document.getElementById('courseSearch').value.toLowerCase();
-            const level = document.getElementById('courseLevel').value;
-            
-            const filteredCourses = sampleCourses.filter(course => {
-                const matchesSearch = course.name.toLowerCase().includes(searchTerm) || 
-                                     course.description.toLowerCase().includes(searchTerm);
-                const matchesLevel = !level || course.level === level;
-                
-                return matchesSearch && matchesLevel;
-            });
-            
-            renderCourses(filteredCourses);
-        }
-
-        // Admin management functions
-        function switchTab(tabId) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Remove active class from all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected tab content and activate button
-            document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        function openAddServiceModal() {
-            alert('Add Service functionality would open here in a real application');
-        }
-
-        function openAddCourseModal() {
-            alert('Add Course functionality would open here in a real application');
-        }
-
-        function editService(id) {
-            alert(`Edit Service ${id} - This would open an edit form in a real application`);
-        }
-
-        function deleteService(id) {
-            if (confirm('Are you sure you want to delete this service?')) {
-                showNotification(`Service ${id} would be deleted in a real application`,
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadServices();
+            loadCourses();
+            loadPositions();
+        });
+    </script>
+</body>
+</html>
