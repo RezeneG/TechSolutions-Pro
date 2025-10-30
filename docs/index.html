@@ -111,57 +111,6 @@
             align-items: center;
         }
         
-        /* Search and Categories in Header */
-        .nav-search-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            max-width: 500px;
-            margin: 0 20px;
-        }
-        
-        .nav-search-box {
-            position: relative;
-            flex: 1;
-        }
-        
-        .nav-search-box input {
-            width: 100%;
-            padding: 10px 15px 10px 40px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
-            font-size: 0.9rem;
-            transition: border-color 0.3s;
-        }
-        
-        .nav-search-box input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .nav-search-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-        }
-        
-        .nav-categories {
-            min-width: 160px;
-        }
-        
-        .nav-categories select {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
-            font-size: 0.9rem;
-            background: white;
-            cursor: pointer;
-        }
-        
         .btn {
             padding: 10px 20px;
             border-radius: 5px;
@@ -1290,22 +1239,6 @@
                 <div class="logo">
                     <i class="fas fa-laptop-code" aria-hidden="true"></i>
                     <span>TechSolutions Pro</span>
-                </div>
-                
-                <!-- Search and Categories in Navigation -->
-                <div class="nav-search-container">
-                    <div class="nav-search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="global-search" placeholder="Search services, courses..." aria-label="Search website">
-                    </div>
-                    <div class="nav-categories">
-                        <select id="global-category" aria-label="Browse categories">
-                            <option value="">All Categories</option>
-                            <option value="services">Services</option>
-                            <option value="courses">Courses</option>
-                            <option value="bootcamps">Bootcamps</option>
-                        </select>
-                    </div>
                 </div>
                 
                 <div class="nav-links">
@@ -3049,32 +2982,6 @@
             }, 500); // Simulate loading delay
         }
 
-        // Global search functionality
-        function handleGlobalSearch() {
-            try {
-                const searchTerm = document.getElementById('global-search').value.toLowerCase();
-                const category = document.getElementById('global-category').value;
-                
-                if (!searchTerm && !category) return;
-                
-                // Navigate to appropriate section based on category
-                if (category === 'services' || (!category && searchTerm)) {
-                    window.location.href = '#services';
-                    document.getElementById('service-search').value = searchTerm;
-                    setTimeout(loadServices, 300);
-                } else if (category === 'courses') {
-                    window.location.href = '#courses';
-                    document.getElementById('course-search').value = searchTerm;
-                    setTimeout(loadCourses, 300);
-                } else if (category === 'bootcamps') {
-                    window.location.href = '#bootcamps';
-                }
-            } catch (error) {
-                console.error('Error handling global search:', error);
-                showToast('Unable to perform search. Please try again.', 'error');
-            }
-        }
-
         // Show service details in modal
         function showServiceDetails(serviceId) {
             try {
@@ -3266,19 +3173,6 @@
                 document.getElementById('service-category').addEventListener('change', loadServices);
                 document.getElementById('course-search').addEventListener('input', loadCourses);
                 document.getElementById('course-level').addEventListener('change', loadCourses);
-                
-                // Global search functionality
-                document.getElementById('global-search').addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        handleGlobalSearch();
-                    }
-                });
-                
-                document.getElementById('global-category').addEventListener('change', function() {
-                    if (document.getElementById('global-search').value) {
-                        handleGlobalSearch();
-                    }
-                });
                 
                 // Close modal when clicking outside
                 window.onclick = function(event) {
