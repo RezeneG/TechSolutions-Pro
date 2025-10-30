@@ -1,0 +1,11 @@
+TechSolutions-Pro/
+├── backend/
+│   ├── server.js
+│   └── package.json
+├── frontend/
+│   ├── index.html
+│   ├── package.json
+│   └── start-frontend.ps1
+├── docs/
+├── start-all.ps1
+└── README.md
