@@ -89,7 +89,6 @@
         .nav-links {
             display: flex;
             gap: 25px;
-            align-items: center;
         }
         
         .nav-links a {
@@ -104,19 +103,6 @@
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary);
             background: rgba(67, 97, 238, 0.1);
-        }
-        
-        .nav-auth-buttons {
-            display: flex;
-            gap: 10px;
-            margin-left: 15px;
-            padding-left: 15px;
-            border-left: 1px solid var(--light-gray);
-        }
-        
-        .nav-auth-buttons .btn {
-            padding: 8px 16px;
-            font-size: 0.9rem;
         }
         
         .auth-buttons {
@@ -1448,13 +1434,6 @@
                 font-size: 0.9rem;
             }
             
-            .nav-auth-buttons {
-                margin-left: 0;
-                padding-left: 0;
-                border-left: none;
-                margin-top: 10px;
-            }
-            
             .nav-search-container {
                 order: 0;
                 margin: 15px 0;
@@ -1550,14 +1529,9 @@
                     <a href="#services" onclick="showHome()">Services</a>
                     <a href="#courses" onclick="showHome()">Courses</a>
                     <a href="#bootcamps" onclick="showHome()">Bootcamps</a>
-                    
-                    <!-- Authentication Buttons in Navigation -->
-                    <div class="nav-auth-buttons" id="nav-auth-buttons">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
                 </div>
                 
-                <!-- Authentication Buttons - Dynamic (for larger screens) -->
+                <!-- Authentication Buttons - Dynamic -->
                 <div class="auth-buttons" id="auth-buttons">
                     <!-- Will be populated by JavaScript -->
                 </div>
@@ -2205,11 +2179,10 @@
         function updateAuthUI() {
             try {
                 const authButtons = document.getElementById('auth-buttons');
-                const navAuthButtons = document.getElementById('nav-auth-buttons');
                 
                 if (currentUser) {
                     // User is logged in
-                    const userMenu = `
+                    authButtons.innerHTML = `
                         <div class="user-menu">
                             <div class="user-avatar" onclick="toggleUserDropdown()">
                                 ${getUserInitials(currentUser.name)}
@@ -2231,28 +2204,20 @@
                             </div>
                         </div>
                     `;
-                    
-                    authButtons.innerHTML = userMenu;
-                    navAuthButtons.innerHTML = userMenu;
                 } else {
                     // User is not logged in
-                    const authButtonsHTML = `
-                        <a href="#" class="btn btn-outline" onclick="openAuthModal('login')">Sign In</a>
+                    authButtons.innerHTML = `
+                        <a href="#" class="btn btn-outline" onclick="openAuthModal('login')">Login</a>
                         <a href="#" class="btn btn-primary" onclick="openAuthModal('register')">Sign Up</a>
                     `;
-                    
-                    authButtons.innerHTML = authButtonsHTML;
-                    navAuthButtons.innerHTML = authButtonsHTML;
                 }
             } catch (error) {
                 console.error('Error updating auth UI:', error);
                 // Graceful fallback - show basic auth buttons
-                const fallbackHTML = `
-                    <a href="#" class="btn btn-outline" onclick="openAuthModal('login')">Sign In</a>
+                document.getElementById('auth-buttons').innerHTML = `
+                    <a href="#" class="btn btn-outline" onclick="openAuthModal('login')">Login</a>
                     <a href="#" class="btn btn-primary" onclick="openAuthModal('register')">Sign Up</a>
                 `;
-                document.getElementById('auth-buttons').innerHTML = fallbackHTML;
-                document.getElementById('nav-auth-buttons').innerHTML = fallbackHTML;
             }
         }
 
@@ -2711,7 +2676,7 @@
                 button.innerHTML = originalText;
                 button.disabled = false;
             }
-        }
+        });
 
         // Utility Functions
         function getUserInitials(name) {
