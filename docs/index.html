@@ -89,6 +89,7 @@
         .nav-links {
             display: flex;
             gap: 25px;
+            align-items: center;
         }
         
         .nav-links a {
@@ -1530,6 +1531,8 @@
                     <a href="#services" onclick="showHome()">Services</a>
                     <a href="#courses" onclick="showHome()">Courses</a>
                     <a href="#bootcamps" onclick="showHome()">Bootcamps</a>
+                    <!-- ADD THE SIGN IN / SIGN UP BUTTON HERE -->
+                    <a href="#" class="btn btn-primary" onclick="openAuthModal('login')">Sign in / Sign up</a>
                 </div>
                 
                 <!-- Authentication Buttons - Dynamic -->
@@ -2180,9 +2183,14 @@
         function updateAuthUI() {
             try {
                 const authButtons = document.getElementById('auth-buttons');
+                const navSigninBtn = document.querySelector('.nav-links .btn-primary');
                 
                 if (currentUser) {
-                    // User is logged in
+                    // User is logged in - hide the nav button and show user menu in auth-buttons
+                    if (navSigninBtn) {
+                        navSigninBtn.style.display = 'none';
+                    }
+                    
                     authButtons.innerHTML = `
                         <div class="user-menu">
                             <div class="user-avatar" onclick="toggleUserDropdown()">
@@ -2206,7 +2214,11 @@
                         </div>
                     `;
                 } else {
-                    // User is not logged in
+                    // User is not logged in - show the nav button and basic auth buttons
+                    if (navSigninBtn) {
+                        navSigninBtn.style.display = 'inline-block';
+                    }
+                    
                     authButtons.innerHTML = `
                         <a href="#" class="btn btn-outline" onclick="openAuthModal('login')">Login</a>
                         <a href="#" class="btn btn-primary" onclick="openAuthModal('register')">Sign Up</a>
