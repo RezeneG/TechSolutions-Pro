@@ -656,6 +656,16 @@ app.delete('/api/admin/users/:id', authenticateAdmin, requirePermission('manage_
         user: deletedUser
     });
 });
+// ServiceRequest Schema
+const serviceRequestSchema = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    service: { type: mongoose.Schema.Types.ObjectId, ref: 'Service', required: true },
+    status: { type: String, default: 'pending' },
+    details: String,
+    createdAt: { type: Date, default: Date.now }
+});
+
+const ServiceRequest = mongoose.model('ServiceRequest', serviceRequestSchema);
 
 // Order Management
 app.put('/api/admin/orders/:id', authenticateAdmin, (req, res) => {
