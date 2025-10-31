@@ -1,6 +1,9 @@
-// TechSolutions Pro - Enhanced Backend Server with Admin Authentication & Management
+// TechSolutions Pro - MongoDB Backend Server
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
@@ -10,259 +13,204 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Admin Users Database
-const adminUsers = [
-    { id: 1, username: "admin", password: "admin123", role: "superadmin", email: "admin@techsolutions.com" },
-    { id: 2, username: "manager", password: "manager123", role: "manager", email: "manager@techsolutions.com" },
-    { id: 3, username: "demo", password: "demo123", role: "viewer", email: "demo@techsolutions.com" }
-];
+// MongoDB Connection with better error handling
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// Enhanced Sample Data with all services and courses
-const sampleServices = [
-    {
-        id: 1,
-        name: "Website Development",
-        description: "Custom website development with modern technologies. We create responsive, SEO-friendly websites that drive results.",
-        price: "£999",
-        category: "development",
-        features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
-        status: "active",
-        created: "2024-01-15"
-    },
-    {
-        id: 2,
-        name: "IT Support & Maintenance",
-        description: "Professional IT support and maintenance services to keep your systems running smoothly.",
-        price: "£45/hour",
-        category: "support", 
-        features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
-        status: "active",
-        created: "2024-01-10"
-    },
-    {
-        id: 3,
-        name: "Software Testing",
-        description: "Comprehensive software testing services to ensure your applications are bug-free and performant.",
-        price: "Get Quote",
-        category: "testing",
-        features: ["Automated Testing", "Manual Testing", "Performance Testing", "Security Testing"],
-        status: "active",
-        created: "2024-02-01"
-    },
-    {
-        id: 4, 
-        name: "Game Development Consultation",
-        description: "Expert consultation for game development projects, from concept to deployment.",
-        price: "£65/hour",
-        category: "consultation",
-        features: ["Game Design", "Technical Architecture", "Performance Optimization", "Platform Guidance"],
-        status: "active",
-        created: "2024-01-20"
-    },
-    {
-        id: 5,
-        name: "Cloud Migration Services",
-        description: "Seamlessly migrate your infrastructure to cloud platforms like AWS, Azure, or Google Cloud.",
-        price: "£1,500+",
-        category: "cloud",
-        features: ["Infrastructure Setup", "Data Migration", "Security Configuration", "Ongoing Support"],
-        status: "active",
-        created: "2024-02-15"
-    },
-    {
-        id: 6,
-        name: "Cybersecurity Audit",
-        description: "Comprehensive security assessment to identify vulnerabilities and protect your business.",
-        price: "£2,000",
-        category: "security",
-        features: ["Vulnerability Assessment", "Penetration Testing", "Security Report", "Remediation Plan"],
-        status: "active",
-        created: "2024-02-20"
-    },
-    {
-        id: 7,
-        name: "Mobile App Development",
-        description: "Create powerful mobile applications for iOS and Android platforms.",
-        price: "£1,200+",
-        category: "development",
-        features: ["Native & Cross-platform", "UI/UX Design", "App Store Deployment", "Maintenance"],
-        status: "active",
-        created: "2024-03-01"
-    },
-    {
-        id: 8,
-        name: "Data Analytics & BI",
-        description: "Transform your data into actionable insights with advanced analytics and business intelligence.",
-        price: "£85/hour",
-        category: "analytics",
-        features: ["Data Visualization", "Dashboard Creation", "Predictive Analytics", "KPI Tracking"],
-        status: "active",
-        created: "2024-03-05"
-    }
-];
-
-const sampleCourses = [
-    {
-        id: 1,
-        name: "Complete Web Development Bootcamp",
-        description: "Master full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
-        duration: "12 weeks",
-        enrolled: 1247,
-        rating: 4.8,
-        level: "Beginner to Advanced",
-        status: "published",
-        price: "£499",
-        badge: "BESTSELLER",
-        created: "2024-01-10"
-    },
-    {
-        id: 2,
-        name: "Cybersecurity Essentials", 
-        description: "Learn essential cybersecurity principles, threat detection, and protection strategies.",
-        duration: "8 weeks",
-        enrolled: 892,
-        rating: 4.7,
-        level: "Intermediate",
-        status: "published",
-        price: "£399",
-        badge: "HOT",
-        created: "2024-01-15"
-    },
-    {
-        id: 3,
-        name: "Mobile App Development",
-        description: "Build native and cross-platform mobile applications for iOS and Android.",
-        duration: "10 weeks", 
-        enrolled: 756,
-        rating: 4.6,
-        level: "Intermediate",
-        status: "published",
-        price: "£449",
-        badge: "NEW",
-        created: "2024-02-01"
-    },
-    {
-        id: 4,
-        name: "Cloud Computing with AWS",
-        description: "Master Amazon Web Services and learn to deploy scalable cloud infrastructure.",
-        duration: "6 weeks",
-        enrolled: 543,
-        rating: 4.9,
-        level: "Intermediate",
-        status: "published",
-        price: "£349",
-        badge: "TRENDING",
-        created: "2024-02-10"
-    },
-    {
-        id: 5,
-        name: "Data Science & Machine Learning",
-        description: "Learn data analysis, visualization, and machine learning algorithms with Python.",
-        duration: "14 weeks",
-        enrolled: 621,
-        rating: 4.7,
-        level: "Advanced",
-        status: "published",
-        price: "£599",
-        badge: "POPULAR",
-        created: "2024-02-15"
-    },
-    {
-        id: 6,
-        name: "DevOps & CI/CD Pipeline",
-        description: "Master DevOps practices, containerization with Docker, and CI/CD pipeline setup.",
-        duration: "8 weeks",
-        enrolled: 432,
-        rating: 4.8,
-        level: "Intermediate",
-        status: "published",
-        price: "£399",
-        badge: "HOT",
-        created: "2024-03-01"
-    },
-    {
-        id: 7,
-        name: "UI/UX Design Fundamentals",
-        description: "Learn user-centered design principles, prototyping, and design tools.",
-        duration: "6 weeks",
-        enrolled: 389,
-        rating: 4.6,
-        level: "Beginner",
-        status: "published",
-        price: "£299",
-        badge: "NEW",
-        created: "2024-03-05"
-    },
-    {
-        id: 8,
-        name: "Blockchain Development",
-        description: "Build decentralized applications and smart contracts on Ethereum blockchain.",
-        duration: "10 weeks",
-        enrolled: 298,
-        rating: 4.5,
-        level: "Advanced",
-        status: "published",
-        price: "£549",
-        badge: "EMERGING",
-        created: "2024-03-10"
-    }
-];
-
-// Sample data for admin management
-let sampleUsers = [
-    { id: 1, name: "John Smith", email: "john@example.com", role: "Customer", joined: "2024-01-15", status: "active" },
-    { id: 2, name: "Sarah Johnson", email: "sarah@example.com", role: "Customer", joined: "2024-02-03", status: "active" },
-    { id: 3, name: "Mike Wilson", email: "mike@example.com", role: "Premium", joined: "2024-01-28", status: "active" },
-    { id: 4, name: "Emily Davis", email: "emily@example.com", role: "Admin", joined: "2023-12-10", status: "active" },
-    { id: 5, name: "Alex Brown", email: "alex@example.com", role: "Customer", joined: "2024-03-01", status: "active" }
-];
-
-let sampleOrders = [
-    { id: 1001, customer: "John Smith", item: "Website Development", amount: "£999", date: "2024-03-15", status: "Completed", type: "service" },
-    { id: 1002, customer: "Sarah Johnson", item: "Web Development Bootcamp", amount: "£299", date: "2024-03-14", status: "In Progress", type: "course" },
-    { id: 1003, customer: "Mike Wilson", item: "Cybersecurity Audit", amount: "£2,000", date: "2024-03-12", status: "Pending", type: "service" },
-    { id: 1004, customer: "Alex Brown", item: "Mobile App Development Course", amount: "£449", date: "2024-03-10", status: "Completed", type: "course" },
-    { id: 1005, customer: "Emily Davis", item: "Cloud Migration Services", amount: "£1,500", date: "2024-03-08", status: "In Progress", type: "service" }
-];
-
-// Helper function to generate simple tokens
-function generateToken(userId) {
-    return 'admin-token-' + userId + '-' + Date.now();
+if (!MONGODB_URI) {
+    console.error('❌ MONGODB_URI is not defined in environment variables');
+    console.log('💡 Please check your .env file and ensure MONGODB_URI is set');
+    process.exit(1);
 }
 
+console.log('🔗 Attempting to connect to MongoDB Atlas...');
+console.log('📝 Connection string:', MONGODB_URI.replace(/mongodb\+srv:\/\/([^:]+):([^@]+)@/, 'mongodb+srv://username:password@'));
+
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    retryWrites: true,
+    w: 'majority'
+})
+.then(() => {
+    console.log('✅ MongoDB Atlas connected successfully');
+    console.log(`📊 Database: ${mongoose.connection.db.databaseName}`);
+})
+.catch(err => {
+    console.error('❌ MongoDB connection failed:', err.message);
+    console.log('💡 Troubleshooting tips:');
+    console.log('   1. Check your MongoDB Atlas connection string');
+    console.log('   2. Ensure your IP is whitelisted in Atlas Network Access');
+    console.log('   3. Verify your database user credentials');
+    console.log('   4. Check if your cluster is running');
+    process.exit(1);
+});
+
+// MongoDB Schemas
+
+// User Schema
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    avatar: String,
+    company: String,
+    phone: String,
+    bio: String,
+    role: { type: String, default: 'customer' },
+    enrolledCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+    serviceRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ServiceRequest' }],
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
+    learningHours: { type: Number, default: 0 },
+    status: { type: String, default: 'active' },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+// Admin User Schema
+const adminUserSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, enum: ['superadmin', 'manager', 'viewer'], default: 'viewer' },
+    permissions: [String],
+    lastLogin: Date,
+    status: { type: String, default: 'active' },
+    createdAt: { type: Date, default: Date.now }
+});
+
+// Product Schema
+const productSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    category: { type: String, required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+    originalPrice: Number,
+    specs: [String],
+    images: [String],
+    badge: String,
+    icon: String,
+    stock: { type: Number, default: 0 },
+    featured: { type: Boolean, default: false },
+    status: { type: String, default: 'active' },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+// Service Schema
+const serviceSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    price: String,
+    category: String,
+    features: [String],
+    details: String,
+    duration: String,
+    status: { type: String, default: 'active' },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+// Course Schema
+const courseSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    duration: String,
+    price: Number,
+    originalPrice: Number,
+    level: String,
+    category: String,
+    enrolled: { type: Number, default: 0 },
+    rating: { type: Number, default: 0 },
+    badge: String,
+    details: String,
+    instructor: String,
+    modules: [{
+        title: String,
+        duration: String,
+        content: String
+    }],
+    status: { type: String, default: 'published' },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+// Service Request Schema
+const serviceRequestSchema = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    service: { type: mongoose.Schema.Types.ObjectId, ref: 'Service', required: true },
+    status: { type: String, default: 'pending' },
+    details: String,
+    requirements: String,
+    budget: String,
+    timeline: String,
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+// Order Schema
+const orderSchema = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    items: [{
+        itemType: { type: String, enum: ['service', 'course', 'product'], required: true },
+        itemId: { type: mongoose.Schema.Types.ObjectId, required: true },
+        itemName: String,
+        quantity: { type: Number, default: 1 },
+        price: Number
+    }],
+    totalAmount: Number,
+    status: { type: String, default: 'pending' },
+    paymentStatus: { type: String, default: 'pending' },
+    shippingAddress: {
+        street: String,
+        city: String,
+        state: String,
+        zipCode: String,
+        country: String
+    },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+// Create Models
+const User = mongoose.model('User', userSchema);
+const AdminUser = mongoose.model('AdminUser', adminUserSchema);
+const Product = mongoose.model('Product', productSchema);
+const Service = mongoose.model('Service', serviceSchema);
+const Course = mongoose.model('Course', courseSchema);
+const ServiceRequest = mongoose.model('ServiceRequest', serviceRequestSchema);
+const Order = mongoose.model('Order', orderSchema);
+
 // Authentication middleware
-function authenticateAdmin(req, res, next) {
-    const token = req.headers.authorization;
-    
-    if (!token) {
-        return res.status(401).json({ 
-            success: false, 
-            message: "Admin authentication token required" 
-        });
-    }
-    
-    // Simple token validation (in production, use JWT)
-    const tokenParts = token.split('-');
-    if (tokenParts.length < 3 || tokenParts[0] !== 'admin' || tokenParts[1] !== 'token') {
+const authenticateAdmin = async (req, res, next) => {
+    try {
+        const token = req.headers.authorization;
+        
+        if (!token) {
+            return res.status(401).json({ 
+                success: false, 
+                message: "Admin authentication token required" 
+            });
+        }
+        
+        const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET);
+        const adminUser = await AdminUser.findById(decoded.userId);
+        
+        if (!adminUser) {
+            return res.status(401).json({ 
+                success: false, 
+                message: "Invalid authentication token" 
+            });
+        }
+        
+        req.adminUser = adminUser;
+        next();
+    } catch (error) {
         return res.status(401).json({ 
             success: false, 
             message: "Invalid authentication token" 
         });
     }
-    
-    const userId = parseInt(tokenParts[2]);
-    const user = adminUsers.find(u => u.id === userId);
-    
-    if (!user) {
-        return res.status(401).json({ 
-            success: false, 
-            message: "User not found" 
-        });
-    }
-    
-    req.adminUser = user;
-    next();
-}
+};
 
 // Permission middleware
 function requirePermission(permission) {
@@ -280,494 +228,609 @@ function requirePermission(permission) {
     };
 }
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-    res.json({ 
-        status: 'OK', 
-        message: 'TechSolutions Pro Backend is running!',
-        timestamp: new Date().toISOString(),
-        version: '2.1.0',
-        features: {
-            adminAuth: true,
-            services: sampleServices.length,
-            courses: sampleCourses.length,
-            users: sampleUsers.length,
-            orders: sampleOrders.length,
-            management: true
-        }
-    });
-});
-
-// Admin Authentication Endpoints
-app.post('/api/admin/login', (req, res) => {
-    const { username, password } = req.body;
-    
-    if (!username || !password) {
-        return res.status(400).json({ 
-            success: false, 
-            message: "Username and password required" 
-        });
-    }
-    
-    const user = adminUsers.find(u => u.username === username && u.password === password);
-    
-    if (user) {
-        const token = generateToken(user.id);
-        
-        res.json({ 
-            success: true, 
-            message: "Login successful",
-            user: { 
-                id: user.id,
-                username: user.username, 
-                role: user.role,
-                email: user.email
-            },
-            token: token,
-            permissions: getPermissions(user.role)
-        });
-    } else {
-        res.status(401).json({ 
-            success: false, 
-            message: "Invalid username or password" 
-        });
-    }
-});
-
-app.post('/api/admin/logout', authenticateAdmin, (req, res) => {
-    res.json({ 
-        success: true, 
-        message: "Logout successful" 
-    });
-});
-
-app.get('/api/admin/profile', authenticateAdmin, (req, res) => {
-    res.json({
-        success: true,
-        user: req.adminUser
-    });
-});
-
 // Helper function for permissions
 function getPermissions(role) {
     const permissions = {
-        superadmin: ['read', 'write', 'delete', 'manage_users', 'manage_services', 'manage_courses', 'view_analytics'],
-        manager: ['read', 'write', 'manage_services', 'manage_courses', 'view_analytics'],
+        superadmin: ['read', 'write', 'delete', 'manage_users', 'manage_services', 'manage_courses', 'manage_products', 'view_analytics', 'manage_admins'],
+        manager: ['read', 'write', 'manage_services', 'manage_courses', 'manage_products', 'view_analytics'],
         viewer: ['read', 'view_analytics']
     };
     return permissions[role] || ['read'];
 }
 
-// Public endpoints (no auth required)
-app.get('/api/services', (req, res) => {
-    res.json(sampleServices);
+// Routes
+
+// Health check endpoint
+app.get('/api/health', async (req, res) => {
+    const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+    
+    res.json({ 
+        status: 'OK', 
+        message: 'TechSolutions Pro Backend is running!',
+        database: dbStatus,
+        timestamp: new Date().toISOString(),
+        version: '2.1.0'
+    });
 });
 
-app.get('/api/services/categories/all', (req, res) => {
-    const categories = [...new Set(sampleServices.map(service => service.category))];
-    res.json(categories);
+// Public endpoints
+app.get('/api/services', async (req, res) => {
+    try {
+        const services = await Service.find({ status: 'active' });
+        res.json(services);
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
 });
 
-app.get('/api/courses', (req, res) => {
-    res.json(sampleCourses);
+app.get('/api/courses', async (req, res) => {
+    try {
+        const courses = await Course.find({ status: 'published' });
+        res.json(courses);
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+app.get('/api/products', async (req, res) => {
+    try {
+        const { category, featured } = req.query;
+        let filter = { status: 'active' };
+        
+        if (category && category !== 'all') {
+            filter.category = category;
+        }
+        
+        if (featured === 'true') {
+            filter.featured = true;
+        }
+        
+        const products = await Product.find(filter);
+        res.json({ success: true, products });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// User Authentication Endpoints
+app.post('/api/auth/register', async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+
+        // Check if user exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ success: false, error: 'User already exists' });
+        }
+
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        // Create user
+        const user = new User({
+            name,
+            email,
+            password: hashedPassword
+        });
+
+        await user.save();
+
+        // Generate token
+        const token = jwt.sign(
+            { userId: user._id, email: user.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h' }
+        );
+
+        res.status(201).json({
+            success: true,
+            message: 'User created successfully',
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                avatar: user.avatar,
+                company: user.company,
+                phone: user.phone,
+                bio: user.bio,
+                role: user.role
+            },
+            token
+        });
+
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+});
+
+app.post('/api/auth/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Find user
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ success: false, error: 'Invalid credentials' });
+        }
+
+        // Check password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({ success: false, error: 'Invalid credentials' });
+        }
+
+        // Generate token
+        const token = jwt.sign(
+            { userId: user._id, email: user.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h' }
+        );
+
+        res.json({
+            success: true,
+            message: 'Login successful',
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                avatar: user.avatar,
+                company: user.company,
+                phone: user.phone,
+                bio: user.bio,
+                role: user.role,
+                enrolledCourses: user.enrolledCourses,
+                serviceRequests: user.serviceRequests,
+                learningHours: user.learningHours
+            },
+            token
+        });
+
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+});
+
+// Admin Authentication Endpoints
+app.post('/api/admin/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        
+        if (!username || !password) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Username and password required" 
+            });
+        }
+        
+        const adminUser = await AdminUser.findOne({ username });
+        
+        if (!adminUser) {
+            return res.status(401).json({ 
+                success: false, 
+                message: "Invalid username or password" 
+            });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, adminUser.password);
+        
+        if (!isPasswordValid) {
+            return res.status(401).json({ 
+                success: false, 
+                message: "Invalid username or password" 
+            });
+        }
+        
+        // Update last login
+        adminUser.lastLogin = new Date();
+        await adminUser.save();
+        
+        const token = jwt.sign(
+            { userId: adminUser._id, username: adminUser.username, role: adminUser.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '8h' }
+        );
+        
+        res.json({ 
+            success: true, 
+            message: "Login successful",
+            user: { 
+                id: adminUser._id,
+                username: adminUser.username, 
+                role: adminUser.role,
+                email: adminUser.email
+            },
+            token: token,
+            permissions: getPermissions(adminUser.role)
+        });
+    } catch (error) {
+        console.error('Admin login error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: "Internal server error" 
+        });
+    }
 });
 
 // Protected Admin endpoints
-app.get('/api/admin/dashboard', authenticateAdmin, (req, res) => {
-    const recentActivities = [
-        { id: 1, action: "user_registration", user: "John Doe", timestamp: new Date(Date.now() - 3600000).toISOString() },
-        { id: 2, action: "course_enrollment", course: "Web Development Bootcamp", user: "Jane Smith", timestamp: new Date(Date.now() - 7200000).toISOString() },
-        { id: 3, action: "service_purchase", service: "Website Development", amount: "£999", timestamp: new Date(Date.now() - 10800000).toISOString() },
-        { id: 4, action: "user_login", user: "admin", timestamp: new Date(Date.now() - 14400000).toISOString() },
-        { id: 5, action: "course_created", course: "Blockchain Development", admin: "manager", timestamp: new Date(Date.now() - 18000000).toISOString() }
-    ];
-    
-    // Calculate revenue from orders
-    const totalRevenue = sampleOrders.reduce((sum, order) => {
-        const amount = parseFloat(order.amount.replace(/[^0-9.]/g, ''));
-        return sum + (isNaN(amount) ? 0 : amount);
-    }, 0);
-    
-    res.json({
-        totalUsers: sampleUsers.length,
-        totalServices: sampleServices.length,
-        totalCourses: sampleCourses.length,
-        totalOrders: sampleOrders.length,
-        revenue: `£${totalRevenue.toLocaleString()}`,
-        activeProjects: 47,
-        completionRate: "94%",
-        newRegistrations: sampleUsers.filter(user => {
-            const joinDate = new Date(user.joined);
-            const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-            return joinDate > thirtyDaysAgo;
-        }).length,
-        monthlyGrowth: "12%",
-        recentActivities: recentActivities,
-        topPerforming: {
-            service: "Website Development",
-            course: "Complete Web Development Bootcamp",
-            revenueSource: "Service Sales"
-        },
-        userStats: {
-            total: sampleUsers.length,
-            byRole: sampleUsers.reduce((acc, user) => {
-                acc[user.role] = (acc[user.role] || 0) + 1;
-                return acc;
-            }, {})
-        }
-    });
+app.get('/api/admin/dashboard', authenticateAdmin, async (req, res) => {
+    try {
+        const totalUsers = await User.countDocuments();
+        const totalServices = await Service.countDocuments();
+        const totalCourses = await Course.countDocuments();
+        const totalProducts = await Product.countDocuments();
+        const totalOrders = await Order.countDocuments();
+        
+        // Calculate revenue from orders
+        const revenueData = await Order.aggregate([
+            { $match: { paymentStatus: 'completed' } },
+            { $group: { _id: null, totalRevenue: { $sum: '$totalAmount' } } }
+        ]);
+        
+        const totalRevenue = revenueData.length > 0 ? revenueData[0].totalRevenue : 0;
+        
+        // Recent activities
+        const recentOrders = await Order.find()
+            .populate('user', 'name email')
+            .sort({ createdAt: -1 })
+            .limit(5);
+            
+        const recentUsers = await User.find()
+            .sort({ createdAt: -1 })
+            .limit(5);
+
+        res.json({
+            totalUsers,
+            totalServices,
+            totalCourses,
+            totalProducts,
+            totalOrders,
+            revenue: `£${totalRevenue.toLocaleString()}`,
+            recentOrders,
+            recentUsers,
+            userStats: {
+                total: totalUsers,
+                byRole: await User.aggregate([
+                    { $group: { _id: '$role', count: { $sum: 1 } } }
+                ])
+            }
+        });
+    } catch (error) {
+        console.error('Dashboard error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
 });
 
 // Admin Management Endpoints
-app.get('/api/admin/services', authenticateAdmin, (req, res) => {
-    const serviceStats = sampleServices.reduce((acc, service) => {
-        acc.total++;
-        acc.byCategory[service.category] = (acc.byCategory[service.category] || 0) + 1;
-        acc.byStatus[service.status] = (acc.byStatus[service.status] || 0) + 1;
-        return acc;
-    }, { total: 0, byCategory: {}, byStatus: {} });
-
-    res.json({
-        services: sampleServices,
-        stats: serviceStats,
-        management: {
-            canAdd: req.adminUser.role !== 'viewer',
-            canEdit: req.adminUser.role !== 'viewer',
-            canDelete: req.adminUser.role === 'superadmin'
-        }
-    });
-});
-
-app.get('/api/admin/courses', authenticateAdmin, (req, res) => {
-    const courseStats = sampleCourses.reduce((acc, course) => {
-        acc.total++;
-        acc.totalEnrolled += course.enrolled;
-        acc.averageRating = (acc.averageRating || 0) + course.rating;
-        acc.byLevel[course.level] = (acc.byLevel[course.level] || 0) + 1;
-        return acc;
-    }, { total: 0, totalEnrolled: 0, averageRating: 0, byLevel: {} });
-    
-    courseStats.averageRating = (courseStats.averageRating / sampleCourses.length).toFixed(1);
-
-    res.json({
-        courses: sampleCourses,
-        stats: courseStats
-    });
-});
-
-app.get('/api/admin/users', authenticateAdmin, requirePermission('manage_users'), (req, res) => {
-    res.json({
-        users: sampleUsers,
-        stats: {
-            total: sampleUsers.length,
-            active: sampleUsers.filter(u => u.status === 'active').length,
-            byRole: sampleUsers.reduce((acc, user) => {
-                acc[user.role] = (acc[user.role] || 0) + 1;
-                return acc;
-            }, {})
-        }
-    });
-});
-
-app.get('/api/admin/orders', authenticateAdmin, (req, res) => {
-    const orderStats = sampleOrders.reduce((acc, order) => {
-        acc.total++;
-        acc.byStatus[order.status] = (acc.byStatus[order.status] || 0) + 1;
-        acc.byType[order.type] = (acc.byType[order.type] || 0) + 1;
+app.get('/api/admin/services', authenticateAdmin, async (req, res) => {
+    try {
+        const services = await Service.find().sort({ createdAt: -1 });
         
-        const amount = parseFloat(order.amount.replace(/[^0-9.]/g, ''));
-        acc.totalRevenue += isNaN(amount) ? 0 : amount;
+        const serviceStats = await Service.aggregate([
+            { $group: { 
+                _id: '$category', 
+                count: { $sum: 1 }
+            }}
+        ]);
+
+        res.json({
+            services,
+            stats: {
+                total: services.length,
+                byCategory: serviceStats
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+app.get('/api/admin/courses', authenticateAdmin, async (req, res) => {
+    try {
+        const courses = await Course.find().sort({ createdAt: -1 });
         
-        return acc;
-    }, { total: 0, byStatus: {}, byType: {}, totalRevenue: 0 });
-    
-    res.json({
-        orders: sampleOrders,
-        stats: orderStats
-    });
+        const courseStats = await Course.aggregate([
+            { $group: { 
+                _id: '$level', 
+                count: { $sum: 1 },
+                totalEnrolled: { $sum: '$enrolled' }
+            }}
+        ]);
+
+        res.json({
+            courses,
+            stats: {
+                total: courses.length,
+                byLevel: courseStats
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+app.get('/api/admin/products', authenticateAdmin, async (req, res) => {
+    try {
+        const products = await Product.find().sort({ createdAt: -1 });
+        
+        const productStats = await Product.aggregate([
+            { $group: { 
+                _id: '$category', 
+                count: { $sum: 1 },
+                totalStock: { $sum: '$stock' }
+            }}
+        ]);
+
+        res.json({
+            products,
+            stats: {
+                total: products.length,
+                byCategory: productStats
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
 });
 
 // CRUD Operations for Services
-app.post('/api/admin/services', authenticateAdmin, requirePermission('manage_services'), (req, res) => {
-    const newService = {
-        id: Math.max(...sampleServices.map(s => s.id)) + 1,
-        ...req.body,
-        created: new Date().toISOString().split('T')[0],
-        status: 'active'
-    };
-    
-    sampleServices.push(newService);
-    
-    res.json({
-        success: true,
-        message: "Service added successfully",
-        service: newService
-    });
+app.post('/api/admin/services', authenticateAdmin, requirePermission('manage_services'), async (req, res) => {
+    try {
+        const newService = new Service(req.body);
+        await newService.save();
+        
+        res.json({
+            success: true,
+            message: "Service added successfully",
+            service: newService
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
 });
 
-app.put('/api/admin/services/:id', authenticateAdmin, requirePermission('manage_services'), (req, res) => {
-    const serviceId = parseInt(req.params.id);
-    const serviceIndex = sampleServices.findIndex(s => s.id === serviceId);
-    
-    if (serviceIndex === -1) {
-        return res.status(404).json({
-            success: false,
-            message: "Service not found"
+app.put('/api/admin/services/:id', authenticateAdmin, requirePermission('manage_services'), async (req, res) => {
+    try {
+        const service = await Service.findByIdAndUpdate(
+            req.params.id,
+            { ...req.body, updatedAt: new Date() },
+            { new: true }
+        );
+        
+        if (!service) {
+            return res.status(404).json({
+                success: false,
+                message: "Service not found"
+            });
+        }
+        
+        res.json({
+            success: true,
+            message: "Service updated successfully",
+            service
         });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
     }
-    
-    sampleServices[serviceIndex] = {
-        ...sampleServices[serviceIndex],
-        ...req.body,
-        updated: new Date().toISOString()
-    };
-    
-    res.json({
-        success: true,
-        message: "Service updated successfully",
-        service: sampleServices[serviceIndex]
-    });
-});
-
-app.delete('/api/admin/services/:id', authenticateAdmin, requirePermission('manage_services'), (req, res) => {
-    const serviceId = parseInt(req.params.id);
-    const serviceIndex = sampleServices.findIndex(s => s.id === serviceId);
-    
-    if (serviceIndex === -1) {
-        return res.status(404).json({
-            success: false,
-            message: "Service not found"
-        });
-    }
-    
-    const deletedService = sampleServices.splice(serviceIndex, 1)[0];
-    
-    res.json({
-        success: true,
-        message: "Service deleted successfully",
-        service: deletedService
-    });
 });
 
 // CRUD Operations for Courses
-app.post('/api/admin/courses', authenticateAdmin, requirePermission('manage_courses'), (req, res) => {
-    const newCourse = {
-        id: Math.max(...sampleCourses.map(c => c.id)) + 1,
-        ...req.body,
-        created: new Date().toISOString().split('T')[0],
-        status: 'published',
-        enrolled: 0,
-        rating: 0
-    };
-    
-    sampleCourses.push(newCourse);
-    
-    res.json({
-        success: true,
-        message: "Course added successfully",
-        course: newCourse
-    });
-});
-
-app.put('/api/admin/courses/:id', authenticateAdmin, requirePermission('manage_courses'), (req, res) => {
-    const courseId = parseInt(req.params.id);
-    const courseIndex = sampleCourses.findIndex(c => c.id === courseId);
-    
-    if (courseIndex === -1) {
-        return res.status(404).json({
-            success: false,
-            message: "Course not found"
+app.post('/api/admin/courses', authenticateAdmin, requirePermission('manage_courses'), async (req, res) => {
+    try {
+        const newCourse = new Course(req.body);
+        await newCourse.save();
+        
+        res.json({
+            success: true,
+            message: "Course added successfully",
+            course: newCourse
         });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
     }
-    
-    sampleCourses[courseIndex] = {
-        ...sampleCourses[courseIndex],
-        ...req.body,
-        updated: new Date().toISOString()
-    };
-    
-    res.json({
-        success: true,
-        message: "Course updated successfully",
-        course: sampleCourses[courseIndex]
-    });
 });
 
-app.delete('/api/admin/courses/:id', authenticateAdmin, requirePermission('manage_courses'), (req, res) => {
-    const courseId = parseInt(req.params.id);
-    const courseIndex = sampleCourses.findIndex(c => c.id === courseId);
-    
-    if (courseIndex === -1) {
-        return res.status(404).json({
-            success: false,
-            message: "Course not found"
+// CRUD Operations for Products
+app.post('/api/admin/products', authenticateAdmin, requirePermission('manage_products'), async (req, res) => {
+    try {
+        const newProduct = new Product(req.body);
+        await newProduct.save();
+        
+        res.json({
+            success: true,
+            message: "Product added successfully",
+            product: newProduct
         });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
     }
-    
-    const deletedCourse = sampleCourses.splice(courseIndex, 1)[0];
-    
-    res.json({
-        success: true,
-        message: "Course deleted successfully",
-        course: deletedCourse
-    });
 });
 
-// User Management
-app.put('/api/admin/users/:id', authenticateAdmin, requirePermission('manage_users'), (req, res) => {
-    const userId = parseInt(req.params.id);
-    const userIndex = sampleUsers.findIndex(u => u.id === userId);
-    
-    if (userIndex === -1) {
-        return res.status(404).json({
-            success: false,
-            message: "User not found"
+// Database Seeding Endpoint
+app.post('/api/admin/seed', async (req, res) => {
+    try {
+        // Clear existing data
+        await User.deleteMany({});
+        await AdminUser.deleteMany({});
+        await Product.deleteMany({});
+        await Service.deleteMany({});
+        await Course.deleteMany({});
+        await ServiceRequest.deleteMany({});
+        await Order.deleteMany({});
+
+        // Create admin users with hashed passwords
+        const adminUsers = [
+            {
+                username: "admin",
+                email: "admin@techsolutions.com",
+                password: await bcrypt.hash("admin123", 12),
+                role: "superadmin"
+            },
+            {
+                username: "manager", 
+                email: "manager@techsolutions.com",
+                password: await bcrypt.hash("manager123", 12),
+                role: "manager"
+            },
+            {
+                username: "demo",
+                email: "demo@techsolutions.com", 
+                password: await bcrypt.hash("demo123", 12),
+                role: "viewer"
+            }
+        ];
+        await AdminUser.insertMany(adminUsers);
+
+        // Create sample products
+        const products = await Product.insertMany([
+            {
+                name: "Gaming Laptop Pro X1",
+                category: "laptop",
+                description: "High-performance gaming laptop with RTX 4070 and Intel i9 processor.",
+                price: 1899,
+                originalPrice: 2199,
+                specs: ["Intel i9-13900H", "RTX 4070 8GB", "32GB DDR5 RAM", "1TB NVMe SSD", "15.6\" 240Hz Display"],
+                badge: "BESTSELLER",
+                icon: "fa-laptop",
+                stock: 15,
+                featured: true
+            },
+            {
+                name: "Business Ultrabook",
+                category: "laptop", 
+                description: "Lightweight and powerful business laptop with all-day battery life.",
+                price: 1299,
+                originalPrice: 1499,
+                specs: ["Intel i7-1360P", "Iris Xe Graphics", "16GB LPDDR5", "512GB SSD", "14\" 2K Display"],
+                badge: "NEW",
+                icon: "fa-laptop",
+                stock: 25,
+                featured: true
+            },
+            {
+                name: "Mechanical Keyboard Pro",
+                category: "peripheral",
+                description: "RGB mechanical keyboard with Cherry MX switches.",
+                price: 129,
+                originalPrice: 159,
+                specs: ["Cherry MX Red", "RGB Backlight", "Aluminum Frame", "USB-C", "Programmable Keys"],
+                badge: "",
+                icon: "fa-keyboard",
+                stock: 50,
+                featured: true
+            }
+        ]);
+
+        // Create sample services
+        const services = await Service.insertMany([
+            {
+                name: "Website Development",
+                description: "Custom website development with modern technologies.",
+                price: "£999",
+                category: "development",
+                features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
+                details: "Our website development service includes comprehensive planning, design, development, and deployment.",
+                duration: "4-6 weeks"
+            },
+            {
+                name: "IT Support & Maintenance",
+                description: "Professional IT support and maintenance services.",
+                price: "£45/hour",
+                category: "support",
+                features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
+                details: "Our IT support service provides comprehensive technical assistance.",
+                duration: "Ongoing"
+            }
+        ]);
+
+        // Create sample courses
+        const courses = await Course.insertMany([
+            {
+                name: "Complete Web Development Bootcamp",
+                description: "Master full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
+                duration: "12 weeks",
+                price: 499,
+                originalPrice: 799,
+                level: "Beginner",
+                category: "development",
+                enrolled: 1247,
+                rating: 4.8,
+                badge: "BESTSELLER",
+                details: "This comprehensive bootcamp covers everything you need to become a full-stack web developer.",
+                instructor: "John Smith"
+            },
+            {
+                name: "Cybersecurity Essentials",
+                description: "Learn essential cybersecurity principles and protection strategies.",
+                duration: "8 weeks",
+                price: 399,
+                originalPrice: 599,
+                level: "Intermediate", 
+                category: "security",
+                enrolled: 892,
+                rating: 4.7,
+                badge: "HOT",
+                details: "This course provides a comprehensive introduction to cybersecurity.",
+                instructor: "Sarah Johnson"
+            }
+        ]);
+
+        res.json({ 
+            success: true, 
+            message: 'Database seeded successfully',
+            counts: {
+                adminUsers: adminUsers.length,
+                products: products.length,
+                services: services.length,
+                courses: courses.length
+            }
         });
+
+    } catch (error) {
+        console.error('Seed error:', error);
+        res.status(500).json({ success: false, error: 'Failed to seed database' });
     }
-    
-    sampleUsers[userIndex] = {
-        ...sampleUsers[userIndex],
-        ...req.body
-    };
-    
-    res.json({
-        success: true,
-        message: "User updated successfully",
-        user: sampleUsers[userIndex]
-    });
-});
-
-app.delete('/api/admin/users/:id', authenticateAdmin, requirePermission('manage_users'), (req, res) => {
-    const userId = parseInt(req.params.id);
-    const userIndex = sampleUsers.findIndex(u => u.id === userId);
-    
-    if (userIndex === -1) {
-        return res.status(404).json({
-            success: false,
-            message: "User not found"
-        });
-    }
-    
-    const deletedUser = sampleUsers.splice(userIndex, 1)[0];
-    
-    res.json({
-        success: true,
-        message: "User deleted successfully",
-        user: deletedUser
-    });
-});
-// ServiceRequest Schema
-const serviceRequestSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    service: { type: mongoose.Schema.Types.ObjectId, ref: 'Service', required: true },
-    status: { type: String, default: 'pending' },
-    details: String,
-    createdAt: { type: Date, default: Date.now }
-});
-
-const ServiceRequest = mongoose.model('ServiceRequest', serviceRequestSchema);
-
-// Order Management
-app.put('/api/admin/orders/:id', authenticateAdmin, (req, res) => {
-    const orderId = parseInt(req.params.id);
-    const orderIndex = sampleOrders.findIndex(o => o.id === orderId);
-    
-    if (orderIndex === -1) {
-        return res.status(404).json({
-            success: false,
-            message: "Order not found"
-        });
-    }
-    
-    sampleOrders[orderIndex] = {
-        ...sampleOrders[orderIndex],
-        ...req.body
-    };
-    
-    res.json({
-        success: true,
-        message: "Order updated successfully",
-        order: sampleOrders[orderIndex]
-    });
-});
-
-// Analytics Endpoints
-app.get('/api/admin/analytics/overview', authenticateAdmin, requirePermission('view_analytics'), (req, res) => {
-    const serviceRevenue = sampleOrders
-        .filter(order => order.type === 'service')
-        .reduce((sum, order) => sum + parseFloat(order.amount.replace(/[^0-9.]/g, '')), 0);
-    
-    const courseRevenue = sampleOrders
-        .filter(order => order.type === 'course')
-        .reduce((sum, order) => sum + parseFloat(order.amount.replace(/[^0-9.]/g, '')), 0);
-    
-    res.json({
-        revenue: {
-            total: serviceRevenue + courseRevenue,
-            services: serviceRevenue,
-            courses: courseRevenue,
-            growth: 12.5
-        },
-        users: {
-            total: sampleUsers.length,
-            newThisMonth: sampleUsers.filter(user => {
-                const joinDate = new Date(user.joined);
-                const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-                return joinDate >= monthStart;
-            }).length
-        },
-        popular: {
-            topService: sampleServices[0],
-            topCourse: sampleCourses[0],
-            trendingCategory: "development"
-        }
-    });
 });
 
 // Root endpoint
 app.get('/', (req, res) => {
     res.json({
-        message: 'Welcome to TechSolutions Pro API v2.1!',
+        message: 'Welcome to TechSolutions Pro MongoDB API!',
         version: '2.1.0',
-        features: ['services', 'courses', 'admin-auth', 'analytics', 'management'],
+        database: 'MongoDB Atlas',
         endpoints: {
             public: {
                 services: '/api/services',
-                courses: '/api/courses', 
+                courses: '/api/courses',
+                products: '/api/products',
                 health: '/api/health'
+            },
+            auth: {
+                register: '/api/auth/register',
+                login: '/api/auth/login'
             },
             admin: {
                 login: '/api/admin/login',
                 dashboard: '/api/admin/dashboard',
                 services: '/api/admin/services',
                 courses: '/api/admin/courses',
-                users: '/api/admin/users',
-                orders: '/api/admin/orders',
-                analytics: '/api/admin/analytics/overview'
+                products: '/api/admin/products',
+                seed: '/api/admin/seed'
             }
-        },
-        adminDemo: {
-            username: 'admin',
-            password: 'admin123'
-        },
-        stats: {
-            services: sampleServices.length,
-            courses: sampleCourses.length,
-            users: sampleUsers.length,
-            orders: sampleOrders.length
         }
     });
 });
 
 // Start server
 app.listen(PORT, () => {
-    console.log('🟢 Starting TechSolutions Pro Enhanced Backend Server...');
+    console.log('🟢 Starting TechSolutions Pro MongoDB Backend Server...');
     console.log('==================================================');
-    console.log('🟢 TECH SOLUTIONS PRO BACKEND SERVER v2.1');
+    console.log('🟢 TECH SOLUTIONS PRO MONGODB BACKEND v2.1');
     console.log('==================================================');
     console.log('Port: ' + PORT);
     console.log('Environment: ' + (process.env.NODE_ENV || 'development'));
-    console.log('Database: In-Memory with Enhanced Admin Features');
+    console.log('Database: MongoDB Atlas');
     console.log('Time: ' + new Date().toLocaleString());
     console.log('URL: http://localhost:' + PORT);
     console.log('');
@@ -775,29 +838,13 @@ app.listen(PORT, () => {
     console.log('   👤 Login: POST http://localhost:' + PORT + '/api/admin/login');
     console.log('   📊 Dashboard: GET http://localhost:' + PORT + '/api/admin/dashboard');
     console.log('');
-    console.log('🛠️  SERVICES MANAGEMENT:');
-    console.log('   📋 All Services: GET http://localhost:' + PORT + '/api/admin/services');
-    console.log('   ➕ Add Service: POST http://localhost:' + PORT + '/api/admin/services');
-    console.log('   ✏️  Update Service: PUT http://localhost:' + PORT + '/api/admin/services/:id');
-    console.log('   🗑️  Delete Service: DELETE http://localhost:' + PORT + '/api/admin/services/:id');
+    console.log('🛠️  DATABASE MANAGEMENT:');
+    console.log('   🌱 Seed Database: POST http://localhost:' + PORT + '/api/admin/seed');
+    console.log('   💊 Health Check: GET http://localhost:' + PORT + '/api/health');
     console.log('');
-    console.log('📚 COURSES MANAGEMENT:');
-    console.log('   📖 All Courses: GET http://localhost:' + PORT + '/api/admin/courses');
-    console.log('   ➕ Add Course: POST http://localhost:' + PORT + '/api/admin/courses');
-    console.log('   ✏️  Update Course: PUT http://localhost:' + PORT + '/api/admin/courses/:id');
-    console.log('   🗑️  Delete Course: DELETE http://localhost:' + PORT + '/api/admin/courses/:id');
-    console.log('');
-    console.log('👥 USER MANAGEMENT:');
-    console.log('   👥 All Users: GET http://localhost:' + PORT + '/api/admin/users');
-    console.log('   ✏️  Update User: PUT http://localhost:' + PORT + '/api/admin/users/:id');
-    console.log('   🗑️  Delete User: DELETE http://localhost:' + PORT + '/api/admin/users/:id');
-    console.log('');
-    console.log('📊 ANALYTICS:');
-    console.log('   📈 Overview: GET http://localhost:' + PORT + '/api/admin/analytics/overview');
-    console.log('');
-    console.log('🔑 DEMO CREDENTIALS:');
+    console.log('🔑 DEFAULT ADMIN CREDENTIALS:');
     console.log('   👑 Admin: admin / admin123 (Full access)');
-    console.log('   👨‍💼 Manager: manager / manager123 (Manage services & courses)');
+    console.log('   👨‍💼 Manager: manager / manager123 (Manage content)');
     console.log('   👀 Viewer: demo / demo123 (Read-only)');
     console.log('==================================================');
 });
