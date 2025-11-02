@@ -112,25 +112,6 @@
             gap: 15px;
             align-items: center;
         }
-
-        /* Backend Status Indicator */
-        .db-status {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            background: var(--success);
-            color: white;
-            margin-right: 10px;
-        }
-
-        .db-status.offline {
-            background: var(--danger);
-        }
-
-        .db-status.connecting {
-            background: var(--warning);
-        }
         
         .btn {
             padding: 10px 20px;
@@ -1550,11 +1531,12 @@
                     <a href="#services" onclick="showHome()">Services</a>
                     <a href="#courses" onclick="showHome()">Courses</a>
                     <a href="#bootcamps" onclick="showHome()">Bootcamps</a>
+                    <!-- ADD THE SIGN IN / SIGN UP BUTTON HERE -->
+                    <a href="#" class="btn btn-primary" onclick="openAuthModal('login')">Sign in / Sign up</a>
                 </div>
                 
                 <!-- Authentication Buttons - Dynamic -->
                 <div class="auth-buttons" id="auth-buttons">
-                    <span class="db-status" id="backendStatus">Checking...</span>
                     <!-- Will be populated by JavaScript -->
                 </div>
             </nav>
@@ -2152,15 +2134,118 @@
 
     <script>
         // =============================================
-        // BACKEND INTEGRATION CONFIGURATION
-        // =============================================
-        const API_BASE = 'http://localhost:5000/api';
-
-        // =============================================
         // AUTHENTICATION SYSTEM
         // =============================================
         
         // Authentication State Management
+        // Add this at the top of your script section, after the AUTHENTICATION SYSTEM comment
+const API_BASE = 'http://localhost:5000/api';
+
+// Update the initAuth function to check backend connection
+async function checkBackendConnection() {
+    try {
+        const response = await fetch(`${API_BASE}/health`);
+        const data = await response.json();
+        console.log('✅ Backend connection:', data);
+        return true;
+    } catch (error) {
+        console.error('❌ Backend connection failed:', error);
+        showToast('Backend server is not running. Please start the backend server.', 'error');
+        return false;
+    }
+}
+
+// Update the login function to use the backend API
+async function loginUser(email, password) {
+    try {
+        const response = await fetch(`${API_BASE}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            currentUser = result.user;
+            localStorage.setItem(AUTH_TOKEN_KEY, result.token || 'demo-token');
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+            return { success: true, user: currentUser };
+        } else {
+            return { success: false, error: result.error };
+        }
+    } catch (error) {
+        console.error('Login API error:', error);
+        // Fallback to demo mode if backend is not available
+        return loginWithDemoData(email, password);
+    }
+}
+
+// Demo fallback function
+function loginWithDemoData(email, password) {
+    const user = sampleUsers.find(u => u.email === email && u.password === password);
+    if (user) {
+        currentUser = { ...user };
+        delete currentUser.password;
+        localStorage.setItem(AUTH_TOKEN_KEY, 'demo-token');
+        localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+        return { success: true, user: currentUser };
+    }
+    return { success: false, error: 'Invalid credentials' };
+}
+
+// Update the registration function to use backend API
+async function registerUser(userData) {
+    try {
+        const response = await fetch(`${API_BASE}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            currentUser = result.user;
+            localStorage.setItem(AUTH_TOKEN_KEY, result.token || 'demo-token');
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+            return { success: true, user: currentUser };
+        } else {
+            return { success: false, error: result.error };
+        }
+    } catch (error) {
+        console.error('Registration API error:', error);
+        // Fallback to demo mode
+        return registerWithDemoData(userData);
+    }
+}
+
+// Demo registration fallback
+function registerWithDemoData(userData) {
+    const newUser = {
+        id: sampleUsers.length + 1,
+        ...userData,
+        avatar: null,
+        company: '',
+        phone: '',
+        bio: '',
+        enrolledCourses: [],
+        serviceRequests: [],
+        certificates: [],
+        learningHours: 0
+    };
+    
+    sampleUsers.push(newUser);
+    currentUser = { ...newUser };
+    delete currentUser.password;
+    localStorage.setItem(AUTH_TOKEN_KEY, 'demo-token');
+    localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+    return { success: true, user: currentUser };
+}
         let currentUser = null;
         const AUTH_TOKEN_KEY = 'techsolutions_auth_token';
         const USER_DATA_KEY = 'techsolutions_user_data';
@@ -2182,32 +2267,6 @@
                 learningHours: 45
             }
         ];
-
-        // Backend connection check
-        async function checkBackendConnection() {
-            try {
-                const response = await fetch(`${API_BASE}/health`);
-                const data = await response.json();
-                console.log('✅ Backend connection:', data);
-                return true;
-            } catch (error) {
-                console.error('❌ Backend connection failed:', error);
-                showToast('Backend server is not running. Please start the backend server.', 'error');
-                return false;
-            }
-        }
-
-        // Backend status indicator
-        function updateBackendStatus(online) {
-            const statusElement = document.getElementById('backendStatus');
-            if (online) {
-                statusElement.textContent = 'Backend Online';
-                statusElement.className = 'db-status';
-            } else {
-                statusElement.textContent = 'Backend Offline';
-                statusElement.className = 'db-status offline';
-            }
-        }
 
         // Initialize authentication
         function initAuth() {
@@ -2232,11 +2291,15 @@
         function updateAuthUI() {
             try {
                 const authButtons = document.getElementById('auth-buttons');
+                const navSigninBtn = document.querySelector('.nav-links .btn-primary');
                 
                 if (currentUser) {
-                    // User is logged in - show user menu
+                    // User is logged in - hide the nav button and show user menu in auth-buttons
+                    if (navSigninBtn) {
+                        navSigninBtn.style.display = 'none';
+                    }
+                    
                     authButtons.innerHTML = `
-                        <span class="db-status" id="backendStatus">Checking...</span>
                         <div class="user-menu">
                             <div class="user-avatar" onclick="toggleUserDropdown()">
                                 ${getUserInitials(currentUser.name)}
@@ -2259,9 +2322,12 @@
                         </div>
                     `;
                 } else {
-                    // User is not logged in - show auth buttons
+                    // User is not logged in - show the nav button and basic auth buttons
+                    if (navSigninBtn) {
+                        navSigninBtn.style.display = 'inline-block';
+                    }
+                    
                     authButtons.innerHTML = `
-                        <span class="db-status" id="backendStatus">Checking...</span>
                         <a href="#" class="btn btn-outline" onclick="openAuthModal('login')">Login</a>
                         <a href="#" class="btn btn-primary" onclick="openAuthModal('register')">Sign Up</a>
                     `;
@@ -2270,7 +2336,6 @@
                 console.error('Error updating auth UI:', error);
                 // Graceful fallback - show basic auth buttons
                 document.getElementById('auth-buttons').innerHTML = `
-                    <span class="db-status offline" id="backendStatus">Backend Offline</span>
                     <a href="#" class="btn btn-outline" onclick="openAuthModal('login')">Login</a>
                     <a href="#" class="btn btn-primary" onclick="openAuthModal('register')">Sign Up</a>
                 `;
@@ -2358,99 +2423,7 @@
             }
         }
 
-        // Login with backend API
-        async function loginUser(email, password) {
-            try {
-                const response = await fetch(`${API_BASE}/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    currentUser = result.user;
-                    localStorage.setItem(AUTH_TOKEN_KEY, result.token || 'demo-token');
-                    localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-                    return { success: true, user: currentUser };
-                } else {
-                    return { success: false, error: result.error };
-                }
-            } catch (error) {
-                console.error('Login API error:', error);
-                // Fallback to demo mode if backend is not available
-                return loginWithDemoData(email, password);
-            }
-        }
-
-        // Demo fallback function
-        function loginWithDemoData(email, password) {
-            const user = sampleUsers.find(u => u.email === email && u.password === password);
-            if (user) {
-                currentUser = { ...user };
-                delete currentUser.password;
-                localStorage.setItem(AUTH_TOKEN_KEY, 'demo-token');
-                localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-                return { success: true, user: currentUser };
-            }
-            return { success: false, error: 'Invalid credentials' };
-        }
-
-        // Registration with backend API
-        async function registerUser(userData) {
-            try {
-                const response = await fetch(`${API_BASE}/auth/register`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(userData)
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    currentUser = result.user;
-                    localStorage.setItem(AUTH_TOKEN_KEY, result.token || 'demo-token');
-                    localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-                    return { success: true, user: currentUser };
-                } else {
-                    return { success: false, error: result.error };
-                }
-            } catch (error) {
-                console.error('Registration API error:', error);
-                // Fallback to demo mode
-                return registerWithDemoData(userData);
-            }
-        }
-
-        // Demo registration fallback
-        function registerWithDemoData(userData) {
-            const newUser = {
-                id: sampleUsers.length + 1,
-                ...userData,
-                avatar: null,
-                company: '',
-                phone: '',
-                bio: '',
-                enrolledCourses: [],
-                serviceRequests: [],
-                certificates: [],
-                learningHours: 0
-            };
-            
-            sampleUsers.push(newUser);
-            currentUser = { ...newUser };
-            delete currentUser.password;
-            localStorage.setItem(AUTH_TOKEN_KEY, 'demo-token');
-            localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-            return { success: true, user: currentUser };
-        }
-
-        // Update login form submission
+        // Login Function
         document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -2464,20 +2437,32 @@
             button.disabled = true;
             
             try {
-                const result = await loginUser(email, password);
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                if (result.success) {
-                    updateAuthUI();
-                    closeAuthModal();
-                    showToast('Login successful!', 'success');
+                const user = sampleUsers.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    currentUser = { ...user };
+                    delete currentUser.password; // Don't store password
+                    
+                    // Store authentication data
+                    const token = generateToken();
+                    localStorage.setItem(AUTH_TOKEN_KEY, token);
+                    localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
                     
                     if (!rememberMe) {
+                        // Set token to expire in 24 hours
                         setTimeout(() => {
                             logout();
                         }, 24 * 60 * 60 * 1000);
                     }
+                    
+                    updateAuthUI();
+                    closeAuthModal();
+                    showToast('Login successful!', 'success');
                 } else {
-                    throw new Error(result.error);
+                    throw new Error('Invalid email or password');
                 }
             } catch (error) {
                 showToast(error.message, 'error');
@@ -2487,7 +2472,7 @@
             }
         });
 
-        // Update registration form submission
+        // Registration Function
         document.getElementById('register-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -2507,16 +2492,42 @@
             button.disabled = true;
             
             try {
-                const userData = { name, email, password };
-                const result = await registerUser(userData);
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                if (result.success) {
-                    updateAuthUI();
-                    closeAuthModal();
-                    showToast('Account created successfully!', 'success');
-                } else {
-                    throw new Error(result.error);
+                // Check if user already exists
+                if (sampleUsers.find(u => u.email === email)) {
+                    throw new Error('User with this email already exists');
                 }
+                
+                // Create new user
+                const newUser = {
+                    id: sampleUsers.length + 1,
+                    name,
+                    email,
+                    password,
+                    avatar: null,
+                    company: '',
+                    phone: '',
+                    bio: '',
+                    enrolledCourses: [],
+                    serviceRequests: [],
+                    certificates: [],
+                    learningHours: 0
+                };
+                
+                sampleUsers.push(newUser);
+                currentUser = { ...newUser };
+                delete currentUser.password;
+                
+                // Store authentication data
+                const token = generateToken();
+                localStorage.setItem(AUTH_TOKEN_KEY, token);
+                localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+                
+                updateAuthUI();
+                closeAuthModal();
+                showToast('Account created successfully!', 'success');
             } catch (error) {
                 showToast(error.message, 'error');
             } finally {
@@ -2878,7 +2889,7 @@
         });
 
         // =============================================
-        // SERVICES AND COURSES INTEGRATION
+        // EXISTING WEBSITE FUNCTIONALITY
         // =============================================
 
         // Sample data - 20 Services
@@ -3309,218 +3320,159 @@
             }
         ];
 
-        // Updated loadServices function with backend integration
-        async function loadServices() {
+        // Load services with search and filter functionality
+        function loadServices() {
             const container = document.getElementById('services-container');
             container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
             
-            try {
-                // Try to load from backend first
-                const response = await fetch(`${API_BASE}/services`);
-                let services = [];
-                
-                if (response.ok) {
-                    services = await response.json();
-                    console.log('✅ Loaded services from backend:', services.length);
-                } else {
-                    // Fallback to sample data
-                    services = sampleServices;
-                    console.log('⚠️ Using sample services data');
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                try {
+                    const searchTerm = document.getElementById('service-search').value.toLowerCase();
+                    const categoryFilter = document.getElementById('service-category').value;
+                    
+                    const filteredServices = sampleServices.filter(service => {
+                        const matchesSearch = service.name.toLowerCase().includes(searchTerm) || 
+                                            service.description.toLowerCase().includes(searchTerm);
+                        const matchesCategory = categoryFilter === 'all' || service.category === categoryFilter;
+                        return matchesSearch && matchesCategory;
+                    });
+                    
+                    container.innerHTML = '';
+                    
+                    if (filteredServices.length === 0) {
+                        container.innerHTML = `
+                            <div class="error-fallback" style="grid-column: 1 / -1;">
+                                <i class="fas fa-search"></i>
+                                <h3>No Services Found</h3>
+                                <p>No services match your search criteria. Try adjusting your filters or search terms.</p>
+                                <button class="btn btn-primary" onclick="document.getElementById('service-search').value=''; document.getElementById('service-category').value='all'; loadServices()">
+                                    Reset Filters
+                                </button>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    filteredServices.forEach(service => {
+                        const serviceCard = document.createElement('div');
+                        serviceCard.className = 'service-card';
+                        serviceCard.innerHTML = `
+                            <div class="service-icon">
+                                <i class="fas ${getServiceIcon(service.category)}"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>${service.name}</h3>
+                                <p>${service.description}</p>
+                                <ul class="service-features">
+                                    ${service.features.map(feature => 
+                                        `<li><i class="fas fa-check"></i> ${feature}</li>`
+                                    ).join('')}
+                                </ul>
+                                <div class="service-price">${service.price}</div>
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary" onclick="showServiceDetails(${service.id})">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                    <button class="btn btn-primary" onclick="getStarted(${service.id})">
+                                        Get Started
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(serviceCard);
+                    });
+                } catch (error) {
+                    console.error('Failed to load services:', error);
+                    container.innerHTML = `
+                        <div class="error-fallback" style="grid-column: 1 / -1;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Unable to Load Services</h3>
+                            <p>There was an error loading our services. Please try again later.</p>
+                            <button class="btn btn-primary" onclick="loadServices()">Retry</button>
+                        </div>
+                    `;
                 }
-                
-                const searchTerm = document.getElementById('service-search').value.toLowerCase();
-                const categoryFilter = document.getElementById('service-category').value;
-                
-                const filteredServices = services.filter(service => {
-                    const matchesSearch = service.name.toLowerCase().includes(searchTerm) || 
-                                        service.description.toLowerCase().includes(searchTerm);
-                    const matchesCategory = categoryFilter === 'all' || service.category === categoryFilter;
-                    return matchesSearch && matchesCategory;
-                });
-                
-                displayServices(filteredServices, container);
-                
-            } catch (error) {
-                console.error('Failed to load services:', error);
-                // Fallback to sample data
-                const searchTerm = document.getElementById('service-search').value.toLowerCase();
-                const categoryFilter = document.getElementById('service-category').value;
-                
-                const filteredServices = sampleServices.filter(service => {
-                    const matchesSearch = service.name.toLowerCase().includes(searchTerm) || 
-                                        service.description.toLowerCase().includes(searchTerm);
-                    const matchesCategory = categoryFilter === 'all' || service.category === categoryFilter;
-                    return matchesSearch && matchesCategory;
-                });
-                
-                displayServices(filteredServices, container);
-            }
+            }, 500); // Simulate loading delay
         }
 
-        // Updated loadCourses function with backend integration
-        async function loadCourses() {
+        // Load courses with search and filter functionality
+        function loadCourses() {
             const container = document.getElementById('courses-container');
             container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
             
-            try {
-                // Try to load from backend first
-                const response = await fetch(`${API_BASE}/courses`);
-                let courses = [];
-                
-                if (response.ok) {
-                    courses = await response.json();
-                    console.log('✅ Loaded courses from backend:', courses.length);
-                } else {
-                    // Fallback to sample data
-                    courses = sampleCourses;
-                    console.log('⚠️ Using sample courses data');
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                try {
+                    const searchTerm = document.getElementById('course-search').value.toLowerCase();
+                    const levelFilter = document.getElementById('course-level').value;
+                    
+                    const filteredCourses = sampleCourses.filter(course => {
+                        const matchesSearch = course.name.toLowerCase().includes(searchTerm) || 
+                                            course.description.toLowerCase().includes(searchTerm);
+                        const matchesLevel = levelFilter === 'all' || course.level.toLowerCase() === levelFilter;
+                        return matchesSearch && matchesLevel;
+                    });
+                    
+                    container.innerHTML = '';
+                    
+                    if (filteredCourses.length === 0) {
+                        container.innerHTML = `
+                            <div class="error-fallback" style="grid-column: 1 / -1;">
+                                <i class="fas fa-search"></i>
+                                <h3>No Courses Found</h3>
+                                <p>No courses match your search criteria. Try adjusting your filters or search terms.</p>
+                                <button class="btn btn-primary" onclick="document.getElementById('course-search').value=''; document.getElementById('course-level').value='all'; loadCourses()">
+                                    Reset Filters
+                                </button>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    filteredCourses.forEach(course => {
+                        const courseCard = document.createElement('div');
+                        courseCard.className = 'course-card';
+                        courseCard.innerHTML = `
+                            <div class="course-image">
+                                <i class="fas ${getCourseIcon(course.name)}"></i>
+                                ${course.badge ? `<div class="course-badge">${course.badge}</div>` : ''}
+                            </div>
+                            <div class="course-content">
+                                <h3>${course.name}</h3>
+                                <p>${course.description}</p>
+                                <div class="course-meta">
+                                    <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                                    <span><i class="fas fa-user-graduate"></i> ${course.enrolled} enrolled</span>
+                                    <span class="course-rating"><i class="fas fa-star"></i> ${course.rating}</span>
+                                </div>
+                                <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
+                                    <i class="fas fa-signal"></i> ${course.level}
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary" onclick="showCourseDetails(${course.id})">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                    <button class="btn btn-primary" onclick="enrollNow(${course.id})">
+                                        Enroll Now
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(courseCard);
+                    });
+                } catch (error) {
+                    console.error('Failed to load courses:', error);
+                    container.innerHTML = `
+                        <div class="error-fallback" style="grid-column: 1 / -1;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Unable to Load Courses</h3>
+                            <p>There was an error loading our course catalog. Please try again later.</p>
+                            <button class="btn btn-primary" onclick="loadCourses()">Retry</button>
+                        </div>
+                    `;
                 }
-                
-                const searchTerm = document.getElementById('course-search').value.toLowerCase();
-                const levelFilter = document.getElementById('course-level').value;
-                
-                const filteredCourses = courses.filter(course => {
-                    const matchesSearch = course.name.toLowerCase().includes(searchTerm) || 
-                                        course.description.toLowerCase().includes(searchTerm);
-                    const matchesLevel = levelFilter === 'all' || course.level.toLowerCase() === levelFilter;
-                    return matchesSearch && matchesLevel;
-                });
-                
-                displayCourses(filteredCourses, container);
-                
-            } catch (error) {
-                console.error('Failed to load courses:', error);
-                // Fallback to sample data
-                const searchTerm = document.getElementById('course-search').value.toLowerCase();
-                const levelFilter = document.getElementById('course-level').value;
-                
-                const filteredCourses = sampleCourses.filter(course => {
-                    const matchesSearch = course.name.toLowerCase().includes(searchTerm) || 
-                                        course.description.toLowerCase().includes(searchTerm);
-                    const matchesLevel = levelFilter === 'all' || course.level.toLowerCase() === levelFilter;
-                    return matchesSearch && matchesLevel;
-                });
-                
-                displayCourses(filteredCourses, container);
-            }
-        }
-
-        // Helper function to display services
-        function displayServices(services, container) {
-            container.innerHTML = '';
-            
-            if (services.length === 0) {
-                container.innerHTML = `
-                    <div class="error-fallback" style="grid-column: 1 / -1;">
-                        <i class="fas fa-search"></i>
-                        <h3>No Services Found</h3>
-                        <p>No services match your search criteria. Try adjusting your filters or search terms.</p>
-                        <button class="btn btn-primary" onclick="resetServiceFilters()">
-                            Reset Filters
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-            
-            services.forEach(service => {
-                const serviceCard = document.createElement('div');
-                serviceCard.className = 'service-card';
-                serviceCard.innerHTML = `
-                    <div class="service-icon">
-                        <i class="fas ${getServiceIcon(service.category)}"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>${service.name}</h3>
-                        <p>${service.description}</p>
-                        <ul class="service-features">
-                            ${service.features.map(feature => 
-                                `<li><i class="fas fa-check"></i> ${feature}</li>`
-                            ).join('')}
-                        </ul>
-                        <div class="service-price">${service.price}</div>
-                        <div class="btn-group">
-                            <button class="btn btn-secondary" onclick="showServiceDetails(${service.id})">
-                                <i class="fas fa-info-circle"></i> Details
-                            </button>
-                            <button class="btn btn-primary" onclick="getStarted(${service.id})">
-                                Get Started
-                            </button>
-                        </div>
-                        ${service._id ? `<div style="margin-top: 10px; font-size: 0.7rem; color: #666; text-align: center;">
-                            <i class="fas fa-database"></i> MongoDB ID: ${service._id.substring(18)}...
-                        </div>` : ''}
-                    </div>
-                `;
-                container.appendChild(serviceCard);
-            });
-        }
-
-        // Helper function to display courses
-        function displayCourses(courses, container) {
-            container.innerHTML = '';
-            
-            if (courses.length === 0) {
-                container.innerHTML = `
-                    <div class="error-fallback" style="grid-column: 1 / -1;">
-                        <i class="fas fa-search"></i>
-                        <h3>No Courses Found</h3>
-                        <p>No courses match your search criteria. Try adjusting your filters or search terms.</p>
-                        <button class="btn btn-primary" onclick="resetCourseFilters()">
-                            Reset Filters
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-            
-            courses.forEach(course => {
-                const courseCard = document.createElement('div');
-                courseCard.className = 'course-card';
-                courseCard.innerHTML = `
-                    <div class="course-image">
-                        <i class="fas ${getCourseIcon(course.name)}"></i>
-                        ${course.badge ? `<div class="course-badge">${course.badge}</div>` : ''}
-                    </div>
-                    <div class="course-content">
-                        <h3>${course.name}</h3>
-                        <p>${course.description}</p>
-                        <div class="course-meta">
-                            <span><i class="fas fa-clock"></i> ${course.duration}</span>
-                            <span><i class="fas fa-user-graduate"></i> ${course.enrolled} enrolled</span>
-                            <span class="course-rating"><i class="fas fa-star"></i> ${course.rating}</span>
-                        </div>
-                        <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
-                            <i class="fas fa-signal"></i> ${course.level}
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn btn-secondary" onclick="showCourseDetails(${course.id})">
-                                <i class="fas fa-info-circle"></i> Details
-                            </button>
-                            <button class="btn btn-primary" onclick="enrollNow(${course.id})">
-                                Enroll Now
-                            </button>
-                        </div>
-                        ${course._id ? `<div style="margin-top: 10px; font-size: 0.7rem; color: #666; text-align: center;">
-                            <i class="fas fa-database"></i> MongoDB ID: ${course._id.substring(18)}...
-                        </div>` : ''}
-                    </div>
-                `;
-                container.appendChild(courseCard);
-            });
-        }
-
-        // Helper functions for resetting filters
-        function resetServiceFilters() {
-            document.getElementById('service-search').value = '';
-            document.getElementById('service-category').value = 'all';
-            loadServices();
-        }
-
-        function resetCourseFilters() {
-            document.getElementById('course-search').value = '';
-            document.getElementById('course-level').value = 'all';
-            loadCourses();
+            }, 500); // Simulate loading delay
         }
 
         // Show service details in modal
@@ -3703,13 +3655,8 @@
         }
 
         // Initialize the application
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', function() {
             try {
-                // Check backend connection first
-                const backendOnline = await checkBackendConnection();
-                updateBackendStatus(backendOnline);
-                
-                // Initialize auth and load data
                 initAuth();
                 loadServices();
                 loadCourses();
@@ -3749,7 +3696,14 @@
                 });
             } catch (error) {
                 console.error('Error initializing application:', error);
-                showToast('Application initialization failed. Some features may not work.', 'error');
+                // Graceful fallback - show a simple message
+                document.body.innerHTML = `
+                    <div style="padding: 50px; text-align: center;">
+                        <h1>TechSolutions Pro</h1>
+                        <p>We're experiencing technical difficulties. Please refresh the page or try again later.</p>
+                        <button onclick="location.reload()" class="btn btn-primary">Refresh Page</button>
+                    </div>
+                `;
             }
         });
     </script>
