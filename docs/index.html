@@ -2458,7 +2458,7 @@
 
     <script>
         // =============================================
-        // AUTHENTICATION SYSTEM
+        // AUTHENTICATION SYSTEM WITH PASSWORD HASHING
         // =============================================
         
         // Authentication State Management
@@ -2466,13 +2466,34 @@
         const AUTH_TOKEN_KEY = 'techsolutions_auth_token';
         const USER_DATA_KEY = 'techsolutions_user_data';
 
-        // Sample user data (in real app, this would come from backend)
+        // Password Hashing Utility (Simple implementation for demo)
+        // In production, use a proper library like bcrypt
+        class PasswordHasher {
+            static async hashPassword(password) {
+                // Simple hash function for demo purposes
+                // In production, use: await bcrypt.hash(password, 12)
+                const encoder = new TextEncoder();
+                const data = encoder.encode(password + 'techsolutions_salt_2024');
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            static async verifyPassword(password, hashedPassword) {
+                // Verify password against hash
+                // In production, use: await bcrypt.compare(password, hashedPassword)
+                const newHash = await this.hashPassword(password);
+                return newHash === hashedPassword;
+            }
+        }
+
+        // Sample user data with hashed passwords
         const sampleUsers = [
             {
                 id: 1,
                 name: "John Doe",
                 email: "john@example.com",
-                password: "Password123!",
+                password: "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225", // Password123!
                 avatar: null,
                 company: "TechCorp",
                 phone: "+44 123 456 7890",
@@ -2480,7 +2501,38 @@
                 enrolledCourses: [1, 3, 5],
                 serviceRequests: [1, 2],
                 certificates: [1],
-                learningHours: 45
+                learningHours: 45,
+                createdAt: "2024-01-15T10:30:00Z"
+            },
+            {
+                id: 2,
+                name: "Test User",
+                email: "test@test.com",
+                password: "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae", // test123
+                avatar: null,
+                company: "Test Company",
+                phone: "",
+                bio: "Test user account",
+                enrolledCourses: [],
+                serviceRequests: [],
+                certificates: [],
+                learningHours: 0,
+                createdAt: "2024-01-20T14:20:00Z"
+            },
+            {
+                id: 3,
+                name: "Admin User",
+                email: "admin@admin.com",
+                password: "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9", // admin123
+                avatar: null,
+                company: "Admin Corp",
+                phone: "",
+                bio: "Administrator account",
+                enrolledCourses: [1, 2, 3, 4],
+                serviceRequests: [1],
+                certificates: [1, 2],
+                learningHours: 120,
+                createdAt: "2024-01-10T09:15:00Z"
             }
         ];
 
@@ -2626,7 +2678,7 @@
         // Password visibility toggle
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
-            const icon = input.parentNode.querySelector('i');
+            const icon = input.parentNode.querySelector('.password-toggle i');
             
             if (input.type === 'password') {
                 input.type = 'text';
@@ -2639,13 +2691,24 @@
             }
         }
 
-        // Login Function
+        // Enhanced Login Function with Password Hashing
         document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('login-email').value;
+            const email = document.getElementById('login-email').value.trim();
             const password = document.getElementById('login-password').value;
             const rememberMe = document.getElementById('remember-me').checked;
+            
+            // Validation
+            if (!email || !password) {
+                showToast('Please enter both email and password', 'error');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showToast('Please enter a valid email address', 'error');
+                return;
+            }
             
             const button = this.querySelector('button');
             const originalText = button.innerHTML;
@@ -2653,34 +2716,45 @@
             button.disabled = true;
             
             try {
-                // Simulate API call
+                // Simulate API call delay
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                const user = sampleUsers.find(u => u.email === email && u.password === password);
+                // Find user by email (case-insensitive)
+                const user = sampleUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
                 
                 if (user) {
-                    currentUser = { ...user };
-                    delete currentUser.password; // Don't store password
+                    // Verify password with hashing
+                    const isPasswordValid = await PasswordHasher.verifyPassword(password, user.password);
                     
-                    // Store authentication data
-                    const token = generateToken();
-                    localStorage.setItem(AUTH_TOKEN_KEY, token);
-                    localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-                    
-                    if (!rememberMe) {
-                        // Set token to expire in 24 hours
-                        setTimeout(() => {
-                            logout();
-                        }, 24 * 60 * 60 * 1000);
+                    if (isPasswordValid) {
+                        currentUser = { ...user };
+                        delete currentUser.password; // Never store password in user object
+                        
+                        // Store authentication data
+                        const token = generateToken();
+                        localStorage.setItem(AUTH_TOKEN_KEY, token);
+                        localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+                        
+                        if (!rememberMe) {
+                            // Set token to expire in 24 hours
+                            setTimeout(() => {
+                                if (currentUser && currentUser.email === user.email) {
+                                    logout();
+                                }
+                            }, 24 * 60 * 60 * 1000);
+                        }
+                        
+                        updateAuthUI();
+                        closeAuthModal();
+                        showToast('Login successful!', 'success');
+                    } else {
+                        throw new Error('Invalid password');
                     }
-                    
-                    updateAuthUI();
-                    closeAuthModal();
-                    showToast('Login successful!', 'success');
                 } else {
-                    throw new Error('Invalid email or password');
+                    throw new Error('No account found with this email');
                 }
             } catch (error) {
+                console.error('Login error:', error);
                 showToast(error.message, 'error');
             } finally {
                 button.innerHTML = originalText;
@@ -2688,17 +2762,39 @@
             }
         });
 
-        // Registration Function
+        // Enhanced Registration Function with Password Hashing
         document.getElementById('register-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('register-name').value;
-            const email = document.getElementById('register-email').value;
+            const name = document.getElementById('register-name').value.trim();
+            const email = document.getElementById('register-email').value.trim();
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-confirm-password').value;
             
+            // Validation
+            if (!name || !email || !password || !confirmPassword) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showToast('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showToast('Password must be at least 8 characters long', 'error');
+                return;
+            }
+            
             if (password !== confirmPassword) {
                 showToast('Passwords do not match', 'error');
+                return;
+            }
+            
+            const passwordStrength = checkPasswordStrengthValue(password);
+            if (passwordStrength === 'weak') {
+                showToast('Please choose a stronger password', 'warning');
                 return;
             }
             
@@ -2708,20 +2804,23 @@
             button.disabled = true;
             
             try {
-                // Simulate API call
+                // Simulate API call delay
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
                 // Check if user already exists
-                if (sampleUsers.find(u => u.email === email)) {
-                    throw new Error('User with this email already exists');
+                if (sampleUsers.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+                    throw new Error('An account with this email already exists');
                 }
                 
-                // Create new user
+                // Hash password before storing
+                const hashedPassword = await PasswordHasher.hashPassword(password);
+                
+                // Create new user with hashed password
                 const newUser = {
                     id: sampleUsers.length + 1,
                     name,
                     email,
-                    password,
+                    password: hashedPassword,
                     avatar: null,
                     company: '',
                     phone: '',
@@ -2729,12 +2828,15 @@
                     enrolledCourses: [],
                     serviceRequests: [],
                     certificates: [],
-                    learningHours: 0
+                    learningHours: 0,
+                    createdAt: new Date().toISOString()
                 };
                 
+                // In a real app, this would be an API call to save the user
                 sampleUsers.push(newUser);
+                
                 currentUser = { ...newUser };
-                delete currentUser.password;
+                delete currentUser.password; // Never store password in current user object
                 
                 // Store authentication data
                 const token = generateToken();
@@ -2744,7 +2846,9 @@
                 updateAuthUI();
                 closeAuthModal();
                 showToast('Account created successfully!', 'success');
+                
             } catch (error) {
+                console.error('Registration error:', error);
                 showToast(error.message, 'error');
             } finally {
                 button.innerHTML = originalText;
@@ -2752,26 +2856,21 @@
             }
         });
 
-        // Password Strength Checker
+        // Enhanced Password Strength Checker
         function checkPasswordStrength(password) {
             try {
                 const strengthText = document.getElementById('password-strength');
-                let strength = 0;
-                
-                if (password.length >= 8) strength++;
-                if (/[A-Z]/.test(password)) strength++;
-                if (/[0-9]/.test(password)) strength++;
-                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                const strength = checkPasswordStrengthValue(password);
                 
                 strengthText.className = 'password-strength';
                 
                 if (password.length === 0) {
                     strengthText.textContent = '';
-                } else if (strength < 2) {
-                    strengthText.textContent = 'Weak password';
+                } else if (strength === 'weak') {
+                    strengthText.textContent = 'Weak password - include uppercase, numbers, and symbols';
                     strengthText.classList.add('strength-weak');
-                } else if (strength < 4) {
-                    strengthText.textContent = 'Medium strength';
+                } else if (strength === 'medium') {
+                    strengthText.textContent = 'Medium strength - could be stronger';
                     strengthText.classList.add('strength-medium');
                 } else {
                     strengthText.textContent = 'Strong password';
@@ -2782,11 +2881,31 @@
             }
         }
 
-        // Forgot Password
+        function checkPasswordStrengthValue(password) {
+            let score = 0;
+            
+            if (password.length >= 8) score++;
+            if (password.length >= 12) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            
+            if (score < 3) return 'weak';
+            if (score < 5) return 'medium';
+            return 'strong';
+        }
+
+        // Enhanced Forgot Password
         document.getElementById('forgot-password-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('forgot-email').value;
+            const email = document.getElementById('forgot-email').value.trim();
+            
+            if (!email || !isValidEmail(email)) {
+                showToast('Please enter a valid email address', 'error');
+                return;
+            }
+            
             const button = this.querySelector('button');
             const originalText = button.innerHTML;
             
@@ -2794,16 +2913,33 @@
             button.disabled = true;
             
             try {
+                // Check if user exists
+                const userExists = sampleUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
+                
                 await new Promise(resolve => setTimeout(resolve, 1500));
-                showToast('Password reset link sent to your email', 'success');
+                
+                if (userExists) {
+                    showToast('Password reset link sent to your email', 'success');
+                    // In a real app, you would send an actual email here
+                    console.log(`Password reset link would be sent to: ${email}`);
+                } else {
+                    showToast('No account found with this email', 'error');
+                }
+                
                 showAuthForm('login');
             } catch (error) {
-                showToast('Error sending reset link', 'error');
+                showToast('Error sending reset link. Please try again.', 'error');
             } finally {
                 button.innerHTML = originalText;
                 button.disabled = false;
             }
         });
+
+        // Email validation helper
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
 
         // Dashboard Functions
         function showDashboard() {
