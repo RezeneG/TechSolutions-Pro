@@ -346,12 +346,8 @@
         
         .course-image {
             height: 160px;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.5rem;
+            background-size: cover;
+            background-position: center;
             position: relative;
         }
         
@@ -432,12 +428,8 @@
 
         .product-image {
             height: 200px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
+            background-size: cover;
+            background-position: center;
             position: relative;
         }
 
@@ -529,143 +521,6 @@
             color: var(--warning);
         }
 
-        /* Product Details Modal */
-        .product-modal .modal-content {
-            max-width: 800px;
-        }
-
-        .product-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .product-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .product-main-image {
-            height: 300px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-        }
-
-        .product-thumbnails {
-            display: flex;
-            gap: 10px;
-        }
-
-        .product-thumbnail {
-            width: 60px;
-            height: 60px;
-            background: var(--light-gray);
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .product-thumbnail:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .product-info h3 {
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-size: 1.5rem;
-        }
-
-        .product-description {
-            color: var(--gray);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .product-specs {
-            margin-bottom: 20px;
-        }
-
-        .product-specs h4 {
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-
-        .specs-list {
-            list-style: none;
-        }
-
-        .specs-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--light-gray);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .specs-list li:last-child {
-            border-bottom: none;
-        }
-
-        .spec-name {
-            color: var(--gray);
-        }
-
-        .spec-value {
-            color: var(--dark);
-            font-weight: 600;
-        }
-
-        .product-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .quantity-btn {
-            width: 35px;
-            height: 35px;
-            border: 1px solid var(--light-gray);
-            background: white;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .quantity-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .quantity-input {
-            width: 60px;
-            text-align: center;
-            padding: 8px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
-        }
-        
         /* Bootcamp Section */
         .bootcamp-section {
             padding: 80px 0;
@@ -2458,6 +2313,20 @@
 
     <script>
         // =============================================
+        // PASSWORD HASHING IMPLEMENTATION
+        // =============================================
+        
+        // Password hashing function using Web Crypto API
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // =============================================
         // AUTHENTICATION SYSTEM
         // =============================================
         
@@ -2472,7 +2341,7 @@
                 id: 1,
                 name: "John Doe",
                 email: "john@example.com",
-                password: "Password123!",
+                password: "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", // "1234" hashed
                 avatar: null,
                 company: "TechCorp",
                 phone: "+44 123 456 7890",
@@ -2639,7 +2508,7 @@
             }
         }
 
-        // Login Function
+        // Login Function with Password Hashing
         document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -2653,10 +2522,13 @@
             button.disabled = true;
             
             try {
+                // Hash the password before checking
+                const hashedPassword = await hashPassword(password);
+                
                 // Simulate API call
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                const user = sampleUsers.find(u => u.email === email && u.password === password);
+                const user = sampleUsers.find(u => u.email === email && u.password === hashedPassword);
                 
                 if (user) {
                     currentUser = { ...user };
@@ -2688,7 +2560,7 @@
             }
         });
 
-        // Registration Function
+        // Registration Function with Password Hashing
         document.getElementById('register-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -2708,6 +2580,9 @@
             button.disabled = true;
             
             try {
+                // Hash the password before storing
+                const hashedPassword = await hashPassword(password);
+                
                 // Simulate API call
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
@@ -2721,7 +2596,7 @@
                     id: sampleUsers.length + 1,
                     name,
                     email,
-                    password,
+                    password: hashedPassword,
                     avatar: null,
                     company: '',
                     phone: '',
@@ -2886,8 +2761,7 @@
                 } else {
                     container.innerHTML = enrolledCourses.map(course => `
                         <div class="course-card">
-                            <div class="course-image">
-                                <i class="fas ${getCourseIcon(course.name)}"></i>
+                            <div class="course-image" style="background-image: url('${course.image}')">
                                 <div class="course-badge">ENROLLED</div>
                             </div>
                             <div class="course-content">
@@ -3292,7 +3166,7 @@
             }
         ];
 
-        // Sample data - 20 Courses
+        // Sample data - 20 Courses with images
         const sampleCourses = [
             {
                 id: 1,
@@ -3304,6 +3178,7 @@
                 level: "Beginner",
                 badge: "BESTSELLER",
                 price: "£1,499",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This comprehensive bootcamp covers everything you need to become a full-stack web developer. You'll learn front-end technologies like HTML, CSS, and JavaScript, as well as back-end development with Node.js and databases like MongoDB. The course includes hands-on projects, real-world scenarios, and career support to help you land your first developer job."
             },
             {
@@ -3316,6 +3191,7 @@
                 level: "Beginner",
                 badge: "POPULAR",
                 price: "£899",
+                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course provides a comprehensive introduction to cybersecurity principles and practices. You'll learn about common threats, security controls, network security, cryptography, and incident response. The course includes hands-on labs and real-world scenarios to prepare you for entry-level cybersecurity roles."
             },
             {
@@ -3328,6 +3204,7 @@
                 level: "Intermediate",
                 badge: "BESTSELLER",
                 price: "£1,199",
+                image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course provides comprehensive training in Amazon Web Services, the world's leading cloud platform. You'll learn to work with core AWS services, deploy applications, implement security measures, and optimize costs. The course prepares you for AWS certification and real-world cloud engineering roles."
             },
             {
@@ -3340,6 +3217,7 @@
                 level: "Intermediate",
                 badge: "",
                 price: "£1,699",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This comprehensive course covers the entire data science workflow, from data collection and cleaning to analysis, visualization, and machine learning. You'll work with Python, pandas, NumPy, scikit-learn, and other essential tools to solve real-world data problems."
             },
             {
@@ -3352,6 +3230,7 @@
                 level: "Intermediate",
                 badge: "",
                 price: "£1,099",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "Learn to develop mobile applications that work on both iOS and Android using React Native. This course covers component development, navigation, state management, API integration, and app deployment to both app stores."
             },
             {
@@ -3364,6 +3243,7 @@
                 level: "Intermediate",
                 badge: "",
                 price: "£999",
+                image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course takes your JavaScript skills to the next level with advanced concepts like closures, prototypes, and asynchronous programming. You'll also master React with hooks, context API, and advanced patterns for building scalable applications."
             },
             {
@@ -3376,6 +3256,7 @@
                 level: "Beginner",
                 badge: "POPULAR",
                 price: "£799",
+                image: "https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This practical course teaches you how to use Python for automation and scripting tasks. You'll learn to work with files, interact with APIs, automate web browsing, and create useful scripts for everyday tasks."
             },
             {
@@ -3388,6 +3269,7 @@
                 level: "Intermediate",
                 badge: "",
                 price: "£1,299",
+                image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "Learn the principles of DevOps and how to implement them using Docker containers. This course covers containerization, orchestration, continuous integration, and deployment pipelines to streamline your development workflow."
             },
             {
@@ -3400,6 +3282,7 @@
                 level: "Beginner",
                 badge: "",
                 price: "£899",
+                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course teaches the principles of effective UI/UX design. You'll learn about user research, wireframing, prototyping, usability testing, and design systems to create intuitive and engaging digital experiences."
             },
             {
@@ -3412,6 +3295,7 @@
                 level: "Advanced",
                 badge: "",
                 price: "£1,599",
+                image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This advanced course covers blockchain fundamentals, smart contract development, and building decentralized applications. You'll work with Ethereum, Solidity, and popular blockchain development tools."
             },
             {
@@ -3424,6 +3308,7 @@
                 level: "Beginner",
                 badge: "POPULAR",
                 price: "£699",
+                image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course provides comprehensive training in SQL and database design. You'll learn to write complex queries, design normalized databases, optimize performance, and work with different database management systems."
             },
             {
@@ -3436,6 +3321,7 @@
                 level: "Advanced",
                 badge: "",
                 price: "£1,399",
+                image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This advanced course covers Kubernetes architecture, deployment strategies, service discovery, scaling, and monitoring. You'll learn to manage containerized applications in production environments."
             },
             {
@@ -3448,6 +3334,7 @@
                 level: "Intermediate",
                 badge: "",
                 price: "£899",
+                image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "Learn to build reactive web applications with Vue.js. This course covers components, directives, state management with Vuex, routing, and building single-page applications."
             },
             {
@@ -3460,6 +3347,7 @@
                 level: "Beginner",
                 badge: "",
                 price: "£999",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course teaches project management principles tailored for IT professionals. You'll learn agile methodologies, risk management, stakeholder communication, and tools like Jira and Trello."
             },
             {
@@ -3472,6 +3360,7 @@
                 level: "Beginner",
                 badge: "",
                 price: "£1,199",
+                image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This comprehensive Java course covers object-oriented programming, data structures, algorithms, and building applications with Spring Framework. You'll learn to develop enterprise-level Java applications."
             },
             {
@@ -3484,6 +3373,7 @@
                 level: "Intermediate",
                 badge: "",
                 price: "£1,099",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course covers network security principles, including firewalls, VPNs, intrusion detection systems, and security protocols. You'll learn to design and implement secure network architectures."
             },
             {
@@ -3496,6 +3386,7 @@
                 level: "Intermediate",
                 badge: "",
                 price: "£1,099",
+                image: "https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This advanced Python course covers decorators, generators, context managers, metaclasses, and concurrency. You'll learn advanced patterns and techniques for writing efficient, maintainable Python code."
             },
             {
@@ -3508,6 +3399,7 @@
                 level: "Beginner",
                 badge: "",
                 price: "£899",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course covers IT service management frameworks, with a focus on ITIL. You'll learn about service strategy, design, transition, operation, and continual service improvement."
             },
             {
@@ -3520,6 +3412,7 @@
                 level: "Advanced",
                 badge: "",
                 price: "£1,499",
+                image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This advanced course covers MLOps practices for managing the machine learning lifecycle. You'll learn about model deployment, monitoring, versioning, and automation of ML workflows."
             },
             {
@@ -3532,11 +3425,12 @@
                 level: "Beginner",
                 badge: "",
                 price: "£699",
+                image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 details: "This course teaches web accessibility principles and techniques. You'll learn about WCAG guidelines, ARIA attributes, screen reader compatibility, and testing methods to create inclusive digital experiences."
             }
         ];
 
-        // Sample data - 10 Products
+        // Sample data - 10 Products with images
         const sampleProducts = [
             {
                 id: 1,
@@ -3557,7 +3451,7 @@
                     "Support": "24/7 Priority",
                     "Updates": "Lifetime"
                 },
-                icon: "fa-tasks"
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 2,
@@ -3578,7 +3472,7 @@
                     "Support": "Dedicated Team",
                     "Compliance": "GDPR, HIPAA"
                 },
-                icon: "fa-shield-alt"
+                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 3,
@@ -3599,7 +3493,7 @@
                     "Platform": "Cross-platform",
                     "Updates": "Monthly"
                 },
-                icon: "fa-code"
+                image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 4,
@@ -3620,7 +3514,7 @@
                     "Backup": "Automatic",
                     "Access": "Anywhere"
                 },
-                icon: "fa-cloud"
+                image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 5,
@@ -3641,7 +3535,7 @@
                     "Alerts": "Multi-channel",
                     "Integration": "API Available"
                 },
-                icon: "fa-network-wired"
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 6,
@@ -3662,7 +3556,7 @@
                     "Storage": "500GB",
                     "Updates": "Quarterly"
                 },
-                icon: "fa-chart-bar"
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 7,
@@ -3683,7 +3577,7 @@
                     "Support": "24/7",
                     "Training": "Included"
                 },
-                icon: "fa-users"
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 8,
@@ -3704,7 +3598,7 @@
                     "Encryption": "Military-grade",
                     "Storage": "1TB Included"
                 },
-                icon: "fa-hdd"
+                image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 9,
@@ -3725,7 +3619,7 @@
                     "Security": "OAuth 2.0",
                     "Support": "Developer Support"
                 },
-                icon: "fa-project-diagram"
+                image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 10,
@@ -3746,7 +3640,7 @@
                     "Bandwidth": "5TB",
                     "Support": "24/7"
                 },
-                icon: "fa-server"
+                image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
             }
         ];
 
@@ -3864,8 +3758,7 @@
                         const courseCard = document.createElement('div');
                         courseCard.className = 'course-card';
                         courseCard.innerHTML = `
-                            <div class="course-image">
-                                <i class="fas ${getCourseIcon(course.name)}"></i>
+                            <div class="course-image" style="background-image: url('${course.image}')">
                                 ${course.badge ? `<div class="course-badge">${course.badge}</div>` : ''}
                             </div>
                             <div class="course-content">
@@ -3942,8 +3835,7 @@
                         const productCard = document.createElement('div');
                         productCard.className = 'product-card';
                         productCard.innerHTML = `
-                            <div class="product-image">
-                                <i class="fas ${product.icon}"></i>
+                            <div class="product-image" style="background-image: url('${product.image}')">
                                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
                             </div>
                             <div class="product-content">
@@ -4061,21 +3953,16 @@
                 document.getElementById('productModalBody').innerHTML = `
                     <div class="product-details">
                         <div class="product-gallery">
-                            <div class="product-main-image">
-                                <i class="fas ${product.icon}"></i>
+                            <div class="product-main-image" style="background-image: url('${product.image}')">
                             </div>
                             <div class="product-thumbnails">
-                                <div class="product-thumbnail">
-                                    <i class="fas ${product.icon}"></i>
+                                <div class="product-thumbnail" style="background-image: url('${product.image}')">
                                 </div>
-                                <div class="product-thumbnail">
-                                    <i class="fas fa-image"></i>
+                                <div class="product-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')">
                                 </div>
-                                <div class="product-thumbnail">
-                                    <i class="fas fa-cogs"></i>
+                                <div class="product-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')">
                                 </div>
-                                <div class="product-thumbnail">
-                                    <i class="fas fa-chart-bar"></i>
+                                <div class="product-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')">
                                 </div>
                             </div>
                         </div>
@@ -4274,25 +4161,6 @@
                 'design': 'fa-palette'
             };
             return icons[category] || 'fa-laptop-code';
-        }
-
-        function getCourseIcon(courseName) {
-            if (courseName.toLowerCase().includes('web')) return 'fa-globe';
-            if (courseName.toLowerCase().includes('cyber') || courseName.toLowerCase().includes('security')) return 'fa-shield-alt';
-            if (courseName.toLowerCase().includes('mobile')) return 'fa-mobile-alt';
-            if (courseName.toLowerCase().includes('cloud')) return 'fa-cloud';
-            if (courseName.toLowerCase().includes('data') || courseName.toLowerCase().includes('machine learning')) return 'fa-chart-line';
-            if (courseName.toLowerCase().includes('devops')) return 'fa-cogs';
-            if (courseName.toLowerCase().includes('design')) return 'fa-palette';
-            if (courseName.toLowerCase().includes('blockchain')) return 'fa-link';
-            if (courseName.toLowerCase().includes('python')) return 'fa-python';
-            if (courseName.toLowerCase().includes('java')) return 'fa-coffee';
-            if (courseName.toLowerCase().includes('sql')) return 'fa-database';
-            if (courseName.toLowerCase().includes('kubernetes')) return 'fa-docker';
-            if (courseName.toLowerCase().includes('project')) return 'fa-tasks';
-            if (courseName.toLowerCase().includes('vue')) return 'fa-vuejs';
-            if (courseName.toLowerCase().includes('javascript')) return 'fa-js';
-            return 'fa-book';
         }
 
         // Initialize the application
