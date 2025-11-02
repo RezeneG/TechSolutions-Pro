@@ -269,6 +269,13 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
+        .service-image {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
         .service-icon {
             background: var(--primary);
             color: white;
@@ -346,13 +353,29 @@
         
         .course-image {
             height: 160px;
-            background: var(--primary);
+            background-size: cover;
+            background-position: center;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        
+        .course-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(67, 97, 238, 0.8);
+        }
+        
+        .course-image i {
+            position: relative;
+            z-index: 2;
             color: white;
             font-size: 2.5rem;
-            position: relative;
         }
         
         .course-badge {
@@ -365,6 +388,7 @@
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 600;
+            z-index: 3;
         }
         
         .course-content {
@@ -432,13 +456,29 @@
 
         .product-image {
             height: 200px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-size: cover;
+            background-position: center;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image i {
+            position: relative;
+            z-index: 2;
             color: white;
             font-size: 3rem;
-            position: relative;
         }
 
         .product-badge {
@@ -451,6 +491,7 @@
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 600;
+            z-index: 3;
         }
 
         .product-content {
@@ -548,13 +589,10 @@
 
         .product-main-image {
             height: 300px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-size: cover;
+            background-position: center;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
+            position: relative;
         }
 
         .product-thumbnails {
@@ -567,18 +605,14 @@
             height: 60px;
             background: var(--light-gray);
             border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s;
+            background-size: cover;
+            background-position: center;
         }
 
         .product-thumbnail:hover {
-            background: var(--primary);
-            color: white;
+            transform: scale(1.05);
         }
 
         .product-info h3 {
@@ -3022,7 +3056,7 @@
                 } else {
                     container.innerHTML = enrolledCourses.map(course => `
                         <div class="course-card">
-                            <div class="course-image">
+                            <div class="course-image" style="background-image: url('${course.image}')">
                                 <i class="fas ${getCourseIcon(course.name)}"></i>
                                 <div class="course-badge">ENROLLED</div>
                             </div>
@@ -3149,7 +3183,7 @@
                 button.innerHTML = originalText;
                 button.disabled = false;
             }
-        });
+        }
 
         // Utility Functions
         function getUserInitials(name) {
@@ -3241,10 +3275,10 @@
         });
 
         // =============================================
-        // EXISTING WEBSITE FUNCTIONALITY
+        // POPULATED DATA WITH IMAGES
         // =============================================
 
-        // Sample data - 20 Services
+        // Sample data - 20 Services with images
         const sampleServices = [
             {
                 id: 1,
@@ -3253,7 +3287,8 @@
                 price: "£999",
                 category: "development",
                 features: ["Responsive Design", "SEO Optimized", "CMS Integration", "3 Months Support"],
-                details: "Our website development service includes comprehensive planning, design, development, and deployment. We use the latest technologies to ensure your website is fast, secure, and scalable. Our team works closely with you to understand your business needs and create a solution that meets your objectives."
+                details: "Our website development service includes comprehensive planning, design, development, and deployment. We use the latest technologies to ensure your website is fast, secure, and scalable. Our team works closely with you to understand your business needs and create a solution that meets your objectives.",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 2,
@@ -3262,7 +3297,8 @@
                 price: "£45/hour",
                 category: "support",
                 features: ["24/7 Support", "Remote Assistance", "Hardware Maintenance", "Software Updates"],
-                details: "Our IT support service provides comprehensive technical assistance for all your IT needs. We offer proactive monitoring, regular maintenance, and quick response times to minimize downtime. Our certified technicians are available 24/7 to resolve any issues and keep your business running smoothly."
+                details: "Our IT support service provides comprehensive technical assistance for all your IT needs. We offer proactive monitoring, regular maintenance, and quick response times to minimize downtime. Our certified technicians are available 24/7 to resolve any issues and keep your business running smoothly.",
+                image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 3,
@@ -3271,7 +3307,8 @@
                 price: "£1,200",
                 category: "security",
                 features: ["Threat Assessment", "Firewall Setup", "Security Monitoring", "Incident Response"],
-                details: "Our cybersecurity solutions are designed to protect your business from evolving threats. We conduct thorough assessments, implement robust security measures, and provide continuous monitoring to ensure your data and systems remain secure."
+                details: "Our cybersecurity solutions are designed to protect your business from evolving threats. We conduct thorough assessments, implement robust security measures, and provide continuous monitoring to ensure your data and systems remain secure.",
+                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 4,
@@ -3280,7 +3317,8 @@
                 price: "£2,500",
                 category: "cloud",
                 features: ["Strategy Planning", "Data Migration", "Application Migration", "Post-Migration Support"],
-                details: "Our cloud migration service helps businesses transition to the cloud with minimal disruption. We develop a comprehensive migration strategy, handle the technical aspects, and provide ongoing support to ensure optimal performance."
+                details: "Our cloud migration service helps businesses transition to the cloud with minimal disruption. We develop a comprehensive migration strategy, handle the technical aspects, and provide ongoing support to ensure optimal performance.",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 5,
@@ -3289,7 +3327,8 @@
                 price: "£3,500",
                 category: "development",
                 features: ["Native iOS & Android", "UI/UX Design", "App Store Deployment", "6 Months Support"],
-                details: "We create powerful mobile applications that deliver exceptional user experiences. Our development process includes thorough planning, design, development, testing, and deployment to ensure your app meets your business goals."
+                details: "We create powerful mobile applications that deliver exceptional user experiences. Our development process includes thorough planning, design, development, testing, and deployment to ensure your app meets your business goals.",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 6,
@@ -3298,7 +3337,8 @@
                 price: "£120/hour",
                 category: "consultation",
                 features: ["Technology Assessment", "Strategic Planning", "Vendor Selection", "Implementation Guidance"],
-                details: "Our IT consultation service provides expert guidance to help you navigate complex technology decisions. We analyze your current infrastructure, identify opportunities for improvement, and develop a strategic roadmap aligned with your business objectives."
+                details: "Our IT consultation service provides expert guidance to help you navigate complex technology decisions. We analyze your current infrastructure, identify opportunities for improvement, and develop a strategic roadmap aligned with your business objectives.",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 7,
@@ -3307,7 +3347,8 @@
                 price: "£1,800",
                 category: "analytics",
                 features: ["Data Collection", "Analysis & Reporting", "Dashboard Creation", "Insight Recommendations"],
-                details: "Our data analytics service helps you unlock the value of your data. We collect, process, and analyze your data to provide meaningful insights that drive informed decision-making and business growth."
+                details: "Our data analytics service helps you unlock the value of your data. We collect, process, and analyze your data to provide meaningful insights that drive informed decision-making and business growth.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 8,
@@ -3316,7 +3357,8 @@
                 price: "£2,200",
                 category: "infrastructure",
                 features: ["Network Design", "Hardware Installation", "Configuration", "Performance Optimization"],
-                details: "We design and implement reliable network infrastructure that supports your business operations. Our solutions ensure high availability, security, and scalability to meet your current and future needs."
+                details: "We design and implement reliable network infrastructure that supports your business operations. Our solutions ensure high availability, security, and scalability to meet your current and future needs.",
+                image: "https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 9,
@@ -3325,7 +3367,8 @@
                 price: "£1,500",
                 category: "database",
                 features: ["Database Design", "Performance Tuning", "Backup Solutions", "Security Implementation"],
-                details: "Our database management service ensures your data is organized, secure, and accessible. We design efficient database structures, optimize performance, and implement robust security measures to protect your valuable information."
+                details: "Our database management service ensures your data is organized, secure, and accessible. We design efficient database structures, optimize performance, and implement robust security measures to protect your valuable information.",
+                image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 10,
@@ -3334,7 +3377,8 @@
                 price: "£800",
                 category: "testing",
                 features: ["Test Planning", "Automated Testing", "Performance Testing", "Security Testing"],
-                details: "Our software testing service identifies and resolves issues before they impact your users. We employ a comprehensive testing approach that includes functional, performance, security, and usability testing to ensure quality."
+                details: "Our software testing service identifies and resolves issues before they impact your users. We employ a comprehensive testing approach that includes functional, performance, security, and usability testing to ensure quality.",
+                image: "https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 11,
@@ -3343,7 +3387,8 @@
                 price: "£3,000",
                 category: "consultation",
                 features: ["Strategy Development", "Process Automation", "Technology Implementation", "Change Management"],
-                details: "Our digital transformation service helps businesses adapt to the digital age. We develop comprehensive strategies, implement modern technologies, and guide your team through the transformation process to maximize benefits."
+                details: "Our digital transformation service helps businesses adapt to the digital age. We develop comprehensive strategies, implement modern technologies, and guide your team through the transformation process to maximize benefits.",
+                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 12,
@@ -3352,7 +3397,8 @@
                 price: "£2,800",
                 category: "development",
                 features: ["Platform Selection", "Custom Design", "Payment Integration", "Inventory Management"],
-                details: "We create feature-rich e-commerce solutions that drive sales and enhance customer experiences. Our services include platform selection, custom design, secure payment integration, and comprehensive inventory management."
+                details: "We create feature-rich e-commerce solutions that drive sales and enhance customer experiences. Our services include platform selection, custom design, secure payment integration, and comprehensive inventory management.",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 13,
@@ -3361,7 +3407,8 @@
                 price: "£75/hour",
                 category: "training",
                 features: ["Needs Assessment", "Custom Curriculum", "Hands-on Exercises", "Progress Tracking"],
-                details: "Our IT training service equips your team with the skills needed to leverage technology effectively. We develop customized training programs based on your specific needs and deliver engaging, hands-on sessions."
+                details: "Our IT training service equips your team with the skills needed to leverage technology effectively. We develop customized training programs based on your specific needs and deliver engaging, hands-on sessions.",
+                image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 14,
@@ -3370,7 +3417,8 @@
                 price: "£1,200",
                 category: "design",
                 features: ["User Research", "Wireframing", "Prototyping", "Usability Testing"],
-                details: "Our UI/UX design service focuses on creating interfaces that are both beautiful and functional. We conduct user research, create detailed wireframes, develop interactive prototypes, and test for usability to ensure optimal user experiences."
+                details: "Our UI/UX design service focuses on creating interfaces that are both beautiful and functional. We conduct user research, create detailed wireframes, develop interactive prototypes, and test for usability to ensure optimal user experiences.",
+                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 15,
@@ -3379,7 +3427,8 @@
                 price: "£2,500",
                 category: "infrastructure",
                 features: ["CI/CD Pipeline", "Infrastructure as Code", "Monitoring Setup", "Team Training"],
-                details: "Our DevOps implementation service helps you adopt modern development practices that improve efficiency and collaboration. We set up continuous integration and deployment pipelines, implement infrastructure as code, and provide team training."
+                details: "Our DevOps implementation service helps you adopt modern development practices that improve efficiency and collaboration. We set up continuous integration and deployment pipelines, implement infrastructure as code, and provide team training.",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 16,
@@ -3388,7 +3437,8 @@
                 price: "£1,600",
                 category: "development",
                 features: ["API Design", "Development & Testing", "Documentation", "Security Implementation"],
-                details: "We develop secure, scalable APIs that enable seamless integration between your applications and services. Our approach includes thorough design, development, testing, and comprehensive documentation."
+                details: "We develop secure, scalable APIs that enable seamless integration between your applications and services. Our approach includes thorough design, development, testing, and comprehensive documentation.",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 17,
@@ -3397,7 +3447,8 @@
                 price: "£2,200",
                 category: "analytics",
                 features: ["Data Warehousing", "Dashboard Creation", "KPI Tracking", "Predictive Analytics"],
-                details: "Our business intelligence service helps you make data-driven decisions. We create comprehensive data warehouses, develop interactive dashboards, track key performance indicators, and implement predictive analytics."
+                details: "Our business intelligence service helps you make data-driven decisions. We create comprehensive data warehouses, develop interactive dashboards, track key performance indicators, and implement predictive analytics.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 18,
@@ -3406,7 +3457,8 @@
                 price: "£1,800",
                 category: "consultation",
                 features: ["Infrastructure Assessment", "Security Review", "Compliance Check", "Recommendations Report"],
-                details: "Our IT audit service provides a thorough assessment of your technology infrastructure. We evaluate security, performance, compliance, and efficiency, then provide detailed recommendations for improvement."
+                details: "Our IT audit service provides a thorough assessment of your technology infrastructure. We evaluate security, performance, compliance, and efficiency, then provide detailed recommendations for improvement.",
+                image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 19,
@@ -3415,1077 +3467,5 @@
                 price: "£1,500",
                 category: "security",
                 features: ["Risk Assessment", "Recovery Strategy", "Backup Solutions", "Testing & Maintenance"],
-                details: "Our disaster recovery service ensures your business can quickly recover from unexpected disruptions. We conduct risk assessments, develop comprehensive recovery strategies, implement backup solutions, and regularly test your plans."
-            },
-            {
-                id: 20,
-                name: "IT Project Management",
-                description: "Professional project management for your IT initiatives to ensure successful delivery.",
-                price: "£100/hour",
-                category: "consultation",
-                features: ["Project Planning", "Resource Management", "Progress Tracking", "Stakeholder Communication"],
-                details: "Our IT project management service ensures your technology projects are delivered on time and within budget. We provide comprehensive planning, resource management, progress tracking, and stakeholder communication."
-            }
-        ];
-
-        // Sample data - 20 Courses
-        const sampleCourses = [
-            {
-                id: 1,
-                name: "Complete Web Development Bootcamp",
-                description: "Master full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
-                duration: "12 weeks",
-                enrolled: 1247,
-                rating: 4.8,
-                level: "Beginner",
-                badge: "BESTSELLER",
-                price: "£1,499",
-                details: "This comprehensive bootcamp covers everything you need to become a full-stack web developer. You'll learn front-end technologies like HTML, CSS, and JavaScript, as well as back-end development with Node.js and databases like MongoDB. The course includes hands-on projects, real-world scenarios, and career support to help you land your first developer job."
-            },
-            {
-                id: 2,
-                name: "Cybersecurity Fundamentals",
-                description: "Learn the fundamentals of cybersecurity, including threat detection, prevention, and response strategies.",
-                duration: "8 weeks",
-                enrolled: 892,
-                rating: 4.7,
-                level: "Beginner",
-                badge: "POPULAR",
-                price: "£899",
-                details: "This course provides a comprehensive introduction to cybersecurity principles and practices. You'll learn about common threats, security controls, network security, cryptography, and incident response. The course includes hands-on labs and real-world scenarios to prepare you for entry-level cybersecurity roles."
-            },
-            {
-                id: 3,
-                name: "Cloud Computing with AWS",
-                description: "Master Amazon Web Services and learn to deploy, manage, and scale applications in the cloud.",
-                duration: "10 weeks",
-                enrolled: 1563,
-                rating: 4.8,
-                level: "Intermediate",
-                badge: "BESTSELLER",
-                price: "£1,199",
-                details: "This course provides comprehensive training in Amazon Web Services, the world's leading cloud platform. You'll learn to work with core AWS services, deploy applications, implement security measures, and optimize costs. The course prepares you for AWS certification and real-world cloud engineering roles."
-            },
-            {
-                id: 4,
-                name: "Data Science & Machine Learning",
-                description: "Learn data analysis, visualization, and machine learning techniques using Python and popular libraries.",
-                duration: "14 weeks",
-                enrolled: 1105,
-                rating: 4.6,
-                level: "Intermediate",
-                badge: "",
-                price: "£1,699",
-                details: "This comprehensive course covers the entire data science workflow, from data collection and cleaning to analysis, visualization, and machine learning. You'll work with Python, pandas, NumPy, scikit-learn, and other essential tools to solve real-world data problems."
-            },
-            {
-                id: 5,
-                name: "Mobile App Development with React Native",
-                description: "Build cross-platform mobile applications for iOS and Android using React Native.",
-                duration: "9 weeks",
-                enrolled: 743,
-                rating: 4.5,
-                level: "Intermediate",
-                badge: "",
-                price: "£1,099",
-                details: "Learn to develop mobile applications that work on both iOS and Android using React Native. This course covers component development, navigation, state management, API integration, and app deployment to both app stores."
-            },
-            {
-                id: 6,
-                name: "Advanced JavaScript & React",
-                description: "Deep dive into advanced JavaScript concepts and master React for building modern web applications.",
-                duration: "7 weeks",
-                enrolled: 982,
-                rating: 4.7,
-                level: "Intermediate",
-                badge: "",
-                price: "£999",
-                details: "This course takes your JavaScript skills to the next level with advanced concepts like closures, prototypes, and asynchronous programming. You'll also master React with hooks, context API, and advanced patterns for building scalable applications."
-            },
-            {
-                id: 7,
-                name: "Python for Automation & Scripting",
-                description: "Learn to automate tasks and write efficient scripts using Python.",
-                duration: "6 weeks",
-                enrolled: 1256,
-                rating: 4.6,
-                level: "Beginner",
-                badge: "POPULAR",
-                price: "£799",
-                details: "This practical course teaches you how to use Python for automation and scripting tasks. You'll learn to work with files, interact with APIs, automate web browsing, and create useful scripts for everyday tasks."
-            },
-            {
-                id: 8,
-                name: "DevOps & Docker",
-                description: "Master DevOps practices and containerization with Docker for efficient application deployment.",
-                duration: "8 weeks",
-                enrolled: 834,
-                rating: 4.8,
-                level: "Intermediate",
-                badge: "",
-                price: "£1,299",
-                details: "Learn the principles of DevOps and how to implement them using Docker containers. This course covers containerization, orchestration, continuous integration, and deployment pipelines to streamline your development workflow."
-            },
-            {
-                id: 9,
-                name: "UI/UX Design Principles",
-                description: "Learn the fundamentals of user interface and user experience design for digital products.",
-                duration: "6 weeks",
-                enrolled: 672,
-                rating: 4.5,
-                level: "Beginner",
-                badge: "",
-                price: "£899",
-                details: "This course teaches the principles of effective UI/UX design. You'll learn about user research, wireframing, prototyping, usability testing, and design systems to create intuitive and engaging digital experiences."
-            },
-            {
-                id: 10,
-                name: "Blockchain Development",
-                description: "Learn to build decentralized applications using blockchain technology and smart contracts.",
-                duration: "10 weeks",
-                enrolled: 521,
-                rating: 4.4,
-                level: "Advanced",
-                badge: "",
-                price: "£1,599",
-                details: "This advanced course covers blockchain fundamentals, smart contract development, and building decentralized applications. You'll work with Ethereum, Solidity, and popular blockchain development tools."
-            },
-            {
-                id: 11,
-                name: "SQL & Database Design",
-                description: "Master SQL queries and learn to design efficient, normalized databases.",
-                duration: "5 weeks",
-                enrolled: 1432,
-                rating: 4.7,
-                level: "Beginner",
-                badge: "POPULAR",
-                price: "£699",
-                details: "This course provides comprehensive training in SQL and database design. You'll learn to write complex queries, design normalized databases, optimize performance, and work with different database management systems."
-            },
-            {
-                id: 12,
-                name: "Kubernetes & Container Orchestration",
-                description: "Learn to deploy, manage, and scale containerized applications with Kubernetes.",
-                duration: "7 weeks",
-                enrolled: 623,
-                rating: 4.6,
-                level: "Advanced",
-                badge: "",
-                price: "£1,399",
-                details: "This advanced course covers Kubernetes architecture, deployment strategies, service discovery, scaling, and monitoring. You'll learn to manage containerized applications in production environments."
-            },
-            {
-                id: 13,
-                name: "Vue.js Framework",
-                description: "Build modern web applications with Vue.js, a progressive JavaScript framework.",
-                duration: "6 weeks",
-                enrolled: 754,
-                rating: 4.5,
-                level: "Intermediate",
-                badge: "",
-                price: "£899",
-                details: "Learn to build reactive web applications with Vue.js. This course covers components, directives, state management with Vuex, routing, and building single-page applications."
-            },
-            {
-                id: 14,
-                name: "Project Management for IT Professionals",
-                description: "Learn project management methodologies and tools specifically for IT projects.",
-                duration: "8 weeks",
-                enrolled: 892,
-                rating: 4.6,
-                level: "Beginner",
-                badge: "",
-                price: "£999",
-                details: "This course teaches project management principles tailored for IT professionals. You'll learn agile methodologies, risk management, stakeholder communication, and tools like Jira and Trello."
-            },
-            {
-                id: 15,
-                name: "Java Programming",
-                description: "Master Java programming language for building robust, enterprise-level applications.",
-                duration: "10 weeks",
-                enrolled: 1123,
-                rating: 4.6,
-                level: "Beginner",
-                badge: "",
-                price: "£1,199",
-                details: "This comprehensive Java course covers object-oriented programming, data structures, algorithms, and building applications with Spring Framework. You'll learn to develop enterprise-level Java applications."
-            },
-            {
-                id: 16,
-                name: "Network Security",
-                description: "Learn to secure network infrastructure and protect against cyber threats.",
-                duration: "7 weeks",
-                enrolled: 645,
-                rating: 4.7,
-                level: "Intermediate",
-                badge: "",
-                price: "£1,099",
-                details: "This course covers network security principles, including firewalls, VPNs, intrusion detection systems, and security protocols. You'll learn to design and implement secure network architectures."
-            },
-            {
-                id: 17,
-                name: "Advanced Python Programming",
-                description: "Take your Python skills to the next level with advanced concepts and patterns.",
-                duration: "8 weeks",
-                enrolled: 783,
-                rating: 4.6,
-                level: "Intermediate",
-                badge: "",
-                price: "£1,099",
-                details: "This advanced Python course covers decorators, generators, context managers, metaclasses, and concurrency. You'll learn advanced patterns and techniques for writing efficient, maintainable Python code."
-            },
-            {
-                id: 18,
-                name: "IT Service Management",
-                description: "Learn IT service management principles and prepare for ITIL certification.",
-                duration: "6 weeks",
-                enrolled: 534,
-                rating: 4.5,
-                level: "Beginner",
-                badge: "",
-                price: "£899",
-                details: "This course covers IT service management frameworks, with a focus on ITIL. You'll learn about service strategy, design, transition, operation, and continual service improvement."
-            },
-            {
-                id: 19,
-                name: "Machine Learning Operations (MLOps)",
-                description: "Learn to deploy, monitor, and maintain machine learning models in production.",
-                duration: "9 weeks",
-                enrolled: 412,
-                rating: 4.4,
-                level: "Advanced",
-                badge: "",
-                price: "£1,499",
-                details: "This advanced course covers MLOps practices for managing the machine learning lifecycle. You'll learn about model deployment, monitoring, versioning, and automation of ML workflows."
-            },
-            {
-                id: 20,
-                name: "Web Accessibility",
-                description: "Learn to create websites and applications that are accessible to all users.",
-                duration: "4 weeks",
-                enrolled: 456,
-                rating: 4.5,
-                level: "Beginner",
-                badge: "",
-                price: "£699",
-                details: "This course teaches web accessibility principles and techniques. You'll learn about WCAG guidelines, ARIA attributes, screen reader compatibility, and testing methods to create inclusive digital experiences."
-            }
-        ];
-
-        // Sample data - 10 Products
-        const sampleProducts = [
-            {
-                id: 1,
-                name: "Project Management Pro",
-                description: "Comprehensive project management software with advanced collaboration features and real-time tracking.",
-                category: "software",
-                price: "£299",
-                originalPrice: "£399",
-                badge: "SAVE 25%",
-                rating: 4.8,
-                reviews: 1247,
-                features: ["Unlimited Projects", "Team Collaboration", "Time Tracking", "Advanced Reporting"],
-                details: "Project Management Pro is an all-in-one solution for managing projects of any size. With intuitive dashboards, real-time collaboration, and comprehensive reporting, it's perfect for teams looking to streamline their workflow.",
-                specs: {
-                    "License Type": "Annual Subscription",
-                    "Users": "Up to 50",
-                    "Storage": "100GB Cloud",
-                    "Support": "24/7 Priority",
-                    "Updates": "Lifetime"
-                },
-                icon: "fa-tasks"
-            },
-            {
-                id: 2,
-                name: "Advanced Security Suite",
-                description: "Enterprise-grade security software with threat detection, firewall, and real-time monitoring.",
-                category: "security",
-                price: "£499",
-                originalPrice: "£649",
-                badge: "BESTSELLER",
-                rating: 4.9,
-                reviews: 892,
-                features: ["Threat Detection", "Firewall Protection", "Real-time Monitoring", "Automated Backups"],
-                details: "Protect your business with our Advanced Security Suite. Featuring AI-powered threat detection, robust firewall protection, and 24/7 monitoring to keep your systems secure.",
-                specs: {
-                    "Protection": "Multi-layer",
-                    "Devices": "Unlimited",
-                    "Monitoring": "24/7 Real-time",
-                    "Support": "Dedicated Team",
-                    "Compliance": "GDPR, HIPAA"
-                },
-                icon: "fa-shield-alt"
-            },
-            {
-                id: 3,
-                name: "CodeMaster IDE",
-                description: "Professional integrated development environment with intelligent code completion and debugging.",
-                category: "development",
-                price: "£199",
-                originalPrice: "£249",
-                badge: "NEW",
-                rating: 4.7,
-                reviews: 1563,
-                features: ["Intelligent Code Completion", "Built-in Debugger", "Version Control", "Plugin Ecosystem"],
-                details: "CodeMaster IDE is built for modern developers. With intelligent code completion, integrated debugging, and extensive plugin support, it's the perfect tool for any development project.",
-                specs: {
-                    "Languages": "50+ Supported",
-                    "Themes": "Customizable",
-                    "Plugins": "1000+ Available",
-                    "Platform": "Cross-platform",
-                    "Updates": "Monthly"
-                },
-                icon: "fa-code"
-            },
-            {
-                id: 4,
-                name: "Cloud Storage Enterprise",
-                description: "Secure cloud storage solution with advanced encryption and collaborative features.",
-                category: "cloud",
-                price: "£149",
-                originalPrice: "",
-                badge: "",
-                rating: 4.6,
-                reviews: 2105,
-                features: ["1TB Storage", "End-to-end Encryption", "File Sharing", "Team Collaboration"],
-                details: "Secure your data with Cloud Storage Enterprise. With military-grade encryption, seamless file sharing, and robust collaboration tools, your data is safe and accessible anywhere.",
-                specs: {
-                    "Storage": "1TB Cloud",
-                    "Encryption": "AES-256",
-                    "Users": "Up to 25",
-                    "Backup": "Automatic",
-                    "Access": "Anywhere"
-                },
-                icon: "fa-cloud"
-            },
-            {
-                id: 5,
-                name: "Network Monitor Pro",
-                description: "Comprehensive network monitoring tool with real-time analytics and alert system.",
-                category: "hardware",
-                price: "£799",
-                originalPrice: "£999",
-                badge: "LIMITED TIME",
-                rating: 4.8,
-                reviews: 534,
-                features: ["Real-time Monitoring", "Custom Alerts", "Performance Analytics", "Network Mapping"],
-                details: "Keep your network running smoothly with Network Monitor Pro. Real-time monitoring, custom alerts, and detailed analytics help you maintain optimal network performance.",
-                specs: {
-                    "Monitoring": "Real-time",
-                    "Devices": "Unlimited",
-                    "Reports": "Customizable",
-                    "Alerts": "Multi-channel",
-                    "Integration": "API Available"
-                },
-                icon: "fa-network-wired"
-            },
-            {
-                id: 6,
-                name: "Data Analytics Dashboard",
-                description: "Interactive data visualization and analytics platform with real-time insights.",
-                category: "software",
-                price: "£449",
-                originalPrice: "£599",
-                badge: "POPULAR",
-                rating: 4.7,
-                reviews: 783,
-                features: ["Real-time Dashboards", "Custom Reports", "Data Integration", "Predictive Analytics"],
-                details: "Transform your data into actionable insights with our Data Analytics Dashboard. Real-time visualization, custom reporting, and predictive analytics help you make informed decisions.",
-                specs: {
-                    "Data Sources": "Unlimited",
-                    "Dashboards": "Customizable",
-                    "Users": "Up to 20",
-                    "Storage": "500GB",
-                    "Updates": "Quarterly"
-                },
-                icon: "fa-chart-bar"
-            },
-            {
-                id: 7,
-                name: "CRM Enterprise Solution",
-                description: "Complete customer relationship management platform with automation and analytics.",
-                category: "software",
-                price: "£399",
-                originalPrice: "",
-                badge: "",
-                rating: 4.6,
-                reviews: 945,
-                features: ["Lead Management", "Sales Automation", "Customer Analytics", "Email Integration"],
-                details: "Streamline your customer relationships with our CRM Enterprise Solution. Automation, analytics, and integration tools help you build stronger customer connections.",
-                specs: {
-                    "Contacts": "Unlimited",
-                    "Automation": "Workflow Builder",
-                    "Integration": "100+ Apps",
-                    "Support": "24/7",
-                    "Training": "Included"
-                },
-                icon: "fa-users"
-            },
-            {
-                id: 8,
-                name: "Backup & Recovery Pro",
-                description: "Automated backup and disaster recovery solution for business continuity.",
-                category: "security",
-                price: "£349",
-                originalPrice: "£449",
-                badge: "ESSENTIAL",
-                rating: 4.9,
-                reviews: 672,
-                features: ["Automated Backups", "Instant Recovery", "Cross-platform", "Encrypted Storage"],
-                details: "Ensure business continuity with Backup & Recovery Pro. Automated backups, instant recovery, and encrypted storage protect your critical data.",
-                specs: {
-                    "Backup": "Automated",
-                    "Recovery": "Instant",
-                    "Platforms": "Cross-platform",
-                    "Encryption": "Military-grade",
-                    "Storage": "1TB Included"
-                },
-                icon: "fa-hdd"
-            },
-            {
-                id: 9,
-                name: "API Gateway Enterprise",
-                description: "Secure API management platform with monitoring, analytics, and developer portal.",
-                category: "development",
-                price: "£599",
-                originalPrice: "£749",
-                badge: "DEVELOPER CHOICE",
-                rating: 4.8,
-                reviews: 423,
-                features: ["API Management", "Rate Limiting", "Analytics", "Developer Portal"],
-                details: "Manage your APIs securely with API Gateway Enterprise. Comprehensive monitoring, rate limiting, and analytics help you maintain API performance and security.",
-                specs: {
-                    "APIs": "Unlimited",
-                    "Requests": "10M/month",
-                    "Analytics": "Real-time",
-                    "Security": "OAuth 2.0",
-                    "Support": "Developer Support"
-                },
-                icon: "fa-project-diagram"
-            },
-            {
-                id: 10,
-                name: "Virtual Private Server",
-                description: "High-performance virtual private servers with dedicated resources and full control.",
-                category: "cloud",
-                price: "£89",
-                originalPrice: "£119",
-                badge: "MOST POPULAR",
-                rating: 4.7,
-                reviews: 1567,
-                features: ["Dedicated Resources", "Full Root Access", "99.9% Uptime", "Scalable"],
-                details: "Get dedicated resources and full control with our Virtual Private Servers. High performance, scalability, and 99.9% uptime guarantee for your applications.",
-                specs: {
-                    "CPU": "4 vCores",
-                    "RAM": "8GB",
-                    "Storage": "160GB SSD",
-                    "Bandwidth": "5TB",
-                    "Support": "24/7"
-                },
-                icon: "fa-server"
-            }
-        ];
-
-        // Load services with search and filter functionality
-        function loadServices() {
-            const container = document.getElementById('services-container');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-            
-            // Simulate loading delay for better UX
-            setTimeout(() => {
-                try {
-                    const searchTerm = document.getElementById('service-search').value.toLowerCase();
-                    const categoryFilter = document.getElementById('service-category').value;
-                    
-                    const filteredServices = sampleServices.filter(service => {
-                        const matchesSearch = service.name.toLowerCase().includes(searchTerm) || 
-                                            service.description.toLowerCase().includes(searchTerm);
-                        const matchesCategory = categoryFilter === 'all' || service.category === categoryFilter;
-                        return matchesSearch && matchesCategory;
-                    });
-                    
-                    container.innerHTML = '';
-                    
-                    if (filteredServices.length === 0) {
-                        container.innerHTML = `
-                            <div class="error-fallback" style="grid-column: 1 / -1;">
-                                <i class="fas fa-search"></i>
-                                <h3>No Services Found</h3>
-                                <p>No services match your search criteria. Try adjusting your filters or search terms.</p>
-                                <button class="btn btn-primary" onclick="document.getElementById('service-search').value=''; document.getElementById('service-category').value='all'; loadServices()">
-                                    Reset Filters
-                                </button>
-                            </div>
-                        `;
-                        return;
-                    }
-                    
-                    filteredServices.forEach(service => {
-                        const serviceCard = document.createElement('div');
-                        serviceCard.className = 'service-card';
-                        serviceCard.innerHTML = `
-                            <div class="service-icon">
-                                <i class="fas ${getServiceIcon(service.category)}"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>${service.name}</h3>
-                                <p>${service.description}</p>
-                                <ul class="service-features">
-                                    ${service.features.map(feature => 
-                                        `<li><i class="fas fa-check"></i> ${feature}</li>`
-                                    ).join('')}
-                                </ul>
-                                <div class="service-price">${service.price}</div>
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary" onclick="showServiceDetails(${service.id})">
-                                        <i class="fas fa-info-circle"></i> Details
-                                    </button>
-                                    <button class="btn btn-primary" onclick="getStarted(${service.id})">
-                                        Get Started
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        container.appendChild(serviceCard);
-                    });
-                } catch (error) {
-                    console.error('Failed to load services:', error);
-                    container.innerHTML = `
-                        <div class="error-fallback" style="grid-column: 1 / -1;">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <h3>Unable to Load Services</h3>
-                            <p>There was an error loading our services. Please try again later.</p>
-                            <button class="btn btn-primary" onclick="loadServices()">Retry</button>
-                        </div>
-                    `;
-                }
-            }, 500); // Simulate loading delay
-        }
-
-        // Load courses with search and filter functionality
-        function loadCourses() {
-            const container = document.getElementById('courses-container');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-            
-            // Simulate loading delay for better UX
-            setTimeout(() => {
-                try {
-                    const searchTerm = document.getElementById('course-search').value.toLowerCase();
-                    const levelFilter = document.getElementById('course-level').value;
-                    
-                    const filteredCourses = sampleCourses.filter(course => {
-                        const matchesSearch = course.name.toLowerCase().includes(searchTerm) || 
-                                            course.description.toLowerCase().includes(searchTerm);
-                        const matchesLevel = levelFilter === 'all' || course.level.toLowerCase() === levelFilter;
-                        return matchesSearch && matchesLevel;
-                    });
-                    
-                    container.innerHTML = '';
-                    
-                    if (filteredCourses.length === 0) {
-                        container.innerHTML = `
-                            <div class="error-fallback" style="grid-column: 1 / -1;">
-                                <i class="fas fa-search"></i>
-                                <h3>No Courses Found</h3>
-                                <p>No courses match your search criteria. Try adjusting your filters or search terms.</p>
-                                <button class="btn btn-primary" onclick="document.getElementById('course-search').value=''; document.getElementById('course-level').value='all'; loadCourses()">
-                                    Reset Filters
-                                </button>
-                            </div>
-                        `;
-                        return;
-                    }
-                    
-                    filteredCourses.forEach(course => {
-                        const courseCard = document.createElement('div');
-                        courseCard.className = 'course-card';
-                        courseCard.innerHTML = `
-                            <div class="course-image">
-                                <i class="fas ${getCourseIcon(course.name)}"></i>
-                                ${course.badge ? `<div class="course-badge">${course.badge}</div>` : ''}
-                            </div>
-                            <div class="course-content">
-                                <h3>${course.name}</h3>
-                                <p>${course.description}</p>
-                                <div class="course-meta">
-                                    <span><i class="fas fa-clock"></i> ${course.duration}</span>
-                                    <span><i class="fas fa-user-graduate"></i> ${course.enrolled} enrolled</span>
-                                    <span class="course-rating"><i class="fas fa-star"></i> ${course.rating}</span>
-                                </div>
-                                <div style="margin-bottom: 15px; font-size: 0.9rem; color: var(--gray);">
-                                    <i class="fas fa-signal"></i> ${course.level}
-                                </div>
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary" onclick="showCourseDetails(${course.id})">
-                                        <i class="fas fa-info-circle"></i> Details
-                                    </button>
-                                    <button class="btn btn-primary" onclick="enrollNow(${course.id})">
-                                        Enroll Now
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        container.appendChild(courseCard);
-                    });
-                } catch (error) {
-                    console.error('Failed to load courses:', error);
-                    container.innerHTML = `
-                        <div class="error-fallback" style="grid-column: 1 / -1;">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <h3>Unable to Load Courses</h3>
-                            <p>There was an error loading our course catalog. Please try again later.</p>
-                            <button class="btn btn-primary" onclick="loadCourses()">Retry</button>
-                        </div>
-                    `;
-                }
-            }, 500); // Simulate loading delay
-        }
-
-        // Load products with search and filter functionality
-        function loadProducts() {
-            const container = document.getElementById('products-container');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-            
-            setTimeout(() => {
-                try {
-                    const searchTerm = document.getElementById('product-search').value.toLowerCase();
-                    const categoryFilter = document.getElementById('product-category').value;
-                    
-                    const filteredProducts = sampleProducts.filter(product => {
-                        const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
-                                            product.description.toLowerCase().includes(searchTerm);
-                        const matchesCategory = categoryFilter === 'all' || product.category === categoryFilter;
-                        return matchesSearch && matchesCategory;
-                    });
-                    
-                    container.innerHTML = '';
-                    
-                    if (filteredProducts.length === 0) {
-                        container.innerHTML = `
-                            <div class="error-fallback" style="grid-column: 1 / -1;">
-                                <i class="fas fa-search"></i>
-                                <h3>No Products Found</h3>
-                                <p>No products match your search criteria. Try adjusting your filters or search terms.</p>
-                                <button class="btn btn-primary" onclick="document.getElementById('product-search').value=''; document.getElementById('product-category').value='all'; loadProducts()">
-                                    Reset Filters
-                                </button>
-                            </div>
-                        `;
-                        return;
-                    }
-                    
-                    filteredProducts.forEach(product => {
-                        const productCard = document.createElement('div');
-                        productCard.className = 'product-card';
-                        productCard.innerHTML = `
-                            <div class="product-image">
-                                <i class="fas ${product.icon}"></i>
-                                ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
-                            </div>
-                            <div class="product-content">
-                                <h3>${product.name}</h3>
-                                <p>${product.description}</p>
-                                <ul class="product-features">
-                                    ${product.features.map(feature => 
-                                        `<li><i class="fas fa-check"></i> ${feature}</li>`
-                                    ).join('')}
-                                </ul>
-                                <div class="product-meta">
-                                    <span class="product-rating">
-                                        <i class="fas fa-star"></i> ${product.rating} (${product.reviews})
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-tag"></i> ${product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-                                    </span>
-                                </div>
-                                <div class="product-price">
-                                    <span class="current-price">${product.price}</span>
-                                    ${product.originalPrice ? `<span class="original-price">${product.originalPrice}</span>` : ''}
-                                </div>
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary" onclick="showProductDetails(${product.id})">
-                                        <i class="fas fa-info-circle"></i> Details
-                                    </button>
-                                    <button class="btn btn-primary" onclick="addToCart(${product.id})">
-                                        <i class="fas fa-shopping-cart"></i> Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        container.appendChild(productCard);
-                    });
-                } catch (error) {
-                    console.error('Failed to load products:', error);
-                    container.innerHTML = `
-                        <div class="error-fallback" style="grid-column: 1 / -1;">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <h3>Unable to Load Products</h3>
-                            <p>There was an error loading our products. Please try again later.</p>
-                            <button class="btn btn-primary" onclick="loadProducts()">Retry</button>
-                        </div>
-                    `;
-                }
-            }, 500);
-        }
-
-        // Show service details in modal
-        function showServiceDetails(serviceId) {
-            try {
-                const service = sampleServices.find(s => s.id === serviceId);
-                if (!service) {
-                    showToast('Service not found', 'error');
-                    return;
-                }
-                
-                document.getElementById('serviceModalTitle').textContent = service.name;
-                document.getElementById('serviceModalBody').innerHTML = `
-                    <p><strong>Description:</strong> ${service.details}</p>
-                    <p><strong>Price:</strong> ${service.price}</p>
-                    <p><strong>Category:</strong> ${service.category.charAt(0).toUpperCase() + service.category.slice(1)}</p>
-                    <p><strong>Features:</strong></p>
-                    <ul>
-                        ${service.features.map(feature => `<li>${feature}</li>`).join('')}
-                    </ul>
-                `;
-                document.getElementById('serviceModalAction').textContent = 'Get Started';
-                document.getElementById('serviceModalAction').onclick = function() { getStarted(serviceId); };
-                
-                openModal('serviceModal');
-            } catch (error) {
-                console.error('Error showing service details:', error);
-                showToast('Unable to load service details. Please try again.', 'error');
-            }
-        }
-
-        // Show course details in modal
-        function showCourseDetails(courseId) {
-            try {
-                const course = sampleCourses.find(c => c.id === courseId);
-                if (!course) {
-                    showToast('Course not found', 'error');
-                    return;
-                }
-                
-                document.getElementById('courseModalTitle').textContent = course.name;
-                document.getElementById('courseModalBody').innerHTML = `
-                    <p><strong>Description:</strong> ${course.details}</p>
-                    <p><strong>Duration:</strong> ${course.duration}</p>
-                    <p><strong>Level:</strong> ${course.level}</p>
-                    <p><strong>Price:</strong> ${course.price}</p>
-                    <p><strong>Rating:</strong> ${course.rating}/5 (${course.enrolled} enrolled)</p>
-                `;
-                document.getElementById('courseModalAction').textContent = 'Enroll Now';
-                document.getElementById('courseModalAction').onclick = function() { enrollNow(courseId); };
-                
-                openModal('courseModal');
-            } catch (error) {
-                console.error('Error showing course details:', error);
-                showToast('Unable to load course details. Please try again.', 'error');
-            }
-        }
-
-        // Show product details in modal
-        function showProductDetails(productId) {
-            try {
-                const product = sampleProducts.find(p => p.id === productId);
-                if (!product) {
-                    showToast('Product not found', 'error');
-                    return;
-                }
-                
-                document.getElementById('productModalTitle').textContent = product.name;
-                document.getElementById('productModalBody').innerHTML = `
-                    <div class="product-details">
-                        <div class="product-gallery">
-                            <div class="product-main-image">
-                                <i class="fas ${product.icon}"></i>
-                            </div>
-                            <div class="product-thumbnails">
-                                <div class="product-thumbnail">
-                                    <i class="fas ${product.icon}"></i>
-                                </div>
-                                <div class="product-thumbnail">
-                                    <i class="fas fa-image"></i>
-                                </div>
-                                <div class="product-thumbnail">
-                                    <i class="fas fa-cogs"></i>
-                                </div>
-                                <div class="product-thumbnail">
-                                    <i class="fas fa-chart-bar"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3>${product.name}</h3>
-                            <div class="product-meta">
-                                <span class="product-rating">
-                                    <i class="fas fa-star"></i> ${product.rating} (${product.reviews} reviews)
-                                </span>
-                                <span>
-                                    <i class="fas fa-tag"></i> ${product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-                                </span>
-                            </div>
-                            <div class="product-price" style="margin: 15px 0;">
-                                <span class="current-price" style="font-size: 1.8rem;">${product.price}</span>
-                                ${product.originalPrice ? `<span class="original-price" style="font-size: 1.2rem;">${product.originalPrice}</span>` : ''}
-                                ${product.badge ? `<span style="background: var(--accent); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; margin-left: 10px;">${product.badge}</span>` : ''}
-                            </div>
-                            <p class="product-description">${product.details}</p>
-                            
-                            <div class="product-specs">
-                                <h4>Specifications</h4>
-                                <ul class="specs-list">
-                                    ${Object.entries(product.specs).map(([key, value]) => `
-                                        <li>
-                                            <span class="spec-name">${key}</span>
-                                            <span class="spec-value">${value}</span>
-                                        </li>
-                                    `).join('')}
-                                </ul>
-                            </div>
-                            
-                            <div class="product-features">
-                                <h4>Key Features</h4>
-                                <ul>
-                                    ${product.features.map(feature => `
-                                        <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                                            <i class="fas fa-check" style="color: var(--success);"></i>
-                                            ${feature}
-                                        </li>
-                                    `).join('')}
-                                </ul>
-                            </div>
-                            
-                            <div class="quantity-selector">
-                                <label>Quantity:</label>
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
-                                    <input type="number" class="quantity-input" id="product-quantity" value="1" min="1">
-                                    <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('productModalAction').textContent = 'Add to Cart';
-                document.getElementById('productModalAction').onclick = function() { addToCart(productId); };
-                
-                openModal('productModal');
-            } catch (error) {
-                console.error('Error showing product details:', error);
-                showToast('Unable to load product details. Please try again.', 'error');
-            }
-        }
-
-        // Get Started function for services
-        function getStarted(serviceId) {
-            try {
-                const service = sampleServices.find(s => s.id === serviceId);
-                if (service) {
-                    if (!currentUser) {
-                        showToast('Please login to request this service', 'warning');
-                        openAuthModal('login');
-                        return;
-                    }
-                    alert(`Thank you for your interest in ${service.name}! Our team will contact you shortly to discuss your requirements.`);
-                    closeModal('serviceModal');
-                }
-            } catch (error) {
-                console.error('Error getting started with service:', error);
-                showToast('Unable to process your request. Please try again.', 'error');
-            }
-        }
-
-        // Enroll Now function for courses
-        function enrollNow(courseId) {
-            try {
-                const course = sampleCourses.find(c => c.id === courseId);
-                if (course) {
-                    if (!currentUser) {
-                        showToast('Please login to enroll in this course', 'warning');
-                        openAuthModal('login');
-                        return;
-                    }
-                    
-                    if (!currentUser.enrolledCourses.includes(courseId)) {
-                        currentUser.enrolledCourses.push(courseId);
-                        localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-                        showToast(`Successfully enrolled in ${course.name}!`, 'success');
-                    } else {
-                        showToast('You are already enrolled in this course', 'info');
-                    }
-                    closeModal('courseModal');
-                }
-            } catch (error) {
-                console.error('Error enrolling in course:', error);
-                showToast('Unable to enroll in course. Please try again.', 'error');
-            }
-        }
-
-        // Add to cart function
-        function addToCart(productId) {
-            try {
-                const product = sampleProducts.find(p => p.id === productId);
-                if (product) {
-                    if (!currentUser) {
-                        showToast('Please login to add items to cart', 'warning');
-                        openAuthModal('login');
-                        return;
-                    }
-                    
-                    const quantity = parseInt(document.getElementById('product-quantity')?.value || 1);
-                    showToast(`${quantity} x ${product.name} added to cart!`, 'success');
-                    closeModal('productModal');
-                }
-            } catch (error) {
-                console.error('Error adding to cart:', error);
-                showToast('Unable to add item to cart. Please try again.', 'error');
-            }
-        }
-
-        // Update quantity function
-        function updateQuantity(change) {
-            const quantityInput = document.getElementById('product-quantity');
-            if (quantityInput) {
-                let quantity = parseInt(quantityInput.value);
-                quantity = Math.max(1, quantity + change);
-                quantityInput.value = quantity;
-            }
-        }
-
-        // Continue course function
-        function continueCourse(courseId) {
-            try {
-                const course = sampleCourses.find(c => c.id === courseId);
-                if (course) {
-                    showToast(`Continuing ${course.name}`, 'info');
-                }
-            } catch (error) {
-                console.error('Error continuing course:', error);
-                showToast('Unable to continue course. Please try again.', 'error');
-            }
-        }
-
-        // Modal functions
-        function openModal(modalId) {
-            try {
-                const modal = document.getElementById(modalId);
-                modal.style.display = 'flex';
-                modal.setAttribute('aria-hidden', 'false');
-                
-                // Focus management for accessibility
-                const closeButton = modal.querySelector('.close-modal');
-                if (closeButton) {
-                    closeButton.focus();
-                }
-            } catch (error) {
-                console.error('Error opening modal:', error);
-                showToast('Unable to open details. Please try again.', 'error');
-            }
-        }
-
-        function closeModal(modalId) {
-            try {
-                const modal = document.getElementById(modalId);
-                modal.style.display = 'none';
-                modal.setAttribute('aria-hidden', 'true');
-            } catch (error) {
-                console.error('Error closing modal:', error);
-            }
-        }
-
-        // Helper functions
-        function getServiceIcon(category) {
-            const icons = {
-                'development': 'fa-code',
-                'support': 'fa-headset',
-                'testing': 'fa-bug',
-                'cloud': 'fa-cloud',
-                'security': 'fa-shield-alt',
-                'analytics': 'fa-chart-bar',
-                'infrastructure': 'fa-server',
-                'database': 'fa-database',
-                'consultation': 'fa-comments',
-                'training': 'fa-graduation-cap',
-                'design': 'fa-palette'
-            };
-            return icons[category] || 'fa-laptop-code';
-        }
-
-        function getCourseIcon(courseName) {
-            if (courseName.toLowerCase().includes('web')) return 'fa-globe';
-            if (courseName.toLowerCase().includes('cyber') || courseName.toLowerCase().includes('security')) return 'fa-shield-alt';
-            if (courseName.toLowerCase().includes('mobile')) return 'fa-mobile-alt';
-            if (courseName.toLowerCase().includes('cloud')) return 'fa-cloud';
-            if (courseName.toLowerCase().includes('data') || courseName.toLowerCase().includes('machine learning')) return 'fa-chart-line';
-            if (courseName.toLowerCase().includes('devops')) return 'fa-cogs';
-            if (courseName.toLowerCase().includes('design')) return 'fa-palette';
-            if (courseName.toLowerCase().includes('blockchain')) return 'fa-link';
-            if (courseName.toLowerCase().includes('python')) return 'fa-python';
-            if (courseName.toLowerCase().includes('java')) return 'fa-coffee';
-            if (courseName.toLowerCase().includes('sql')) return 'fa-database';
-            if (courseName.toLowerCase().includes('kubernetes')) return 'fa-docker';
-            if (courseName.toLowerCase().includes('project')) return 'fa-tasks';
-            if (courseName.toLowerCase().includes('vue')) return 'fa-vuejs';
-            if (courseName.toLowerCase().includes('javascript')) return 'fa-js';
-            return 'fa-book';
-        }
-
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                initAuth();
-                loadServices();
-                loadCourses();
-                loadProducts();
-                
-                // Add event listeners for search and filter
-                document.getElementById('service-search').addEventListener('input', loadServices);
-                document.getElementById('service-category').addEventListener('change', loadServices);
-                document.getElementById('course-search').addEventListener('input', loadCourses);
-                document.getElementById('course-level').addEventListener('change', loadCourses);
-                document.getElementById('product-search').addEventListener('input', loadProducts);
-                document.getElementById('product-category').addEventListener('change', loadProducts);
-                
-                // Add event listeners for the new social buttons
-                document.querySelectorAll('.social-button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        showToast('Social authentication coming soon!', 'info');
-                    });
-                });
-                
-                // Close modal when clicking outside
-                window.onclick = function(event) {
-                    if (event.target.classList.contains('modal')) {
-                        event.target.style.display = 'none';
-                        event.target.setAttribute('aria-hidden', 'true');
-                    }
-                }
-                
-                // Close modal with Escape key
-                document.addEventListener('keydown', function(event) {
-                    if (event.key === 'Escape') {
-                        const modals = document.querySelectorAll('.modal');
-                        modals.forEach(modal => {
-                            if (modal.style.display === 'flex') {
-                                modal.style.display = 'none';
-                                modal.setAttribute('aria-hidden', 'true');
-                            }
-                        });
-                    }
-                });
-            } catch (error) {
-                console.error('Error initializing application:', error);
-                // Graceful fallback - show a simple message
-                document.body.innerHTML = `
-                    <div style="padding: 50px; text-align: center;">
-                        <h1>TechSolutions Pro</h1>
-                        <p>We're experiencing technical difficulties. Please refresh the page or try again later.</p>
-                        <button onclick="location.reload()" class="btn btn-primary">Refresh Page</button>
-                    </div>
-                `;
-            }
-        });
-    </script>
-</body>
-</html>
+                details: "Our disaster recovery service ensures your business can quickly recover from unexpected disruptions. We conduct risk assessments, develop comprehensive recovery strategies, implement backup solutions, and regularly test your plans.",
+                image: "https://images.unsplash.com/photo-1563013541-2d
