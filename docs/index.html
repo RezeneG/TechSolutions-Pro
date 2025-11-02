@@ -402,6 +402,270 @@
             color: var(--warning);
         }
         
+        /* Products Section Styles */
+        .products-section {
+            background: var(--light);
+            padding: 80px 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-content h3 {
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+
+        .product-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            flex-grow: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: var(--gray);
+            text-decoration: line-through;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .product-features li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .product-features li i {
+            color: var(--success);
+            font-size: 0.8rem;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .product-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .product-rating {
+            color: var(--warning);
+        }
+
+        /* Product Details Modal */
+        .product-modal .modal-content {
+            max-width: 800px;
+        }
+
+        .product-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .product-main-image {
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .product-thumbnails {
+            display: flex;
+            gap: 10px;
+        }
+
+        .product-thumbnail {
+            width: 60px;
+            height: 60px;
+            background: var(--light-gray);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .product-thumbnail:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .product-info h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.5rem;
+        }
+
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .product-specs {
+            margin-bottom: 20px;
+        }
+
+        .product-specs h4 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .specs-list {
+            list-style: none;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-name {
+            color: var(--gray);
+        }
+
+        .spec-value {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid var(--light-gray);
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            padding: 8px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+        }
+        
         /* Bootcamp Section */
         .bootcamp-section {
             padding: 80px 0;
@@ -1463,7 +1727,8 @@
             }
             
             .services-grid,
-            .courses-grid {
+            .courses-grid,
+            .products-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -1490,6 +1755,10 @@
             
             .auth-tabs {
                 flex-wrap: wrap;
+            }
+            
+            .product-details {
+                grid-template-columns: 1fr;
             }
             
             /* Responsive adjustments for auth modal */
@@ -1530,8 +1799,8 @@
                     <a href="#" class="active" onclick="showHome()">Home</a>
                     <a href="#services" onclick="showHome()">Services</a>
                     <a href="#courses" onclick="showHome()">Courses</a>
+                    <a href="#products" onclick="showHome()">Products</a>
                     <a href="#bootcamps" onclick="showHome()">Bootcamps</a>
-                    <!-- ADD THE SIGN IN / SIGN UP BUTTON HERE -->
                     <a href="#" class="btn btn-primary" onclick="openAuthModal('login')">Sign in / Sign up</a>
                 </div>
                 
@@ -1555,7 +1824,7 @@
                     <div class="hero-buttons">
                         <a href="#services" class="btn btn-primary">Explore Services</a>
                         <a href="#courses" class="btn btn-outline">View Courses</a>
-                        <a href="#bootcamps" class="btn btn-outline">Explore Bootcamps</a>
+                        <a href="#products" class="btn btn-outline">Browse Products</a>
                     </div>
                     <div class="hero-stats">
                         <div class="stat">
@@ -1639,6 +1908,43 @@
                     </div>
                     
                     <div class="courses-grid" id="courses-container">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section class="products-section" id="products">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <a href="#">Home</a> > <span>Products</span>
+                    </div>
+                    
+                    <div class="section-header">
+                        <h2>IT Products & Software</h2>
+                        <p>Discover our range of premium IT products, software solutions, and digital tools to enhance your business operations.</p>
+                    </div>
+                    
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="product-search" placeholder="Search products..." aria-label="Search products">
+                        </div>
+                        <div class="filter-dropdown">
+                            <select id="product-category" aria-label="Filter by category">
+                                <option value="all">All Categories</option>
+                                <option value="software">Software</option>
+                                <option value="security">Security Tools</option>
+                                <option value="development">Development</option>
+                                <option value="cloud">Cloud Services</option>
+                                <option value="hardware">Hardware</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="products-grid" id="products-container">
                         <div class="loading">
                             <div class="spinner"></div>
                         </div>
@@ -1879,6 +2185,7 @@
                         <li><a href="#" onclick="showHome()">Home</a></li>
                         <li><a href="#services" onclick="showHome()">Services</a></li>
                         <li><a href="#courses" onclick="showHome()">Courses</a></li>
+                        <li><a href="#products" onclick="showHome()">Products</a></li>
                         <li><a href="#bootcamps" onclick="showHome()">Bootcamps</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
@@ -1974,6 +2281,23 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" onclick="closeModal('courseModal')">Close</button>
                 <button class="btn btn-primary" id="courseModalAction">Enroll Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="modal product-modal" role="dialog" aria-labelledby="productModalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Product Details</h3>
+                <button class="close-modal" onclick="closeModal('productModal')" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body" id="productModalBody">
+                <!-- Product details will be populated here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('productModal')">Close</button>
+                <button class="btn btn-primary" id="productModalAction">Add to Cart</button>
             </div>
         </div>
     </div>
@@ -2138,114 +2462,6 @@
         // =============================================
         
         // Authentication State Management
-        // Add this at the top of your script section, after the AUTHENTICATION SYSTEM comment
-const API_BASE = 'http://localhost:5000/api';
-
-// Update the initAuth function to check backend connection
-async function checkBackendConnection() {
-    try {
-        const response = await fetch(`${API_BASE}/health`);
-        const data = await response.json();
-        console.log('✅ Backend connection:', data);
-        return true;
-    } catch (error) {
-        console.error('❌ Backend connection failed:', error);
-        showToast('Backend server is not running. Please start the backend server.', 'error');
-        return false;
-    }
-}
-
-// Update the login function to use the backend API
-async function loginUser(email, password) {
-    try {
-        const response = await fetch(`${API_BASE}/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password })
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            currentUser = result.user;
-            localStorage.setItem(AUTH_TOKEN_KEY, result.token || 'demo-token');
-            localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-            return { success: true, user: currentUser };
-        } else {
-            return { success: false, error: result.error };
-        }
-    } catch (error) {
-        console.error('Login API error:', error);
-        // Fallback to demo mode if backend is not available
-        return loginWithDemoData(email, password);
-    }
-}
-
-// Demo fallback function
-function loginWithDemoData(email, password) {
-    const user = sampleUsers.find(u => u.email === email && u.password === password);
-    if (user) {
-        currentUser = { ...user };
-        delete currentUser.password;
-        localStorage.setItem(AUTH_TOKEN_KEY, 'demo-token');
-        localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-        return { success: true, user: currentUser };
-    }
-    return { success: false, error: 'Invalid credentials' };
-}
-
-// Update the registration function to use backend API
-async function registerUser(userData) {
-    try {
-        const response = await fetch(`${API_BASE}/auth/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData)
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            currentUser = result.user;
-            localStorage.setItem(AUTH_TOKEN_KEY, result.token || 'demo-token');
-            localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-            return { success: true, user: currentUser };
-        } else {
-            return { success: false, error: result.error };
-        }
-    } catch (error) {
-        console.error('Registration API error:', error);
-        // Fallback to demo mode
-        return registerWithDemoData(userData);
-    }
-}
-
-// Demo registration fallback
-function registerWithDemoData(userData) {
-    const newUser = {
-        id: sampleUsers.length + 1,
-        ...userData,
-        avatar: null,
-        company: '',
-        phone: '',
-        bio: '',
-        enrolledCourses: [],
-        serviceRequests: [],
-        certificates: [],
-        learningHours: 0
-    };
-    
-    sampleUsers.push(newUser);
-    currentUser = { ...newUser };
-    delete currentUser.password;
-    localStorage.setItem(AUTH_TOKEN_KEY, 'demo-token');
-    localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
-    return { success: true, user: currentUser };
-}
         let currentUser = null;
         const AUTH_TOKEN_KEY = 'techsolutions_auth_token';
         const USER_DATA_KEY = 'techsolutions_user_data';
@@ -3320,6 +3536,220 @@ function registerWithDemoData(userData) {
             }
         ];
 
+        // Sample data - 10 Products
+        const sampleProducts = [
+            {
+                id: 1,
+                name: "Project Management Pro",
+                description: "Comprehensive project management software with advanced collaboration features and real-time tracking.",
+                category: "software",
+                price: "£299",
+                originalPrice: "£399",
+                badge: "SAVE 25%",
+                rating: 4.8,
+                reviews: 1247,
+                features: ["Unlimited Projects", "Team Collaboration", "Time Tracking", "Advanced Reporting"],
+                details: "Project Management Pro is an all-in-one solution for managing projects of any size. With intuitive dashboards, real-time collaboration, and comprehensive reporting, it's perfect for teams looking to streamline their workflow.",
+                specs: {
+                    "License Type": "Annual Subscription",
+                    "Users": "Up to 50",
+                    "Storage": "100GB Cloud",
+                    "Support": "24/7 Priority",
+                    "Updates": "Lifetime"
+                },
+                icon: "fa-tasks"
+            },
+            {
+                id: 2,
+                name: "Advanced Security Suite",
+                description: "Enterprise-grade security software with threat detection, firewall, and real-time monitoring.",
+                category: "security",
+                price: "£499",
+                originalPrice: "£649",
+                badge: "BESTSELLER",
+                rating: 4.9,
+                reviews: 892,
+                features: ["Threat Detection", "Firewall Protection", "Real-time Monitoring", "Automated Backups"],
+                details: "Protect your business with our Advanced Security Suite. Featuring AI-powered threat detection, robust firewall protection, and 24/7 monitoring to keep your systems secure.",
+                specs: {
+                    "Protection": "Multi-layer",
+                    "Devices": "Unlimited",
+                    "Monitoring": "24/7 Real-time",
+                    "Support": "Dedicated Team",
+                    "Compliance": "GDPR, HIPAA"
+                },
+                icon: "fa-shield-alt"
+            },
+            {
+                id: 3,
+                name: "CodeMaster IDE",
+                description: "Professional integrated development environment with intelligent code completion and debugging.",
+                category: "development",
+                price: "£199",
+                originalPrice: "£249",
+                badge: "NEW",
+                rating: 4.7,
+                reviews: 1563,
+                features: ["Intelligent Code Completion", "Built-in Debugger", "Version Control", "Plugin Ecosystem"],
+                details: "CodeMaster IDE is built for modern developers. With intelligent code completion, integrated debugging, and extensive plugin support, it's the perfect tool for any development project.",
+                specs: {
+                    "Languages": "50+ Supported",
+                    "Themes": "Customizable",
+                    "Plugins": "1000+ Available",
+                    "Platform": "Cross-platform",
+                    "Updates": "Monthly"
+                },
+                icon: "fa-code"
+            },
+            {
+                id: 4,
+                name: "Cloud Storage Enterprise",
+                description: "Secure cloud storage solution with advanced encryption and collaborative features.",
+                category: "cloud",
+                price: "£149",
+                originalPrice: "",
+                badge: "",
+                rating: 4.6,
+                reviews: 2105,
+                features: ["1TB Storage", "End-to-end Encryption", "File Sharing", "Team Collaboration"],
+                details: "Secure your data with Cloud Storage Enterprise. With military-grade encryption, seamless file sharing, and robust collaboration tools, your data is safe and accessible anywhere.",
+                specs: {
+                    "Storage": "1TB Cloud",
+                    "Encryption": "AES-256",
+                    "Users": "Up to 25",
+                    "Backup": "Automatic",
+                    "Access": "Anywhere"
+                },
+                icon: "fa-cloud"
+            },
+            {
+                id: 5,
+                name: "Network Monitor Pro",
+                description: "Comprehensive network monitoring tool with real-time analytics and alert system.",
+                category: "hardware",
+                price: "£799",
+                originalPrice: "£999",
+                badge: "LIMITED TIME",
+                rating: 4.8,
+                reviews: 534,
+                features: ["Real-time Monitoring", "Custom Alerts", "Performance Analytics", "Network Mapping"],
+                details: "Keep your network running smoothly with Network Monitor Pro. Real-time monitoring, custom alerts, and detailed analytics help you maintain optimal network performance.",
+                specs: {
+                    "Monitoring": "Real-time",
+                    "Devices": "Unlimited",
+                    "Reports": "Customizable",
+                    "Alerts": "Multi-channel",
+                    "Integration": "API Available"
+                },
+                icon: "fa-network-wired"
+            },
+            {
+                id: 6,
+                name: "Data Analytics Dashboard",
+                description: "Interactive data visualization and analytics platform with real-time insights.",
+                category: "software",
+                price: "£449",
+                originalPrice: "£599",
+                badge: "POPULAR",
+                rating: 4.7,
+                reviews: 783,
+                features: ["Real-time Dashboards", "Custom Reports", "Data Integration", "Predictive Analytics"],
+                details: "Transform your data into actionable insights with our Data Analytics Dashboard. Real-time visualization, custom reporting, and predictive analytics help you make informed decisions.",
+                specs: {
+                    "Data Sources": "Unlimited",
+                    "Dashboards": "Customizable",
+                    "Users": "Up to 20",
+                    "Storage": "500GB",
+                    "Updates": "Quarterly"
+                },
+                icon: "fa-chart-bar"
+            },
+            {
+                id: 7,
+                name: "CRM Enterprise Solution",
+                description: "Complete customer relationship management platform with automation and analytics.",
+                category: "software",
+                price: "£399",
+                originalPrice: "",
+                badge: "",
+                rating: 4.6,
+                reviews: 945,
+                features: ["Lead Management", "Sales Automation", "Customer Analytics", "Email Integration"],
+                details: "Streamline your customer relationships with our CRM Enterprise Solution. Automation, analytics, and integration tools help you build stronger customer connections.",
+                specs: {
+                    "Contacts": "Unlimited",
+                    "Automation": "Workflow Builder",
+                    "Integration": "100+ Apps",
+                    "Support": "24/7",
+                    "Training": "Included"
+                },
+                icon: "fa-users"
+            },
+            {
+                id: 8,
+                name: "Backup & Recovery Pro",
+                description: "Automated backup and disaster recovery solution for business continuity.",
+                category: "security",
+                price: "£349",
+                originalPrice: "£449",
+                badge: "ESSENTIAL",
+                rating: 4.9,
+                reviews: 672,
+                features: ["Automated Backups", "Instant Recovery", "Cross-platform", "Encrypted Storage"],
+                details: "Ensure business continuity with Backup & Recovery Pro. Automated backups, instant recovery, and encrypted storage protect your critical data.",
+                specs: {
+                    "Backup": "Automated",
+                    "Recovery": "Instant",
+                    "Platforms": "Cross-platform",
+                    "Encryption": "Military-grade",
+                    "Storage": "1TB Included"
+                },
+                icon: "fa-hdd"
+            },
+            {
+                id: 9,
+                name: "API Gateway Enterprise",
+                description: "Secure API management platform with monitoring, analytics, and developer portal.",
+                category: "development",
+                price: "£599",
+                originalPrice: "£749",
+                badge: "DEVELOPER CHOICE",
+                rating: 4.8,
+                reviews: 423,
+                features: ["API Management", "Rate Limiting", "Analytics", "Developer Portal"],
+                details: "Manage your APIs securely with API Gateway Enterprise. Comprehensive monitoring, rate limiting, and analytics help you maintain API performance and security.",
+                specs: {
+                    "APIs": "Unlimited",
+                    "Requests": "10M/month",
+                    "Analytics": "Real-time",
+                    "Security": "OAuth 2.0",
+                    "Support": "Developer Support"
+                },
+                icon: "fa-project-diagram"
+            },
+            {
+                id: 10,
+                name: "Virtual Private Server",
+                description: "High-performance virtual private servers with dedicated resources and full control.",
+                category: "cloud",
+                price: "£89",
+                originalPrice: "£119",
+                badge: "MOST POPULAR",
+                rating: 4.7,
+                reviews: 1567,
+                features: ["Dedicated Resources", "Full Root Access", "99.9% Uptime", "Scalable"],
+                details: "Get dedicated resources and full control with our Virtual Private Servers. High performance, scalability, and 99.9% uptime guarantee for your applications.",
+                specs: {
+                    "CPU": "4 vCores",
+                    "RAM": "8GB",
+                    "Storage": "160GB SSD",
+                    "Bandwidth": "5TB",
+                    "Support": "24/7"
+                },
+                icon: "fa-server"
+            }
+        ];
+
         // Load services with search and filter functionality
         function loadServices() {
             const container = document.getElementById('services-container');
@@ -3475,6 +3905,93 @@ function registerWithDemoData(userData) {
             }, 500); // Simulate loading delay
         }
 
+        // Load products with search and filter functionality
+        function loadProducts() {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+            
+            setTimeout(() => {
+                try {
+                    const searchTerm = document.getElementById('product-search').value.toLowerCase();
+                    const categoryFilter = document.getElementById('product-category').value;
+                    
+                    const filteredProducts = sampleProducts.filter(product => {
+                        const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                                            product.description.toLowerCase().includes(searchTerm);
+                        const matchesCategory = categoryFilter === 'all' || product.category === categoryFilter;
+                        return matchesSearch && matchesCategory;
+                    });
+                    
+                    container.innerHTML = '';
+                    
+                    if (filteredProducts.length === 0) {
+                        container.innerHTML = `
+                            <div class="error-fallback" style="grid-column: 1 / -1;">
+                                <i class="fas fa-search"></i>
+                                <h3>No Products Found</h3>
+                                <p>No products match your search criteria. Try adjusting your filters or search terms.</p>
+                                <button class="btn btn-primary" onclick="document.getElementById('product-search').value=''; document.getElementById('product-category').value='all'; loadProducts()">
+                                    Reset Filters
+                                </button>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    filteredProducts.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        productCard.innerHTML = `
+                            <div class="product-image">
+                                <i class="fas ${product.icon}"></i>
+                                ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                            </div>
+                            <div class="product-content">
+                                <h3>${product.name}</h3>
+                                <p>${product.description}</p>
+                                <ul class="product-features">
+                                    ${product.features.map(feature => 
+                                        `<li><i class="fas fa-check"></i> ${feature}</li>`
+                                    ).join('')}
+                                </ul>
+                                <div class="product-meta">
+                                    <span class="product-rating">
+                                        <i class="fas fa-star"></i> ${product.rating} (${product.reviews})
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-tag"></i> ${product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+                                    </span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="current-price">${product.price}</span>
+                                    ${product.originalPrice ? `<span class="original-price">${product.originalPrice}</span>` : ''}
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary" onclick="showProductDetails(${product.id})">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                    <button class="btn btn-primary" onclick="addToCart(${product.id})">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(productCard);
+                    });
+                } catch (error) {
+                    console.error('Failed to load products:', error);
+                    container.innerHTML = `
+                        <div class="error-fallback" style="grid-column: 1 / -1;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Unable to Load Products</h3>
+                            <p>There was an error loading our products. Please try again later.</p>
+                            <button class="btn btn-primary" onclick="loadProducts()">Retry</button>
+                        </div>
+                    `;
+                }
+            }, 500);
+        }
+
         // Show service details in modal
         function showServiceDetails(serviceId) {
             try {
@@ -3531,6 +4048,99 @@ function registerWithDemoData(userData) {
             }
         }
 
+        // Show product details in modal
+        function showProductDetails(productId) {
+            try {
+                const product = sampleProducts.find(p => p.id === productId);
+                if (!product) {
+                    showToast('Product not found', 'error');
+                    return;
+                }
+                
+                document.getElementById('productModalTitle').textContent = product.name;
+                document.getElementById('productModalBody').innerHTML = `
+                    <div class="product-details">
+                        <div class="product-gallery">
+                            <div class="product-main-image">
+                                <i class="fas ${product.icon}"></i>
+                            </div>
+                            <div class="product-thumbnails">
+                                <div class="product-thumbnail">
+                                    <i class="fas ${product.icon}"></i>
+                                </div>
+                                <div class="product-thumbnail">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="product-thumbnail">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <div class="product-thumbnail">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <div class="product-meta">
+                                <span class="product-rating">
+                                    <i class="fas fa-star"></i> ${product.rating} (${product.reviews} reviews)
+                                </span>
+                                <span>
+                                    <i class="fas fa-tag"></i> ${product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+                                </span>
+                            </div>
+                            <div class="product-price" style="margin: 15px 0;">
+                                <span class="current-price" style="font-size: 1.8rem;">${product.price}</span>
+                                ${product.originalPrice ? `<span class="original-price" style="font-size: 1.2rem;">${product.originalPrice}</span>` : ''}
+                                ${product.badge ? `<span style="background: var(--accent); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; margin-left: 10px;">${product.badge}</span>` : ''}
+                            </div>
+                            <p class="product-description">${product.details}</p>
+                            
+                            <div class="product-specs">
+                                <h4>Specifications</h4>
+                                <ul class="specs-list">
+                                    ${Object.entries(product.specs).map(([key, value]) => `
+                                        <li>
+                                            <span class="spec-name">${key}</span>
+                                            <span class="spec-value">${value}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                            
+                            <div class="product-features">
+                                <h4>Key Features</h4>
+                                <ul>
+                                    ${product.features.map(feature => `
+                                        <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                            <i class="fas fa-check" style="color: var(--success);"></i>
+                                            ${feature}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                            
+                            <div class="quantity-selector">
+                                <label>Quantity:</label>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
+                                    <input type="number" class="quantity-input" id="product-quantity" value="1" min="1">
+                                    <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('productModalAction').textContent = 'Add to Cart';
+                document.getElementById('productModalAction').onclick = function() { addToCart(productId); };
+                
+                openModal('productModal');
+            } catch (error) {
+                console.error('Error showing product details:', error);
+                showToast('Unable to load product details. Please try again.', 'error');
+            }
+        }
+
         // Get Started function for services
         function getStarted(serviceId) {
             try {
@@ -3573,6 +4183,37 @@ function registerWithDemoData(userData) {
             } catch (error) {
                 console.error('Error enrolling in course:', error);
                 showToast('Unable to enroll in course. Please try again.', 'error');
+            }
+        }
+
+        // Add to cart function
+        function addToCart(productId) {
+            try {
+                const product = sampleProducts.find(p => p.id === productId);
+                if (product) {
+                    if (!currentUser) {
+                        showToast('Please login to add items to cart', 'warning');
+                        openAuthModal('login');
+                        return;
+                    }
+                    
+                    const quantity = parseInt(document.getElementById('product-quantity')?.value || 1);
+                    showToast(`${quantity} x ${product.name} added to cart!`, 'success');
+                    closeModal('productModal');
+                }
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+                showToast('Unable to add item to cart. Please try again.', 'error');
+            }
+        }
+
+        // Update quantity function
+        function updateQuantity(change) {
+            const quantityInput = document.getElementById('product-quantity');
+            if (quantityInput) {
+                let quantity = parseInt(quantityInput.value);
+                quantity = Math.max(1, quantity + change);
+                quantityInput.value = quantity;
             }
         }
 
@@ -3660,12 +4301,15 @@ function registerWithDemoData(userData) {
                 initAuth();
                 loadServices();
                 loadCourses();
+                loadProducts();
                 
                 // Add event listeners for search and filter
                 document.getElementById('service-search').addEventListener('input', loadServices);
                 document.getElementById('service-category').addEventListener('change', loadServices);
                 document.getElementById('course-search').addEventListener('input', loadCourses);
                 document.getElementById('course-level').addEventListener('change', loadCourses);
+                document.getElementById('product-search').addEventListener('input', loadProducts);
+                document.getElementById('product-category').addEventListener('change', loadProducts);
                 
                 // Add event listeners for the new social buttons
                 document.querySelectorAll('.social-button').forEach(button => {
